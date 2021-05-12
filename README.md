@@ -1,9 +1,6 @@
 # Dotfiles
 
-Welcome to my world. This is a collection of vim, tmux, and zsh configurations. Interested in a video walkthrough of the dotfiles? Check out my talk, [vim + tmux](https://www.youtube.com/watch?v=5r6yzFEXajQ).
-
-Obviously this setup works for me, a JavaScript developer on macOS, but this particular setup may not work for you. If this particular setup doesn't work for you, please steal ideas from this and if you like, contribute back tips, tricks, and other tidbits via Pull Requests if you like!
-![A screenshot of the dotfiles setup](screenshot.png)
+Forked from [nicknisi/dotfiles](https://github.com/nicknisi/dotfiles)
 
 ## Contents
 
@@ -129,22 +126,6 @@ I am currently using [Operator Mono](http://www.typography.com/fonts/operator/st
 
 Tmux is a terminal multiplexor which lets you create windows and splits in the terminal that you can attach and detach from. I use it to keep multiple projects open in separate windows and to create an IDE-like environment to work in where I can have my code open in vim/neovim and a shell open to run tests/scripts. Tmux is configured in [~/.tmux.conf](tmux/tmux.conf.symlink), and in [tmux/theme.sh](tmux/theme.sh), which defines the colors used, the layout of the tmux bar, and what what will be displayed, including the time and date, open windows, tmux session name, computer name, and current iTunes song playing. If not running on macOS, this configuration should be removed.
 
-## Docker Setup
-
-A Dockerfile exists in the repository as a testing ground for linux support. To set up the image, make sure you have Docker installed and then run the following command.
-
-```bash
-docker build -t dotfiles --force-rm --build-arg PRIVATE_KEY="$(cat ~/.ssh/id_rsa)" --build-arg PUBLIC_KEY="$(cat ~/.ssh/id_rsa.pub)" .
-```
-
-This should create a `dotfiles` image which will set up the base environment with the dotfiles repo cloned. To run, execute the following command.
-
-```bash
-docker run -it --rm dotfiles
-```
-
-This will open a bash shell in the container which can then be used to manually test the dotfiles installation process with linux.
-
 ## Questions
 
-If you have questions, notice issues,  or would like to see improvements, please open an [issue](https://github.com/nicknisi/dotfiles/issues/new) and I'm happy to help you out!
+If you have questions, notice issues,  or would like to see improvements, please open an [issue](https://github.com/azemetre/dotfiles/issues/new) and I'm happy to help you out!
