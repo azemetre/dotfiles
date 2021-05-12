@@ -59,6 +59,9 @@ command W w !sudo tee % > /dev/null
 " delete, yank goes to OS clipboard
 set clipboard+=unnamedplus
 
+"source neovim config
+nnoremap <Leader>sv :source $MYVIMRC<CR>
+
 " enable persistent undo
 if has('persistent_undo')      "check if your vim version supports it
   set undofile                 "turn on the feature  
@@ -164,6 +167,19 @@ set termguicolors
 "     colorscheme default
 " catch
 " endtry
+
+"Pmenu popup colors
+"modified to work with iterm2 colorscheme adventure time
+func! s:my_colors_setup() abort
+  hi PMenu guibg=#2364CE gui=None
+  hi PmenuSel guibg=#d7e5dc gui=NONE
+  hi PmenuSbar guibg=#bcbcbc
+  hi PmenuThumb guibg=#585858
+endfunc
+
+augroup colorscheme_coc_setup | au!
+  au ColorScheme * call s:my_colors_setup()
+augroup END
 
 set background=dark
 
