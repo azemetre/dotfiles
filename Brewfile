@@ -62,6 +62,11 @@ brew "icu4c"
 brew "libunistring"
 brew "ncurses"
 
+# Dependencies for obs and streaming
+brew "blackhole-2ch"
+brew "blackhole-16ch"
+brew "keycastr"
+
 # Command line Tools
 brew "ack"
 brew "bat"
@@ -105,6 +110,16 @@ brew "openssh"
 brew "screen"
 brew "php"
 brew "gmp"
+
+# Dependencies for neofetch
+brew "w3m"
+brew "terminology"
+brew "kitty"
+brew "libsixel"
+brew "catimg"
+brew "jp2a"
+brew "libcaca"
+brew "screenresolution"
 
 # shells
 brew "zsh"
