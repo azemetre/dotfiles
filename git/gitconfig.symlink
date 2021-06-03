@@ -13,6 +13,7 @@
 	df = diff
 	dfs = diff --staged
 	logg = log --graph --decorate --oneline --abbrev-commit --all
+    olog = log --oneline
     # show what I did today
     day = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
 
