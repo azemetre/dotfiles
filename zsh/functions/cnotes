@@ -1,8 +1,16 @@
 today=$(date +"%Y-%m-%d")
     if [ -e ~/notes/${today}-notes.md ];
     then
-        echo "${today}-notes.md already created"
-    else
-        # echo "no file created"
-        nvim -c "+normal ggO# What Did I Do?" -c "+normal ggo" -c "+normal ggo## $(date)" -c ':s/$/\r/' -c 'se nohlsearch' ~/notes/${today}-notes.md
-    fi
+        printf "Today's notes are already made\nopening up ${today}-notes.md"
+        nvim ~/notes/${today}-notes.md
+        return;
+    fi 
+    while true; do
+    printf "create notes for ${today}-notes.md?\n"
+    read "?(Y)es or (N)o " yn
+        case $yn in
+            [Yy]* ) nvim -c "+normal ggO# What Did I Do?" -c "+normal ggo## $(date)" -c ':s/$/\r/' -c 'se nohlsearch' ~/notes/${today}-notes.md; break;;
+            [Nn]* ) return;;
+            * ) printf "Please choose yes or no.\n";;
+        esac
+    done

@@ -170,16 +170,17 @@ set termguicolors
 
 "Pmenu popup colors
 "modified to work with iterm2 colorscheme adventure time
-func! s:my_colors_setup() abort
-  hi PMenu guibg=#2364CE gui=None
-  hi PmenuSel guibg=#d7e5dc gui=NONE
-  hi PmenuSbar guibg=#bcbcbc
-  hi PmenuThumb guibg=#585858
-endfunc
+" func! s:my_colors_setup() abort
+hi Pmenu guibg=#2364CD gui=None
+hi PmenuSel guibg=#83b3a8 gui=NONE
+" hi PmenuSel guibg=#d7e5dc gui=NONE
+hi PmenuSbar guibg=#bcbcbc
+hi PmenuThumb guibg=#585858
+" endfunc
 
-augroup colorscheme_coc_setup | au!
-  au ColorScheme * call s:my_colors_setup()
-augroup END
+" augroup colorscheme_coc_setup | au!
+"   au ColorScheme * call s:my_colors_setup()
+" augroup END
 
 set background=dark
 
@@ -249,6 +250,8 @@ autocmd FileType gitcommit,markdown setlocal spell
 au FileType gitcommit set tw=60
 "javascript spacing
 au FileType javascript setl sw=2 sts=2 et
+"markdown spacing
+au FileType markdown setl tw=80 sw=2 sts=2 et
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -520,16 +523,6 @@ nmap <leader>nf :NERDTreeFind<cr>
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'typescript']
 " ===> lightline
 let g:lightline = {
-      \ 'colorscheme': 'powerline',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
-      \ },
-      \ }
-let g:lightline = {
       \   'colorscheme': 'powerline',
       \   'active': {
       \       'left': [ [ 'mode', 'paste' ],
@@ -551,7 +544,7 @@ let g:lightline = {
       \       'filename': 'helpers#lightline#fileName',
       \       'fileformat': 'helpers#lightline#fileFormat',
       \       'filetype': 'helpers#lightline#fileType',
-      \       'gitbranch': 'helpers#lightline#gitBranch',
+      \       'gitbranch': 'FugitiveHead',
       \       'cocstatus': 'coc#status',
       \       'currentfunction': 'helpers#lightline#currentFunction',
       \       'gitblame': 'helpers#lightline#gitBlame'
@@ -571,14 +564,15 @@ let g:lightline = {
       \   'subseparator': { 'left': '', 'right': '' }
       \ }
 " ===> Ale
+"disabling ale to see if it's necessary when I use coc
 "ale:general
 "sign gutter open all times
-let g:ale_sign_column_always = 1
+" let g:ale_sign_column_always = 1
 "warning and error signs
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
+" let g:ale_sign_error = '>>'
+" let g:ale_sign_warning = '--'
 "ale:javascript
-let g:ale_linters = {}
+" let g:ale_linters = {}
 " ===> coc.nvim
 let g:coc_global_extensions = [
         \ 'coc-css',
@@ -755,6 +749,9 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+" ===> emmet
+" ,, - activates emmet
+" let g:user_emmet_leader_key=','
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vim Plug - Package Manager - https://github.com/junegunn/vim-plug
@@ -767,7 +764,7 @@ call plug#begin('~/.vim/plugged')
 "coc latest release
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Asynchronous Lint Engine
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 "Tree explorer
 Plug 'scrooloose/nerdtree'
 "startup time
