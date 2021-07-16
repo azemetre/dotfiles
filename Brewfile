@@ -66,6 +66,7 @@ brew "ncurses"
 brew "blackhole-2ch"
 brew "blackhole-16ch"
 brew "keycastr"
+brew "kap"
 
 # Command line Tools
 brew "ack"
