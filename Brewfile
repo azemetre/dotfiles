@@ -80,6 +80,7 @@ brew "fd"
 brew "ffmpeg"
 brew "figlet"
 brew "fzf"
+brew 'gdal'
 brew "gh"
 brew "gnupg"
 brew "hexyl"
