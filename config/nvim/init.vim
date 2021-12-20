@@ -519,6 +519,10 @@ nmap <leader>nc :NERDTreeClose<cr>
 nmap <leader>nx :NERDTreeFocus<cr>
 "find files, need directory path
 nmap <leader>nf :NERDTreeFind<cr>
+" ===> prettier
+" only run prettier if prettierrc file is configured in directory/repo
+let g:prettier#autoformat_config_present = 1
+let g:prettier#autoformat_require_pragma = 0
 " ===> vim markdown
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'typescript']
 " ===> lightline
@@ -750,8 +754,8 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " ===> emmet
-" ,, - activates emmet
-" let g:user_emmet_leader_key=','
+" ctrl + z + , - activates emmet
+let g:user_emmet_leader_key='<C-Z>'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vim Plug - Package Manager - https://github.com/junegunn/vim-plug
@@ -794,6 +798,11 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'kkoomen/vim-doge'
 "markdown preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+"JsDoc annotations
+Plug 'heavenshell/vim-jsdoc', {
+  \ 'for': ['javascript', 'javascript.jsx','typescript'],
+  \ 'do': 'make install'
+\}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Languages
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
