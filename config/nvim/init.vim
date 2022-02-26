@@ -567,6 +567,9 @@ let g:lightline = {
       \   'separator': { 'left': '', 'right': '' },
       \   'subseparator': { 'left': '', 'right': '' }
       \ }
+" ===> Prettier
+let g:prettier#autoformat_config_present = 1
+let g:prettier#autoformat_require_pragma = 0
 " ===> Ale
 "disabling ale to see if it's necessary when I use coc
 "ale:general

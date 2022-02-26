@@ -246,15 +246,13 @@ alias lpath='echo $PATH | tr ":" "\n"' # list the PATH separated by new lines
 
 alias nr="npm run"
 
-# Work Specific
-alias pbi="cd ~/pega-repos/business-intelligence/"
-alias pcui="cd ~/pega-repos/constellationui"
-alias pprpc="cd ~/pega-repos/prpc-platform/"
+# garden variety aliases
+alias github='cd ~/github'
+alias blog='cd ~/github/azemetredotcom'
+alias playground='cd ~/playground'
+alias dotfiles='cd ~/github/dotfiles'
 
 source "$DOTFILES/zsh/utils.zsh"
-
-# Language Exports
-export JAVA_HOME=$(/usr/libexec/java_home)
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
