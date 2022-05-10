@@ -761,8 +761,19 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 let g:user_emmet_leader_key='<C-Z>'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vim Plug - Package Manager - https://github.com/junegunn/vim-plug
+" => Vim-Plug - Package Manager - https://github.com/junegunn/vim-plug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
 call plug#begin('~/.vim/plugged')
 "Neovim Specific Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -778,6 +789,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'dstein64/vim-startuptime'
 "dev icons
 Plug 'ryanoasis/vim-devicons'
+" insert or delete brackets, parens, and quotes
+Plug 'jiangmiao/auto-pairs'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Tooling
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
