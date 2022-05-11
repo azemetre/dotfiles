@@ -250,7 +250,9 @@ alias nr="npm run"
 alias github='cd ~/github'
 alias blog='cd ~/github/azemetredotcom'
 alias playground='cd ~/playground'
+alias learning='cd ~/learning'
 alias dotfiles='cd ~/github/dotfiles'
+alias dot='cd ~/github/dotfiles'
 
 source "$DOTFILES/zsh/utils.zsh"
 
