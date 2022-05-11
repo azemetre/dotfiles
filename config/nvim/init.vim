@@ -495,6 +495,8 @@ endfunction
 " 	set pyx=3
 " endif
 
+let g:python3_host_prog = '/usr/local/bin/python3'
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Specific Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -813,7 +815,7 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 "(Do)cumentation (Ge)nerator
 Plug 'kkoomen/vim-doge'
 "markdown preview
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 "JsDoc annotations
 Plug 'heavenshell/vim-jsdoc', {
   \ 'for': ['javascript', 'javascript.jsx','typescript'],
