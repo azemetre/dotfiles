@@ -251,7 +251,7 @@ au FileType gitcommit set tw=60
 "javascript spacing
 au FileType javascript setl sw=2 sts=2 et
 "markdown spacing
-au FileType markdown setl tw=80 sw=2 sts=2 et
+au FileType markdown setl tw=80 shiftwidth=2 tabstop=2 sts=2 et
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -570,8 +570,9 @@ let g:lightline = {
       \   'subseparator': { 'left': '', 'right': '' }
       \ }
 " ===> Prettier
-let g:prettier#autoformat_config_present = 1
-let g:prettier#autoformat_require_pragma = 0
+command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+" let g:prettier#autoformat_config_present = 1
+" let g:prettier#autoformat_require_pragma = 0
 " ===> Ale
 "disabling ale to see if it's necessary when I use coc
 "ale:general
@@ -602,12 +603,15 @@ let g:coc_global_extensions = [
         \ 'coc-sh',
         \ 'coc-snippets',
         \ 'coc-stylelint',
+        \ 'coc-svelte',
         \ 'coc-tsserver',
         \ 'coc-ultisnips',
         \ 'coc-vimlsp',
         \ 'coc-word',
         \ 'coc-yaml',
         \ ]
+" coc-highlight colors
+autocmd CursorHold * silent call CocActionAsync('highlight')
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -811,7 +815,7 @@ Plug 'jremmen/vim-ripgrep'
 "A light and configurable statusline/tabline
 Plug 'itchyny/lightline.vim'
 "code formatter for javascript, typescript, css, less, scss, json, graphql, markdown, vue, yaml, html
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 "(Do)cumentation (Ge)nerator
 Plug 'kkoomen/vim-doge'
 "markdown preview

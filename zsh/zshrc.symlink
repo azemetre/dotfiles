@@ -123,6 +123,8 @@ export ZPLUGDIR="$CACHEDIR/zsh/plugins"
 plugins=(
   git
   fzf
+  ansible
+  zsh-autosuggestions
 )
 
 if [[ -x "$(command -v fnm)" ]]; then
@@ -251,8 +253,11 @@ alias github='cd ~/github'
 alias blog='cd ~/github/azemetredotcom'
 alias playground='cd ~/playground'
 alias learning='cd ~/learning'
+alias learn='cd ~/learning'
 alias dotfiles='cd ~/github/dotfiles'
 alias dot='cd ~/github/dotfiles'
+alias ideas='vim ~/azemetre-docs/projects-todo.md'
+alias idea='vim ~/azemetre-docs/projects-todo.md'
 
 source "$DOTFILES/zsh/utils.zsh"
 
