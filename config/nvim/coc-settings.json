@@ -1,19 +1,18 @@
 {
     "suggest.enablePreview": true,
     "codeLens.enable": true,
+    "colors.filetypes": ["*"],
     "git.addedSign.text": "┃",
     "git.removedSign.text": "┃",
     "git.changedSign.text": "┃",
     "git.changeRemovedSign.text": "┃",
-    "suggest.maxPreviewWidth": 100,
     "diagnostic.checkCurrentLine": true,
-    "diagnostic.maxWindowHeight": 20,
     "diagnostic.errorSign": "✖",
     "diagnostic.warningSign": "⚠",
     "diagnostic.infoSign": "●",
     "diagnostic.hintSign": "○",
     "git.addGBlameToBufferVar": true,
-    "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascript", "javascript.jsx", "typescript.tsx", "typescriptreact", "javascriptreact", "html"],
+    "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascript", "javascript.jsx", "typescript.tsx", "typescriptreact", "javascriptreact", "html", "svelte"],
     "explorer.icon.enableNerdfont": true,
     "explorer.sources": [
         {"name": "buffer", "expand": true},
@@ -91,5 +90,6 @@
         "snippet": "\ue60b",
         "typeParameter": "\uf728",
         "default": "\uf29c"
-    }
+    },
+    "svelte.enable-ts-plugin": true
 }
