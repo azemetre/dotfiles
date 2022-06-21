@@ -1,89 +1,31 @@
-# tmux display things in 256 colors
-set -g default-terminal "tmux-256color"
-set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
+set -ga terminal-overrides ",xterm-256color*:Tc"
+set -s escape-time 0
 
-set -g history-limit 20000
-
-# automatically renumber tmux windows
-set -g renumber-windows on
-
-# unbind default prefix and set it to Ctrl+a
 unbind C-b
-set -g prefix C-a
-bind C-a send-prefix
+set-option -g prefix C-a
+bind-key C-a send-prefix
+set -g status-style 'bg=#333333 fg=#5eacd3'
 
-# for nested tmux sessions
-bind-key a send-prefix
-
-# Activity Monitoring
-setw -g monitor-activity off
-set -g visual-activity off
-
-# Rather than constraining window size to the maximum size of any client
-# connected to the *session*, constrain window size to the maximum size of any
-# client connected to *that window*. Much more reasonable.
-setw -g aggressive-resize on
-
-# make delay shorter
-set -sg escape-time 0
-
-# tile all windows
-unbind =
-bind = select-layout tiled
-
-# cycle through panes
-# unbind C-a
-# unbind o # this is the default key for cycling panes
-# bind ^A select-pane -t:.+
-
-# make window/pane index start with 1
+bind r source-file ~/.tmux.conf
 set -g base-index 1
-setw -g pane-base-index 1
 
-set-option -g set-titles on
-set-option -g set-titles-string "#T - #W"
-# set-window-option -g automatic-rename on
+set-window-option -g mode-keys vi
+bind -T copy-mode-vi v send-keys -X begin-selection
+bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'pbcopy'
 
-######################
-#### Key Bindings ####
-######################
+# vim-like pane switching
+bind -r ^ last-window
+bind -r k select-pane -U
+bind -r j select-pane -D
+bind -r h select-pane -L
+bind -r l select-pane -R
 
-# reload config file
-bind r source-file ~/.tmux.conf \; display "Config Reloaded!"
+bind -r D neww -c "#{pane_current_path}" "[[ -e TODO.md ]] && nvim TODO.md || nvim ~/.dotfiles/personal/todo.md"
 
-# split window and fix path for tmux 1.9
-bind | split-window -h -c "#{pane_current_path}"
-bind - split-window -v -c "#{pane_current_path}"
+# forget the find window.  That is for chumps
+bind-key -r f run-shell "tmux neww ~/.local/bin/tmux-sessionizer"
 
-# synchronize all panes in a window
-bind y setw synchronize-panes
-
-# pane movement shortcuts
-bind h select-pane -L
-bind j select-pane -D
-bind k select-pane -U
-bind l select-pane -R
-
-bind -r C-h select-window -t :-
-bind -r C-l select-window -t :+
-
-# Resize pane shortcuts
-bind -r H resize-pane -L 10
-bind -r J resize-pane -D 10
-bind -r K resize-pane -U 10
-bind -r L resize-pane -R 10
-
-# enable mouse support for switching panes/windows
-setw -g mouse on
-
-# set vi mode for copy mode
-setw -g mode-keys vi
-# more settings to make copy-mode more vim-like
-unbind [
-bind Escape copy-mode
-unbind p
-bind p paste-buffer
-bind -T copy-mode-vi v send -X begin-selection
+bind-key -r i run-shell "tmux neww tmux-cht.sh"
 
 if-shell "uname | grep -q Darwin" {
     bind -T copy-mode-vi y send -X copy-pipe-and-cancel 'tmux save-buffer - | pbcopy'; \

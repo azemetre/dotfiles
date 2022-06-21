@@ -253,6 +253,9 @@ au FileType javascript setl sw=2 sts=2 et
 "markdown spacing
 au FileType markdown setl tw=80 shiftwidth=2 tabstop=2 sts=2 et
 
+"makes current file executable, useful when writing scripts
+nnoremap <leader>x :silent !chmod +x %<CR>
+
 """"""""""""""""""""""""""""""
 " => Visual mode related
 """"""""""""""""""""""""""""""
@@ -384,7 +387,7 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 map <leader>q :e ~/buffer<cr>
 
 " Quickly open a markdown buffer for scribble
-map <leader>x :e ~/buffer.md<cr>
+" map <leader>x :e ~/buffer.md<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
@@ -400,6 +403,9 @@ function! HasPaste()
     endif
     return ''
 endfunction
+
+"goes to new tmux session
+nnoremap <silent> <C-f> :silent !tmux neww tmux-sessionizer<CR>
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
