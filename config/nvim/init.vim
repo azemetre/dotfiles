@@ -46,7 +46,6 @@ set autoread
 au FocusGained,BufEnter * :checktime
 
 " With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
 let mapleader = ","
 
 " Fast saving
@@ -491,18 +490,6 @@ let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'typesc
 " ===> lightline
 " ===> Prettier
 command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
-" let g:prettier#autoformat_config_present = 1
-" let g:prettier#autoformat_require_pragma = 0
-" ===> Ale
-"disabling ale to see if it's necessary when I use coc
-"ale:general
-"sign gutter open all times
-" let g:ale_sign_column_always = 1
-"warning and error signs
-" let g:ale_sign_error = '>>'
-" let g:ale_sign_warning = '--'
-"ale:javascript
-" let g:ale_linters = {}
 " ===> coc.nvim
 let g:coc_global_extensions = [
         \ 'coc-css',
@@ -710,17 +697,12 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "startup time
 Plug 'dstein64/vim-startuptime'
 "dev icons
-<<<<<<< HEAD
-Plug 'ryanoasis/vim-devicons'
-" insert or delete brackets, parens, and quotes
-Plug 'jiangmiao/auto-pairs'
-"telescope
+Plug 'kyazdani42/nvim-web-devicons'
+"fzf finder
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-=======
-Plug 'kyazdani42/nvim-web-devicons'
->>>>>>> ecb7c80 (chore: taking out the trash)
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Tooling
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
