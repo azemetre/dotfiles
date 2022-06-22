@@ -405,7 +405,7 @@ function! HasPaste()
 endfunction
 
 "goes to new tmux session
-nnoremap <silent> <C-f> :silent !tmux neww tmux-sessionizer<CR>
+nnoremap <silent> <leader>tw :silent !tmux neww tmux-sessionizer<CR>
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
@@ -449,48 +449,12 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
-" fzf + bat + ripgrep preview finder
-nnoremap <silent> <leader>e :call Fzf_dev()<CR>
-
 " ripgrep
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
   set grepprg=rg\ --vimgrep
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif
-
-" Files + devicons
-function! Fzf_dev()
-  let l:fzf_files_options = '--preview "bat --theme="OneHalfDark" --style=numbers,changes --color always {2..-1} | head -'.&lines.'"'
-
-  function! s:files()
-    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
-    return s:prepend_icon(l:files)
-  endfunction
-
-  function! s:prepend_icon(candidates)
-    let l:result = []
-    for l:candidate in a:candidates
-      let l:filename = fnamemodify(l:candidate, ':p:t')
-      let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
-      call add(l:result, printf('%s %s', l:icon, l:candidate))
-    endfor
-
-    return l:result
-  endfunction
-
-  function! s:edit_file(item)
-    let l:pos = stridx(a:item, ' ')
-    let l:file_path = a:item[pos+1:-1]
-    execute 'silent e' l:file_path
-  endfunction
-
-  call fzf#run({
-        \ 'source': <sid>files(),
-        \ 'sink':   function('s:edit_file'),
-        \ 'options': '-m ' . l:fzf_files_options,
-        \ 'down':    '40%' })
-endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Neovim Settings
@@ -506,27 +470,18 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Specific Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ===> NERDTree
-"nerdtree:general
-"always open nerdtree
-"autocmd vimenter * NERDTree
-"replace C-g chars with no-break spaces
-let g:NERDTreeNodeDelimiter = "\u00a0"
-"right side window position 
-let g:NERDTreeWinPos = "right"
-"nerdtree:hotkeys
-"show hidden files
-let NERDTreeShowHidden=1
-"opens directory
-nmap <leader>n :NERDTree<cr>
-"toggle directory pane
-nmap <leader>ng :NERDTreeToggle<cr>
-"close directory pane
-nmap <leader>nc :NERDTreeClose<cr>
-"opens or reopens, otherwise reopens tab with NerdTree open
-nmap <leader>nx :NERDTreeFocus<cr>
-"find files, need directory path
-nmap <leader>nf :NERDTreeFind<cr>
+" ===> Telescope
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 " ===> prettier
 " only run prettier if prettierrc file is configured in directory/repo
 let g:prettier#autoformat_config_present = 1
@@ -793,16 +748,16 @@ call plug#begin('~/.vim/plugged')
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "coc latest release
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Asynchronous Lint Engine
-" Plug 'w0rp/ale'
-"Tree explorer
-Plug 'scrooloose/nerdtree'
 "startup time
 Plug 'dstein64/vim-startuptime'
 "dev icons
 Plug 'ryanoasis/vim-devicons'
 " insert or delete brackets, parens, and quotes
 Plug 'jiangmiao/auto-pairs'
+"telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Tooling
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -820,8 +775,6 @@ Plug '/usr/local/opt/fzf'
 Plug 'jremmen/vim-ripgrep'
 "A light and configurable statusline/tabline
 Plug 'itchyny/lightline.vim'
-"code formatter for javascript, typescript, css, less, scss, json, graphql, markdown, vue, yaml, html
-" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 "(Do)cumentation (Ge)nerator
 Plug 'kkoomen/vim-doge'
 "markdown preview
