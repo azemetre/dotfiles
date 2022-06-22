@@ -405,7 +405,7 @@ function! HasPaste()
 endfunction
 
 "goes to new tmux session
-nnoremap <silent> <leader>tw :silent !tmux neww tmux-sessionizer<CR>
+nnoremap <leader>tw :silent !tmux neww tmux-sessionizer<CR>
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
@@ -489,47 +489,6 @@ let g:prettier#autoformat_require_pragma = 0
 " ===> vim markdown
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'typescript']
 " ===> lightline
-let g:lightline = {
-      \   'colorscheme': 'powerline',
-      \   'active': {
-      \       'left': [ [ 'mode', 'paste' ],
-      \               [ 'gitbranch' ],
-      \               [ 'readonly', 'filetype', 'filename' ]],
-      \       'right': [ [ 'percent' ], [ 'lineinfo' ],
-      \               [ 'fileformat', 'fileencoding' ],
-      \               [ 'gitblame', 'currentfunction',  'cocstatus', 'linter_errors', 'linter_warnings' ]]
-      \   },
-      \   'component_expand': {
-      \   },
-      \   'component_type': {
-      \       'readonly': 'error',
-      \       'linter_warnings': 'warning',
-      \       'linter_errors': 'error'
-      \   },
-      \   'component_function': {
-      \       'fileencoding': 'helpers#lightline#fileEncoding',
-      \       'filename': 'helpers#lightline#fileName',
-      \       'fileformat': 'helpers#lightline#fileFormat',
-      \       'filetype': 'helpers#lightline#fileType',
-      \       'gitbranch': 'FugitiveHead',
-      \       'cocstatus': 'coc#status',
-      \       'currentfunction': 'helpers#lightline#currentFunction',
-      \       'gitblame': 'helpers#lightline#gitBlame'
-      \   },
-      \   'tab_component_function': {
-      \       'filetype': 'helpers#lightline#tabFileType'
-      \   },
-      \   'tabline': {
-      \       'left': [ [ 'tabs' ] ],
-      \       'right': [ [ 'close' ] ]
-      \   },
-      \   'tab': {
-      \       'active': [ 'filetype', 'filename', 'modified' ],
-      \       'inactive': [ 'filetype', 'filename', 'modified' ],
-      \   },
-      \   'separator': { 'left': '', 'right': '' },
-      \   'subseparator': { 'left': '', 'right': '' }
-      \ }
 " ===> Prettier
 command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 " let g:prettier#autoformat_config_present = 1
@@ -751,6 +710,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "startup time
 Plug 'dstein64/vim-startuptime'
 "dev icons
+<<<<<<< HEAD
 Plug 'ryanoasis/vim-devicons'
 " insert or delete brackets, parens, and quotes
 Plug 'jiangmiao/auto-pairs'
@@ -758,6 +718,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+=======
+Plug 'kyazdani42/nvim-web-devicons'
+>>>>>>> ecb7c80 (chore: taking out the trash)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Tooling
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -767,8 +730,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 "Replacement for 95% of grep - plugin for the Perl module / CLI script 'ack'
 Plug 'mileszs/ack.vim'
-"vim fetch, open files at line and char numbers
-Plug 'wsdjeg/vim-fetch'
 "fuzzy finder
 Plug '/usr/local/opt/fzf'
 "ripgrep passthrough
@@ -779,22 +740,13 @@ Plug 'itchyny/lightline.vim'
 Plug 'kkoomen/vim-doge'
 "markdown preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-"JsDoc annotations
-Plug 'heavenshell/vim-jsdoc', {
-  \ 'for': ['javascript', 'javascript.jsx','typescript'],
-  \ 'do': 'make install'
-\}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Languages
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"language pack
-Plug 'sheerun/vim-polyglot'
 "markdown syntax
 Plug 'tpope/vim-markdown'
 "Emmet html && css snippets
 Plug 'mattn/emmet-vim'
-"typescript syntax
-Plug 'peitalin/vim-jsx-typescript'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text Editing and Navigation
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -802,8 +754,6 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'editorconfig/editorconfig-vim'
 "Comment stuff out - gcc (comment out line) - gc (comment out target motion) - gcap (comment out paragraph)
 Plug 'tpope/vim-commentary'
-"Manage most recently used (MRU) files
-Plug 'vim-scripts/mru.vim'
 "Initialize plugin system
 call plug#end()
 
