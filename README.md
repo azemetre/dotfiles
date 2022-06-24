@@ -1,6 +1,12 @@
 # Dotfiles
 
-Forked from [nicknisi/dotfiles](https://github.com/nicknisi/dotfiles)
+Forked and tweaked from [nicknisi/dotfiles](https://github.com/nicknisi/dotfiles)
+
+Inspired/stolen bits from:
+
+[kevinhwang91/dotfiles](https://github.com/kevinhwang91/dotfiles)
+
+[ThePrimeagen/.dotfiles](https://github.com/ThePrimeagen/.dotfiles)
 
 ## Contents
 
