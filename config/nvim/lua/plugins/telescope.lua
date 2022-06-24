@@ -2,6 +2,32 @@ local telescope = require("telescope")
 local actions = require("telescope.actions")
 local nnoremap = require("utils").nnoremap
 
+-- files to ignore with `file_ignore_patterns`
+local always_ignore_these = {
+	"yarn.lock",
+	"package%-lock.json",
+	"node_modules/.*",
+	"%.git/.*",
+	"%.svg",
+	"%.png",
+	"%.jpeg",
+	"%.jpg",
+	"%.ico",
+	"%.webp",
+	"%.avif",
+	"%.heic",
+	"%.mp3",
+	"%.mp4",
+	"%.mkv",
+	"%.mov",
+	"%.wav",
+	"%.flv",
+	"%.avi",
+	"%.webm",
+	".env.*",
+	"%.db",
+}
+
 telescope.setup({
 	defaults = {
 		mappings = {
@@ -25,6 +51,24 @@ telescope.setup({
 			"--column",
 			"--smart-case",
 			"--trim",
+		},
+		layout_strategy = "flex",
+		layout_config = {
+			prompt_position = "top",
+			horizontal = {
+				mirror = true,
+				preview_cutoff = 100,
+				preview_width = 0.5,
+			},
+			vertical = {
+				mirror = true,
+				preview_cutoff = 0.4,
+			},
+			flex = {
+				flip_columns = 110,
+			},
+			height = 0.94,
+			width = 0.86,
 		},
 		prompt_prefix = "   ",
 		selection_caret = "  ",

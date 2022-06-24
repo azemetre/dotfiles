@@ -158,8 +158,9 @@ opt.fcs = "eob: "
 g.mapleader = ","
 opt.pastetoggle = "<leader>v"
 
--- source nvim
-nnoremap("<leader><CR>", ":so ~/.config/nvim/init.lua<CR>")
+-- source current file
+-- not working will need to tweak
+nnoremap("<leader>sf", ":so %<CR>")
 
 -- make current file executable
 nnoremap("<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
