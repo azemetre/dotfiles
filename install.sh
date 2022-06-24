@@ -66,11 +66,6 @@ backup() {
 setup_symlinks() {
     title "Creating symlinks"
 
-    if [ ! -e "$HOME/.dotfiles" ]; then
-        info "Adding symlink to dotfiles at $HOME/.dotfiles"
-        ln -s "$DOTFILES" ~/.dotfiles
-    fi
-
     for file in $(get_linkables) ; do
         target="$HOME/.$(basename "$file" '.symlink')"
         if [ -e "$target" ]; then
@@ -96,29 +91,6 @@ setup_symlinks() {
         else
             info "Creating symlink for $config"
             ln -s "$config" "$target"
-        fi
-    done
-
-    # create vim symlinks
-    # As I have moved off of vim as my full time editor in favor of neovim,
-    # I feel it doesn't make sense to leave my vimrc intact in the dotfiles repo
-    # as it is not really being actively maintained. However, I would still
-    # like to configure vim, so lets symlink ~/.vimrc and ~/.vim over to their
-    # neovim equivalent.
-
-    echo -e
-    info "Creating vim symlinks"
-    VIMFILES=( "$HOME/.vim:$DOTFILES/config/nvim"
-            "$HOME/.vimrc:$DOTFILES/config/nvim/init.vim" )
-
-    for file in "${VIMFILES[@]}"; do
-        KEY=${file%%:*}
-        VALUE=${file#*:}
-        if [ -e "${KEY}" ]; then
-            info "${KEY} already exists... skipping."
-        else
-            info "Creating symlink for $KEY"
-            ln -s "${VALUE}" "${KEY}"
         fi
     done
 }
@@ -174,7 +146,7 @@ setup_homebrew() {
     "$(brew --prefix)"/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
 }
 
-function setup_shell() {
+setup_shell() {
     title "Configuring shell"
 
     [[ -n "$(command -v brew)" ]] && zsh_path="$(brew --prefix)/bin/zsh" || zsh_path="$(which zsh)"
