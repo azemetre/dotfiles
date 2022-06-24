@@ -121,10 +121,8 @@ export ZPLUGDIR="$CACHEDIR/zsh/plugins"
 [[ -d "$ZPLUGDIR" ]] || mkdir -p "$ZPLUGDIR"
 
 plugins=(
-  git
   fzf
   ansible
-  zsh-autosuggestions
 )
 
 if [[ -x "$(command -v fnm)" ]]; then
