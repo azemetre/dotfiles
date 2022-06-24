@@ -25,22 +25,22 @@ local colors = require("theme").colors
 _G.completion_nvim = {}
 
 function _G.completion_nvim.smart_pumvisible(vis_seq, not_vis_seq)
-  if (fn.pumvisible() == 1) then
-    return termcodes(vis_seq)
-  else
-    return termcodes(not_vis_seq)
-  end
+	if fn.pumvisible() == 1 then
+		return termcodes(vis_seq)
+	else
+		return termcodes(not_vis_seq)
+	end
 end
 
 -- General
 ----------------------------------------------------------------
-cmd [[abbr funciton function]]
-cmd [[abbr teh the]]
-cmd [[abbr tempalte template]]
-cmd [[abbr fitler filter]]
-cmd [[abbr cosnt const]]
-cmd [[abbr attribtue attribute]]
-cmd [[abbr attribuet attribute]]
+cmd([[abbr funciton function]])
+cmd([[abbr teh the]])
+cmd([[abbr tempalte template]])
+cmd([[abbr fitler filter]])
+cmd([[abbr cosnt const]])
+cmd([[abbr attribtue attribute]])
+cmd([[abbr attribuet attribute]])
 
 opt.backup = false -- don't use backup files
 opt.writebackup = false -- don't backup the file while editing
@@ -48,19 +48,19 @@ opt.swapfile = false -- don't create swap files for new buffers
 opt.updatecount = 0 -- don't write swap files after some number of updates
 
 opt.backupdir = {
-  "~/.vim-tmp",
-  "~/.tmp",
-  "~/tmp",
-  "/var/tmp",
-  "/tmp"
+	"~/.vim-tmp",
+	"~/.tmp",
+	"~/tmp",
+	"/var/tmp",
+	"/tmp",
 }
 
 opt.directory = {
-  "~/.vim-tmp",
-  "~/.tmp",
-  "~/tmp",
-  "/var/tmp",
-  "/tmp"
+	"~/.vim-tmp",
+	"~/.tmp",
+	"~/tmp",
+	"/var/tmp",
+	"/tmp",
 }
 
 opt.history = 1000 -- store the last 1000 commands entered
@@ -69,8 +69,8 @@ opt.textwidth = 120 -- after configured number of characters, wrap line
 opt.inccommand = "nosplit" -- show the results of substition as they're happening
 -- but don't open a split
 
-opt.backspace = {"indent", "eol,start"} -- make backspace behave in a sane manner
-opt.clipboard = {"unnamed", "unnamedplus"} -- use the system clipboard
+opt.backspace = { "indent", "eol,start" } -- make backspace behave in a sane manner
+opt.clipboard = { "unnamed", "unnamedplus" } -- use the system clipboard
 opt.mouse = "a" -- set mouse mode to all modes
 
 -- searching
@@ -82,9 +82,9 @@ opt.lazyredraw = false -- don't redraw while executing macros
 opt.magic = true -- set magic on, for regular expressions
 
 if fn.executable("rg") then
-  -- if ripgrep installed, use that as a grepper
-  opt.grepprg = "rg --vimgrep --no-heading"
-  opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
+	-- if ripgrep installed, use that as a grepper
+	opt.grepprg = "rg --vimgrep --no-heading"
+	opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 end
 
 -- error bells
@@ -116,7 +116,7 @@ opt.wildmenu = true -- enhanced command line completion
 opt.hidden = true -- current buffer can be put into background
 opt.showcmd = true -- show incomplete commands
 opt.showmode = true -- don't show which mode disabled for PowerLine
-opt.wildmode = {"list", "longest"} -- complete files like a shell
+opt.wildmode = { "list", "longest" } -- complete files like a shell
 opt.shell = env.SHELL
 opt.cmdheight = 1 -- command bar height
 opt.title = true -- set terminal title
@@ -144,11 +144,11 @@ opt.foldlevel = 1
 -- toggle invisible characters
 opt.list = true
 opt.listchars = {
-  tab = "→ ",
-  eol = "¬",
-  trail = "⋅",
-  extends = "❯",
-  precedes = "❮"
+	tab = "→ ",
+	eol = "¬",
+	trail = "⋅",
+	extends = "❯",
+	precedes = "❮",
 }
 
 -- hide the ~ character on empty lines at the end of the buffer
@@ -158,8 +158,15 @@ opt.fcs = "eob: "
 g.mapleader = ","
 opt.pastetoggle = "<leader>v"
 
-nnoremap("Q", "<nop>")
-imap("jk", "<Esc>")
+-- source nvim
+nnoremap("<leader><CR>", ":so ~/.config/nvim/init.lua<CR>")
+
+-- make current file executable
+nnoremap("<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- unsets last search pattern register
+nnoremap("<CR>", ":noh<CR>")
+
 nmap("<leader>,", ":w<cr>")
 nmap("<space>", ":set hlsearch! hlsearch?<cr>")
 
@@ -167,23 +174,16 @@ nmap("<leader><space>", [[:%s/\s\+$<cr>]])
 nmap("<leader><space><space>", [[:%s/\n\{2,}/\r\r/g<cr>]])
 
 nmap("<leader>l", ":set list!<cr>")
-inoremap("<C-j>", [[v:lua.completion_nvim.smart_pumvisible('<C-n>', '<C-j>')]], {expr = true})
-inoremap("<C-k>", [[v:lua.completion_nvim.smart_pumvisible('<C-p>', '<C-k>')]], {expr = true})
+inoremap("<C-j>", [[v:lua.completion_nvim.smart_pumvisible('<C-n>', '<C-j>')]], { expr = true })
+inoremap("<C-k>", [[v:lua.completion_nvim.smart_pumvisible('<C-p>', '<C-k>')]], { expr = true })
 vmap("<", "<gv")
 vmap(">", ">gv")
 nmap("<leader>.", "<c-^>")
 vmap(".", ":normal .<cr>")
 
-nmap("<C-h>", "<Plug>WinMoveLeft")
-nmap("<C-j>", "<Plug>WinMoveDown")
-nmap("<C-k>", "<Plug>WinMoveUp")
-nmap("<C-l>", "<Plug>WinMoveRight")
-
 -- helpers for dealing with other people's code
 nmap([[\t]], ":set ts=4 sts=4 sw=4 noet<cr>")
 nmap([[\s]], ":set ts=4 sts=4 sw=4 et<cr>")
-
-nmap("<leader>z", "<Plug>Zoom")
 
 -- move line mappings
 local opt_h = "˙"
@@ -214,12 +214,6 @@ vnoremap([[$<]], "<esc>`>a><esc>`<i<<esc>")
 nnoremap("<C-e>", "3<c-e>")
 nnoremap("<C-y>", "3<c-y>")
 
--- moving up and down work as you would expect
-nnoremap("j", 'v:count == 0 ? "gj" : "j"', {expr = true})
-nnoremap("k", 'v:count == 0 ? "gk" : "k"', {expr = true})
-nnoremap("^", 'v:count == 0 ? "g^" :  "^"', {expr = true})
-nnoremap("$", 'v:count == 0 ? "g$" : "$"', {expr = true})
-
 -- custom text objects
 -- inner-line
 xmap("il", ":<c-u>normal! g_v^<cr>")
@@ -237,27 +231,58 @@ nmap("<leader>4", "<Plug>HiInterestingWord4")
 nmap("<leader>5", "<Plug>HiInterestingWord5")
 nmap("<leader>6", "<Plug>HiInterestingWord6")
 
--- open current buffer in a new tab
-nmap("gTT", ":tab sb<cr>")
-
 require("plugins")
 
 if utils.file_exists(fn.expand("~/.vimrc_background")) then
-  g.base16colorspace = 256
-  cmd [[source ~/.vimrc_background]]
+	g.base16colorspace = 256
+	cmd([[source ~/.vimrc_background]])
 end
 
-cmd [[syntax on]]
-cmd [[filetype plugin indent on]]
+-- coc setup
+vim.defer_fn(function()
+	g.coc_global_extensions = {
+		"coc-clangd", --
+		"coc-css", --
+		"coc-dictionary", --
+		"coc-eslint", --
+		"coc-go", --
+		"coc-html", --
+		"coc-json", --
+		"coc-markdownlint", --
+		"coc-pyright", --
+		"coc-rust-analyzer", --
+		"coc-sh", --
+		"coc-sql", --
+		"coc-svelte", --
+		"coc-tsserver", --
+		"coc-vimlsp", --
+		"coc-word", --
+		"coc-xml", --
+		"coc-yaml", --
+	}
+	g.coc_enable_locationlist = 0
+	g.coc_selectmode_mapping = 0
+	cmd([[
+            au User CocNvimInit ++once lua require('plugs.coc').initialize()
+            hi! link CocSemDefaultLibrary Special
+            hi! link CocSemDocumentation Number
+            hi! CocSemStatic gui=bold
+        ]])
+	cmd("pa coc-kvs")
+	cmd("pa coc.nvim")
+end, 300)
+
+cmd([[syntax on]])
+cmd([[filetype plugin indent on]])
 -- make the highlighting of tabs and other non-text less annoying
-cmd [[highlight SpecialKey ctermfg=19 guifg=#333333]]
-cmd [[highlight NonText ctermfg=19 guifg=#333333]]
+cmd([[highlight SpecialKey ctermfg=19 guifg=#333333]])
+cmd([[highlight NonText ctermfg=19 guifg=#333333]])
 
 -- make comments and HTML attributes italic
-cmd [[highlight Comment cterm=italic term=italic gui=italic]]
-cmd [[highlight htmlArg cterm=italic term=italic gui=italic]]
-cmd [[highlight xmlAttrib cterm=italic term=italic gui=italic]]
+cmd([[highlight Comment cterm=italic term=italic gui=italic]])
+cmd([[highlight htmlArg cterm=italic term=italic gui=italic]])
+cmd([[highlight xmlAttrib cterm=italic term=italic gui=italic]])
 -- highlight Type cterm=italic term=italic gui=italic
-cmd [[highlight Normal ctermbg=none]]
+cmd([[highlight Normal ctermbg=none]])
 -- make the StatusLine background match the GalaxyLine styles
 cmd("hi StatusLine guibg=" .. colors.bg)
