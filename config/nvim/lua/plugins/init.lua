@@ -12,8 +12,6 @@ local Plug = fn["plug#"]
 plugLoad()
 plugBegin("~/.config/nvim/plugged")
 
--- NOTE: the argument passed to Plug has to be wrapped with single-quotes
-
 -- a set of lua helpers that are used by other plugins
 Plug("nvim-lua/plenary.nvim")
 
@@ -66,6 +64,9 @@ Plug("norcalli/nvim-colorizer.lua")
 
 -- use devicons for filetypes
 Plug("kyazdani42/nvim-web-devicons")
+
+-- indention guides for all lines
+Plug("lukas-reineke/indent-blankline.nvim")
 
 -- fast lau file drawer
 Plug("kyazdani42/nvim-tree.lua")
@@ -151,5 +152,6 @@ require("plugins.completion")
 require("plugins.treesitter")
 require("plugins.nvimtree")
 require("plugins.tabline")
+require("plugins.indent-blankline")
 require("plugins.feline")
 require("plugins.startup")

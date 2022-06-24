@@ -148,7 +148,6 @@ M.hl_fallback = (function()
 		"c",
 		"cpp",
 		"rust",
-		"java",
 		"lua",
 		"typescript",
 		"javascript",
