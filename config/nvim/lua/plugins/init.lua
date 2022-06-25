@@ -18,6 +18,9 @@ Plug("nvim-lua/plenary.nvim")
 -- create themes
 Plug("rktjmp/lush.nvim")
 
+-- color schemes
+Plug("folke/tokyonight.nvim", { ["branch"] = "main" })
+
 -- easy commenting
 Plug("tpope/vim-commentary")
 Plug("JoosepAlviste/nvim-ts-context-commentstring")
@@ -116,9 +119,6 @@ Plug("alvarosevilla95/luatab.nvim")
 
 -- improve the default neovim interfaces, such as refactoring
 Plug("stevearc/dressing.nvim")
-
--- conquer of completion
-Plug("neoclide/coc.nvim", { ["branch"] = "release" })
 
 -- Navigate a code base with a really slick UI
 Plug("nvim-telescope/telescope.nvim")

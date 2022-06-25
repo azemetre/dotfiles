@@ -34,6 +34,20 @@ end
 
 -- General
 ----------------------------------------------------------------
+
+-- theme and colorscheme declaration
+---- Example config in Lua
+g.tokyonight_style = "storm"
+g.tokyonight_italic_functions = true
+g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
+
+-- Change the "hint" color to the "orange" color, and make the "error" color bright red
+g.tokyonight_colors = { hint = "orange", error = "#ff0000" }
+
+-- Load the colorscheme
+-- issues loading theme
+--cmd([[colorscheme tokyonight]])
+
 cmd([[abbr funciton function]])
 cmd([[abbr teh the]])
 cmd([[abbr tempalte template]])
@@ -175,8 +189,6 @@ nmap("<leader><space>", [[:%s/\s\+$<cr>]])
 nmap("<leader><space><space>", [[:%s/\n\{2,}/\r\r/g<cr>]])
 
 nmap("<leader>l", ":set list!<cr>")
-inoremap("<C-j>", [[v:lua.completion_nvim.smart_pumvisible('<C-n>', '<C-j>')]], { expr = true })
-inoremap("<C-k>", [[v:lua.completion_nvim.smart_pumvisible('<C-p>', '<C-k>')]], { expr = true })
 vmap("<", "<gv")
 vmap(">", ">gv")
 nmap("<leader>.", "<c-^>")
@@ -201,15 +213,6 @@ inoremap(opt_j, "<Esc>:m .+1<cr>==gi")
 inoremap(opt_k, "<Esc>:m .-2<cr>==gi")
 vnoremap(opt_j, ":m '>+1<cr>gv=gv")
 vnoremap(opt_k, ":m '<-2<cr>gv=gv")
-
--- TODO: what exactly does this do?
-vnoremap("$(", "<esc>`>a)<esc>`<i(<esc>")
-vnoremap("$[", "<esc>`>a]<esc>`<i[<esc>")
-vnoremap("${", "<esc>`>a}<esc>`<i{<esc>")
-vnoremap([[$']], [[<esc>`>a"<esc>`<i"<esc>]])
-vnoremap("$'", "<esc>`>a'<esc>`<i'<esc>")
-vnoremap([[$\]], "<esc>`>o*/<esc>`<O/*<esc>")
-vnoremap([[$<]], "<esc>`>a><esc>`<i<<esc>")
 
 -- scroll the viewport faster
 nnoremap("<C-e>", "3<c-e>")
@@ -238,40 +241,6 @@ if utils.file_exists(fn.expand("~/.vimrc_background")) then
 	g.base16colorspace = 256
 	cmd([[source ~/.vimrc_background]])
 end
-
--- coc setup
-vim.defer_fn(function()
-	g.coc_global_extensions = {
-		"coc-clangd", --
-		"coc-css", --
-		"coc-dictionary", --
-		"coc-eslint", --
-		"coc-go", --
-		"coc-html", --
-		"coc-json", --
-		"coc-markdownlint", --
-		"coc-pyright", --
-		"coc-rust-analyzer", --
-		"coc-sh", --
-		"coc-sql", --
-		"coc-svelte", --
-		"coc-tsserver", --
-		"coc-vimlsp", --
-		"coc-word", --
-		"coc-xml", --
-		"coc-yaml", --
-	}
-	g.coc_enable_locationlist = 0
-	g.coc_selectmode_mapping = 0
-	cmd([[
-            au User CocNvimInit ++once lua require('plugs.coc').initialize()
-            hi! link CocSemDefaultLibrary Special
-            hi! link CocSemDocumentation Number
-            hi! CocSemStatic gui=bold
-        ]])
-	cmd("pa coc-kvs")
-	cmd("pa coc.nvim")
-end, 300)
 
 cmd([[syntax on]])
 cmd([[filetype plugin indent on]])
