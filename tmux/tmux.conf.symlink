@@ -14,11 +14,12 @@ bind -T copy-mode-vi v send-keys -X begin-selection
 bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'pbcopy'
 
 # vim-like pane switching
-bind -r ^ last-window
+bind -r l last-window
 bind -r k select-pane -U
 bind -r j select-pane -D
 bind -r h select-pane -L
-bind -r l select-pane -R
+# testing something dicey
+# bind -r l select-pane -R
 
 bind -r D neww -c "#{pane_current_path}" "[[ -e TODO.md ]] && nvim TODO.md || nvim ~/.dotfiles/personal/todo.md"
 
