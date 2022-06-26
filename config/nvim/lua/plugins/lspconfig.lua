@@ -11,9 +11,6 @@ local theme = require("theme")
 local colors = theme.colors
 local icons = theme.icons
 
-cmd("autocmd ColorScheme * highlight NormalFloat guibg=" .. colors.bg)
-cmd("autocmd ColorScheme * highlight FloatBorder guifg=white guibg=" .. colors.bg)
-
 local border = {
 	{ "🭽", "FloatBorder" },
 	{ "▔", "FloatBorder" },
@@ -216,6 +213,22 @@ lsp_installer.on_server_ready(function(server)
 
 	server:setup(opts)
 end)
+
+-- emmet_ls
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+-- nvim_lsp.emmet_ls.setup({
+-- 	-- on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- 	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
+-- })
+
+-- nvim_lsp.svelte.setup(config())
+
+-- nvim_lsp.rust_analyzer.setup(config({
+-- 	cmd = { "rustup", "run", "nightly", "rust-analyzer" },
+-- }))
 
 -- set up custom symbols for LSP errors
 local signs = {
