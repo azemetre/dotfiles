@@ -4,6 +4,7 @@
 require("globals")
 local opt = vim.opt
 local cmd = vim.cmd
+local autocmd = vim.api.nvim_create_autocmd
 local g = vim.g
 local o = vim.o
 local fn = vim.fn
@@ -241,6 +242,14 @@ if utils.file_exists(fn.expand("~/.vimrc_background")) then
 	g.base16colorspace = 256
 	cmd([[source ~/.vimrc_background]])
 end
+
+-- allows inlay hints for rust
+-- autocmd({ "BufEnter", "BufWinEnter", "TabEnter" }, {
+-- 	pattern = "*.rs",
+-- 	callback = function()
+-- 		require("lsp_extensions").inlay_hints({})
+-- 	end,
+-- })
 
 cmd([[syntax on]])
 cmd([[filetype plugin indent on]])
