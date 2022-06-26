@@ -45,8 +45,8 @@ local icons = {
 	warning = "",
 	info = "",
 	hint = "",
-	-- hint = "",
-	-- lsp = " ",
+	hint = "",
+	lsp = " ",
 	lsp = "",
 	line = "☰",
 	-- git icons
