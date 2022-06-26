@@ -59,7 +59,7 @@ local comps = {
 		},
 		right = {
 			-- provider = "▊",
-			provider = "",
+			provider = "",
 			hl = function()
 				local val = {
 					name = vi_mode_utils.get_mode_highlight_name(),
