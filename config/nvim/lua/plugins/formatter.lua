@@ -33,6 +33,9 @@ require("formatter").setup({
 		lua = {
 			require("formatter.filetypes.lua").stylua,
 		},
+		rust = {
+			require("formatter.filetypes.rust").rustfmt,
+		},
 	},
 })
 
@@ -42,6 +45,7 @@ augroup FormatAutogroup
   autocmd!
   autocmd BufWritePost *.js,*.ts,*.tsx FormatWrite
   autocmd BufWritePost *.lua FormatWrite
+  autocmd BufWritePost *.rs FormatWrite
 augroup END
 ]],
 	true
