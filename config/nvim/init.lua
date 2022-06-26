@@ -245,8 +245,16 @@ end
 cmd([[syntax on]])
 cmd([[filetype plugin indent on]])
 -- make the highlighting of tabs and other non-text less annoying
-cmd([[highlight SpecialKey ctermfg=19 guifg=#333333]])
-cmd([[highlight NonText ctermfg=19 guifg=#333333]])
+cmd([[highlight SpecialKey ctermfg=19 guifg=#f6f5fb]])
+cmd([[highlight NonText ctermfg=19 guifg=#f6f5fb]])
+-- floating window colors
+cmd([[highlight Pmenu guibg=#0f4ac6 gui=NONE]])
+cmd([[highlight PmenuSel guibg=#1997c6 gui=NONE]])
+cmd([[highlight PmenuSbar guibg=#4e7cbf]])
+cmd([[highlight PmenuThumb guibg=#f6f5fb]])
+-- lsp doc colors
+cmd([[highlight NormalFloat guibg=#0f4ac6]])
+cmd([[highlight FloatBorder guifg=white guibg=#f6f5fb]])
 
 -- make comments and HTML attributes italic
 cmd([[highlight Comment cterm=italic term=italic gui=italic]])
