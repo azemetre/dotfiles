@@ -90,6 +90,9 @@ Plug("hrsh7th/cmp-buffer")
 Plug("hrsh7th/cmp-path")
 Plug("hrsh7th/nvim-cmp")
 
+-- used for rust inlay hints
+Plug("nvim-lua/lsp_extensions.nvim")
+
 -- treesitter enables an AST-like understanding of files
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
 -- show treesitter nodes
@@ -123,6 +126,7 @@ Plug("stevearc/dressing.nvim")
 -- Navigate a code base with a really slick UI
 Plug("nvim-telescope/telescope.nvim")
 Plug("nvim-telescope/telescope-rg.nvim")
+Plug("nvim-telescope/telescope-file-browser.nvim")
 
 -- Startup screen for Neovim
 Plug("startup-nvim/startup.nvim")

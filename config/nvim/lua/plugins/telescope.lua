@@ -108,6 +108,7 @@ telescope.setup({
 })
 
 telescope.load_extension("fzf")
+telescope.load_extension("file_browser")
 
 -- mappings
 nnoremap("<leader>ff", "<cmd>Telescope find_files<cr>")
@@ -116,4 +117,5 @@ nnoremap("<leader>fn", "<cmd>Telescope node_modules list<cr>")
 nnoremap("<leader>fg", "<cmd>Telescope live_grep<cr>")
 nnoremap("<leader>fr", "<cmd>lua require('telescope').extensions.live_grep_raw.live_grep_raw()<cr>")
 nnoremap("<leader>fb", "<cmd>Telescope buffers<cr>")
+nnoremap("<leader>ft", "<cmd>Telescope file_browser<cr>")
 nnoremap("<leader>fh", "<cmd>Telescope help_tags<cr>")
