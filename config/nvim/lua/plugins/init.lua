@@ -83,6 +83,11 @@ Plug("neovim/nvim-lspconfig")
 -- Helpers to install LSPs and maintain them
 Plug("williamboman/nvim-lsp-installer")
 
+-- snippet support
+Plug("hrsh7th/vim-vsnip")
+Plug("hrsh7th/vim-vsnip-integ")
+Plug("rafamadriz/friendly-snippets")
+
 -- neovim completion
 Plug("hrsh7th/cmp-nvim-lsp")
 Plug("hrsh7th/cmp-nvim-lua")
