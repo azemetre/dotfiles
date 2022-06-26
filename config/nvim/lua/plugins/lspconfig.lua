@@ -179,40 +179,87 @@ local function make_config()
 	}
 end
 
-lsp_installer.on_server_ready(function(server)
-	local opts = make_config()
-	if server.name == "lua" then
-		opts.settings = lua_settings
-		opts.root_dir = function(fname)
-			local util = require("lspconfig/util")
-			return util.find_git_ancestor(fname) or util.path.dirname(fname)
-		end
-	elseif server.name == "vim" then
-		opts.init_options = { isNeovim = true }
-	elseif server.name == "diagnosticls" then
-		opts = diagnosticls_settings
-	elseif server.name == "tsserver" then
-		local capabilities = opts.capabilities
-		opts.capabiltiies = require("cmp_nvim_lsp").update_capabilities(capabilities)
-		opts.root_dir = nvim_lsp.util.root_pattern("package.json")
-		opts.handlers = {
-			["textDocument/definition"] = function(err, result, ctx, config)
-				-- if there is more than one result, just use the first one
-				if #result > 1 then
-					result = { result[1] }
-				end
-				vim.lsp.handlers["textDocument/definition"](err, result, ctx, config)
-			end,
-		}
-	elseif server.name == "denols" then
-		opts.root_dir = nvim_lsp.util.root_pattern("deno.json")
-		opts.init_options = {
-			lint = true,
-		}
-	end
+require("nvim-lsp-installer").setup {
+	ensure_installed = {
+		"ansiblels",
+		"awk_ls",
+		"bashls",
+		"cmake",
+		"cssls",
+		"dockerls",
+		"denols",
+		"emmet_ls",
+		"html",
+		"kotlin_language_server",
+		"lemminx",
+		"rust_analyzer",
+		"sqlls",
+		"sumneko_lua",
+		"svelte",
+		"tsserver",
+		"tailwindcss",
+		"vimls",
+		"yamlls",
+	},
 
-	server:setup(opts)
-end)
+	automatic_installation = true,
+
+	ui = {
+		-- Whether to automatically check for outdated servers when opening the UI window.
+		check_outdated_servers_on_open = true,
+
+		-- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
+		border = "solid",
+
+		icons = {
+			server_installed = "✓",
+			server_pending = "➜",
+			server_uninstalled = "✗", -- The list icon to use for installed servers.
+		},
+		keymaps = {
+			-- Keymap to expand a server in the UI
+			toggle_server_expand = "<CR>",
+			-- Keymap to install the server under the current cursor position
+			install_server = "i",
+			-- Keymap to reinstall/update the server under the current cursor position
+			update_server = "u",
+			-- Keymap to check for new version for the server under the current cursor position
+			check_server_version = "c",
+			-- Keymap to update all installed servers
+			update_all_servers = "U",
+			-- Keymap to check which installed servers are outdated
+			check_outdated_servers = "C",
+			-- Keymap to uninstall a server
+			uninstall_server = "X",
+		},
+	},
+
+	-- Controls to which degree logs are written to the log file. It's useful to set this to vim.log.levels.DEBUG when
+	-- debugging issues with server installations.
+	log_level = vim.log.levels.INFO,
+
+	max_concurrent_installers = 4,
+}
+
+nvim_lsp.ansiblels.setup({})
+nvim_lsp.awk_ls.setup({})
+nvim_lsp.bashls.setup({})
+nvim_lsp.cmake.setup({})
+nvim_lsp.cssls.setup({})
+nvim_lsp.dockerls.setup({})
+nvim_lsp.denols.setup({})
+nvim_lsp.emmet_ls.setup({})
+nvim_lsp.html.setup({})
+nvim_lsp.kotlin_language_server.setup({})
+nvim_lsp.lemminx.setup({})
+nvim_lsp.rust_analyzer.setup({})
+nvim_lsp.sqlls.setup({})
+nvim_lsp.sumneko_lua.setup({})
+nvim_lsp.svelte.setup({})
+nvim_lsp.tsserver.setup({})
+nvim_lsp.tailwindcss.setup({})
+nvim_lsp.vimls.setup({})
+nvim_lsp.yamlls.setup({})
 
 -- emmet_ls
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
