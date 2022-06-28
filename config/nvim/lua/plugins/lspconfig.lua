@@ -2,6 +2,7 @@ local utils = require("utils")
 local nmap = utils.nmap
 local imap = utils.imap
 local cmd = vim.cmd
+local vo = vim.o
 local api = vim.api
 local fn = vim.fn
 local lsp = vim.lsp
@@ -68,9 +69,28 @@ local on_attach = function(client, bufnr)
 	cmd([[command! LspDiagNext lua vim.lsp.diagnostic.goto_next()]])
 	cmd([[command! LspDiagLine lua lsp_show_diagnostics()]])
 	cmd([[command! LspSignatureHelp lua vim.lsp.buf.signature_help()]])
+	-- highlight errors on cursor position in floating window
+	vo.updatetime = 100
+	cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
+	cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]])
 
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
+	api.nvim_create_autocmd("CursorHold", {
+		buffer = bufnr,
+		callback = function()
+			local opts = {
+				focusable = false,
+				close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+				border = "rounded",
+				source = "always",
+				prefix = " ",
+				scope = "cursor",
+			}
+			vim.diagnostic.open_float(nil, opts)
+		end,
+	})
+
+	lsp.handlers["textDocument/hover"] = lsp.with(vim.lsp.handlers.hover, { border = border })
+	lsp.handlers["textDocument/signatureHelp"] = lsp.with(vim.lsp.handlers.hover, { border = border })
 
 	nmap("gd", ":LspDef<CR>", { bufnr = bufnr })
 	nmap("gR", ":LspRename<CR>", { bufnr = bufnr })
@@ -84,7 +104,7 @@ local on_attach = function(client, bufnr)
 	nmap("<Leader>a", ":LspDiagLine<CR>", { bufnr = bufnr })
 	imap("<C-x><C-x>", "<cmd> LspSignatureHelp<CR>", { bufnr = bufnr })
 
-	if client.resolved_capabilities.document_highlight then
+	if client.server_capabilities.documentHighlightProvider then
 		api.nvim_exec(
 			[[
     augroup lsp_document_highlight
@@ -179,7 +199,7 @@ local function make_config()
 	}
 end
 
-require("nvim-lsp-installer").setup {
+lsp_installer.setup({
 	ensure_installed = {
 		"ansiblels",
 		"awk_ls",
@@ -239,7 +259,7 @@ require("nvim-lsp-installer").setup {
 	log_level = vim.log.levels.INFO,
 
 	max_concurrent_installers = 4,
-}
+})
 
 nvim_lsp.ansiblels.setup({})
 nvim_lsp.awk_ls.setup({})
@@ -247,8 +267,11 @@ nvim_lsp.bashls.setup({})
 nvim_lsp.cmake.setup({})
 nvim_lsp.cssls.setup({})
 nvim_lsp.dockerls.setup({})
-nvim_lsp.denols.setup({})
-nvim_lsp.emmet_ls.setup({})
+-- nvim_lsp.denols.setup({})
+nvim_lsp.emmet_ls.setup({
+	capabilities = capabilities,
+	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
+})
 nvim_lsp.html.setup({})
 nvim_lsp.kotlin_language_server.setup({})
 nvim_lsp.lemminx.setup({})
@@ -257,25 +280,9 @@ nvim_lsp.sqlls.setup({})
 nvim_lsp.sumneko_lua.setup({})
 nvim_lsp.svelte.setup({})
 nvim_lsp.tsserver.setup({})
-nvim_lsp.tailwindcss.setup({})
+-- nvim_lsp.tailwindcss.setup({})
 nvim_lsp.vimls.setup({})
 nvim_lsp.yamlls.setup({})
-
--- emmet_ls
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
-
--- nvim_lsp.emmet_ls.setup({
--- 	-- on_attach = on_attach,
--- 	capabilities = capabilities,
--- 	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
--- })
-
--- nvim_lsp.svelte.setup(config())
-
--- nvim_lsp.rust_analyzer.setup(config({
--- 	cmd = { "rustup", "run", "nightly", "rust-analyzer" },
--- }))
 
 -- set up custom symbols for LSP errors
 local signs = {

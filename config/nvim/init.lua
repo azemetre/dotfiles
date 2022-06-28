@@ -35,19 +35,8 @@ end
 
 -- General
 ----------------------------------------------------------------
-
--- theme and colorscheme declaration
----- Example config in Lua
-g.tokyonight_style = "storm"
-g.tokyonight_italic_functions = true
-g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
-
--- Change the "hint" color to the "orange" color, and make the "error" color bright red
-g.tokyonight_colors = { hint = "orange", error = "#ff0000" }
-
--- Load the colorscheme
--- issues loading theme
---cmd([[colorscheme tokyonight]])
+-- emmet invocation
+g.user_emmet_leader_key = "<C-Z>"
 
 cmd([[abbr funciton function]])
 cmd([[abbr teh the]])
