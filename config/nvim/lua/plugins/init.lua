@@ -142,6 +142,11 @@ Plug("junegunn/fzf.vim")
 -- Power telescope with FZF
 Plug("nvim-telescope/telescope-fzf-native.nvim", { ["do"] = "make" })
 
+-- debug adapter protocol
+Plug("mfussenegger/nvim-dap")
+Plug("rcarriga/nvim-dap-ui")
+Plug("theHamsta/nvim-dap-virtual-text")
+
 Plug("folke/trouble.nvim")
 
 plugEnd()
