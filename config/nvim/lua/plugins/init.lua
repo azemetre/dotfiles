@@ -44,8 +44,11 @@ Plug("editorconfig/editorconfig-vim")
 Plug("tpope/vim-fugitive")
 nmap("<leader>gb", ":G blame<cr>")
 
--- see markdown live
+-- starts a html page to view markdown - can make changes live
 Plug("iamcco/markdown-preview.nvim", { ["do"] = "cd app && yarn install" })
+
+-- create ascii diagrams
+Plug("jbyuki/venn.nvim")
 
 -- general plugins
 -- emmet support for vim - easily create markdup wth CSS-like syntax
