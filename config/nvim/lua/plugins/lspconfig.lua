@@ -212,6 +212,7 @@ lsp_installer.setup({
 		"html",
 		"kotlin_language_server",
 		"lemminx",
+		"marksman",
 		"rust_analyzer",
 		"sqlls",
 		"sumneko_lua",
@@ -275,6 +276,7 @@ nvim_lsp.emmet_ls.setup({
 nvim_lsp.html.setup({})
 nvim_lsp.kotlin_language_server.setup({})
 nvim_lsp.lemminx.setup({})
+nvim_lsp.marksman.setup({})
 nvim_lsp.rust_analyzer.setup({})
 nvim_lsp.sqlls.setup({})
 nvim_lsp.sumneko_lua.setup({})
