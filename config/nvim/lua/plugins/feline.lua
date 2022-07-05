@@ -218,7 +218,7 @@ local comps = {
 			provider = "git_diff_changed",
 			icon = " " .. icons.modified .. " ",
 			hl = {
-				fg = colors.orange,
+				fg = colors.yellow,
 			},
 		},
 		remove = {
