@@ -37,6 +37,9 @@ Plug("tpope/vim-repeat")
 -- detect indent style (tabs vs. spaces)
 Plug("tpope/vim-sleuth")
 
+-- handy bracket mappings
+Plug("tpope/vim-unimpaired")
+
 -- setup editorconfig
 Plug("editorconfig/editorconfig-vim")
 
