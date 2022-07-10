@@ -37,6 +37,9 @@ Plug("tpope/vim-repeat")
 -- detect indent style (tabs vs. spaces)
 Plug("tpope/vim-sleuth")
 
+-- handy bracket mappings
+Plug("tpope/vim-unimpaired")
+
 -- setup editorconfig
 Plug("editorconfig/editorconfig-vim")
 
@@ -141,6 +144,11 @@ Plug("/usr/local/bin/fzf")
 Plug("junegunn/fzf.vim")
 -- Power telescope with FZF
 Plug("nvim-telescope/telescope-fzf-native.nvim", { ["do"] = "make" })
+
+-- debug adapter protocol
+Plug("mfussenegger/nvim-dap")
+Plug("rcarriga/nvim-dap-ui")
+Plug("theHamsta/nvim-dap-virtual-text")
 
 Plug("folke/trouble.nvim")
 
