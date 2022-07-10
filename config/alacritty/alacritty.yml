@@ -1,0 +1,154 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator
+
+# Shell
+
+# You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
+# Entries in shell.args are passed unmodified as arguments to the shell.
+
+# shell:
+#   program: /usr/bin/env
+#   args:
+#     - zsh
+
+# Any items in the `env` entry below will be added as
+# environment variables. Some entries may override variables
+# set by alacritty it self.
+env:
+  # TERM env customization.
+  #
+  # If this property is not set, alacritty will set it to xterm-256color.
+  #
+  # Note that some xterm terminfo databases don't declare support for italics.
+  # You can verify this by checking for the presence of `smso` and `sitm` inDejaVu Sans Mono
+  # `infocmp xterm-256color`.
+  TERM: xterm-256color
+
+# Window dimensions in character columns and lines
+# (changes require restart)
+window:
+  dimensions:
+    columns: 110
+    lines: 33
+
+  # window padding (change requires restart)
+  padding:
+    x: 2
+    y: 2
+  # spread additional padding evenly around the terminal content
+  dynamic_padding: true
+  # window decoarations
+  full: borders and title bar
+  # - none: neither borders nor title bar
+  # - (macos) transparent: title bar, transparent background, and title bar buttons
+  # - (macos) buttonless: title bar transparent background, but no title bar buttons
+  decorations: buttonless
+  # dynamically set the window title
+  dynamic_title: true
+  # Startup mode
+  # - Windowed
+  # - Maximized
+  # - Fullscreen
+  # - SimpleFullscreen (macos only)
+  startup_mode: Windowed
+
+scrolling:
+  history: 10000
+  multiplier: 3
+
+# The FreeType rasterizer needs to know the device DPI for best results
+# (changes require restart)
+dpi:
+  x: 128.0
+  y: 128.0
+
+# When true, bold text is drawn using the bright variant of colors.
+draw_bold_text_with_bright_colors: true
+
+# Font configuration (changes require restart)
+font:
+  # The normal (roman) font face to use.
+  normal:
+    family: Hack Nerd Font Mono
+    # Style can be specified to pick a specific face.
+    style: Regular
+
+  # The bold font face
+  bold:
+    family: Hack Nerd Font Mono
+    # Style can be specified to pick a specific face.
+    style: Bold
+
+  # The italic font face
+  italic:
+    family: Hack Nerd Font Mono
+    # Style can be specified to pick a specific face.
+    style: Italic
+
+  # Point size of the font
+  size: 24.0
+
+  # Offset is the extra space around each character. offset.y can be thought of
+  # as modifying the linespacing, and offset.x as modifying the letter spacing.
+  offset:
+    x: 0
+    y: 0
+
+  # Glyph offset determines the locations of the glyphs within their cells with
+  # the default being at the bottom. Increase the x offset to move the glyph to
+  # the right, increase the y offset to move the glyph upward.
+  glyph_offset:
+    x: 0
+    y: 0
+
+  # OS X only: use thin stroke font rendering. Thin strokes are suitable
+  # for retina displays, but for non-retina you probably want this set to
+  # false.
+  use_thin_strokes: false
+
+# Mouse bindings
+# Currently doesn't support modifiers. Both the `mouse` and `action` fields must
+# be specified.
+#
+mouse:
+  # hide the cursor when typing
+  hide_when_typing: true
+  # save selected text to system clipboard
+  save_to_clipboard: true
+# Values for `action`:
+# - Paste
+# - PasteSelection
+# - Copy (TODO)
+
+
+# Should display the render timer
+debug.render_timer: true
+
+# Visual Bell
+#
+# Any time the BEL code is received, Alacritty "rings" the visual bell. Once
+# rung, the terminal background will be set to white and transition back to the
+# default background color. You can control the rate of this transition by
+# setting the `duration` property (represented in milliseconds). You can also
+# configure the transition function by setting the `animation` property.
+#
+# Possible values for `animation`
+# `Ease`
+# `EaseOut`
+# `EaseOutSine`
+# `EaseOutQuad`
+# `EaseOutCubic`
+# `EaseOutQuart`
+# `EaseOutQuint`
+# `EaseOutExpo`
+# `EaseOutCirc`
+# `Linear`
+#
+# To completely disable the visual bell, set its duration to 0.
+#
+# visual_bell:
+#   animation: EaseOutExpo
+#   duration: 0
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
+
