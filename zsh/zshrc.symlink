@@ -218,6 +218,7 @@ alias df="df -h" # disk free, in Gigabytes, not bytes
 alias du="du -h -c" # calculate disk usage for a folder
 alias brewuuc="brew update && brew upgrade && brew cleanup" # update upgrade clean brew
 alias ohmyzsh="vim ~/.oh-my-zsh"
+alias vzsh="vim ~/.zshrc"
 alias szsh="source ~/.zshrc"
 
 # Applications
@@ -251,6 +252,7 @@ alias nr="npm run"
 alias github='cd ~/github'
 alias blog='cd ~/github/azemetredotcom'
 alias playground='cd ~/playground'
+alias personal='cd ~/personal'
 alias learning='cd ~/learning'
 alias learn='cd ~/learning'
 alias dotfiles='cd ~/github/dotfiles'
