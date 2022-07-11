@@ -75,7 +75,7 @@ local icons = {
 	deleted = "",
 	ignored = "◌",
 	modified = "",
-	deleted = "",
+	-- deleted = "",
 	added = "",
 	-- file icons
 	arrow_open = "",
@@ -84,7 +84,7 @@ local icons = {
 	open = "",
 	empty = "",
 	empty_open = "",
-	symlink = "",
+	-- symlink = "",
 	symlink_open = "",
 	file = "",
 	symlink = "",

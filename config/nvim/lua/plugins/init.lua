@@ -18,8 +18,8 @@ Plug("nvim-lua/plenary.nvim")
 -- create themes
 Plug("rktjmp/lush.nvim")
 
--- color schemes
-Plug("folke/tokyonight.nvim", { ["branch"] = "main" })
+-- thipster hemes
+Plug("azemetre/hipster.nvim")
 
 -- easy commenting
 Plug("tpope/vim-commentary")
