@@ -164,7 +164,7 @@ opt.pastetoggle = "<leader>v"
 
 -- source current file
 -- not working will need to tweak
-nnoremap("<leader>sf", ":so %<CR>")
+nnoremap("<leader>s", ":so %<CR>")
 
 -- make current file executable
 nnoremap("<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
