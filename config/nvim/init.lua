@@ -172,7 +172,7 @@ nnoremap("<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- unsets last search pattern register
 nnoremap("<CR>", ":noh<CR>")
 
-nmap("<leader>,", ":w<cr>")
+nmap("<leader>,", ":w<CR>")
 nmap("<space>", ":set hlsearch! hlsearch?<cr>")
 
 nmap("<leader><space>", [[:%s/\s\+$<cr>]])
@@ -204,10 +204,6 @@ inoremap(opt_k, "<Esc>:m .-2<cr>==gi")
 vnoremap(opt_j, ":m '>+1<cr>gv=gv")
 vnoremap(opt_k, ":m '<-2<cr>gv=gv")
 
--- scroll the viewport faster
-nnoremap("<C-e>", "3<c-e>")
-nnoremap("<C-y>", "3<c-y>")
-
 -- custom text objects
 -- inner-line
 xmap("il", ":<c-u>normal! g_v^<cr>")
@@ -231,6 +227,16 @@ if utils.file_exists(fn.expand("~/.vimrc_background")) then
 	g.base16colorspace = 256
 	cmd([[source ~/.vimrc_background]])
 end
+
+-- plugin hotkeys
+-- harpoon
+nnoremap("<C-a>", ":lua require('harpoon.mark').add_file()<CR>")
+nnoremap("<C-e>", ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
+
+nnoremap("<C-h>", ":lua require('harpoon.ui').nav_file(1)<CR>")
+nnoremap("<C-j>", ":lua require('harpoon.ui').nav_file(2)<CR>")
+nnoremap("<C-k>", ":lua require('harpoon.ui').nav_file(3)<CR>")
+nnoremap("<C-l>", ":lua require('harpoon.ui').nav_file(4)<CR>")
 
 -- allows inlay hints for rust
 -- autocmd({ "BufEnter", "BufWinEnter", "TabEnter" }, {
