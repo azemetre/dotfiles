@@ -40,6 +40,9 @@ Plug("tpope/vim-sleuth")
 -- handy bracket mappings
 Plug("tpope/vim-unimpaired")
 
+-- notate interesting words, pretty neat!
+Plug("lfv89/vim-interestingwords")
+
 -- setup editorconfig
 Plug("gpanders/editorconfig.nvim")
 
@@ -133,6 +136,9 @@ Plug("alvarosevilla95/luatab.nvim")
 
 -- improve the default neovim interfaces, such as refactoring
 Plug("stevearc/dressing.nvim")
+
+-- when you only need to jump between a handful of files
+Plug("ThePrimeagen/harpoon")
 
 -- Navigate a code base with a really slick UI
 Plug("nvim-telescope/telescope.nvim")
