@@ -41,7 +41,7 @@ Plug("tpope/vim-sleuth")
 Plug("tpope/vim-unimpaired")
 
 -- setup editorconfig
-Plug("editorconfig/editorconfig-vim")
+Plug("gpanders/editorconfig.nvim")
 
 -- fugitive
 Plug("tpope/vim-fugitive")
