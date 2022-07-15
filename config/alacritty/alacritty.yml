@@ -13,6 +13,9 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty it self.
+import:
+  - "~/.config/alacritty/tokyo-night-storm.yaml"
+
 env:
   # TERM env customization.
   #
@@ -41,7 +44,7 @@ window:
   # - none: neither borders nor title bar
   # - (macos) transparent: title bar, transparent background, and title bar buttons
   # - (macos) buttonless: title bar transparent background, but no title bar buttons
-  decorations: buttonless
+  decorations: buttonless 
   # dynamically set the window title
   dynamic_title: true
   # Startup mode
@@ -49,7 +52,7 @@ window:
   # - Maximized
   # - Fullscreen
   # - SimpleFullscreen (macos only)
-  startup_mode: Windowed
+  startup_mode: Windowed 
 
 scrolling:
   history: 10000
@@ -152,3 +155,13 @@ debug.render_timer: true
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
+key_bindings:
+  - { key: Comma,     mods: Command,      command:
+      {program: "sh", args: ["-c","open ~/.config/alacritty/alacritty.yml"]}     }
+  - { key: N,         mods: Command,      action: SpawnNewInstance       }
+  - { key: Space,     mods: Alt,          chars: " "                     }
+  - { key: Back, mods: Super, chars: "\x15" } # delete word/line
+  - { key: Left,     mods: Alt,     chars: "\x1bb"                       } # one word left
+  - { key: Right,    mods: Alt,     chars: "\x1bf"                       } # one word right
+  - { key: Left,     mods: Command, chars: "\x1bOH",   mode: AppCursor   } # Home
+  - { key: Right,    mods: Command, chars: "\x1bOF",   mode: AppCursor   } # End
