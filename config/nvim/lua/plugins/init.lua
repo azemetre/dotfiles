@@ -140,6 +140,9 @@ Plug("stevearc/dressing.nvim")
 -- when you only need to jump between a handful of files
 Plug("ThePrimeagen/harpoon")
 
+-- worktrees made easy
+Plug("ThePrimeagen/git-worktree.nvim")
+
 -- Navigate a code base with a really slick UI
 Plug("nvim-telescope/telescope.nvim")
 Plug("nvim-telescope/telescope-rg.nvim")
@@ -168,6 +171,7 @@ plugEnd()
 -- starting them. Otherwise, the plugin itself is required and its `setup` method is called.
 require("nvim-autopairs").setup()
 require("colorizer").setup()
+require("plugins.git-worktree")
 require("plugins.telescope")
 require("plugins.gitsigns")
 require("plugins.trouble")
