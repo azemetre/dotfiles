@@ -230,10 +230,10 @@ end
 
 -- plugin hotkeys
 -- harpoon
--- nnoremap("<C-a>", ":lua require('harpoon.mark').add_file()<CR>")
--- nnoremap("<C-e>", ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
-nnoremap("<leader>ha", ":lua require('harpoon.mark').add_file()<CR>")
-nnoremap("<leader>he", ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
+nnoremap("<C-a>", ":lua require('harpoon.mark').add_file()<CR>")
+nnoremap("<C-e>", ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
+-- nnoremap("<leader>ha", ":lua require('harpoon.mark').add_file()<CR>")
+-- nnoremap("<leader>he", ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
 
 nnoremap("<C-h>", ":lua require('harpoon.ui').nav_file(1)<CR>")
 nnoremap("<C-j>", ":lua require('harpoon.ui').nav_file(2)<CR>")
