@@ -15,13 +15,13 @@ else
 	nmap("<leader>t", ":FZF<cr>")
 end
 
-nmap("<leader>s", ":GFiles?<cr>")
-nmap("<leader>r", ":Buffers<cr>")
-nmap("<leader>e", ":FZF<cr>")
+-- nmap("<leader>s", ":GFiles?<cr>")
+-- nmap("<leader>r", ":Buffers<cr>")
+-- nmap("<leader>e", ":FZF<cr>")
 
-nmap("<leader><tab>", "<plug>(fzf-maps-n)")
-xmap("<leader><tab>", "<plug>(fzf-maps-x)")
-omap("<leader><tab>", "<plug>(fzf-maps-o)")
+-- nmap("<leader><tab>", "<plug>(fzf-maps-n)")
+-- xmap("<leader><tab>", "<plug>(fzf-maps-x)")
+-- omap("<leader><tab>", "<plug>(fzf-maps-o)")
 
 -- Insert mode completion
 imap("<c-x><c-k>", "<plug>(fzf-complete-word)")
