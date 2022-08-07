@@ -240,16 +240,17 @@ nnoremap("<C-j>", ":lua require('harpoon.ui').nav_file(2)<CR>")
 nnoremap("<C-k>", ":lua require('harpoon.ui').nav_file(3)<CR>")
 nnoremap("<C-l>", ":lua require('harpoon.ui').nav_file(4)<CR>")
 
--- show inline errors
-nmap("<leader>e", "vim.diagnostic.open_float()")
+-- goto-preview go-to-preview gotopreview
+nnoremap("gpd", ":lua require('goto-preview').goto_preview_definition()<CR>")
+nnoremap("gpt", ":lua require('goto-preview').goto_preview_type_definition()<CR>")
+nnoremap("gpi", ":lua require('goto-preview').goto_preview_implementation()<CR>")
+nnoremap("gq", ":lua require('goto-preview').close_all_win()<CR>")
+-- Only set if you have telescope installed
+nnoremap("gpr", ":lua require('goto-preview').goto_preview_references()<CR>")
 
--- allows inlay hints for rust
--- autocmd({ "BufEnter", "BufWinEnter", "TabEnter" }, {
--- 	pattern = "*.rs",
--- 	callback = function()
--- 		require("lsp_extensions").inlay_hints({})
--- 	end,
--- })
+-- cmp-spell
+opt.spell = true
+opt.spelllang = { "en_us" }
 
 cmd([[syntax on]])
 cmd([[filetype plugin indent on]])

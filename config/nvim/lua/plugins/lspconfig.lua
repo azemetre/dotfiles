@@ -95,15 +95,15 @@ local on_attach = function(client, bufnr)
 
 	nmap("gd", ":LspDef<CR>", { bufnr = bufnr })
 	nmap("gR", ":LspRename<CR>", { bufnr = bufnr })
-	nmap("gr", ":LspRefs<CR>", { bufnr = bufnr })
-	nmap("gt", ":LspTypeDef<CR>", { bufnr = bufnr })
+	-- nmap("gr", ":LspRefs<CR>", { bufnr = bufnr })
+	-- nmap("gt", ":LspTypeDef<CR>", { bufnr = bufnr })
 	nmap("K", ":LspHover<CR>", { bufnr = bufnr })
 	nmap("gs", ":LspOrganize<CR>", { bufnr = bufnr })
 	nmap("[a", ":LspDiagPrev<CR>", { bufnr = bufnr })
 	nmap("]a", ":LspDiagNext<CR>", { bufnr = bufnr })
 	nmap("ga", ":LspCodeAction<CR>", { bufnr = bufnr })
 	nmap("<Leader>a", ":LspDiagLine<CR>", { bufnr = bufnr })
-	imap("<C-x><C-x>", "<cmd> LspSignatureHelp<CR>", { bufnr = bufnr })
+	imap("<C-x><C-x>", ":LspSignatureHelp<CR>", { bufnr = bufnr })
 
 	if client.server_capabilities.documentHighlightProvider then
 		api.nvim_exec(

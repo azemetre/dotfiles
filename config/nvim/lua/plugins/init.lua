@@ -103,9 +103,14 @@ Plug("hrsh7th/cmp-nvim-lua")
 Plug("hrsh7th/cmp-buffer")
 Plug("hrsh7th/cmp-path")
 Plug("hrsh7th/nvim-cmp")
+-- spell checker
+Plug("f3fora/cmp-spell")
 
 -- used for rust inlay hints
 Plug("nvim-lua/lsp_extensions.nvim")
+
+-- preview native LSP's goto definition, type definition, implementation, and references in floating windows
+Plug("rmagatti/goto-preview")
 
 -- treesitter enables an AST-like understanding of files
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
@@ -180,8 +185,9 @@ require("plugins.formatter")
 require("plugins.lspconfig")
 require("plugins.completion")
 require("plugins.treesitter")
+require("plugins.goto-preview")
 require("plugins.nvimtree")
+require("plugins.cmp")
 require("plugins.tabline")
 require("plugins.indent-blankline")
 require("plugins.feline")
-require("plugins.startup")
