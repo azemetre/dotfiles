@@ -1,4 +1,5 @@
 local utils = require("utils")
+local util = require("lspconfig.util")
 local nmap = utils.nmap
 local imap = utils.imap
 local cmd = vim.cmd
@@ -83,14 +84,14 @@ local on_attach = function(client, bufnr)
 				border = "rounded",
 				source = "always",
 				prefix = " ",
-				scope = "cursor",
+				scope = "line",
 			}
 			vim.diagnostic.open_float(nil, opts)
 		end,
 	})
 
-	lsp.handlers["textDocument/hover"] = lsp.with(vim.lsp.handlers.hover, { border = border })
-	lsp.handlers["textDocument/signatureHelp"] = lsp.with(vim.lsp.handlers.hover, { border = border })
+	lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = border })
+	lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.hover, { border = border })
 
 	nmap("gd", ":LspDef<CR>", { bufnr = bufnr })
 	nmap("gR", ":LspRename<CR>", { bufnr = bufnr })
@@ -209,6 +210,7 @@ lsp_installer.setup({
 		"dockerls",
 		"denols",
 		"emmet_ls",
+		"gopls",
 		"html",
 		"kotlin_language_server",
 		"lemminx",
@@ -266,21 +268,55 @@ nvim_lsp.ansiblels.setup({})
 nvim_lsp.awk_ls.setup({})
 nvim_lsp.bashls.setup({})
 nvim_lsp.cmake.setup({})
-nvim_lsp.cssls.setup({})
+nvim_lsp.cssls.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
 nvim_lsp.dockerls.setup({})
 -- nvim_lsp.denols.setup({})
 nvim_lsp.emmet_ls.setup({
 	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
 })
-nvim_lsp.html.setup({})
+nvim_lsp.gopls.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+	cmd = { "gopls", "serve" },
+	filetypes = { "go", "gomod" },
+	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+	settings = {
+		gopls = {
+			analyses = {
+				unusedparams = true,
+			},
+			staticcheck = true,
+		},
+	},
+})
+
+nvim_lsp.html.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
 nvim_lsp.kotlin_language_server.setup({})
 nvim_lsp.lemminx.setup({})
 nvim_lsp.marksman.setup({})
-nvim_lsp.rust_analyzer.setup({})
+nvim_lsp.rust_analyzer.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
 nvim_lsp.sqlls.setup({})
-nvim_lsp.sumneko_lua.setup({})
-nvim_lsp.svelte.setup({})
-nvim_lsp.tsserver.setup({})
+nvim_lsp.sumneko_lua.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
+nvim_lsp.svelte.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
+nvim_lsp.tsserver.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
 -- nvim_lsp.tailwindcss.setup({})
 nvim_lsp.vimls.setup({})
 nvim_lsp.yamlls.setup({})
@@ -291,7 +327,7 @@ local signs = {
 	Warning = icons.warning,
 	Warn = icons.warning,
 	Hint = icons.hint,
-	Info = icons.hint,
+	Info = icons.info,
 }
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
