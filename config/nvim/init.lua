@@ -9,6 +9,8 @@ local g = vim.g
 local o = vim.o
 local fn = vim.fn
 local env = vim.env
+local lsp = vim.lsp
+local diagnostic = vim.diagnostic
 local utils = require("utils")
 local termcodes = utils.termcodes
 local nmap = utils.nmap
@@ -230,15 +232,16 @@ end
 
 -- plugin hotkeys
 -- harpoon
-nnoremap("<C-a>", ":lua require('harpoon.mark').add_file()<CR>")
+nnoremap("<C-w>", ":lua require('harpoon.mark').add_file()<CR>")
 nnoremap("<C-e>", ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
--- nnoremap("<leader>ha", ":lua require('harpoon.mark').add_file()<CR>")
--- nnoremap("<leader>he", ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
 
 nnoremap("<C-h>", ":lua require('harpoon.ui').nav_file(1)<CR>")
 nnoremap("<C-j>", ":lua require('harpoon.ui').nav_file(2)<CR>")
 nnoremap("<C-k>", ":lua require('harpoon.ui').nav_file(3)<CR>")
 nnoremap("<C-l>", ":lua require('harpoon.ui').nav_file(4)<CR>")
+
+-- show inline errors
+nmap("<leader>e", "vim.diagnostic.open_float()")
 
 -- allows inlay hints for rust
 -- autocmd({ "BufEnter", "BufWinEnter", "TabEnter" }, {
@@ -264,6 +267,35 @@ cmd("colorscheme hipster")
 -- lsp doc colors
 -- cmd([[highlight NormalFloat guibg=#0f4ac6]])
 -- cmd([[highlight FloatBorder guifg=white guibg=#f6f5fb]])
+
+-- go golang go-lang specifics
+local wait_ms = 1000
+local OrgImports = function()
+	local params = lsp.util.make_range_params()
+	params.context = { only = { "source.organizeImports" } }
+	local result = lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
+	for _, res in pairs(result or {}) do
+		for _, r in pairs(res.result or {}) do
+			if r.edit then
+				lsp.util.apply_workspace_edit(r.edit, "UTF-8")
+			else
+				lsp.buf.execute_command(r.command)
+			end
+		end
+	end
+end
+
+autocmd({ "BufWritePre" }, {
+	pattern = { "*.go" },
+	callback = OrgImports,
+})
+
+autocmd({ "BufWritePre" }, {
+	pattern = { "*.go" },
+	callback = function()
+		lsp.buf.formatting_sync(nil, 500)
+	end,
+})
 
 -- make comments and HTML attributes italic
 cmd([[highlight Comment cterm=italic term=italic gui=italic]])
