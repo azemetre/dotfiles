@@ -13,6 +13,8 @@ local theme = require("theme")
 local colors = theme.colors
 local icons = theme.icons
 
+local ONE_HALF_SECOND = 1500
+
 local border = {
 	{ "🭽", "FloatBorder" },
 	{ "▔", "FloatBorder" },
@@ -71,7 +73,7 @@ local on_attach = function(client, bufnr)
 	cmd([[command! LspDiagLine lua lsp_show_diagnostics()]])
 	cmd([[command! LspSignatureHelp lua vim.lsp.buf.signature_help()]])
 	-- highlight errors on cursor position in floating window
-	vo.updatetime = 100
+	vo.updatetime = ONE_HALF_SECOND
 	cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
 	cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]])
 
@@ -308,6 +310,13 @@ nvim_lsp.sqlls.setup({})
 nvim_lsp.sumneko_lua.setup({
 	on_attach = make_config().on_attach,
 	capabilities = make_config().capabilities,
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim" },
+			},
+		},
+	},
 })
 nvim_lsp.svelte.setup({
 	on_attach = make_config().on_attach,

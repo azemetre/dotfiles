@@ -24,6 +24,7 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "buffer", keyword_length = 5, max_item_count = 5 },
 		{ name = "path" },
+		{ name = "spell" },
 	}),
 	formatting = {
 		format = lspkind.cmp_format({
