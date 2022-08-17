@@ -28,11 +28,11 @@ local colors = require("theme").colors
 _G.completion_nvim = {}
 
 function _G.completion_nvim.smart_pumvisible(vis_seq, not_vis_seq)
-	if fn.pumvisible() == 1 then
-		return termcodes(vis_seq)
-	else
-		return termcodes(not_vis_seq)
-	end
+    if fn.pumvisible() == 1 then
+        return termcodes(vis_seq)
+    else
+        return termcodes(not_vis_seq)
+    end
 end
 
 -- General
@@ -54,19 +54,19 @@ opt.swapfile = false -- don't create swap files for new buffers
 opt.updatecount = 0 -- don't write swap files after some number of updates
 
 opt.backupdir = {
-	"~/.vim-tmp",
-	"~/.tmp",
-	"~/tmp",
-	"/var/tmp",
-	"/tmp",
+    "~/.vim-tmp",
+    "~/.tmp",
+    "~/tmp",
+    "/var/tmp",
+    "/tmp",
 }
 
 opt.directory = {
-	"~/.vim-tmp",
-	"~/.tmp",
-	"~/tmp",
-	"/var/tmp",
-	"/tmp",
+    "~/.vim-tmp",
+    "~/.tmp",
+    "~/tmp",
+    "/var/tmp",
+    "/tmp",
 }
 
 opt.history = 1000 -- store the last 1000 commands entered
@@ -88,9 +88,9 @@ opt.lazyredraw = false -- don't redraw while executing macros
 opt.magic = true -- set magic on, for regular expressions
 
 if fn.executable("rg") then
-	-- if ripgrep installed, use that as a grepper
-	opt.grepprg = "rg --vimgrep --no-heading"
-	opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
+    -- if ripgrep installed, use that as a grepper
+    opt.grepprg = "rg --vimgrep --no-heading"
+    opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 end
 
 -- error bells
@@ -150,11 +150,11 @@ opt.foldlevel = 1
 -- toggle invisible characters
 opt.list = true
 opt.listchars = {
-	tab = "→ ",
-	eol = "¬",
-	trail = "⋅",
-	extends = "❯",
-	precedes = "❮",
+    tab = "→ ",
+    eol = "¬",
+    trail = "⋅",
+    extends = "❯",
+    precedes = "❮",
 }
 
 -- hide the ~ character on empty lines at the end of the buffer
@@ -226,8 +226,8 @@ nmap("<leader>6", "<Plug>HiInterestingWord6")
 require("plugins")
 
 if utils.file_exists(fn.expand("~/.vimrc_background")) then
-	g.base16colorspace = 256
-	cmd([[source ~/.vimrc_background]])
+    g.base16colorspace = 256
+    cmd([[source ~/.vimrc_background]])
 end
 
 -- plugin hotkeys
@@ -256,7 +256,8 @@ cmd([[syntax on]])
 cmd([[filetype plugin indent on]])
 
 -- theme selection
-cmd("colorscheme hipster")
+cmd("colorscheme tokyonight")
+-- cmd("colorscheme hipster")
 -- make the highlighting of tabs and other non-text less annoying
 -- cmd([[highlight SpecialKey ctermfg=19 guifg=#f6f5fb]])
 -- cmd([[highlight NonText ctermfg=19 guifg=#f6f5fb]])
@@ -272,30 +273,30 @@ cmd("colorscheme hipster")
 -- go golang go-lang specifics
 local wait_ms = 1000
 local OrgImports = function()
-	local params = lsp.util.make_range_params()
-	params.context = { only = { "source.organizeImports" } }
-	local result = lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
-	for _, res in pairs(result or {}) do
-		for _, r in pairs(res.result or {}) do
-			if r.edit then
-				lsp.util.apply_workspace_edit(r.edit, "UTF-8")
-			else
-				lsp.buf.execute_command(r.command)
-			end
-		end
-	end
+    local params = lsp.util.make_range_params()
+    params.context = { only = { "source.organizeImports" } }
+    local result = lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
+    for _, res in pairs(result or {}) do
+        for _, r in pairs(res.result or {}) do
+            if r.edit then
+                lsp.util.apply_workspace_edit(r.edit, "UTF-8")
+            else
+                lsp.buf.execute_command(r.command)
+            end
+        end
+    end
 end
 
 autocmd({ "BufWritePre" }, {
-	pattern = { "*.go" },
-	callback = OrgImports,
+    pattern = { "*.go" },
+    callback = OrgImports,
 })
 
 autocmd({ "BufWritePre" }, {
-	pattern = { "*.go" },
-	callback = function()
-		lsp.buf.formatting_sync(nil, 500)
-	end,
+    pattern = { "*.go" },
+    callback = function()
+        lsp.buf.formatting_sync(nil, 500)
+    end,
 })
 
 -- make comments and HTML attributes italic

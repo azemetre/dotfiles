@@ -18,8 +18,9 @@ Plug("nvim-lua/plenary.nvim")
 -- create themes
 Plug("rktjmp/lush.nvim")
 
--- hipster themes
+-- themes
 Plug("azemetre/hipster.nvim")
+Plug("folke/tokyonight.nvim", { ["branch"] = "main" })
 
 -- easy commenting
 Plug("tpope/vim-commentary")
@@ -178,7 +179,7 @@ plugEnd()
 -- For plugins with their own configuration file, that file is loaded and is responsible for
 -- starting them. Otherwise, the plugin itself is required and its `setup` method is called.
 require("nvim-autopairs").setup()
-require("colorizer").setup()
+require("colorizer")
 require("plugins.git-worktree")
 require("plugins.telescope")
 require("plugins.gitsigns")
