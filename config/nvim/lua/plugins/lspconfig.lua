@@ -268,15 +268,30 @@ lsp_installer.setup({
 	max_concurrent_installers = 4,
 })
 
-nvim_lsp.ansiblels.setup({})
-nvim_lsp.awk_ls.setup({})
-nvim_lsp.bashls.setup({})
-nvim_lsp.cmake.setup({})
+nvim_lsp.ansiblels.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
+nvim_lsp.awk_ls.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
+nvim_lsp.bashls.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
+nvim_lsp.cmake.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
 nvim_lsp.cssls.setup({
 	on_attach = make_config().on_attach,
 	capabilities = make_config().capabilities,
 })
-nvim_lsp.dockerls.setup({})
+nvim_lsp.dockerls.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
 -- nvim_lsp.denols.setup({})
 nvim_lsp.emmet_ls.setup({
 	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
@@ -302,13 +317,22 @@ nvim_lsp.html.setup({
 	capabilities = make_config().capabilities,
 })
 nvim_lsp.kotlin_language_server.setup({})
-nvim_lsp.lemminx.setup({})
-nvim_lsp.marksman.setup({})
+nvim_lsp.lemminx.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
+nvim_lsp.marksman.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
 nvim_lsp.rust_analyzer.setup({
 	on_attach = make_config().on_attach,
 	capabilities = make_config().capabilities,
 })
-nvim_lsp.sqlls.setup({})
+nvim_lsp.sqlls.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
 nvim_lsp.sumneko_lua.setup({
 	on_attach = make_config().on_attach,
 	capabilities = make_config().capabilities,
@@ -329,8 +353,14 @@ nvim_lsp.tsserver.setup({
 	capabilities = make_config().capabilities,
 })
 -- nvim_lsp.tailwindcss.setup({})
-nvim_lsp.vimls.setup({})
-nvim_lsp.yamlls.setup({})
+nvim_lsp.vimls.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
+nvim_lsp.yamlls.setup({
+	on_attach = make_config().on_attach,
+	capabilities = make_config().capabilities,
+})
 
 -- set up custom symbols for LSP errors
 local signs = {
