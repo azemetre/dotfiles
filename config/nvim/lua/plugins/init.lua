@@ -18,7 +18,7 @@ Plug("nvim-lua/plenary.nvim")
 -- create themes
 Plug("rktjmp/lush.nvim")
 
--- thipster hemes
+-- hipster themes
 Plug("azemetre/hipster.nvim")
 
 -- easy commenting
@@ -91,6 +91,9 @@ Plug("neovim/nvim-lspconfig")
 
 -- Helpers to install LSPs and maintain them
 Plug("williamboman/nvim-lsp-installer")
+
+-- formatter for lsps
+Plug("lukas-reineke/lsp-format.nvim")
 
 -- snippet support
 Plug("hrsh7th/vim-vsnip")
