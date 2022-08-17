@@ -1,5 +1,8 @@
 local utils = require("utils")
 local util = require("lspconfig.util")
+local lsp_installer = require("nvim-lsp-installer")
+local nvim_lsp = require("lspconfig")
+local lsp_format = require("lsp-format")
 local nmap = utils.nmap
 local imap = utils.imap
 local cmd = vim.cmd
@@ -7,8 +10,6 @@ local vo = vim.o
 local api = vim.api
 local fn = vim.fn
 local lsp = vim.lsp
-local lsp_installer = require("nvim-lsp-installer")
-local nvim_lsp = require("lspconfig")
 local theme = require("theme")
 local colors = theme.colors
 local icons = theme.icons
@@ -58,6 +59,7 @@ _G.lsp_show_diagnostics = function()
 end
 
 local on_attach = function(client, bufnr)
+	require("lsp-format").on_attach(client)
 	cmd([[command! LspDef lua vim.lsp.buf.definition()]])
 	cmd([[command! LspFormatting lua vim.lsp.buf.formatting()]])
 	cmd([[command! LspCodeAction lua vim.lsp.buf.code_action()]])
