@@ -138,7 +138,7 @@ Plug("feline-nvim/feline.nvim")
 Plug("windwp/nvim-autopairs")
 
 -- Run prettier and other formatters on save
-Plug("mhartington/formatter.nvim")
+-- Plug("mhartington/formatter.nvim")
 
 -- Style the tabline without taking over how tabs and buffers work in Neovim
 Plug("alvarosevilla95/luatab.nvim")
@@ -185,8 +185,9 @@ require("plugins.telescope")
 require("plugins.gitsigns")
 require("plugins.trouble")
 require("plugins.fzf")
-require("plugins.formatter")
+-- require("plugins.formatter")
 require("plugins.lspconfig")
+require("lsp-format")
 require("plugins.completion")
 require("plugins.treesitter")
 require("plugins.goto-preview")
