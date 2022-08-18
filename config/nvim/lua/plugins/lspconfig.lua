@@ -59,7 +59,7 @@ _G.lsp_show_diagnostics = function()
 end
 
 local on_attach = function(client, bufnr)
-    require("lsp-format").on_attach(client)
+    lsp_format.on_attach(client)
     cmd([[command! LspDef lua vim.lsp.buf.definition()]])
     cmd([[command! LspFormatting lua vim.lsp.buf.formatting()]])
     cmd([[command! LspCodeAction lua vim.lsp.buf.code_action()]])
