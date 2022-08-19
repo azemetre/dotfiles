@@ -214,15 +214,6 @@ omap("il", ":<c-u>normal! g_v^<cr>")
 vmap("al", ":<c-u>normal! $v0<cr>")
 omap("al", ":<c-u>normal! $v0<cr>")
 
--- interesting word mappings
-nmap("<leader>0", "<Plug>ClearInterestingWord")
-nmap("<leader>1", "<Plug>HiInterestingWord1")
-nmap("<leader>2", "<Plug>HiInterestingWord2")
-nmap("<leader>3", "<Plug>HiInterestingWord3")
-nmap("<leader>4", "<Plug>HiInterestingWord4")
-nmap("<leader>5", "<Plug>HiInterestingWord5")
-nmap("<leader>6", "<Plug>HiInterestingWord6")
-
 require("plugins")
 
 if utils.file_exists(fn.expand("~/.vimrc_background")) then
@@ -294,6 +285,24 @@ autocmd({ "BufWritePre" }, {
     pattern = { "*.go" },
     callback = OrgImports,
 })
+
+-- rust
+-- Enable type inlay hints
+local InlayHints = function()
+    require('lsp_extensions').inlay_hints({
+        prefix = '',
+        highlight = "Comment",
+        enabled = { "TypeHint", "ChainingHint", "ParameterHint" }
+    })
+end
+
+-- cmd([[ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost * :lua require'lsp_extensions'.inlay_hints{ prefix = '=>', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} } ]])
+
+-- autocmd({ "CursorMoved", "InsertLeave", "BufEnter", "BufWinEnter", "TabEnter", "BufWritePost" }, {
+--     pattern = {"*.rs"},
+--     callback = InlayHints,
+-- })
+
 
 -- make comments and HTML attributes italic
 cmd([[highlight Comment cterm=italic term=italic gui=italic]])

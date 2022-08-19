@@ -41,9 +41,6 @@ Plug("tpope/vim-sleuth")
 -- handy bracket mappings
 Plug("tpope/vim-unimpaired")
 
--- notate interesting words, pretty neat!
-Plug("lfv89/vim-interestingwords")
-
 -- setup editorconfig
 Plug("gpanders/editorconfig.nvim")
 
