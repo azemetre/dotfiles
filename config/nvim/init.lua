@@ -130,6 +130,7 @@ opt.showmatch = true -- show matching braces
 opt.mat = 2 -- how many tenths of a second to blink
 opt.updatetime = 300
 opt.signcolumn = "yes"
+opt.colorcolumn = "80"
 opt.shortmess = "atToOFc" -- prompt message options
 
 -- Tab control
