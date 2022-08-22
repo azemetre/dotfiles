@@ -48,7 +48,7 @@ Plug("gpanders/editorconfig.nvim")
 Plug("tpope/vim-fugitive")
 nmap("<leader>gb", ":G blame<cr>")
 
--- starts a html page to view markdown - can make changes live
+-- markdown - can make changes live
 Plug("iamcco/markdown-preview.nvim", { ["do"] = "cd app && yarn install" })
 
 -- create ascii diagrams
@@ -61,10 +61,8 @@ Plug("mattn/emmet-vim")
 -- match tags in html, similar to paren support
 Plug("gregsexton/MatchTag", { ["for"] = "html" })
 
--- html5 support
+-- html5 css support
 Plug("othree/html5.vim", { ["for"] = "html" })
-
-Plug("wavded/vim-stylus", { ["for"] = { "stylus", "markdown" } })
 Plug("hail2u/vim-css3-syntax", { ["for"] = "css" })
 Plug("cakebaker/scss-syntax.vim", { ["for"] = "scss" })
 Plug("stephenway/postcss.vim", { ["for"] = "css" })
@@ -107,7 +105,10 @@ Plug("hrsh7th/nvim-cmp")
 -- spell checker
 Plug("f3fora/cmp-spell")
 
--- used for rust inlay hints
+-- rust
+Plug("saecki/crates.nvim")
+
+-- used for inlay hints
 Plug("nvim-lua/lsp_extensions.nvim")
 
 -- preview native LSP's goto definition, type definition, implementation, and references in floating windows
@@ -177,6 +178,7 @@ plugEnd()
 -- starting them. Otherwise, the plugin itself is required and its `setup` method is called.
 require("nvim-autopairs").setup()
 require("colorizer")
+require("startup")
 require("plugins.git-worktree")
 require("plugins.telescope")
 require("plugins.gitsigns")
