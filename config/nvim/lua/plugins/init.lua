@@ -67,6 +67,10 @@ Plug("hail2u/vim-css3-syntax", { ["for"] = "css" })
 Plug("cakebaker/scss-syntax.vim", { ["for"] = "scss" })
 Plug("stephenway/postcss.vim", { ["for"] = "css" })
 
+-- prettier
+Plug("jose-elias-alvarez/null-ls.nvim")
+Plug("MunifTanjim/prettier.nvim")
+
 -- add color highlighting to hex values
 Plug("norcalli/nvim-colorizer.lua")
 

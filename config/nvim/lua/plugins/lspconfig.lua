@@ -3,6 +3,7 @@ local util = require("lspconfig.util")
 local lsp_installer = require("nvim-lsp-installer")
 local nvim_lsp = require("lspconfig")
 local lsp_format = require("lsp-format")
+local null_ls = require("null-ls")
 local nmap = utils.nmap
 local imap = utils.imap
 local cmd = vim.cmd

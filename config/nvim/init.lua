@@ -249,6 +249,14 @@ opt.spelllang = { "en_us" }
 cmd([[syntax on]])
 cmd([[filetype plugin indent on]])
 
+-- prettier formatting
+-- formatting in normal mode
+nmap("<leader>p", ":Prettier<CR>")
+
+-- range_formatting in visual mode
+xmap("<leader>p", ":Prettier<CR>")
+
+
 -- theme selection
 cmd("colorscheme tokyonight")
 -- cmd("colorscheme hipster")
