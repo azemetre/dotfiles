@@ -212,8 +212,6 @@ lsp_installer.setup({
         "cmake",
         "cssls",
         "dockerls",
-        "denols",
-        "efm",
         "emmet_ls",
         "gopls",
         "html",
@@ -292,10 +290,6 @@ nvim_lsp.cssls.setup({
 nvim_lsp.dockerls.setup({
     on_attach = make_config().on_attach,
     capabilities = make_config().capabilities,
-})
--- nvim_lsp.denols.setup({})
-nvim_lsp.efm.setup({
-
 })
 nvim_lsp.emmet_ls.setup({
     filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
@@ -398,17 +392,6 @@ local prettier = {
     formatCommand = [[prettier --stdin-filepath ${INPUT} ${--tab-width:tab_width}]],
     formatStdin = true,
 }
-nvim_lsp.efm.setup({
-    on_attach = lsp_format.on_attach,
-    init_options = { documentFormatting = true },
-    settings = {
-        languages = {
-            typescript = { prettier },
-            javascript = { prettier },
-            yaml = { prettier },
-        },
-    },
-})
 
 -- Set colors for completion items
 cmd("highlight! CmpItemAbbrMatch guibg=NONE guifg=" .. colors.lightblue)
