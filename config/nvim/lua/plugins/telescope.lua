@@ -24,7 +24,6 @@ local always_ignore_these = {
 	"%.flv",
 	"%.avi",
 	"%.webm",
-	".env.*",
 	"%.db",
 }
 
