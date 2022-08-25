@@ -40,6 +40,11 @@ end
 -- emmet invocation
 g.user_emmet_leader_key = "<C-Z>"
 
+-- in millisecond, used for both CursorHold and CursorHoldI,
+-- use updatetime instead if not defined
+-- used with plugin "antoinemadec/FixCursorHold.nvim"
+g.cursorhold_updatetime = 100
+
 cmd([[abbr funciton function]])
 cmd([[abbr teh the]])
 cmd([[abbr tempalte template]])
@@ -242,9 +247,27 @@ nnoremap("gpr", ":lua require('goto-preview').goto_preview_references()<CR>")
 -- lsp-format
 cmd([[cabbrev wq execute "Format sync" <bar> wq]])
 
+-- neotest
+nnoremap("<leader>tr", ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>")
+nnoremap("<leader>ts", ":lua require('neotest').run.run({ suite = true, adapter = adapter_id })<CR>")
+nnoremap("<leader>tw", ":lua require('neotest').watch.watch()<CR>")
+nnoremap("<leader>tx", ":lua require('neotest').run.stop()<CR>")
+nnoremap("<leader>tn", ":lua require('neotest').run.run<CR>")
+nnoremap("<leader>td", ":lua require('neotest').run.run({ strategy = 'dap' })<CR>")
+nnoremap("<leader>tl", ":lua require('neotest').run.run_last<CR>")
+nnoremap("<leader>tD", ":lua require('neotest').run.run_last({ strategy = 'dap' })<CR>")
+nnoremap("<leader>ta", ":lua require('neotest').run.attach<CR>")
+nnoremap("<leader>to", ":lua require('neotest').output.open({ enter = true })<CR>")
+nnoremap("<leader>tO", ":lua require('neotest').output.open({ enter = true, short = true })<CR>")
+nnoremap("<leader>tp", ":lua require('neotest').summary.toggle.run<CR>")
+nnoremap("<leader>tm", ":lua require('neotest').summary.run_marked<CR>")
+nnoremap("<leader>[t", ":lua require('neotest').jump.prev({status = 'failed'})<CR>")
+nnoremap("<leader>]t", ":lua require('neotest').jump.next({status = 'failed'})<CR>")
+
+-- spell checker cramping my LSP action
 -- cmp-spell
-opt.spell = true
-opt.spelllang = { "en_us" }
+-- opt.spell = true
+-- opt.spelllang = { "en_us" }
 
 cmd([[syntax on]])
 cmd([[filetype plugin indent on]])
