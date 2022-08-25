@@ -86,6 +86,17 @@ Plug("kyazdani42/nvim-tree.lua")
 -- Show git information in the gutter
 Plug("lewis6991/gitsigns.nvim")
 
+-- Fixes performance issue when using autocmd with CursorHold and CursorHoldI
+Plug("antoinemadec/FixCursorHold.nvim")
+
+-- general test client
+Plug("nvim-neotest/neotest")
+Plug("vim-test/vim-test")
+
+-- neotest plugins
+Plug("nvim-neotest/neotest-vim-test")
+Plug("nvim-neotest/neotest-go")
+
 -- Helpers to configure the built-in Neovim LSP client
 Plug("neovim/nvim-lspconfig")
 
@@ -139,9 +150,6 @@ Plug("feline-nvim/feline.nvim")
 -- automatically complete brackets/parens/quotes
 Plug("windwp/nvim-autopairs")
 
--- Run prettier and other formatters on save
--- Plug("mhartington/formatter.nvim")
-
 -- Style the tabline without taking over how tabs and buffers work in Neovim
 Plug("alvarosevilla95/luatab.nvim")
 
@@ -158,9 +166,6 @@ Plug("ThePrimeagen/git-worktree.nvim")
 Plug("nvim-telescope/telescope.nvim")
 Plug("nvim-telescope/telescope-rg.nvim")
 Plug("nvim-telescope/telescope-file-browser.nvim")
-
--- Startup screen for Neovim
-Plug("startup-nvim/startup.nvim")
 
 -- fzf
 Plug("/usr/local/bin/fzf")
@@ -182,19 +187,18 @@ plugEnd()
 -- starting them. Otherwise, the plugin itself is required and its `setup` method is called.
 require("nvim-autopairs").setup()
 require("colorizer")
-require("startup")
 require("plugins.git-worktree")
 require("plugins.telescope")
 require("plugins.gitsigns")
 require("plugins.trouble")
 require("plugins.fzf")
--- require("plugins.formatter")
 require("plugins.lspconfig")
 require("lsp-format")
 require("plugins.completion")
 require("plugins.treesitter")
 require("plugins.goto-preview")
 require("plugins.nvimtree")
+require("plugins.neotest")
 require("plugins.tabline")
 require("plugins.indent-blankline")
 require("plugins.feline")
