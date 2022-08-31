@@ -209,8 +209,11 @@ nnoremap(opt_j, ":m .+1<cr>==")
 nnoremap(opt_k, ":m .-2<cr>==")
 inoremap(opt_j, "<Esc>:m .+1<cr>==gi")
 inoremap(opt_k, "<Esc>:m .-2<cr>==gi")
-vnoremap(opt_j, ":m '>+1<cr>gv=gv")
-vnoremap(opt_k, ":m '<-2<cr>gv=gv")
+-- vnoremap(opt_j, ":m '>+1<cr>gv=gv")
+-- vnoremap(opt_k, ":m '<-2<cr>gv=gv")
+vnoremap("J", ":m '>+1<CR>gv=gv")
+vnoremap("K", ":m '<-2<CR>gv=gv")
+
 
 -- custom text objects
 -- inner-line
@@ -328,8 +331,8 @@ local InlayHints = function()
     })
 end
 
--- cmd([[ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost * :lua require'lsp_extensions'.inlay_hints{ prefix = '=>', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} } ]])
 
+-- cmd([[ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost * :lua require'lsp_extensions'.inlay_hints{ prefix = '=>', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} } ]])
 -- autocmd({ "CursorMoved", "InsertLeave", "BufEnter", "BufWinEnter", "TabEnter", "BufWritePost" }, {
 --     pattern = {"*.rs"},
 --     callback = InlayHints,
