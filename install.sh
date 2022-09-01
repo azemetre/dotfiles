@@ -93,6 +93,25 @@ setup_symlinks() {
             ln -s "$config" "$target"
         fi
     done
+
+    echo -e
+    info "installing ~/.local"
+    if [ ! -d "$HOME/.local" ]; then
+        info "Creating ~/.local"
+        mkdir -p "$HOME/.local"
+    fi
+
+    local_files=$(find "$DOTFILES/bin/.local" -maxdepth 1 2>/dev/null)
+    for local in $local_files; do
+        target="$HOME/.local/$(basename "$local")"
+        if [ -e "$target" ]; then
+            info "~${target#$HOME} already exists... Skipping."
+        else
+            info "Creating symlink for $local"
+            ln -s "$local" "$target"
+        fi
+    done
+
 }
 
 setup_git() {
