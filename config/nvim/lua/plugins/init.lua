@@ -135,6 +135,8 @@ Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
 Plug("nvim-treesitter/playground")
 -- enable more advanced treesitter-aware text objects
 Plug("nvim-treesitter/nvim-treesitter-textobjects")
+-- current function context
+Plug("nvim-treesitter/nvim-treesitter-context")
 -- add rainbow highlighting to parens and brackets
 Plug("p00f/nvim-ts-rainbow")
 

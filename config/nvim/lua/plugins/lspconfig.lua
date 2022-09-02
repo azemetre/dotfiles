@@ -213,6 +213,7 @@ lsp_installer.setup({
         "cssls",
         "dockerls",
         "emmet_ls",
+        "eslint",
         "gopls",
         "html",
         "kotlin_language_server",
