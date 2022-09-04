@@ -81,7 +81,7 @@ setopt HIST_IGNORE_ALL_DUPS      # delete old recorded entry if new entry is a d
 setopt COMPLETE_ALIASES
 
 # Where should I put you?
-bindkey -s ^f "tmux-sessionizer\n"
+bindkey -s ^f "~/.local/bin/tmux-sessionizer\n"
 
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -114,6 +114,9 @@ fi
 ########################################################
 # Setup
 ########################################################
+
+# language settings
+export LANG=en_US.UTF-8
 
 # If a local zshrc exists, source it
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
