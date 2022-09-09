@@ -71,7 +71,7 @@ nvimtree.setup({
 	},
 	view = {
 		width = 40,
-		side = "left",
+		side = "right",
         relativenumber = true
 	},
 })
