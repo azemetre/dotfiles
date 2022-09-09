@@ -77,23 +77,23 @@ local on_attach = function(client, bufnr)
     cmd([[command! LspSignatureHelp lua vim.lsp.buf.signature_help()]])
     -- highlight errors on cursor position in floating window
     vo.updatetime = ONE_HALF_SECOND
-    cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
-    cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]])
+    -- cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
+    -- cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]])
 
-    api.nvim_create_autocmd("CursorHold", {
-        buffer = bufnr,
-        callback = function()
-            local opts = {
-                focusable = false,
-                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-                border = "rounded",
-                source = "always",
-                prefix = " ",
-                scope = "line",
-            }
-            vim.diagnostic.open_float(nil, opts)
-        end,
-    })
+    -- api.nvim_create_autocmd("CursorHold", {
+    --     buffer = bufnr,
+    --     callback = function()
+    --         local opts = {
+    --             focusable = false,
+    --             close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+    --             border = "rounded",
+    --             source = "always",
+    --             prefix = " ",
+    --             scope = "line",
+    --         }
+    --         vim.diagnostic.open_float(nil, opts)
+    --     end,
+    -- })
 
     lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = border })
     lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.hover, { border = border })
