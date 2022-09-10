@@ -250,8 +250,7 @@ nnoremap("gpr", ":lua require('goto-preview').goto_preview_references()<CR>")
 -- lsp-format
 cmd([[cabbrev wq execute "Format sync" <bar> wq]])
 -- toggle diagnostic window with keypress
-nnoremap("<leader>d", ":lua vim.diagnostic.open_float(nil, {focus=false, scope='cursor'})<CR>")
-
+nnoremap("<leader>d", ":lua vim.diagnostic.open_float(nil, {focus=false, scope='line'})<CR>")
 
 -- neotest
 nnoremap("<leader>tr", ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>")
