@@ -1,27 +1,32 @@
-if OS.mac?
-    # taps
-    tap "homebrew/cask"
-    tap "homebrew/cask-fonts"
-
-    brew "mas"
-    brew "noti"
-    brew "trash"
-
-    # Applications
-    # mas "Xcode", id: 497799835
-
-    # Browsers
-    # cask "firefox"
-
-    # Fonts
-    cask "font-hack"
-    cask "font-hack-nerd-font"
-
-end
-
+# taps
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "schniz/tap"
+
+brew "mas"
+brew "noti"
+brew "trash"
+
+# Applications
+# mas "Xcode", id: 497799835
+
+# brew "blackhole-2ch"
+# brew "blackhole-16ch"
+
+# Fonts
+cask "font-hack"
+cask "font-hack-nerd-font"
+
+# Dependencies for other tools
+brew "libvterm"
+brew "libuv"
+brew "libtermkey"
+brew "unibilium"
+brew "icu4c"
+brew "libunistring"
+brew "ncurses"
 
 # Useful Utilities
 brew "coreutils"
@@ -43,7 +48,8 @@ brew "gdbm"
 brew "readline"
 brew "watchman"
 
-# Languages
+# Languages && managers
+brew "asdf"
 brew "python"
 brew "node"
 brew "go"
@@ -53,66 +59,53 @@ brew "sbt"
 brew "lua"
 brew "luajit"
 
-# Dependencies for other tools
-brew "libvterm"
-brew "libuv"
-brew "libtermkey"
-brew "unibilium"
-brew "icu4c"
-brew "libunistring"
-brew "ncurses"
-
-# Dependencies for obs and streaming
-brew "blackhole-2ch"
-brew "blackhole-16ch"
-brew "keycastr"
-brew "kap"
-
 # Command line Tools
 brew "ack"
-brew "bat"
 brew "cloc"
 brew "diff-so-fancy"
-brew "diskus"
 brew "entr"
-brew "exa"
-brew "fd"
-brew "ffmpeg"
-brew "figlet"
 brew "fzf"
 brew 'gdal'
 brew "gh"
 brew "gnupg"
-brew "hexyl"
 brew "highlight"
 brew "homeshick"
 brew "htop"
 brew "httpie"
-brew "imagemagick"
 brew "jq"
 brew "lazygit"
 brew "markdown"
-brew "neofetch"
 brew "pastel"
-brew "ripgrep"
 brew "fnm"
 brew "shellcheck"
-brew "tmux"
 brew "tree"
 brew "wdiff"
 brew "wget"
 brew "z"
 
+# image && video
+brew "imagemagick"
+brew "ffmpeg"
+brew "figlet"
+
+# REIR - Rewrite Everything In Rust
+brew "bat"
+brew "diskus"
+brew "exa"
+brew "fd"
+brew "hexyl"
+brew "hyperfine"
+brew "ripgrep"
+
 # more recent versions of macOS tools
-brew "vim"
 brew "git"
 brew "grep"
 brew "openssh"
 brew "screen"
-brew "php"
 brew "gmp"
 
-# Dependencies for neofetch
+# neofetch and its dependencies
+brew "neofetch"
 brew "w3m"
 brew "terminology"
 brew "kitty"
@@ -126,5 +119,27 @@ brew "screenresolution"
 brew "zsh"
 brew "romkatv/powerlevel10k/powerlevel10k"
 
-# software
+# GOAT tools
 brew "neovim"
+brew "tmux"
+
+# software
+# browsers
+cask "firefox"
+cask "microsoft-edge"
+cask "google-chrome"
+cask "google-chrome-canary"
+
+# terminal
+cask "alacritty"
+
+# image editors
+cask "gimp"
+
+# chat software
+cask "discord"
+
+# screen recorder && utils
+cask "kap"
+cask "keycastr"
+cask "obs"
