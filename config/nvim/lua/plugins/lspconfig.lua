@@ -3,7 +3,6 @@ local util = require("lspconfig.util")
 local lsp_installer = require("nvim-lsp-installer")
 local nvim_lsp = require("lspconfig")
 local lsp_format = require("lsp-format")
-local null_ls = require("null-ls")
 local nmap = utils.nmap
 local imap = utils.imap
 local cmd = vim.cmd
@@ -14,8 +13,6 @@ local lsp = vim.lsp
 local theme = require("theme")
 local colors = theme.colors
 local icons = theme.icons
-
-local ONE_HALF_SECOND = 1500
 
 local border = {
     { "🭽", "FloatBorder" },
@@ -28,21 +25,21 @@ local border = {
     { "▏", "FloatBorder" },
 }
 
-local format_async = function(err, _, result, _, bufnr)
-    if err ~= nil or result == nil then
-        return
-    end
-    if not api.nvim_buf_get_option(bufnr, "modified") then
-        local view = fn.winsaveview()
-        lsp.util.apply_text_edits(result, bufnr)
-        fn.winrestview(view)
-        if bufnr == api.nvim_get_current_buf() then
-            api.nvim_command("noautocmd :update")
-        end
-    end
-end
+-- local format_async = function(err, _, result, _, bufnr)
+--     if err ~= nil or result == nil then
+--         return
+--     end
+--     if not api.nvim_buf_get_option(bufnr, "modified") then
+--         local view = fn.winsaveview()
+--         lsp.util.apply_text_edits(result, bufnr)
+--         fn.winrestview(view)
+--         if bufnr == api.nvim_get_current_buf() then
+--             api.nvim_command("noautocmd :update")
+--         end
+--     end
+-- end
 
-lsp.handlers["textDocument/formatting"] = format_async
+-- lsp.handlers["textDocument/formatting"] = format_async
 
 -- _G makes this function available to vimscript lua calls
 _G.lsp_organize_imports = function()
@@ -76,38 +73,21 @@ local on_attach = function(client, bufnr)
     cmd([[command! LspDiagLine lua lsp_show_diagnostics()]])
     cmd([[command! LspSignatureHelp lua vim.lsp.buf.signature_help()]])
     -- highlight errors on cursor position in floating window
-    vo.updatetime = ONE_HALF_SECOND
-    -- cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
-    -- cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]])
-
-    -- api.nvim_create_autocmd("CursorHold", {
-    --     buffer = bufnr,
-    --     callback = function()
-    --         local opts = {
-    --             focusable = false,
-    --             close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-    --             border = "rounded",
-    --             source = "always",
-    --             prefix = " ",
-    --             scope = "line",
-    --         }
-    --         vim.diagnostic.open_float(nil, opts)
-    --     end,
-    -- })
 
     lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = border })
     lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.hover, { border = border })
 
     nmap("gd", ":LspDef<CR>", { bufnr = bufnr })
     nmap("gR", ":LspRename<CR>", { bufnr = bufnr })
-    -- nmap("gr", ":LspRefs<CR>", { bufnr = bufnr })
-    -- nmap("gt", ":LspTypeDef<CR>", { bufnr = bufnr })
+    nmap("gr", ":LspRefs<CR>", { bufnr = bufnr })
+    nmap("gt", ":LspTypeDef<CR>", { bufnr = bufnr })
     nmap("K", ":LspHover<CR>", { bufnr = bufnr })
     nmap("gs", ":LspOrganize<CR>", { bufnr = bufnr })
     nmap("[a", ":LspDiagPrev<CR>", { bufnr = bufnr })
     nmap("]a", ":LspDiagNext<CR>", { bufnr = bufnr })
     nmap("ga", ":LspCodeAction<CR>", { bufnr = bufnr })
     nmap("<Leader>a", ":LspDiagLine<CR>", { bufnr = bufnr })
+    nmap("ge", ":lua vim.diagnostic.open_float(nil, {focus=false, scope='line'})<CR>")
     imap("<C-x><C-x>", ":LspSignatureHelp<CR>", { bufnr = bufnr })
 
     if client.server_capabilities.documentHighlightProvider then
@@ -174,7 +154,7 @@ local lua_settings = {
         },
         diagnostics = {
             -- Get the language server to recognize the `vim` global
-            globals = { "vim" },
+            globals = { "vim", "require" },
         },
         workspace = {
             -- Make the server aware of Neovim runtime files
@@ -389,10 +369,11 @@ lsp_format.setup({
     javascript = { tab_width = 4 },
     yaml = { tab_width = 2 },
 })
-local prettier = {
-    formatCommand = [[prettier --stdin-filepath ${INPUT} ${--tab-width:tab_width}]],
-    formatStdin = true,
-}
+-- may not need prettier
+-- local prettier = {
+--     formatCommand = [[prettier --stdin-filepath ${INPUT} ${--tab-width:tab_width}]],
+--     formatStdin = true,
+-- }
 
 -- Set colors for completion items
 cmd("highlight! CmpItemAbbrMatch guibg=NONE guifg=" .. colors.lightblue)

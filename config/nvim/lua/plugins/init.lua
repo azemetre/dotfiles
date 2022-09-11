@@ -1,206 +1,299 @@
 local g = vim.g
 local fn = vim.fn
-local utils = require("utils")
-local nmap = utils.nmap
+local cmd = vim.cmd
+-- local utils = require("utils")
+-- local nmap = utils.nmap
 local env = vim.env
 
-local plugLoad = fn["functions#PlugLoad"]
-local plugBegin = fn["plug#begin"]
-local plugEnd = fn["plug#end"]
-local Plug = fn["plug#"]
+local ensure_packer = function()
+	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+	if fn.empty(fn.glob(install_path)) > 0 then
+		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+		cmd([[packadd packer.nvim]])
+		return true
+	end
+	return false
+end
 
-plugLoad()
-plugBegin("~/.config/nvim/plugged")
+local packer_bootstrap = ensure_packer()
 
--- a set of lua helpers that are used by other plugins
-Plug("nvim-lua/plenary.nvim")
+return require("packer").startup(function(use)
+	-- core utils
+	-- plugin manager
+	use("wbthomason/packer.nvim")
+	-- lsp
+	use({
+		"neovim/nvim-lspconfig",
+		config = function()
+			require("plugins.lspconfig")
+		end,
+	})
+	-- fzf
+	use("/usr/local/opt/fzf")
+	use("junegunn/fzf.vim")
+	-- TODO NEED TO SETUP DAP
+	-- dap - debugging
+	use("mfussenegger/nvim-dap")
+	use({
+		"rcarriga/nvim-dap-ui",
+		requires = {
+			"mfussenegger/nvim-dap",
+		},
+	})
+	use({
+		"theHamsta/nvim-dap-virtual-text",
+		requires = {
+			"mfussenegger/nvim-dap",
+		},
+	})
 
--- create themes
-Plug("rktjmp/lush.nvim")
+	-- looks
+	-- theme
+	use({
+		"azemetre/hipster.nvim",
+		requires = { "rktjmp/lush.nvim" },
+	})
+	use("folke/tokyonight.nvim")
+	-- build base16 color schemes
+	use("RRethy/nvim-base16")
+	-- indention guides for all lines
+	use({
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			require("plugins.indent-blankline")
+		end,
+	})
+	-- status lines
+	use({
+		"feline-nvim/feline.nvim",
+		config = function()
+			require("plugins.feline")
+		end,
+	})
+	-- pretty list of diagnostics
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("plugins.trouble")
+		end,
+	})
 
--- themes
-Plug("azemetre/hipster.nvim")
-Plug("folke/tokyonight.nvim", { ["branch"] = "main" })
+	-- comment tooling
+	use("tpope/vim-commentary")
+	use("JoosepAlviste/nvim-ts-context-commentstring")
 
--- easy commenting
-Plug("tpope/vim-commentary")
-Plug("JoosepAlviste/nvim-ts-context-commentstring")
+	-- autogenerate code doc comments based on signature
+	use({
+		"danymat/neogen",
+		requires = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("plugins.neogen")
+		end,
+		-- stable releases only
+		tag = "*",
+	})
 
--- mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
-Plug("tpope/vim-surround")
+	-- live preview of markdown files (includes mermaid)
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	})
 
--- endings for html, xml, etc. - ehances surround
-Plug("tpope/vim-ragtag")
+	-- create ascii diagrams
+	use("jbyuki/venn.nvim")
 
--- enables repeating other supported plugins with the . command
-Plug("tpope/vim-repeat")
+	-- easily delete, change & add such surroundings in pairs, such as quotes,
+	-- parens, etc.
+	use("tpope/vim-surround")
 
--- detect indent style (tabs vs. spaces)
-Plug("tpope/vim-sleuth")
+	-- endings for html, xml, etc. - ehances surround
+	use("tpope/vim-ragtag")
 
--- handy bracket mappings
-Plug("tpope/vim-unimpaired")
+	-- enables repeating other supported plugins with the . command
+	use("tpope/vim-repeat")
 
--- setup editorconfig
-Plug("gpanders/editorconfig.nvim")
+	-- detect indent style (tabs vs. spaces)
+	use("tpope/vim-sleuth")
 
--- fugitive
-Plug("tpope/vim-fugitive")
-nmap("<leader>gb", ":G blame<cr>")
+	-- handy bracket mappings
+	use("tpope/vim-unimpaired")
 
--- markdown - can make changes live
-Plug("iamcco/markdown-preview.nvim", { ["do"] = "cd app && yarn install" })
+	-- setup editorconfig
+	use("gpanders/editorconfig.nvim")
 
--- create ascii diagrams
-Plug("jbyuki/venn.nvim")
+	-- languages
+	-- misc
+	use({
+		"windwp/nvim-autopairs",
+		config = function()
+			require("plugins.nvim-autopairs")
+		end,
+	})
+	-- syntax
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = function()
+			require("nvim-treesitter.install").update({ with_sync = true })
+		end,
+		config = function()
+			require("plugins.treesitter")
+		end,
+	})
+	-- show treesitter nodes
+	use("nvim-treesitter/playground")
+	-- enable more advanced treesitter-aware text objects
+	use("nvim-treesitter/nvim-treesitter-textobjects")
+	-- current function context
+	use("nvim-treesitter/nvim-treesitter-context")
+	-- add rainbow highlighting to parens and brackets
+	use("p00f/nvim-ts-rainbow")
+	-- web dev
+	use("mattn/emmet-vim")
+	-- rust
+	use({
+		"saecki/crates.nvim",
+		event = { "BufRead Cargo.toml" },
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("plugins.crates")
+		end,
+	})
 
--- general plugins
--- emmet support for vim - easily create markdup wth CSS-like syntax
-Plug("mattn/emmet-vim")
+	-- lsp
+	-- lsp tooling
+	use({
+		"jose-elias-alvarez/null-ls.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("plugins.null-ls")
+		end,
+	})
+	use("williamboman/nvim-lsp-installer")
+	use({
+		"lukas-reineke/lsp-format.nvim",
+	})
 
--- match tags in html, similar to paren support
-Plug("gregsexton/MatchTag", { ["for"] = "html" })
+	-- lsp plugins
+	use({
+		"MunifTanjim/prettier.nvim",
+		config = function()
+			require("plugins.prettier")
+		end,
+	})
 
--- html5 css support
-Plug("othree/html5.vim", { ["for"] = "html" })
-Plug("hail2u/vim-css3-syntax", { ["for"] = "css" })
-Plug("cakebaker/scss-syntax.vim", { ["for"] = "scss" })
-Plug("stephenway/postcss.vim", { ["for"] = "css" })
+	-- navigation
+	-- tree explorer
+	use({
+		"kyazdani42/nvim-tree.lua",
+		requires = {
+			"kyazdani42/nvim-web-devicons",
+		},
+		config = function()
+			require("plugins.nvimtree")
+		end,
+	})
+	-- fuzzy finder
+	use({
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.0",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-live-grep-args.nvim",
+			"nvim-telescope/telescope-file-browser.nvim",
+			"kyazdani42/nvim-web-devicons",
+		},
+		config = function()
+			require("plugins.telescope")
+		end,
+	})
+	-- enables fzf
+	use({
+		"nvim-telescope/telescope-fzf-native.nvim",
+		run = "make",
+	})
+	-- harpoon
+	use({
+		"ThePrimeagen/harpoon",
+		requires = {
+			"nvim-lua/plenary.nvim",
+		},
+	})
+	-- exploring
+	use({
+		"rmagatti/goto-preview",
+		config = function()
+			require("plugins.goto-preview")
+		end,
+	})
 
--- prettier
-Plug("jose-elias-alvarez/null-ls.nvim")
-Plug("MunifTanjim/prettier.nvim")
+	-- improve the default neovim interfaces, such as refactoring or previews
+	use("stevearc/dressing.nvim")
 
--- add color highlighting to hex values
-Plug("norcalli/nvim-colorizer.lua")
+	-- testing
+	use({
+		"nvim-neotest/neotest",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			-- Fixes performance issue when using autocmd with CursorHold and
+			-- CursorHoldI
+			"antoinemadec/FixCursorHold.nvim",
+		},
+		config = function()
+			require("plugins.neotest")
+		end,
+	})
+	-- neotest plugins
+	use("vim-test/vim-test")
+	use("nvim-neotest/neotest-vim-test")
+	use("nvim-neotest/neotest-go")
 
--- use devicons for filetypes
-Plug("kyazdani42/nvim-web-devicons")
+	-- snippets
+	use({
+		"hrsh7th/nvim-cmp",
+		requires = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-vsnip",
+		},
+		config = function()
+			require("plugins.completion")
+		end,
+	})
+	use("hrsh7th/vim-vsnip-integ")
+	use("hrsh7th/vim-vsnip")
+	use({
+		"L3MON4D3/LuaSnip",
+		tag = "v<CurrentMajor>.*",
+	})
+	-- show nerd font icons for LSP types in completion menu
+	use("onsails/lspkind-nvim")
 
--- indention guides for all lines
-Plug("lukas-reineke/indent-blankline.nvim")
+	-- git
+	-- fugitive
+	use("tpope/vim-fugitive")
 
--- fast lau file drawer
-Plug("kyazdani42/nvim-tree.lua")
+	use({
+		"ThePrimeagen/git-worktree.nvim",
+		config = function()
+			require("plugins.git-worktree")
+		end,
+	})
+	use({
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("plugins.gitsigns")
+		end,
+	})
 
--- Show git information in the gutter
-Plug("lewis6991/gitsigns.nvim")
-
--- Fixes performance issue when using autocmd with CursorHold and CursorHoldI
-Plug("antoinemadec/FixCursorHold.nvim")
-
--- general test client
-Plug("nvim-neotest/neotest")
-Plug("vim-test/vim-test")
-
--- neotest plugins
-Plug("nvim-neotest/neotest-vim-test")
-Plug("nvim-neotest/neotest-go")
-
--- Helpers to configure the built-in Neovim LSP client
-Plug("neovim/nvim-lspconfig")
-
--- Helpers to install LSPs and maintain them
-Plug("williamboman/nvim-lsp-installer")
-
--- formatter for lsps
-Plug("lukas-reineke/lsp-format.nvim")
-
--- snippet support
-Plug("hrsh7th/vim-vsnip")
-Plug("hrsh7th/vim-vsnip-integ")
-Plug("rafamadriz/friendly-snippets")
-
--- neovim completion
-Plug("hrsh7th/cmp-nvim-lsp")
-Plug("hrsh7th/cmp-nvim-lua")
-Plug("hrsh7th/cmp-buffer")
-Plug("hrsh7th/cmp-path")
-Plug("hrsh7th/nvim-cmp")
--- spell checker
-Plug("f3fora/cmp-spell")
-
--- rust
-Plug("saecki/crates.nvim")
-
--- used for inlay hints
-Plug("nvim-lua/lsp_extensions.nvim")
-
--- preview native LSP's goto definition, type definition, implementation, and references in floating windows
-Plug("rmagatti/goto-preview")
-
--- treesitter enables an AST-like understanding of files
-Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
--- show treesitter nodes
-Plug("nvim-treesitter/playground")
--- enable more advanced treesitter-aware text objects
-Plug("nvim-treesitter/nvim-treesitter-textobjects")
--- current function context
-Plug("nvim-treesitter/nvim-treesitter-context")
--- add rainbow highlighting to parens and brackets
-Plug("p00f/nvim-ts-rainbow")
-
--- show nerd font icons for LSP types in completion menu
-Plug("onsails/lspkind-nvim")
-
--- base16 syntax themes that are neovim/treesitter-aware
-Plug("RRethy/nvim-base16")
-
--- status line plugin
-Plug("feline-nvim/feline.nvim")
-
--- automatically complete brackets/parens/quotes
-Plug("windwp/nvim-autopairs")
-
--- Style the tabline without taking over how tabs and buffers work in Neovim
-Plug("alvarosevilla95/luatab.nvim")
-
--- improve the default neovim interfaces, such as refactoring
-Plug("stevearc/dressing.nvim")
-
--- when you only need to jump between a handful of files
-Plug("ThePrimeagen/harpoon")
-
--- worktrees made easy
-Plug("ThePrimeagen/git-worktree.nvim")
-
--- Navigate a code base with a really slick UI
-Plug("nvim-telescope/telescope.nvim")
-Plug("nvim-telescope/telescope-rg.nvim")
-Plug("nvim-telescope/telescope-file-browser.nvim")
-
--- fzf
-Plug("/usr/local/bin/fzf")
-Plug("junegunn/fzf.vim")
--- Power telescope with FZF
-Plug("nvim-telescope/telescope-fzf-native.nvim", { ["do"] = "make" })
-
--- debug adapter protocol
-Plug("mfussenegger/nvim-dap")
-Plug("rcarriga/nvim-dap-ui")
-Plug("theHamsta/nvim-dap-virtual-text")
-
-Plug("folke/trouble.nvim")
-
-plugEnd()
-
--- Once the plugins have been loaded, Lua-based plugins need to be required and started up
--- For plugins with their own configuration file, that file is loaded and is responsible for
--- starting them. Otherwise, the plugin itself is required and its `setup` method is called.
-require("nvim-autopairs").setup()
-require("colorizer")
-require("plugins.git-worktree")
-require("plugins.telescope")
-require("plugins.gitsigns")
-require("plugins.trouble")
-require("plugins.fzf")
-require("plugins.lspconfig")
-require("lsp-format")
-require("plugins.completion")
-require("plugins.treesitter")
-require("plugins.goto-preview")
-require("plugins.nvimtree")
-require("plugins.neotest")
-require("plugins.tabline")
-require("plugins.indent-blankline")
-require("plugins.feline")
+	-- Automatically set up your configuration after cloning packer.nvim
+	-- Put this at the end after all plugins
+	if packer_bootstrap then
+		require("packer").sync()
+	end
+end)

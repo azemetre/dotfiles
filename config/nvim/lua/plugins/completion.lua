@@ -22,6 +22,7 @@ cmp.setup({
 		{ name = "vsnip" },
 		{ name = "nvim_lua" },
 		{ name = "nvim_lsp" },
+		{ name = "crates" },
 		{ name = "buffer", keyword_length = 5, max_item_count = 5 },
 		{ name = "path" },
 		{ name = "spell" },
