@@ -15,8 +15,6 @@ local theme = require("theme")
 local colors = theme.colors
 local icons = theme.icons
 
-local ONE_HALF_SECOND = 1500
-
 local border = {
     { "🭽", "FloatBorder" },
     { "▔", "FloatBorder" },
@@ -76,38 +74,21 @@ local on_attach = function(client, bufnr)
     cmd([[command! LspDiagLine lua lsp_show_diagnostics()]])
     cmd([[command! LspSignatureHelp lua vim.lsp.buf.signature_help()]])
     -- highlight errors on cursor position in floating window
-    vo.updatetime = ONE_HALF_SECOND
-    -- cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
-    -- cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]])
-
-    -- api.nvim_create_autocmd("CursorHold", {
-    --     buffer = bufnr,
-    --     callback = function()
-    --         local opts = {
-    --             focusable = false,
-    --             close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-    --             border = "rounded",
-    --             source = "always",
-    --             prefix = " ",
-    --             scope = "line",
-    --         }
-    --         vim.diagnostic.open_float(nil, opts)
-    --     end,
-    -- })
 
     lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = border })
     lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.hover, { border = border })
 
     nmap("gd", ":LspDef<CR>", { bufnr = bufnr })
     nmap("gR", ":LspRename<CR>", { bufnr = bufnr })
-    -- nmap("gr", ":LspRefs<CR>", { bufnr = bufnr })
-    -- nmap("gt", ":LspTypeDef<CR>", { bufnr = bufnr })
+    nmap("gr", ":LspRefs<CR>", { bufnr = bufnr })
+    nmap("gt", ":LspTypeDef<CR>", { bufnr = bufnr })
     nmap("K", ":LspHover<CR>", { bufnr = bufnr })
     nmap("gs", ":LspOrganize<CR>", { bufnr = bufnr })
     nmap("[a", ":LspDiagPrev<CR>", { bufnr = bufnr })
     nmap("]a", ":LspDiagNext<CR>", { bufnr = bufnr })
     nmap("ga", ":LspCodeAction<CR>", { bufnr = bufnr })
     nmap("<Leader>a", ":LspDiagLine<CR>", { bufnr = bufnr })
+    nmap("ge", ":lua vim.diagnostic.open_float(nil, {focus=false, scope='line'})<CR>")
     imap("<C-x><C-x>", ":LspSignatureHelp<CR>", { bufnr = bufnr })
 
     if client.server_capabilities.documentHighlightProvider then
@@ -174,7 +155,7 @@ local lua_settings = {
         },
         diagnostics = {
             -- Get the language server to recognize the `vim` global
-            globals = { "vim" },
+            globals = { "vim", "require" },
         },
         workspace = {
             -- Make the server aware of Neovim runtime files
