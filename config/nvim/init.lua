@@ -181,20 +181,20 @@ nnoremap("<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 nnoremap("<CR>", ":noh<CR>")
 
 nmap("<leader>,", ":w<CR>")
-nmap("<space>", ":set hlsearch! hlsearch?<cr>")
+nmap("<space>", ":set hlsearch! hlsearch?<CR>")
 
-nmap("<leader><space>", [[:%s/\s\+$<cr>]])
-nmap("<leader><space><space>", [[:%s/\n\{2,}/\r\r/g<cr>]])
+nmap("<leader><space>", [[:%s/\s\+$<CR>]])
+nmap("<leader><space><space>", [[:%s/\n\{2,}/\r\r/g<CR>]])
 
-nmap("<leader>l", ":set list!<cr>")
+nmap("<leader>l", ":set list!<CR>")
 vmap("<", "<gv")
 vmap(">", ">gv")
 nmap("<leader>.", "<c-^>")
-vmap(".", ":normal .<cr>")
+vmap(".", ":normal .<CR>")
 
 -- helpers for dealing with other people's code
-nmap([[\t]], ":set ts=4 sts=4 sw=4 noet<cr>")
-nmap([[\s]], ":set ts=4 sts=4 sw=4 et<cr>")
+nmap([[\t]], ":set ts=4 sts=4 sw=4 noet<CR>")
+nmap([[\s]], ":set ts=4 sts=4 sw=4 et<CR>")
 
 -- move line mappings
 local opt_h = "˙"
@@ -202,26 +202,26 @@ local opt_j = "∆"
 local opt_k = "˚"
 local opt_l = "¬"
 
-nnoremap(opt_h, ":cprev<cr>zz")
-nnoremap(opt_l, ":cnext<cr>zz")
+nnoremap(opt_h, ":cprev<CR>zz")
+nnoremap(opt_l, ":cnext<CR>zz")
 
-nnoremap(opt_j, ":m .+1<cr>==")
-nnoremap(opt_k, ":m .-2<cr>==")
-inoremap(opt_j, "<Esc>:m .+1<cr>==gi")
-inoremap(opt_k, "<Esc>:m .-2<cr>==gi")
--- vnoremap(opt_j, ":m '>+1<cr>gv=gv")
--- vnoremap(opt_k, ":m '<-2<cr>gv=gv")
+nnoremap(opt_j, ":m .+1<CR>==")
+nnoremap(opt_k, ":m .-2<CR>==")
+inoremap(opt_j, "<Esc>:m .+1<CR>==gi")
+inoremap(opt_k, "<Esc>:m .-2<CR>==gi")
+-- vnoremap(opt_j, ":m '>+1<CR>gv=gv")
+-- vnoremap(opt_k, ":m '<-2<CR>gv=gv")
 vnoremap("J", ":m '>+1<CR>gv=gv")
 vnoremap("K", ":m '<-2<CR>gv=gv")
 
 
 -- custom text objects
 -- inner-line
-xmap("il", ":<c-u>normal! g_v^<cr>")
-omap("il", ":<c-u>normal! g_v^<cr>")
+xmap("il", ":<c-u>normal! g_v^<CR>")
+omap("il", ":<c-u>normal! g_v^<CR>")
 -- around line
-vmap("al", ":<c-u>normal! $v0<cr>")
-omap("al", ":<c-u>normal! $v0<cr>")
+vmap("al", ":<c-u>normal! $v0<CR>")
+omap("al", ":<c-u>normal! $v0<CR>")
 
 require("plugins")
 
@@ -247,10 +247,20 @@ nnoremap("gq", ":lua require('goto-preview').close_all_win()<CR>")
 -- Only set if you have telescope installed
 nnoremap("gpr", ":lua require('goto-preview').goto_preview_references()<CR>")
 
+-- trouble keymappings
+nnoremap("<leader>xx", ":TroubleToggle<CR>")
+nnoremap("<leader>xw", ":TroubleToggle workspace_diagnostics<CR>")
+nnoremap("<leader>xd", ":TroubleToggle document_diagnostics<CR>")
+nnoremap("<leader>xq", ":TroubleToggle quickfix<CR>")
+nnoremap("<leader>xl", ":TroubleToggle loclist<CR>")
+
 -- lsp-format
 cmd([[cabbrev wq execute "Format sync" <bar> wq]])
 -- toggle diagnostic window with keypress
-nnoremap("<leader>d", ":lua vim.diagnostic.open_float(nil, {focus=false, scope='line'})<CR>")
+-- nnoremap("<leader>ge", ":lua vim.diagnostic.open_float(nil, {focus=false, scope='line'})<CR>")
+
+-- fugitive
+nmap("<leader>gb", ":G blame<CR>")
 
 -- neotest
 nnoremap("<leader>tr", ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>")
@@ -279,10 +289,24 @@ cmd([[filetype plugin indent on]])
 
 -- prettier formatting
 -- formatting in normal mode
-nmap("<leader>p", ":Prettier<CR>")
+-- nmap("<leader>p", ":Prettier<CR>")
 
 -- range_formatting in visual mode
-xmap("<leader>p", ":Prettier<CR>")
+-- xmap("<leader>p", ":Prettier<CR>")
+
+-- tree sitter
+-- issue when folds aren't found when using packer
+-- vim.opt.foldmethod     = 'expr'
+-- vim.opt.foldexpr       = 'nvim_treesitter#foldexpr()'
+-- -WORKAROUND
+autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
+    group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
+    callback = function()
+        vim.opt.foldmethod = 'expr'
+        vim.opt.foldexpr   = 'nvim_treesitter#foldexpr()'
+    end
+})
+---ENDWORKAROUND
 
 
 -- theme selection
