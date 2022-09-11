@@ -68,8 +68,8 @@ local on_attach = function(client, bufnr)
     cmd([[command! LspRefs lua vim.lsp.buf.references()]])
     cmd([[command! LspTypeDef lua vim.lsp.buf.type_definition()]])
     cmd([[command! LspImplementation lua vim.lsp.buf.implementation()]])
-    cmd([[command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()]])
-    cmd([[command! LspDiagNext lua vim.lsp.diagnostic.goto_next()]])
+    cmd([[command! LspDiagPrev lua vim.diagnostic.goto_prev()]])
+    cmd([[command! LspDiagNext lua vim.diagnostic.goto_next()]])
     cmd([[command! LspDiagLine lua lsp_show_diagnostics()]])
     cmd([[command! LspSignatureHelp lua vim.lsp.buf.signature_help()]])
     -- highlight errors on cursor position in floating window
@@ -313,10 +313,10 @@ nvim_lsp.rust_analyzer.setup({
         ["rust-analyzer"] = {
             -- enable clippy diagnostics on save
             checkOnSave = {
-                command = "clippy"
+                command = "clippy",
             },
-        }
-    }
+        },
+    },
 })
 nvim_lsp.sqlls.setup({
     on_attach = make_config().on_attach,
