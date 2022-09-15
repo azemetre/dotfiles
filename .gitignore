@@ -2,6 +2,7 @@
 npm-debug.log
 
 plug.vim.old
+**/packer_compiled.lua
 
 config/nvim/spell
 config/nvim/shada
