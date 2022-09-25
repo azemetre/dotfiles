@@ -118,8 +118,9 @@ return require("packer").startup(function(use)
 	-- detect indent style (tabs vs. spaces)
 	use("tpope/vim-sleuth")
 
+	-- not really using
 	-- handy bracket mappings
-	use("tpope/vim-unimpaired")
+	-- use("tpope/vim-unimpaired")
 
 	-- setup editorconfig
 	use("gpanders/editorconfig.nvim")
@@ -159,6 +160,17 @@ return require("packer").startup(function(use)
 		requires = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("plugins.crates")
+		end,
+	})
+	use({
+		"simrat39/rust-tools.nvim",
+		requires = {
+			"neovim/nvim-lspconfig",
+			"nvim-lua/plenary.nvim",
+			"mfussenegger/nvim-dap",
+		},
+		config = function()
+			require("plugins.rust-tools")
 		end,
 	})
 
