@@ -8,6 +8,23 @@ Inspired/stolen bits from:
 
 [ThePrimeagen/.dotfiles](https://github.com/ThePrimeagen/.dotfiles)
 
+## Appearance
+
+How my setup looks for my daily driving:
+
+![Tmux with neovim window open on rust file](./screenshot.png)
+
+Currently going through the lovely book [Command Line Rust](https://www.amazon.com/Command-Line-Rust-Project-Based-Primer-Writing/dp/1098109430). Highly recommended.
+
+### Todos
+
+- [x] Move from `vim-plug` to `packer.nvim`
+- [ ] Update `README.md` to include new instructions on setting everything up
+- [ ] Remove unused plugins
+- [ ] Cleanup `Brewfile`
+- [ ] Add a `why vim?` section
+- [ ] Setup DAP for various languages
+
 ## Contents
 
 + [Initial Setup and Installation](#initial-setup-and-installation)
