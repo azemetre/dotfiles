@@ -76,7 +76,7 @@ local comps = {
             provider = {
                 name = "file_info",
                 opts = {
-                    type = "unique-short",
+                    type = "unique",
                     file_readonly_icon = icons.file_readonly,
                     file_modified_icon = icons.file_modified,
                 },
