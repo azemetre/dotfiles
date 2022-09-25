@@ -13,7 +13,9 @@ function NvimTreeConfig.find_toggle()
 	end
 end
 
-nnoremap("<leader>k", "<CMD>lua NvimTreeConfig.find_toggle()<CR>")
+nnoremap("<leader>et", "<CMD>lua NvimTreeConfig.find_toggle()<CR>")
+nnoremap("<leader>ef", "<CMD>:NvimTreeFocus<CR>")
+nnoremap("<leader>er", "<CMD>:NvimTreeRefresh<CR>")
 
 nvimtree.setup({
 	disable_netrw = false,
@@ -72,6 +74,6 @@ nvimtree.setup({
 	view = {
 		width = 40,
 		side = "right",
-        relativenumber = true
+		relativenumber = true,
 	},
 })
