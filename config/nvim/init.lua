@@ -239,7 +239,7 @@ nnoremap("<C-k>", ":lua require('harpoon.ui').nav_file(3)<CR>")
 nnoremap("<C-l>", ":lua require('harpoon.ui').nav_file(4)<CR>")
 
 -- prettier
-nnoremap("<leader>p", ":Prettier");
+nnoremap("<leader>p", ":Prettier<CR>");
 
 -- goto-preview go-to-preview gotopreview
 nnoremap("gpd", ":lua require('goto-preview').goto_preview_definition()<CR>")
