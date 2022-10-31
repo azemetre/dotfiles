@@ -55,7 +55,7 @@ If on OSX, you will need to install the XCode CLI tools before continuing. To do
 Then, clone the dotfiles repository to your home directory as `~/.dotfiles`. 
 
 ```bash
-➜ git clone https://github.com/nicknisi/dotfiles.git ~/.dotfiles
+➜ git clone https://github.com/azemetre/dotfiles.git ~/.dotfiles
 ➜ cd ~/.dotfiles
 ➜ ./install.sh
 ```
@@ -148,6 +148,22 @@ I am currently using [Operator Mono](http://www.typography.com/fonts/operator/st
 ## Tmux Configuration
 
 Tmux is a terminal multiplexor which lets you create windows and splits in the terminal that you can attach and detach from. I use it to keep multiple projects open in separate windows and to create an IDE-like environment to work in where I can have my code open in vim/neovim and a shell open to run tests/scripts. Tmux is configured in [~/.tmux.conf](tmux/tmux.conf.symlink), and in [tmux/theme.sh](tmux/theme.sh), which defines the colors used, the layout of the tmux bar, and what what will be displayed, including the time and date, open windows, tmux session name, computer name, and current iTunes song playing. If not running on macOS, this configuration should be removed.
+
+## Alacritty
+
+Sometimes we work for employers that are quite restrictive, so restrictive that
+you can't run 3rd party software. To side step this issue, you can allow
+Alacritty to run on OSX with the following command:
+
+```shell
+sudo xattr -d com.apple.quarantine /path/to/Alacritty.app
+```
+
+Where `path/to/Alacritty.app` is the current location of Alacritty, for me this
+is `/Applications/Alacritty.app`.
+
+After quaratining Alacritty you should be permitted to use the tools you want
+in order to do your job as best fit.
 
 ## Questions
 
