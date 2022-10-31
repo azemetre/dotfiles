@@ -103,11 +103,6 @@ font:
     x: 0
     y: 0
 
-  # OS X only: use thin stroke font rendering. Thin strokes are suitable
-  # for retina displays, but for non-retina you probably want this set to
-  # false.
-  use_thin_strokes: false
-
 # Mouse bindings
 # Currently doesn't support modifiers. Both the `mouse` and `action` fields must
 # be specified.
