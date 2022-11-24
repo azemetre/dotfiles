@@ -382,8 +382,9 @@ for type, icon in pairs(signs) do
 end
 
 lsp_format.setup({
-    typescript = { tab_width = 4 },
-    javascript = { tab_width = 4 },
+    -- not necessary with prettier workflow
+    -- typescript = { tab_width = 2 },
+    -- javascript = { tab_width = 2 },
     yaml = { tab_width = 2 },
 })
 -- may not need prettier
