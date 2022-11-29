@@ -25,21 +25,21 @@ local border = {
     { "▏", "FloatBorder" },
 }
 
--- local format_async = function(err, _, result, _, bufnr)
---     if err ~= nil or result == nil then
---         return
---     end
---     if not api.nvim_buf_get_option(bufnr, "modified") then
---         local view = fn.winsaveview()
---         lsp.util.apply_text_edits(result, bufnr)
---         fn.winrestview(view)
---         if bufnr == api.nvim_get_current_buf() then
---             api.nvim_command("noautocmd :update")
---         end
---     end
--- end
+local format_async = function(err, _, result, _, bufnr)
+    if err ~= nil or result == nil then
+        return
+    end
+    if not api.nvim_buf_get_option(bufnr, "modified") then
+        local view = fn.winsaveview()
+        lsp.util.apply_text_edits(result, bufnr)
+        fn.winrestview(view)
+        if bufnr == api.nvim_get_current_buf() then
+            api.nvim_command("noautocmd :update")
+        end
+    end
+end
 
--- lsp.handlers["textDocument/formatting"] = format_async
+lsp.handlers["textDocument/formatting"] = format_async
 
 -- _G makes this function available to vimscript lua calls
 _G.lsp_organize_imports = function()
@@ -281,6 +281,7 @@ nvim_lsp.dockerls.setup({
 nvim_lsp.emmet_ls.setup({
     filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
 })
+
 nvim_lsp.gopls.setup({
     on_attach = make_config().on_attach,
     capabilities = make_config().capabilities,
@@ -314,20 +315,20 @@ nvim_lsp.marksman.setup({
     capabilities = make_config().capabilities,
 })
 
-nvim_lsp.rust_analyzer.setup({
-    on_attach = make_config().on_attach,
-    capabilities = make_config().capabilities,
-    settings = {
-        -- to enable rust-analyzer settings visit:
-        -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-        ["rust-analyzer"] = {
-            -- enable clippy diagnostics on save
-            checkOnSave = {
-                command = "clippy",
-            },
-        },
-    },
-})
+-- nvim_lsp.rust_analyzer.setup({
+--     on_attach = make_config().on_attach,
+--     capabilities = make_config().capabilities,
+--     settings = {
+--         -- to enable rust-analyzer settings visit:
+--         -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+--         ["rust-analyzer"] = {
+--             -- enable clippy diagnostics on save
+--             checkOnSave = {
+--                 command = "clippy",
+--             },
+--         },
+--     },
+-- })
 
 nvim_lsp.sqlls.setup({
     on_attach = make_config().on_attach,
@@ -388,10 +389,10 @@ lsp_format.setup({
     yaml = { tab_width = 2 },
 })
 -- may not need prettier
--- local prettier = {
---     formatCommand = [[prettier --stdin-filepath ${INPUT} ${--tab-width:tab_width}]],
---     formatStdin = true,
--- }
+local prettier = {
+    formatCommand = [[prettier --stdin-filepath ${INPUT} ${--tab-width:tab_width}]],
+    formatStdin = true,
+}
 
 -- Set colors for completion items
 cmd("highlight! CmpItemAbbrMatch guibg=NONE guifg=" .. colors.lightblue)
