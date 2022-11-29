@@ -281,8 +281,9 @@ nnoremap("<leader>tm", ":lua require('neotest').summary.run_marked<CR>")
 nnoremap("<leader>[t", ":lua require('neotest').jump.prev({status = 'failed'})<CR>")
 nnoremap("<leader>]t", ":lua require('neotest').jump.next({status = 'failed'})<CR>")
 
+-- whimsy
 -- cellular automation
-nnoremap("<leader>fml", ":CellularAutomaton make_it_rain<CR>")
+nmap("<leader>fml", ":CellularAutomaton make_it_rain<CR>")
 
 -- spell checker cramping my LSP action
 -- cmp-spell
