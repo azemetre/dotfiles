@@ -162,7 +162,7 @@ sudo xattr -d com.apple.quarantine /path/to/Alacritty.app
 Where `path/to/Alacritty.app` is the current location of Alacritty, for me this
 is `/Applications/Alacritty.app`.
 
-After quaratining Alacritty you should be permitted to use the tools you want
+After quarantining Alacritty you should be permitted to use the tools you want
 in order to do your job as best fit.
 
 ## Questions
