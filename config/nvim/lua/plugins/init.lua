@@ -29,7 +29,8 @@ return require("packer").startup(function(use)
         end,
     })
     -- fzf
-    use("/usr/local/bin/fzf")
+    -- packer unable to install fzf
+    -- use("/usr/local/bin/fzf")
     use("junegunn/fzf.vim")
     -- TODO NEED TO SETUP DAP
     -- dap - debugging
@@ -215,7 +216,6 @@ return require("packer").startup(function(use)
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-live-grep-args.nvim",
             "nvim-telescope/telescope-file-browser.nvim",
-            "nvim-telescope/telescope-media-files.nvim",
             "kyazdani42/nvim-web-devicons",
         },
         config = function()
