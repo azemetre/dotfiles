@@ -32,8 +32,8 @@ return require("packer").startup(function(use)
     -- packer unable to install fzf
     -- use("/usr/local/bin/fzf")
     use("junegunn/fzf.vim")
-    -- TODO: setup dap for debuggin
     -- dap - debugging
+    -- TODO: setup dap for debuggin
     use("mfussenegger/nvim-dap")
     use({
         "rcarriga/nvim-dap-ui",
@@ -264,8 +264,8 @@ return require("packer").startup(function(use)
         end,
     })
 
-    -- TODO: reconfigure, not currently working
     -- testing
+    -- TODO: reconfigure, not currently working
     use({
         "nvim-neotest/neotest",
         requires = {
