@@ -32,7 +32,7 @@ return require("packer").startup(function(use)
     -- packer unable to install fzf
     -- use("/usr/local/bin/fzf")
     use("junegunn/fzf.vim")
-    -- TODO NEED TO SETUP DAP
+    -- TODO: setup dap for debuggin
     -- dap - debugging
     use("mfussenegger/nvim-dap")
     use({
@@ -208,6 +208,7 @@ return require("packer").startup(function(use)
             require("plugins.nvimtree")
         end,
     })
+
     -- fuzzy finder
     use({
         "nvim-telescope/telescope.nvim",
@@ -222,11 +223,13 @@ return require("packer").startup(function(use)
             require("plugins.telescope")
         end,
     })
+
     -- enables fzf
     use({
         "nvim-telescope/telescope-fzf-native.nvim",
         run = "make",
     })
+
     -- harpoon
     use({
         "ThePrimeagen/harpoon",
@@ -234,6 +237,7 @@ return require("packer").startup(function(use)
             "nvim-lua/plenary.nvim",
         },
     })
+
     -- exploring
     use({
         "rmagatti/goto-preview",
@@ -245,6 +249,22 @@ return require("packer").startup(function(use)
     -- improve the default neovim interfaces, such as refactoring or previews
     use("stevearc/dressing.nvim")
 
+    -- todo - shows list of the following
+    -- TODO:
+    -- FIX:
+    -- HACK:
+    -- PERF:
+    -- NOTE:
+    -- WARN:
+    use({
+        "folke/todo-comments.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+            require("plugins.todo-comments")
+        end,
+    })
+
+    -- TODO: reconfigure, not currently working
     -- testing
     use({
         "nvim-neotest/neotest",

@@ -286,7 +286,17 @@ local function toggleFugitiveGit()
 end
 
 -- toggle fugitive
-vim.keymap.set('n', 'GF', toggleFugitiveGit, opts)
+vim.keymap.set('n', 'GF', toggleFugitiveGit)
+
+-- todo-comment
+-- next todo
+vim.keymap.set("n", "]t", function()
+    require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+-- previous todo
+vim.keymap.set("n", "[t", function()
+    require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
 
 -- neotest
 nnoremap("<leader>tr", ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>")
