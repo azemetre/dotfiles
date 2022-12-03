@@ -263,6 +263,30 @@ cmd([[cabbrev wq execute "Format sync" <bar> wq]])
 
 -- fugitive
 nmap("<leader>gb", ":G blame<CR>")
+local function showFugitiveGit()
+    if vim.fn.FugitiveHead() ~= '' then
+        cmd([[
+    Git
+    " wincmd H  " Open Git window in vertical split
+    " setlocal winfixwidth
+    " vertical resize 31
+    " setlocal winfixwidth
+    setlocal nonumber
+    setlocal norelativenumber
+    ]]   )
+    end
+end
+
+local function toggleFugitiveGit()
+    if vim.fn.buflisted(vim.fn.bufname('fugitive:///*/.git//$')) ~= 0 then
+        cmd([[ execute ":bdelete" bufname('fugitive:///*/.git//$') ]])
+    else
+        showFugitiveGit()
+    end
+end
+
+-- toggle fugitive
+vim.keymap.set('n', 'GF', toggleFugitiveGit, opts)
 
 -- neotest
 nnoremap("<leader>tr", ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>")
