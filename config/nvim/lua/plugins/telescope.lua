@@ -8,7 +8,6 @@ local always_ignore_these = {
     "package%-lock.json",
     "node_modules/.*",
     "%.git/.*",
-    -- "%.svg",
     "%.png",
     "%.jpeg",
     "%.jpg",
@@ -104,17 +103,11 @@ telescope.setup({
             override_file_sorter = true,
             case_mode = "smart_case",
         },
-        media_files = {
-            -- filetypes whitelist
-            filetypes = { "png", "webp", "jpg", "jpeg", "pdf", "mp4", "webm" },
-            find_cmd = "rg", -- find command (defaults to `fd`)
-        },
     },
 })
 
 telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
-telescope.load_extension("media_files")
 
 -- mappings
 nnoremap("<leader>ff", "<cmd>Telescope find_files<cr>")
