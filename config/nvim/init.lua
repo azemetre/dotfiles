@@ -289,6 +289,8 @@ end
 vim.keymap.set('n', 'GF', toggleFugitiveGit)
 
 -- todo-comment
+nnoremap("<leader>fT", ":TodoTelescope<CR>")
+nnoremap("<leader>xT", ":TodoTrouble<CR>")
 -- next todo
 vim.keymap.set("n", "]t", function()
     require("todo-comments").jump_next()
