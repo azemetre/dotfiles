@@ -103,6 +103,14 @@ return require("packer").startup(function(use)
         end,
     })
 
+    -- show & pick inline colors, supports hex, rgb, hsl, hcl
+    use({
+        "uga-rosa/ccc.nvim",
+        config = function()
+            require("plugins.ccc")
+        end,
+    })
+
     -- create ascii diagrams
     use("jbyuki/venn.nvim")
 
