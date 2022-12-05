@@ -58,6 +58,8 @@ brew "scala"
 brew "sbt"
 brew "lua"
 brew "luajit"
+# golang static analysis - https://staticcheck.io/
+brew "staticcheck"
 
 # Command line Tools
 brew "ack"
