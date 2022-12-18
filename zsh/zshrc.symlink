@@ -80,7 +80,8 @@ setopt HIST_IGNORE_ALL_DUPS      # delete old recorded entry if new entry is a d
 
 setopt COMPLETE_ALIASES
 
-# Where should I put you?
+# Tmux script hotkeys
+# Find/open a new tmux session from select folders
 bindkey -s ^f "~/.local/bin/tmux-sessionizer\n"
 
 # matches case insensitive for lowercase
@@ -216,10 +217,6 @@ alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 # remove broken symlinks
 alias clsym="find -L . -name . -o -type d -prune -o -type l -exec rm {} +"
 
-# git aliases
-alias gs="git s"
-alias glog="git l"
-
 # tmux aliases
 alias ta='tmux attach'
 alias tls='tmux ls'
@@ -231,7 +228,7 @@ alias lpath='echo $PATH | tr ":" "\n"' # list the PATH separated by new lines
 
 alias nr="npm run"
 
-# garden variety aliases
+# garden variety aliases - user specific
 alias github='cd ~/github'
 alias blog='cd ~/github/azemetredotcom'
 alias playground='cd ~/playground'
@@ -242,6 +239,7 @@ alias dotfiles='cd ~/github/dotfiles'
 alias dot='cd ~/github/dotfiles'
 alias ideas='vim ~/azemetre-docs/projects-todo.md'
 alias idea='vim ~/azemetre-docs/projects-todo.md'
+alias docs='cd ~/azemetre-docs/'
 
 source "$DOTFILES/zsh/utils.zsh"
 
@@ -253,3 +251,6 @@ export NVM_DIR="$HOME/.nvm"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 . /usr/local/opt/asdf/libexec/asdf.sh
+
+# Language PATHS
+export PATH=$PATH:$(go env GOPATH)/bin
