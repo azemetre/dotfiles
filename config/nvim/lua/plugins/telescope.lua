@@ -1,12 +1,14 @@
 local telescope = require("telescope")
 local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
 local nnoremap = require("utils").nnoremap
 
 -- files to ignore with `file_ignore_patterns`
 local always_ignore_these = {
-    "yarn.lock",
-    "package%-lock.json",
-    "node_modules/.*",
+    "yarn.lock", -- nodejs
+    "package%-lock.json", -- nodejs
+    "node_modules/.*", -- nodejs
+    "vendor/*", -- golang
     "%.git/.*",
     "%.png",
     "%.jpeg",
@@ -35,7 +37,7 @@ telescope.setup({
                 ["<C-k>"] = actions.move_selection_previous, -- scroll the list with <c-k>
                 -- ["<C-\\->"] = actions.select_horizontal, -- open selection in new horizantal split
                 -- ["<C-\\|>"] = actions.select_vertical, -- open selection in new vertical split
-                ["<C-t>"] = actions.select_tab, -- open selection in new tab
+                ["<C-t>"] = trouble.open_with_trouble, -- open selection in new tab
                 ["<C-u>"] = actions.preview_scrolling_up,
                 ["<C-d>"] = actions.preview_scrolling_down,
             },
