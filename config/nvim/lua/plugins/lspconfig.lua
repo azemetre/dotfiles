@@ -87,6 +87,8 @@ local on_attach = function(client, bufnr)
     nmap("gb", ":LspDiagPrev<CR>", { bufnr = bufnr })
     nmap("ga", ":LspCodeAction<CR>", { bufnr = bufnr })
     nmap("<Leader>a", ":LspDiagLine<CR>", { bufnr = bufnr })
+    nmap("<Leader>LR", ":LspRestart<CR>", { bufnr = bufnr })
+    nmap("<Leader>LS", ":LspStart<CR>", { bufnr = bufnr })
     nmap("ge", ":lua vim.diagnostic.open_float(nil, {focus=false, scope='line'})<CR>")
     imap("<C-x><C-x>", ":LspSignatureHelp<CR>", { bufnr = bufnr })
 
