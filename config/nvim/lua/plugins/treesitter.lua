@@ -4,7 +4,8 @@ require("nvim-treesitter.configs").setup({
         "c",
         "cmake",
         "cpp",
-        "css",
+        -- "css", -- possible trojan installed, refer to \
+        -- https://github.com/tree-sitter/tree-sitter-css/issues/35
         "dockerfile",
         "go",
         "html",
