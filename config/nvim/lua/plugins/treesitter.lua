@@ -8,6 +8,7 @@ require("nvim-treesitter.configs").setup({
         -- https://github.com/tree-sitter/tree-sitter-css/issues/35
         "dockerfile",
         "go",
+        "gomod",
         "html",
         "javascript",
         "jsdoc",
