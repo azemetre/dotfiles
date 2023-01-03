@@ -19,10 +19,15 @@ Currently going through the lovely book [Command Line Rust](https://www.amazon.c
 ### Todos
 
 - [x] Move from `vim-plug` to `packer.nvim`
+- [ ] Move from `packer.nvim` to `lazy.nvim`
 - [ ] Update `README.md` to include new instructions on setting everything up
 - [ ] Remove unused plugins
+- [ ] Correct issues with shell scripts not configured correctly
 - [ ] Cleanup `Brewfile`
-- [ ] Add a `why vim?` section
+- [ ] Documentation rewrite:
+    - [ ] Rewrite Installation instructions
+    - [ ] Rewrite Font section
+    - [ ] Add a `why vim?` section
 - [ ] Setup DAP for various languages
 
 ## Contents
