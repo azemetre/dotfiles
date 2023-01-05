@@ -14,7 +14,7 @@
 # environment variables. Some entries may override variables
 # set by alacritty it self.
 import:
-  - "~/.config/alacritty/tokyo-night-storm.yaml"
+  - "~/.config/alacritty/adventuretime.yml"
 
 env:
   # TERM env customization.
