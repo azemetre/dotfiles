@@ -24,6 +24,7 @@ Currently going through the lovely book [Command Line Rust](https://www.amazon.c
 - [ ] Remove unused plugins
 - [ ] Correct issues with shell scripts not configured correctly
 - [ ] Cleanup `Brewfile`
+- [ ] Verify zsh works in multiple terminals (iterm, alacritty, terminal, etc)
 - [ ] Documentation rewrite:
     - [ ] Rewrite Installation instructions
     - [ ] Rewrite Font section
