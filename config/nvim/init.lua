@@ -177,6 +177,9 @@ nnoremap("<leader>sf", ":so %<CR>")
 -- make current file executable
 nnoremap("<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
+-- source vimrc
+nnoremap("<leader>sv", ":source $MYVIMRC<CR>")
+
 -- unsets last search pattern register
 nnoremap("<CR>", ":noh<CR>")
 
