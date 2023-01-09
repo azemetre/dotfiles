@@ -34,18 +34,6 @@ vim.keymap.set("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev se
 vim.keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 vim.keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
--- Add undo break-points
-vim.keymap.set("i", ",", ",<c-g>u")
-vim.keymap.set("i", ".", ".<c-g>u")
-vim.keymap.set("i", ";", ";<c-g>u")
-
--- save in insert mode
-vim.keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
-
--- better indenting
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
-
 -- lazy
 vim.keymap.set("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 
@@ -81,26 +69,6 @@ vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 if vim.fn.has("nvim-0.9.0") == 1 then
     vim.keymap.set("n", "<leader>hl", vim.show_pos, { desc = "Highlight Groups at cursor" })
 end
-
--- floating terminal
-vim.keymap.set("n", "<leader>ot", function() util.float_term(nil, { cwd = util.get_root() }) end,
-    { desc = "Terminal (root dir)" })
-vim.keymap.set("n", "<leader>oT", function() require("lua.util").float_term() end, { desc = "Terminal (cwd)" })
-vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
-
--- windows
-vim.keymap.set("n", "<leader>ww", "<C-W>p", { desc = "other-window" })
-vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "delete-window" })
-vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "split-window-below" })
-vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "split-window-right" })
-
--- tabs
-vim.keymap.set("n", "<leader><tab>l", "<cmd>tablast<CR>", { desc = "Last" })
-vim.keymap.set("n", "<leader><tab>f", "<cmd>tabfirst<CR>", { desc = "First" })
-vim.keymap.set("n", "<leader><tab><tab>", "<cmd>tabnew<CR>", { desc = "New Tab" })
-vim.keymap.set("n", "<leader><tab>]", "<cmd>tabnext<CR>", { desc = "Next" })
-vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<CR>", { desc = "Close" })
-vim.keymap.set("n", "<leader><tab>[", "<cmd>tabprevious<CR>", { desc = "Previous" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b]", "<cmd>:BufferLineCycleNext<CR>", { desc = "Next Buffer" })
