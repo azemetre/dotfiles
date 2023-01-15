@@ -32,12 +32,7 @@ vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Open Quickfix List
 vim.keymap.set("n", "<leader>tf", require("azemetre.plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
 vim.keymap.set("n", "<leader>ts", function() util.toggle("spell") end, { desc = "Toggle Spelling" })
 vim.keymap.set("n", "<leader>tw", function() util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
-vim.keymap.set("n", "<leader>tn", function() util.toggle("relativenumber", true) util.toggle("number") end,
-    { desc = "Toggle Line Numbers" })
-vim.keymap.set("n", "<leader>td", util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
-local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-vim.keymap.set("n", "<leader>tc", function() util.toggle("conceallevel", false, { 0, conceallevel }) end,
-    { desc = "Toggle Conceal" })
+vim.keymap.set("n", "<leader>tn", function() util.toggle("relativenumber", true) util.toggle("number") end, { desc = "Toggle Line Numbers" })
 
 -- quit
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
