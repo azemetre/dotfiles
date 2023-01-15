@@ -1,25 +1,8 @@
 -- This file is automatically loaded by lazyvim.plugins.config
 
-local util = require("lua.util")
+local util = require("azemetre.util")
 
 -- FIXME: document all keymaps
-
--- Move Lines
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move down" })
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move down" })
-vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = "Move down" })
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move up" })
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move up" })
-vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { desc = "Move up" })
-
--- Switch buffers with <shift> hl
-vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
-
--- Easier pasting
-vim.keymap.set("n", "[p", ":pu!<cr>", { desc = "Paste below" })
-vim.keymap.set("n", "]p", ":pu<cr>", { desc = "Paste above" })
-vim.keymap.set("n", "]p", ":pu<cr>", { desc = "Paste above" })
 
 -- Clear search with <esc>
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
@@ -46,7 +29,7 @@ vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Open Quickfix List
 -- stylua: ignore start
 
 -- toggle options
-vim.keymap.set("n", "<leader>tf", require("lua.plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
+vim.keymap.set("n", "<leader>tf", require("azemetre.plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
 vim.keymap.set("n", "<leader>ts", function() util.toggle("spell") end, { desc = "Toggle Spelling" })
 vim.keymap.set("n", "<leader>tw", function() util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
 vim.keymap.set("n", "<leader>tn", function() util.toggle("relativenumber", true) util.toggle("number") end,
@@ -55,12 +38,6 @@ vim.keymap.set("n", "<leader>td", util.toggle_diagnostics, { desc = "Toggle Diag
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 vim.keymap.set("n", "<leader>tc", function() util.toggle("conceallevel", false, { 0, conceallevel }) end,
     { desc = "Toggle Conceal" })
-
--- lazygit
-vim.keymap.set("n", "<leader>gg", function() require("lua.util").float_term({ "lazygit" }) end,
-    { desc = "Lazygit (cwd)" })
-vim.keymap.set("n", "<leader>gG", function() util.float_term({ "lazygit" }, { cwd = util.get_root() }) end,
-    { desc = "Lazygit (root dir)" })
 
 -- quit
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
