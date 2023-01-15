@@ -65,7 +65,7 @@ return {
                 }),
                 formatting = {
                     format = function(_, item)
-                        local icons = require("lua.config.settings").icons.kinds
+                        local icons = require("azemetre.config.settings").icons.kinds
                         if icons[item.kind] then
                             item.kind = icons[item.kind] .. item.kind
                         end

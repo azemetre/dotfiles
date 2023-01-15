@@ -37,7 +37,7 @@ return {
         ---@param opts TSConfig
         config = function(plugin, opts)
             if plugin.ensure_installed then
-                require("lua.util").deprecate("treesitter.ensure_installed", "treesitter.opts.ensure_installed")
+                require("azemetre.util").deprecate("treesitter.ensure_installed", "treesitter.opts.ensure_installed")
             end
             require("nvim-treesitter.configs").setup(opts)
         end,
