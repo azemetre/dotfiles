@@ -43,7 +43,7 @@ vim.opt.hidden = true -- current buffer can be put into background
 vim.opt.showcmd = true -- show incomplete commands
 vim.opt.showmode = true -- don't show which mode disabled for PowerLine
 vim.opt.wildmode = { "list", "longest" } -- complete files like a shell
-vim.opt.shell = env.SHELL
+vim.opt.shell = vim.env.SHELL
 vim.opt.cmdheight = 1 -- command bar height
 vim.opt.title = true -- set terminal title
 vim.opt.showmatch = true -- show matching braces
@@ -58,24 +58,24 @@ vim.opt.showbreak = "↪"
 vim.opt.fcs = "eob: " -- hide the ~ character on empty lines at the end of the buffer
 vim.opt.list = true
 vim.opt.listchars = {
-    tab = "→ ",
-    eol = "¬",
-    trail = "⋅",
-    extends = "❯",
-    precedes = "❮",
+  tab = "→ ",
+  eol = "¬",
+  trail = "⋅",
+  extends = "❯",
+  precedes = "❮",
 }
 
 -- code folding settings
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldlevelstart = 99
-opt.foldnestmax = 10 -- deepest fold is 10 levels
-opt.foldenable = false -- don't fold by default
-opt.foldlevel = 1
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevelstart = 99
+vim.opt.foldnestmax = 10 -- deepest fold is 10 levels
+vim.opt.foldenable = false -- don't fold by default
+vim.opt.foldlevel = 1
 
 if vim.fn.has("nvim-0.9.0") == 1 then
-    vim.opt.splitkeep = "screen"
-    vim.o.shortmess = "filnxtToOFWIcC"
+  vim.opt.splitkeep = "screen"
+  vim.o.shortmess = "filnxtToOFWIcC"
 end
 
 -- fix markdown indentation settings

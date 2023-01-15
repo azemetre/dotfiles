@@ -1,101 +1,48 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "--single-branch",
-    "https://github.com/folke/lazy.nvim.git",
-    lazypath,
-  })
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "--single-branch",
+        "https://github.com/folke/lazy.nvim.git",
+        lazypath,
+    })
 end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
-  spec = { import = config_namespace .. ".plugins" },
-  dev = {
-    path = "~/Code/Neovim",
-    patterns = { "olimorris" },
-  },
-  checker = {
-    enabled = true,
-    notify = false,
-    frequency = 900,
-  },
-  change_detection = {
-    enabled = true,
-    notify = false,
-  },
-  install = {
-    colorscheme = { "onedark", "onelight" },
-  },
-  ui = {
-    icons = {
-      plugin = "",
+    spec = { import = config_namespace .. ".plugins" },
+    dev = {
+        path = "~/.config/nvim",
+        patterns = { "azemetre" },
     },
-  },
-  performance = {
-    rtp = {
-      disabled_plugins = {
-        "gzip",
-        "matchit",
-        "matchparen",
-        "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
-      },
+    checker = {
+        enabled = true,
+        notify = false,
+        frequency = 900,
     },
-  },
-})local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "--single-branch",
-    "https://github.com/folke/lazy.nvim.git",
-    lazypath,
-  })
-end
-vim.opt.runtimepath:prepend(lazypath)
-
-require("lazy").setup({
-  spec = { import = config_namespace .. ".plugins" },
-  dev = {
-    path = "~/Code/Neovim",
-    patterns = { "olimorris" },
-  },
-  checker = {
-    enabled = true,
-    notify = false,
-    frequency = 900,
-  },
-  change_detection = {
-    enabled = true,
-    notify = false,
-  },
-  install = {
-    colorscheme = { "onedark", "onelight" },
-  },
-  ui = {
-    icons = {
-      plugin = "",
+    change_detection = {
+        enabled = true,
+        notify = false,
     },
-  },
-  performance = {
-    rtp = {
-      disabled_plugins = {
-        "gzip",
-        "matchit",
-        "matchparen",
-        "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
-      },
+    ui = {
+        icons = {
+            plugin = "",
+        },
     },
-  },
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                "gzip",
+                "matchit",
+                "matchparen",
+                -- "netrwPlugin", -- TODO: definitely use this I think, may need to tweak
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zipPlugin",
+            },
+        },
+    },
 })
