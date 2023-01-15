@@ -3,50 +3,75 @@
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
+-- system level
 vim.opt.autowrite = true -- enable auto write
-vim.opt.clipboard = "unnamedplus" -- sync with system clipboard
-vim.opt.cmdheight = 1
-vim.opt.completeopt = "menu,menuone,noselect"
-vim.opt.conceallevel = 3 -- Hide * markup for bold and italic
-vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
-vim.opt.cursorline = true -- Enable highlighting of the current line
-vim.opt.expandtab = true -- Use spaces instead of tabs
-vim.opt.formatoptions = "jcroqlnt" -- tcqj
-vim.opt.grepformat = "%f:%l:%c:%m"
-vim.opt.grepprg = "rg --vimgrep"
-vim.opt.guifont = "FiraCode Nerd Font:h11"
-vim.opt.hidden = true -- Enable modified buffers in background
-vim.opt.ignorecase = true -- Ignore case
-vim.opt.inccommand = "nosplit" -- preview incremental substitute
-vim.opt.joinspaces = false -- No double spaces with join after a dot
-vim.opt.laststatus = 0
-vim.opt.list = true -- Show some invisible characters (tabs...
-vim.opt.mouse = "a" -- enable mouse mode
-vim.opt.number = true -- Print line number
-vim.opt.pumblend = 10 -- Popup blend
-vim.opt.pumheight = 10 -- Maximum number of entries in a popup
-vim.opt.relativenumber = true -- Relative line numbers
-vim.opt.scrolloff = 4 -- Lines of context
-vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
-vim.opt.shiftround = true -- Round indent
-vim.opt.shiftwidth = 2 -- Size of an indent
-vim.opt.showmode = false -- dont show mode since we have a statusline
-vim.opt.sidescrolloff = 8 -- Columns of context
-vim.opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
-vim.opt.smartcase = true -- Don't ignore case with capitals
-vim.opt.smartindent = true -- Insert indents automatically
-vim.opt.spelllang = { "en" }
-vim.opt.splitbelow = true -- Put new windows below current
-vim.opt.splitright = true -- Put new windows right of current
-vim.opt.tabstop = 2 -- Number of spaces tabs count for
-vim.opt.termguicolors = true -- True color support
-vim.opt.timeoutlen = 300
-vim.opt.undofile = true
-vim.opt.undolevels = 10000
-vim.opt.updatetime = 200 -- save swap file and trigger CursorHold
-vim.opt.wildmode = "longest:full,full" -- Command-line completion mode
-vim.go.winminwidth = 5 -- minimum window width
-vim.opt.wrap = false -- Disable line wrap
+vim.opt.backspace = { "indent", "eol,start" } -- make backspace behave in a sane manner
+vim.opt.clipboard = { "unnamed", "unnamedplus" } -- sync with system clipboard
+vim.opt.mouse = "a" -- set mouse mode to all modes
+vim.opt.history = 1000 -- store the last 1000 commands entered
+
+-- search
+vim.opt.ignorecase = true -- case insensitive searching
+vim.opt.smartcase = true -- case-sensitive if expresson contains a capital letter
+vim.opt.hlsearch = true -- highlight search results
+vim.opt.incsearch = true -- set incremental search, like modern browsers
+vim.opt.lazyredraw = false -- don't redraw while executing macros
+vim.opt.magic = true -- set magic on, for regular expressions
+
+-- error bells
+vim.opt.errorbells = false
+vim.opt.visualbell = true
+vim.opt.timeoutlen = 500
+
+-- appearance
+vim.o.termguicolors = true
+vim.opt.number = true -- show line numbers
+vim.opt.relativenumber = true -- show relative numbers
+vim.opt.cursorline = true -- bullseye
+vim.opt.cursorcolumn = true -- bullseye
+vim.opt.wrap = true -- turn on line wrapping
+vim.opt.wrapmargin = 8 -- wrap lines when coming within n characters from side
+vim.opt.linebreak = true -- set soft wrapping
+vim.opt.autoindent = true -- automatically set indent of new line
+vim.opt.ttyfast = true -- faster redrawing
+vim.opt.textwidth = 80 -- after configured number of characters, wrap line
+
+vim.opt.laststatus = 3 -- show the global statusline all the time
+vim.opt.scrolloff = 7 -- set 7 lines to the cursors - when moving vertical
+vim.opt.wildmenu = true -- enhanced command line completion
+vim.opt.hidden = true -- current buffer can be put into background
+vim.opt.showcmd = true -- show incomplete commands
+vim.opt.showmode = true -- don't show which mode disabled for PowerLine
+vim.opt.wildmode = { "list", "longest" } -- complete files like a shell
+vim.opt.shell = env.SHELL
+vim.opt.cmdheight = 1 -- command bar height
+vim.opt.title = true -- set terminal title
+vim.opt.showmatch = true -- show matching braces
+vim.opt.mat = 2 -- how many tenths of a second to blink
+vim.opt.updatetime = 300
+vim.opt.signcolumn = "yes"
+vim.opt.colorcolumn = "80"
+vim.opt.shortmess = "atToOFc" -- prompt message options
+
+-- toggle invisible characters
+vim.opt.showbreak = "↪"
+vim.opt.fcs = "eob: " -- hide the ~ character on empty lines at the end of the buffer
+vim.opt.list = true
+vim.opt.listchars = {
+    tab = "→ ",
+    eol = "¬",
+    trail = "⋅",
+    extends = "❯",
+    precedes = "❮",
+}
+
+-- code folding settings
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevelstart = 99
+opt.foldnestmax = 10 -- deepest fold is 10 levels
+opt.foldenable = false -- don't fold by default
+opt.foldlevel = 1
 
 if vim.fn.has("nvim-0.9.0") == 1 then
     vim.opt.splitkeep = "screen"
