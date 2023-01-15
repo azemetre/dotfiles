@@ -138,7 +138,7 @@ return {
             -- -- don't go into normal mode, just close
             -- ["<Esc>"] = require("telescope.actions").close,
             -- -- scroll the list with <c-j> and <c-k>
-            ["<C-j>"] = require("telescope.actions"),
+            -- ["<C-j>"] = require("telescope.actions"),
             -- ["<C-k>"] = require("telescope.actions").move_selection_previous,
             -- -- move the preview window up and down
             -- ["<C-u>"] = require("telescope.actions").preview_scrolling_up,
