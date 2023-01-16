@@ -4,18 +4,59 @@ local util = require("azemetre.util")
 
 -- FIXME: document all keymaps
 
--- Clear search with <esc>
-vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+-- Clear search with <esc> or <cr>
+vim.keymap.set(
+  { "i", "n" },
+  "<esc>",
+  "<cmd>noh<cr><esc>",
+  { desc = "Escape and clear hlsearch" }
+)
+vim.keymap.set(
+  { "n" },
+  "<cr>",
+  "<cmd>noh<cr>",
+  { desc = "Enter and clear hlsearch" }
+)
 vim.keymap.set("n", "gw", "*N")
 vim.keymap.set("x", "gw", "*N")
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-vim.keymap.set("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-vim.keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-vim.keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-vim.keymap.set("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-vim.keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-vim.keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+vim.keymap.set(
+  "n",
+  "n",
+  "'Nn'[v:searchforward]",
+  { expr = true, desc = "Next search result" }
+)
+vim.keymap.set(
+  "x",
+  "n",
+  "'Nn'[v:searchforward]",
+  { expr = true, desc = "Next search result" }
+)
+vim.keymap.set(
+  "o",
+  "n",
+  "'Nn'[v:searchforward]",
+  { expr = true, desc = "Next search result" }
+)
+vim.keymap.set(
+  "n",
+  "N",
+  "'nN'[v:searchforward]",
+  { expr = true, desc = "Prev search result" }
+)
+vim.keymap.set(
+  "x",
+  "N",
+  "'nN'[v:searchforward]",
+  { expr = true, desc = "Prev search result" }
+)
+vim.keymap.set(
+  "o",
+  "N",
+  "'nN'[v:searchforward]",
+  { expr = true, desc = "Prev search result" }
+)
 
 -- lazy
 vim.keymap.set("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
@@ -23,8 +64,18 @@ vim.keymap.set("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 -- new file
 vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
-vim.keymap.set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Open Location List" })
-vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Open Quickfix List" })
+vim.keymap.set(
+  "n",
+  "<leader>xl",
+  "<cmd>lopen<cr>",
+  { desc = "Open Location List" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>xq",
+  "<cmd>copen<cr>",
+  { desc = "Open Quickfix List" }
+)
 
 -- stylua: ignore start
 
