@@ -185,7 +185,16 @@ return {
           path_display = { "truncate" },
           winblend = 0,
           border = {},
-          borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+          borderchars = {
+            "─",
+            "│",
+            "─",
+            "│",
+            "╭",
+            "╮",
+            "╯",
+            "╰",
+          },
           color_devicons = true,
           use_less = true,
           set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
@@ -211,11 +220,6 @@ return {
         },
       })
     end,
-  },
-
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build = "make",
   },
 
   -- jump between 4 files
@@ -293,6 +297,11 @@ return {
         },
   },
 
+  -- move any selection, in any directiond
+  {
+    "echasnovski/mini.move",
+  },
+
   -- better diagnostics list and others
   {
     "folke/trouble.nvim",
@@ -302,8 +311,16 @@ return {
     cmd = { "TroubleToggle", "Trouble" },
     opts = { use_diagnostic_signs = true },
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
-      { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+      {
+        "<leader>xx",
+        "<cmd>TroubleToggle document_diagnostics<cr>",
+        desc = "Document Diagnostics (Trouble)",
+      },
+      {
+        "<leader>xw",
+        "<cmd>TroubleToggle workspace_diagnostics<cr>",
+        desc = "Workspace Diagnostics (Trouble)",
+      },
     },
   },
 
