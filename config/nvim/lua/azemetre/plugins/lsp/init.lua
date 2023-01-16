@@ -44,10 +44,16 @@ return {
     ---@param opts PluginLspOpts
     config = function(plugin, opts)
       if plugin.servers then
-        require("azemetre.util").deprecate("lspconfig.servers", "lspconfig.opts.servers")
+        require("azemetre.util").deprecate(
+          "lspconfig.servers",
+          "lspconfig.opts.servers"
+        )
       end
       if plugin.setup_server then
-        require("azemetre.util").deprecate("lspconfig.setup_server", "lspconfig.opts.setup[SERVER]")
+        require("azemetre.util").deprecate(
+          "lspconfig.setup_server",
+          "lspconfig.opts.setup[SERVER]"
+        )
       end
 
       -- setup formatting and keymaps
@@ -57,7 +63,9 @@ return {
       end)
 
       -- diagnostics
-      for name, icon in pairs(require("azemetre.config.settings").icons.diagnostics) do
+      for name, icon in
+        pairs(require("azemetre.config.settings").icons.diagnostics)
+      do
         name = "DiagnosticSign" .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
@@ -69,9 +77,13 @@ return {
       })
 
       local servers = opts.servers
-      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      local capabilities = require("cmp_nvim_lsp").default_capabilities(
+        vim.lsp.protocol.make_client_capabilities()
+      )
 
-      require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
+      require("mason-lspconfig").setup({
+        ensure_installed = vim.tbl_keys(servers),
+      })
       require("mason-lspconfig").setup_handlers({
         function(server)
           local server_opts = servers[server] or {}
@@ -100,7 +112,16 @@ return {
       local nls = require("null-ls")
       return {
         sources = {
-          -- nls.builtins.formatting.prettierd,
+          nls.builtins.formatting.prettier.with({
+            filetypes = {
+              "css",
+              "html",
+              "javascript",
+              "typescript",
+              "json",
+              "svelte",
+            },
+          }),
           nls.builtins.formatting.stylua,
           nls.builtins.diagnostics.flake8,
         },
@@ -130,7 +151,6 @@ return {
       "editorconfig-checker",
       "elixir-ls",
       "ember-language-server",
-      -- "emmet-ls",
       "eslint-lsp",
       "firefox-debug-adapter",
       "fixjson",
@@ -139,7 +159,6 @@ return {
       "gopls",
       "gotests",
       "gotestsum",
-      -- "graphql-language-service-cli",
       "haskell-language-server",
       "html-lsp",
       "json-lsp",
@@ -154,7 +173,7 @@ return {
       "ocamlformat",
       "php-cs-fixer",
       "php-debug-adapter",
-      "prettierd",
+      "prettier",
       "prisma-language-server",
       "proselint",
       "puppet-editor-services",
@@ -169,7 +188,6 @@ return {
       "stylelint-lsp",
       "stylua",
       "svelte-language-server",
-      -- "tailwindcss-language-server",
       "taplo",
       "terraform-ls",
       "typescript-language-server",
