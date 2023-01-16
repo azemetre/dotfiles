@@ -8,6 +8,8 @@ Inspired/stolen bits from:
 
 [ThePrimeagen/.dotfiles](https://github.com/ThePrimeagen/.dotfiles)
 
+[olimorris/dotfiles](https://github.com/olimorris/dotfiles)
+
 ## Appearance
 
 How my setup looks for my daily driving:
