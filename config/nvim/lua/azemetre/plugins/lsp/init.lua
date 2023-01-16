@@ -27,6 +27,9 @@ return {
             },
           },
         },
+        stylelint_lsp = {
+          filetypes = { "css", "less", "scss" },
+        },
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
@@ -131,7 +134,6 @@ return {
 
   -- cmdline tools and lsp servers
   {
-
     "williamboman/mason.nvim",
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
@@ -150,7 +152,6 @@ return {
       "dockerfile-language-server",
       "editorconfig-checker",
       "elixir-ls",
-      "ember-language-server",
       "eslint-lsp",
       "firefox-debug-adapter",
       "fixjson",
