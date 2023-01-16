@@ -3,11 +3,7 @@ local M = {}
 function M.on_attach(client, buffer)
   local self = M.new(client, buffer)
 
-  self:map(
-    "ge",
-    vim.diagnostic.open_float,
-    { desc = "Line Diagnostics" }
-  )
+  self:map("ge", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
   self:map("<leader>cl", "LspInfo", { desc = "Lsp Info" })
   self:map(
     "<leader>xd",
