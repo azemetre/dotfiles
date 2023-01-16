@@ -1,31 +1,6 @@
 local icons = require("azemetre.theme").icons
 
-local always_ignore_these = {
-  "yarn.lock", -- nodejs
-  "package%-lock.json", -- nodejs
-  "node_modules/.*", -- nodejs
-  "vendor/*", -- golang
-  "%.git/.*",
-  "%.png",
-  "%.jpeg",
-  "%.jpg",
-  "%.ico",
-  "%.webp",
-  "%.avif",
-  "%.heic",
-  "%.mp3",
-  "%.mp4",
-  "%.mkv",
-  "%.mov",
-  "%.wav",
-  "%.flv",
-  "%.avi",
-  "%.webm",
-  "%.db",
-}
-
 return {
-
   -- file explorer
   {
     "nvim-tree/nvim-tree.lua",
@@ -132,6 +107,30 @@ return {
       { "<leader>fh", "<cmd>Telescope help_tags<cr>" },
     },
     config = function()
+      local always_ignore_these = {
+        "yarn.lock", -- nodejs
+        "package%-lock.json", -- nodejs
+        "node_modules/.*", -- nodejs
+        "vendor/*", -- golang
+        "%.git/.*",
+        "%.png",
+        "%.jpeg",
+        "%.jpg",
+        "%.ico",
+        "%.webp",
+        "%.avif",
+        "%.heic",
+        "%.mp3",
+        "%.mp4",
+        "%.mkv",
+        "%.mov",
+        "%.wav",
+        "%.flv",
+        "%.avi",
+        "%.webm",
+        "%.db",
+      }
+
       require("telescope").setup({
         defaults = {
           mappings = {
