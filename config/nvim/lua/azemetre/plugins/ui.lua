@@ -360,58 +360,79 @@ return {
     event = "VimEnter",
     opts = function()
       local dashboard = require("alpha.themes.dashboard")
-      local logo = [[
-                                                 :::
-                                             :: :::.
-                       \/,                    .:::::
-           \),          \`-._                 :::888
-           /\            \   `-.             ::88888
-          /  \            | .(                ::88
-         /,.  \           ; ( `              .:8888
-            ), \         / ;``               :::888
-           /_   \     __/_(_                  :88
-             `. ,`..-'      `-._    \  /      :8
-               )__ `.           `._ .\/.
-              /   `. `             `-._______m         _,
-  ,-=====-.-;'                 ,  ___________/ _,-_,'"`/__,-.
- C   =--   ;                   `.`._    V V V       -=-'"#==-._
-:,  \     ,|      UuUu _,......__   `-.__A_A_ -. ._ ,--._ ",`` `-
-||  |`---' :    uUuUu,'          `'--...____/   `" `".   `
-|`  :       \   UuUu:
-:  /         \   UuUu`-._
- \(_          `._  uUuUu `-.
- (_3             `._  uUu   `._
-                    ``-._      `.
-                         `-._    `.
-                             `.    \
-                               )   ;
-                              /   /
-               `.        |\ ,'   /
-                 ",_A_/\-| `   ,'
-                   `--..,_|_,-'\
-                          |     \
-                          |      \__
-                          |__
-      ]]
+      local neovim = {
+				type = 'text',
+				val = {
+					[[                                        ]],
+					[[ ██████████████████████████████████████ ]],
+					[[ █▄ ▀█▄ ▄█▄ ▄▄ █ ▄▄ █▄ █ ▄█▄ ▄█▄ ▀█▀ ▄█ ]],
+					[[ ██ █▄▀ ███ ▄█▀█ ██ ██▄▀▄███ ███ █▄█ ██ ]],
+					[[ ▀▄▄▄▀▀▄▄▀▄▄▄▄▄▀▄▄▄▄▀▀▀▄▀▀▀▄▄▄▀▄▄▄▀▄▄▄▀ ]],
+					[[                                        ]],
+				},
+				opts = {
+					position = 'center',
+					type = 'ascii',
+					hl = 'String',
+				}
+			}
+			local trogdor = {
+				type = 'text',
+				val = {
+					[[                                                                 ]],
+					[[                                                 :::             ]],
+					[[                                             :: :::.             ]],
+					[[                       \/,                    .:::::             ]],
+					[[           \),          \`-._                 :::888             ]],
+					[[           /\            \   `-.             ::88888             ]],
+					[[          /  \            | .(                ::88               ]],
+					[[         /,.  \           ; ( `              .:8888              ]],
+					[[            ), \         / ;``               :::888              ]],
+					[[           /_   \     __/_(_                  :88                ]],
+					[[             `. ,`..-'      `-._    \  /      :8                 ]],
+					[[               )__ `.           `._ .\/.                         ]],
+					[[              /   `. `             `-._______m         _,        ]],
+					[[  ,-=====-.-;'                 ,  ___________/ _,-_,'"`/__,-.    ]],
+					[[ C   =--   ;                   `.`._    V V V       -=-'"#==-._  ]],
+					[[:,  \     ,|      UuUu _,......__   `-.__A_A_ -. ._ ,--._ ",`` `-]],
+					[[||  |`---' :    uUuUu,'          `'--...____/   `" `".   `       ]],
+					[[|`  :       \   UuUu:                                            ]],
+					[[:  /         \   UuUu`-._                                        ]],
+					[[ \(_          `._  uUuUu `-.                                     ]],
+					[[ (_3             `._  uUu   `._                                  ]],
+					[[                    ``-._      `.                                ]],
+					[[                         `-._    `.                              ]],
+					[[                             `.    \                             ]],
+					[[                               )   ;                             ]],
+					[[                              /   /                              ]],
+					[[               `.        |\ ,'   /                               ]],
+					[[                 ",_A_/\-| `   ,'                                ]],
+					[[                   `--..,_|_,-'\                                 ]],
+					[[                          |     \                                ]],
+					[[                          |      \__                             ]],
+					[[                          |__                                    ]],
+				},
+				opts = {
+					position = 'center',
+					type = 'ascii',
+					hl = 'String',
+				}
+			}
 
-      dashboard.section.header.val = vim.split(logo, "\n")
-      dashboard.section.buttons.val = {
+			-- figure out a way to change font size for ascii art
+      -- dashboard.section.header.val = trogdor.val
+      dashboard.section.header.val = neovim.val
+			dashboard.section.buttons.val = {
         dashboard.button(
           "f",
           " " .. " Find file",
           ":Telescope find_files <CR>"
         ),
         dashboard.button(
-          "r",
-          " " .. " Recent files",
-          ":Telescope oldfiles <CR>"
-        ),
-        dashboard.button(
           "g",
           " " .. " Find text",
           ":Telescope live_grep <CR>"
         ),
-        dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
         dashboard.button(
           "s",
           "勒" .. " Restore Session",
@@ -425,7 +446,6 @@ return {
         button.opts.hl_shortcut = "AlphaShortcut"
       end
       dashboard.section.footer.opts.hl = "Type"
-      dashboard.section.header.opts.hl = "AlphaHeader"
       dashboard.section.buttons.opts.hl = "AlphaButtons"
       dashboard.opts.layout[1].val = 8
       return dashboard
