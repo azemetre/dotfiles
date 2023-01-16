@@ -24,7 +24,7 @@ vim.opt.visualbell = true
 vim.opt.timeoutlen = 500
 
 -- appearance
-vim.o.termguicolors = true
+vim.opt.termguicolors = true
 vim.opt.number = true -- show line numbers
 vim.opt.relativenumber = true -- show relative numbers
 vim.opt.cursorline = true -- bullseye
