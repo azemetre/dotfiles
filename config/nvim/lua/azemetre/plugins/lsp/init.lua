@@ -115,16 +115,7 @@ return {
       local nls = require("null-ls")
       return {
         sources = {
-          nls.builtins.formatting.prettier.with({
-            filetypes = {
-              "css",
-              "html",
-              "javascript",
-              "typescript",
-              "json",
-              "svelte",
-            },
-          }),
+          nls.builtins.formatting.prettier,
           nls.builtins.formatting.stylua,
           nls.builtins.diagnostics.flake8,
         },
@@ -148,7 +139,6 @@ return {
       "commitlint",
       "cspell",
       "css-lsp",
-      "diagnostic-languageserver",
       "dockerfile-language-server",
       "editorconfig-checker",
       "elixir-ls",
