@@ -14,9 +14,13 @@ Inspired/stolen bits from:
 
 How my setup looks for my daily driving:
 
-![Tmux with neovim window open on rust file](./screenshot.png)
+![alpha-nvim dashboard](./docs/nvim-alpha-dashboard.png)
 
-Currently going through the lovely book [Command Line Rust](https://www.amazon.com/Command-Line-Rust-Project-Based-Primer-Writing/dp/1098109430). Highly recommended.
+![tmux with neovim window open on rust file](./docs/rust-with-doc-hover.png)
+
+![tmux with neovim window open on go file](./docs/go-looks.png)
+
+Currently finished the lovely book [Command Line Rust](https://www.amazon.com/Command-Line-Rust-Project-Based-Primer-Writing/dp/1098109430). Highly recommended.
 
 ### Todos
 
@@ -31,8 +35,8 @@ Currently going through the lovely book [Command Line Rust](https://www.amazon.c
 - [ ] Move `git` and `tmux` into `config`
 - [ ] Verify if `applescripts` is needed
 - [ ] zsh config
-	- [ ] Verify zsh works in multiple terminals (iterm, alacritty, terminal, etc)
-	- [ ] Clean zsh scripts
+  - [ ] Verify zsh works in multiple terminals (iterm, alacritty, terminal, etc)
+  - [ ] Clean zsh scripts
 - [ ] Fix `bin` setup (some script's aren't working)
 - [ ] Create helper script to give appropriate files appropriate privileges
 - [ ] Documentation rewrite:
