@@ -20,27 +20,36 @@ Currently going through the lovely book [Command Line Rust](https://www.amazon.c
 
 ### Todos
 
-- [x] Move from `vim-plug` to `packer.nvim`
-- [ ] Move from `packer.nvim` to `lazy.nvim`
-- [ ] Update `README.md` to include new instructions on setting everything up
-- [ ] Remove unused plugins
-- [ ] Correct issues with shell scripts not configured correctly
+- [ ] neovim updates:
+  - [x] Move from `vim-plug` to `packer.nvim`
+  - [x] Move from `packer.nvim` to `lazy.nvim`
+  - [ ] List current installed plugins with their purpose
+  - [ ] Setup DAP for various languages
+  - [ ] Fix `null-ls` issues with prettier and lua
+  - [ ] Fit Trogdor the Burninator into `alpha-nvim`
 - [ ] Cleanup `Brewfile`
-- [ ] Verify zsh works in multiple terminals (iterm, alacritty, terminal, etc)
+- [ ] Move `git` and `tmux` into `config`
+- [ ] Verify if `applescripts` is needed
+- [ ] zsh config
+	- [ ] Verify zsh works in multiple terminals (iterm, alacritty, terminal, etc)
+	- [ ] Clean zsh scripts
+- [ ] Fix `bin` setup (some script's aren't working)
+- [ ] Create helper script to give appropriate files appropriate privileges
 - [ ] Documentation rewrite:
-    - [ ] Rewrite Installation instructions
-    - [ ] Rewrite Font section
-    - [ ] Add a `why vim?` section
-- [ ] Setup DAP for various languages
+  - [ ] What roads I drive on with this setup
+  - [ ] Rewrite Installation instructions
+  - [ ] Rewrite Font section
+  - [ ] Update table of contents
+  - [ ] Add a `why vim?` section
 
 ## Contents
 
-+ [Initial Setup and Installation](#initial-setup-and-installation)
-+ [ZSH Setup](#zsh-setup)
-+ [Prompt](#prompt)
-+ [Vim and Neovim Setup](#vim-and-neovim-setup)
-+ [Fonts](#fonts)
-+ [Tmux](#tmux-configuration)
+- [Initial Setup and Installation](#initial-setup-and-installation)
+- [ZSH Setup](#zsh-setup)
+- [Prompt](#prompt)
+- [Vim and Neovim Setup](#vim-and-neovim-setup)
+- [Fonts](#fonts)
+- [Tmux](#tmux-configuration)
 
 ## Initial Setup and Installation
 
@@ -60,7 +69,7 @@ If on OSX, you will need to install the XCode CLI tools before continuing. To do
 ➜ xcode-select --install
 ```
 
-Then, clone the dotfiles repository to your home directory as `~/.dotfiles`. 
+Then, clone the dotfiles repository to your home directory as `~/.dotfiles`.
 
 ```bash
 ➜ git clone https://github.com/azemetre/dotfiles.git ~/.dotfiles
@@ -70,7 +79,7 @@ Then, clone the dotfiles repository to your home directory as `~/.dotfiles`.
 
 `install.sh` will start by initializing the submodules used by this repository (if any). **Read through this file and comment out anything you don't want installed.** Then, it will install all symbolic links into your home directory. Every file with a `.symlink` extension will be symlinked to the home directory with a `.` in front of it. As an example, `vimrc.symlink` will be symlinked in the home directory as `~/.vimrc`. Then, this script will create a `~/.vim-tmp` directory in your home directory, as this is where vim is configured to place its temporary files. Additionally, all files in the `$DOTFILES/config` directory will be symlinked to the `~/.config/` directory for applications that follow the [XDG base directory specification](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html), such as neovim.
 
-Next, the install script will perform a check to see if it is running on an OSX machine. If so, it will install Homebrew if it is not currently installed and will install the homebrew packages listed in [`Brewfile`](Brewfile). Then, it will run [`osx.sh`](install/osx.sh) and change some OSX configurations. This file is pretty well documented and so it is advised that you __read through and comment out any changes you do not want__.
+Next, the install script will perform a check to see if it is running on an OSX machine. If so, it will install Homebrew if it is not currently installed and will install the homebrew packages listed in [`Brewfile`](Brewfile). Then, it will run [`osx.sh`](install/osx.sh) and change some OSX configurations. This file is pretty well documented and so it is advised that you **read through and comment out any changes you do not want**.
 
 ## Terminal Capabilities
 
@@ -85,14 +94,14 @@ tic -x resources/tmux.terminfo
 
 ZSH is configured in the `zshrc.symlink` file, which will be symlinked to the home directory. The following occurs in this file:
 
-* set the `EDITOR` to nvim
-* Load any `~/.terminfo` setup
-* Set the `CODE_DIR` variable, pointing to the location where the code projects exist for exclusive autocompletion with the `c` command
-* Recursively search the `$DOTFILES/zsh` directory for files ending in .zsh and source them
-* Setup zplug plugin manager for zsh plugins and installed them.
-* source a `~/.localrc` if it exists so that additional configurations can be made that won't be kept track of in this dotfiles repo. This is good for things like API keys, etc.
-* Add the `~/bin` and `$DOTFILES/bin` directories to the path
-* And more...
+- set the `EDITOR` to nvim
+- Load any `~/.terminfo` setup
+- Set the `CODE_DIR` variable, pointing to the location where the code projects exist for exclusive autocompletion with the `c` command
+- Recursively search the `$DOTFILES/zsh` directory for files ending in .zsh and source them
+- Setup zplug plugin manager for zsh plugins and installed them.
+- source a `~/.localrc` if it exists so that additional configurations can be made that won't be kept track of in this dotfiles repo. This is good for things like API keys, etc.
+- Add the `~/bin` and `$DOTFILES/bin` directories to the path
+- And more...
 
 ### Prompt
 
@@ -106,17 +115,17 @@ It does this by writing the actual text that will be displayed int he prompt to 
 
 The git info shown on the `RPROMPT` displays the current branch name, along with the following symbols.
 
--  `+` - New files were added
--  `!` - Existing files were modified
--  `?` - Untracked files exist that are not ignored
--  `»` - Current changes include file renaming
--  `✘` - An existing tracked file has been deleted
--  `$` - There are currently stashed files
--  `=` - There are unmerged files
--  `⇡` - Branch is ahead of the remote (indicating a push is needed)
--  `⇣` - Branch is behind the remote (indicating a pull is needed)
--  `⇕` - The branches have diverged (indicating history has changed and maybe a force-push is needed)
--  `✔` - The current working directory is clean
+- `+` - New files were added
+- `!` - Existing files were modified
+- `?` - Untracked files exist that are not ignored
+- `»` - Current changes include file renaming
+- `✘` - An existing tracked file has been deleted
+- `$` - There are currently stashed files
+- `=` - There are unmerged files
+- `⇡` - Branch is ahead of the remote (indicating a push is needed)
+- `⇣` - Branch is behind the remote (indicating a pull is needed)
+- `⇕` - The branches have diverged (indicating history has changed and maybe a force-push is needed)
+- `✔` - The current working directory is clean
 
 #### Jobs Prompt
 
@@ -131,8 +140,8 @@ If a `package.json` file or a `node_modules` directory exists in the current wor
 [Neovim](https://neovim.io/) is a fork and drop-in replacement for vim. in most cases, you would not notice a difference between the two, other than Neovim allows plugins to run asynchronously so that they do not freeze the editor, which is the main reason I have switched over to it. Vim and Neovim both use Vimscript and most plugins will work in both (all of the plugins I use do work in both Vim and Neovim). For this reason, they share the same configuration files in this setup. Neovim uses the [XDG base directory specification](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html) which means it won't look for a `.vimrc` in your home directory. Instead, its configuration looks like the following:
 
 |                         | Vim        | Neovim                    |
-|-------------------------|------------|---------------------------|
-| Main Configuration File  | `~/.vimrc` | `~/.config/nvim/init.vim` |
+| ----------------------- | ---------- | ------------------------- |
+| Main Configuration File | `~/.vimrc` | `~/.config/nvim/init.vim` |
 | Configuration directory | `~/.vim`   | `~/.config/nvim`          |
 
 ### Installation
@@ -175,4 +184,4 @@ in order to do your job as best fit.
 
 ## Questions
 
-If you have questions, notice issues,  or would like to see improvements, please open an [issue](https://github.com/azemetre/dotfiles/issues/new) and I'm happy to help you out!
+If you have questions, notice issues, or would like to see improvements, please open an [issue](https://github.com/azemetre/dotfiles/issues/new) and I'm happy to help you out!
