@@ -14,12 +14,18 @@ return {
   },
 
   -- hipster
-  -- {
-  --     "azemetre/hipster.nvim",
-  --     lazy = false,
-  --     priority = 1000,
-  --     dependencies = { "rktjmp/lush.nvim" },
-  -- },
+  {
+      "azemetre/hipster.nvim",
+      lazy = false,
+      priority = 1000,
+      dependencies = { "rktjmp/lush.nvim" },
+  },
+
+	-- noctis
+	{
+		"talha-akram/noctis.nvim",
+		priority = 1000,
+	},
 
   -- catppuccin
   {
