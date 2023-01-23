@@ -339,4 +339,10 @@ return {
             { "<leader>xT", "<cmd>TodoTelescope<cr>", desc = "Todo Telescope" },
         },
   },
+
+	-- lsp status
+	-- TODO: get it working
+	{
+		"j-hui/fidget.nvim"
+	}
 }
