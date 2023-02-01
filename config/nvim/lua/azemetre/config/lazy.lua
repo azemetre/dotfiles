@@ -35,7 +35,7 @@ require("lazy").setup({
         rtp = {
             disabled_plugins = {
                 "gzip",
-                "matchit",
+                -- "matchit", -- TODO: definitely use this I think, may need to tweak
                 "matchparen",
                 -- "netrwPlugin", -- TODO: definitely use this I think, may need to tweak
                 "tarPlugin",
