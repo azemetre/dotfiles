@@ -1,5 +1,9 @@
 # Dotfiles
 
+Used for macOS but making changes to make it more platform agnostic.
+
+---
+
 Forked and tweaked from [nicknisi/dotfiles](https://github.com/nicknisi/dotfiles)
 
 Inspired/stolen bits from:
@@ -16,24 +20,35 @@ How my setup looks for my daily driving:
 
 ![alpha-nvim dashboard](./docs/nvim-alpha-dashboard.png)
 
-![tmux with neovim window open on rust file](./docs/rust-with-doc-hover.png)
-
 ![tmux with neovim window open on go file](./docs/go-looks.png)
+
+![tmux with neovim window open on rust file](./docs/rust-with-doc-hover.png)
 
 Currently finished the lovely book [Command Line Rust](https://www.amazon.com/Command-Line-Rust-Project-Based-Primer-Writing/dp/1098109430). Highly recommended.
 
 ### Todos
+
+Putting the todo near the top to let people know the instructions below may be
+incorrect, if you would like help I'd recommend using the
+[discussions](https://github.com/azemetre/dotfiles/discussions) to ask a
+question.
 
 - [ ] neovim updates:
   - [x] Move from `vim-plug` to `packer.nvim`
   - [x] Move from `packer.nvim` to `lazy.nvim`
   - [ ] List current installed plugins with their purpose
   - [ ] Setup DAP for various languages
-  - [ ] Fix `null-ls` issues with prettier and lua
+  - [ ] Fix `null-ls` issues for:
+    - [x] prettier
+    - [ ] lua
+    - [ ] gopls
   - [ ] Fit Trogdor the Burninator into `alpha-nvim`
-- [ ] Cleanup `Brewfile`
-- [ ] Move `git` and `tmux` into `config`
-- [ ] Verify if `applescripts` is needed
+- [ ] `Brewfile` cleanup and add comments
+- [ ] Move core configurations into `config`:
+  - [ ] git
+  - [ ] tmux
+  - [ ] zshrc
+- [x] Verify if `applescripts` is needed
 - [ ] zsh config
   - [ ] Verify zsh works in multiple terminals (iterm, alacritty, terminal, etc)
   - [ ] Clean zsh scripts
@@ -42,9 +57,11 @@ Currently finished the lovely book [Command Line Rust](https://www.amazon.com/Co
 - [ ] Documentation rewrite:
   - [ ] What roads I drive on with this setup
   - [ ] Rewrite Installation instructions
-  - [ ] Rewrite Font section
+  - [x] Rewrite Font section
   - [ ] Update table of contents
+	- [ ] Detail what each `brew` formula is used for
   - [ ] Add a `why vim?` section
+  - [ ] Add a `how I use tmux` section
 
 ## Contents
 
@@ -156,15 +173,12 @@ Vim is likely already installed on your system. If using a Mac, MacVim will be i
 
 Inside of [`.zshrc`](zsh/zshrc.symlink), the `EDITOR` shell variable is set to `nvim`, defaulting to Neovim for editor tasks, such as git commit messages. Additionally, I have aliased `vim` to `nvim` in [`aliases.zsh`](zsh/aliases.zsh) You can remove this if you would rather not alias the `vim` command to `nvim`.
 
-vim and neovim should just work once the correct plugins are installed. To install the plugins, you will need to open Neovim in the following way:
-
-```bash
-➜ nvim +PlugInstall
-```
-
 ## Fonts
 
-I am currently using [Operator Mono](http://www.typography.com/fonts/operator/styles/operatormonoscreensmart) as my default font which is a paid font ($199 US) and does not include Powerline support. You do not need this font at all and there is nothing directly referencing it in the setup. For a great, free programming font, check out Mozilla's [Fira](http://mozilla.github.io/Fira/). In addition to this, I do have [nerd-fonts](https://github.com/ryanoasis/nerd-fonts) installed and configured to be used for non-ascii characters via iTerm2's profile settings. If you would prefer not to do this, then simply remove the `Plug 'ryanoasis/vim-devicons'` plugin from vim/nvim.
+I am currently using [Hack](https://sourcefoundry.org/hack/) as my default font,
+it is MIT licensed. More explicitly the
+[Hack nerd font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack)
+, this allows for non-ascii characters to be used in my terminal.
 
 ## Tmux Configuration
 
