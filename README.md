@@ -177,8 +177,8 @@ Inside of [`.zshrc`](zsh/zshrc.symlink), the `EDITOR` shell variable is set to `
 
 I am currently using [Hack](https://sourcefoundry.org/hack/) as my default font,
 it is MIT licensed. More explicitly the
-[Hack nerd font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack)
-, this allows for non-ascii characters to be used in my terminal.
+[Hack nerd font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack),
+this allows for non-ascii characters to be used in my terminal.
 
 ## Tmux Configuration
 
