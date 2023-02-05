@@ -108,20 +108,20 @@ return {
   -- surround
   {
     "echasnovski/mini.surround",
-    keys = { "gz" },
+    keys = { "gs" },
     opts = {
       mappings = {
-        add = "gza", -- Add surrounding in Normal and Visual modes
-        delete = "gzd", -- Delete surrounding
-        find = "gzf", -- Find surrounding (to the right)
-        find_left = "gzF", -- Find surrounding (to the left)
-        highlight = "gzh", -- Highlight surrounding
-        replace = "gzr", -- Replace surrounding
-        update_n_lines = "gzn", -- Update `n_lines`
+        add = "gsa", -- Add surrounding in Normal and Visual modes
+        delete = "gsd", -- Delete surrounding
+        find = "gsf", -- Find surrounding (to the right)
+        find_left = "gsF", -- Find surrounding (to the left)
+        highlight = "gsh", -- Highlight surrounding
+        replace = "gsr", -- Replace surrounding
+        update_n_lines = "gsn", -- Update `n_lines`
       },
     },
     config = function(_, opts)
-      -- use gz mappings instead of s to prevent conflict with leap
+      -- use gs mappings instead of s to prevent conflict with leap
       require("mini.surround").setup(opts)
     end,
   },
