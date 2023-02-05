@@ -15,10 +15,10 @@ return {
 
   -- hipster
   {
-      "azemetre/hipster.nvim",
-      lazy = false,
-      priority = 1000,
-      dependencies = { "rktjmp/lush.nvim" },
+		"azemetre/hipster.nvim",
+		lazy = false,
+		priority = 1000,
+		dependencies = { "rktjmp/lush.nvim" },
   },
 
 	-- noctis
