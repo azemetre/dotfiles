@@ -41,7 +41,7 @@ question.
   - [ ] Fix `null-ls` issues for:
     - [x] prettier
     - [ ] lua
-    - [ ] gopls
+    - [x] gopls
   - [ ] Fit Trogdor the Burninator into `alpha-nvim`
 - [ ] `Brewfile` cleanup and add comments
 - [ ] Move core configurations into `config`:
@@ -59,7 +59,7 @@ question.
   - [ ] Rewrite Installation instructions
   - [x] Rewrite Font section
   - [ ] Update table of contents
-	- [ ] Detail what each `brew` formula is used for
+  - [ ] Detail what each `brew` formula is used for
   - [ ] Add a `why vim?` section
   - [ ] Add a `how I use tmux` section
 
