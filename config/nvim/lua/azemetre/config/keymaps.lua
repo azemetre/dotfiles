@@ -58,6 +58,10 @@ vim.keymap.set(
   { expr = true, desc = "Prev search result" }
 )
 
+-- visually move selection
+vim.keymap.set({"v", "o"}, "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
+vim.keymap.set({"v", "o"}, "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
+
 -- lazy
 vim.keymap.set("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 
