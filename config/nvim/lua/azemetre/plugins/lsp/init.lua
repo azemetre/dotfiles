@@ -18,6 +18,9 @@ return {
         sumneko_lua = {
           settings = {
             Lua = {
+							diagnostics = {
+								globals = { "vim" },
+							},
               workspace = {
                 checkThirdParty = false,
               },
