@@ -125,9 +125,17 @@ return {
       local nls = require("null-ls")
       return {
 				sources = {
-					nls.builtins.formatting.prettier,
-          nls.builtins.formatting.stylua,
-					nls.builtins.diagnostics.eslint,
+					nls.builtins.formatting.prettier.with({
+						condition = function(utils)
+							return utils.has_file({ ".prettierrc.*" })
+						end,
+					}),
+					nls.builtins.formatting.stylua,
+					nls.builtins.diagnostics.eslint.with({
+						condition = function(utils)
+							return utils.has_file({ ".eslintrc.*" })
+						end,
+					}),
         },
       }
     end,
