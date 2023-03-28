@@ -40,7 +40,7 @@ window:
   # spread additional padding evenly around the terminal content
   dynamic_padding: true
   # window decoarations
-  full: borders and title bar
+  # full: borders and title bar
   # - none: neither borders nor title bar
   # - (macos) transparent: title bar, transparent background, and title bar buttons
   # - (macos) buttonless: title bar transparent background, but no title bar buttons
@@ -55,7 +55,7 @@ window:
   startup_mode: Windowed
 
 scrolling:
-  history: 10000
+  history: 100000
   multiplier: 3
 
 # The FreeType rasterizer needs to know the device DPI for best results
