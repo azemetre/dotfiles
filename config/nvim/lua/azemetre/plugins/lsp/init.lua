@@ -15,7 +15,7 @@ return {
 			---@type lspconfig.options
 			servers = {
 				jsonls = {},
-				sumneko_lua = {
+				lua_ls = {
 					settings = {
 						Lua = {
 							diagnostics = {
