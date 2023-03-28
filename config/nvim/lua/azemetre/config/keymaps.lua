@@ -6,61 +6,66 @@ local util = require("azemetre.util")
 
 -- Clear search with <esc> or <cr>
 vim.keymap.set(
-  { "i", "n" },
-  "<esc>",
-  "<cmd>noh<cr><esc>",
-  { desc = "Escape and clear hlsearch" }
+	{ "i", "n" },
+	"<esc>",
+	"<cmd>noh<cr><esc>",
+	{ desc = "Escape and clear hlsearch" }
 )
 vim.keymap.set(
-  { "n" },
-  "<cr>",
-  "<cmd>noh<cr>",
-  { desc = "Enter and clear hlsearch" }
+	{ "n" },
+	"<cr>",
+	"<cmd>noh<cr>",
+	{ desc = "Enter and clear hlsearch" }
 )
 vim.keymap.set("n", "gw", "*N")
 vim.keymap.set("x", "gw", "*N")
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 vim.keymap.set(
-  "n",
-  "n",
-  "'Nn'[v:searchforward]",
-  { expr = true, desc = "Next search result" }
+	"n",
+	"n",
+	"'Nn'[v:searchforward]",
+	{ expr = true, desc = "Next search result" }
 )
 vim.keymap.set(
-  "x",
-  "n",
-  "'Nn'[v:searchforward]",
-  { expr = true, desc = "Next search result" }
+	"x",
+	"n",
+	"'Nn'[v:searchforward]",
+	{ expr = true, desc = "Next search result" }
 )
 vim.keymap.set(
-  "o",
-  "n",
-  "'Nn'[v:searchforward]",
-  { expr = true, desc = "Next search result" }
+	"o",
+	"n",
+	"'Nn'[v:searchforward]",
+	{ expr = true, desc = "Next search result" }
 )
 vim.keymap.set(
-  "n",
-  "N",
-  "'nN'[v:searchforward]",
-  { expr = true, desc = "Prev search result" }
+	"n",
+	"N",
+	"'nN'[v:searchforward]",
+	{ expr = true, desc = "Prev search result" }
 )
 vim.keymap.set(
-  "x",
-  "N",
-  "'nN'[v:searchforward]",
-  { expr = true, desc = "Prev search result" }
+	"x",
+	"N",
+	"'nN'[v:searchforward]",
+	{ expr = true, desc = "Prev search result" }
 )
 vim.keymap.set(
-  "o",
-  "N",
-  "'nN'[v:searchforward]",
-  { expr = true, desc = "Prev search result" }
+	"o",
+	"N",
+	"'nN'[v:searchforward]",
+	{ expr = true, desc = "Prev search result" }
 )
 
 -- visually move selection
-vim.keymap.set({"v", "o"}, "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
-vim.keymap.set({"v", "o"}, "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
+vim.keymap.set(
+	{ "v", "o" },
+	"J",
+	":m '>+1<CR>gv=gv",
+	{ desc = "Move line down" }
+)
+vim.keymap.set({ "v", "o" }, "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 
 -- lazy
 vim.keymap.set("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
@@ -69,16 +74,16 @@ vim.keymap.set("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
 vim.keymap.set(
-  "n",
-  "<leader>xl",
-  "<cmd>lopen<cr>",
-  { desc = "Open Location List" }
+	"n",
+	"<leader>xl",
+	"<cmd>lopen<cr>",
+	{ desc = "Open Location List" }
 )
 vim.keymap.set(
-  "n",
-  "<leader>xq",
-  "<cmd>copen<cr>",
-  { desc = "Open Quickfix List" }
+	"n",
+	"<leader>xq",
+	"<cmd>copen<cr>",
+	{ desc = "Open Quickfix List" }
 )
 
 -- stylua: ignore start

@@ -58,11 +58,11 @@ vim.opt.showbreak = "↪"
 vim.opt.fcs = "eob: " -- hide the ~ character on empty lines at the end of the buffer
 vim.opt.list = true
 vim.opt.listchars = {
-  tab = "→ ",
-  eol = "¬",
-  trail = "⋅",
-  extends = "❯",
-  precedes = "❮",
+	tab = "→ ",
+	eol = "¬",
+	trail = "⋅",
+	extends = "❯",
+	precedes = "❮",
 }
 
 -- code folding settings
@@ -74,8 +74,8 @@ vim.opt.foldenable = false -- don't fold by default
 vim.opt.foldlevel = 1
 
 if vim.fn.has("nvim-0.9.0") == 1 then
-  vim.opt.splitkeep = "screen"
-  vim.o.shortmess = "filnxtToOFWIcC"
+	vim.opt.splitkeep = "screen"
+	vim.o.shortmess = "filnxtToOFWIcC"
 end
 
 -- fix markdown indentation settings
