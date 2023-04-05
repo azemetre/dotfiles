@@ -17,8 +17,10 @@ return {
 	},
 
 	-- feline -- statusline
+	-- feline-nvim/feline.nvim in archive mode
+	-- freddiehaddad/feline.nvim is actively maintained
 	{
-		"feline-nvim/feline.nvim",
+		"freddiehaddad/feline.nvim",
 		event = "VeryLazy",
 		config = function()
 			local theme = require("azemetre.theme")
@@ -711,6 +713,7 @@ return {
 	-- color picker and lsp
 	{
 		"uga-rosa/ccc.nvim",
+		event = "VeryLazy",
 		config = function()
 			local ccc = require("ccc")
 			local mapping = ccc.mapping
