@@ -58,6 +58,7 @@ brew "scala"
 brew "sbt"
 brew "lua"
 brew "luajit"
+brew "opam"
 # golang static analysis - https://staticcheck.io/
 brew "staticcheck"
 
