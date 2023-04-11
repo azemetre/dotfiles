@@ -185,7 +185,7 @@ return {
 			"rustfmt",
 			"shellcheck",
 			"sql-formatter",
-			"sqls",
+			"sqlls",
 			"staticcheck", -- go linter
 			"stylelint-lsp",
 			"stylua",
