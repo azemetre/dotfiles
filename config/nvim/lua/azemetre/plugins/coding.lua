@@ -127,7 +127,10 @@ return {
 	},
 
 	-- comments
-	{ "JoosepAlviste/nvim-ts-context-commentstring" },
+	{
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		event = "VeryLazy",
+	},
 	{
 		"echasnovski/mini.comment",
 		event = "VeryLazy",
