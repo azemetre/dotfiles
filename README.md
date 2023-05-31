@@ -49,6 +49,7 @@ question.
   - [ ] tmux
   - [ ] zshrc
 - [x] Verify if `applescripts` is needed
+- [ ] Rewrite `zsh` scripts to `go`
 - [ ] zsh config
   - [ ] Verify zsh works in multiple terminals (iterm, alacritty, terminal, etc)
   - [ ] Clean zsh scripts
