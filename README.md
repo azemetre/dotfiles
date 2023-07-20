@@ -1,5 +1,9 @@
 # Dotfiles
 
+[Since the beginning I felt your strength](https://www.youtube.com/watch?v=lqDhEaTcgYc#t=1m3s)
+
+---
+
 Used for macOS but making changes to make it more platform agnostic.
 
 ---
