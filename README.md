@@ -1,6 +1,6 @@
 # Dotfiles
 
-[Since the beginning I felt your strength](https://www.youtube.com/watch?v=lqDhEaTcgYc#t=1m3s)
+[(Since the beginning I felt your strength)](https://www.youtube.com/watch?v=lqDhEaTcgYc#t=1m3s)
 
 ---
 
@@ -24,9 +24,19 @@ How my setup looks for my daily driving:
 
 ![alpha-nvim dashboard](./docs/nvim-alpha-dashboard.png)
 
-![tmux with neovim window open on go file](./docs/go-looks.png)
+![fugitive with split pane](./docs/fugitive-with-split-pane.png)
 
-![tmux with neovim window open on rust file](./docs/rust-with-doc-hover.png)
+![function context](./docs/function-context.png)
+
+![nvim tree](./docs/nvim-tree.png)
+
+![completion menu in rust](./docs/rust-cmp.png)
+
+![hoverover docs in rust](./docs/rust-hoverover-docs.png)
+
+![telescope](./docs/telescope.png)
+
+![visual highlighing go](./docs/visual-highlighting-go.png)
 
 Currently finished the lovely book [Command Line Rust](https://www.amazon.com/Command-Line-Rust-Project-Based-Primer-Writing/dp/1098109430). Highly recommended.
 
