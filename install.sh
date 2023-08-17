@@ -247,6 +247,23 @@ setup_macos() {
     fi
 }
 
+setup_hammerspoon() {
+	# Check if the directory exists
+	if [ ! -d "$HOME/.config/hammerspoon" ]; then
+			echo "Error: Directory ~/.config/hammerspoon does not exist."
+			exit 1
+	fi
+
+	# Use the defaults command and check its return code
+	if ! defaults write org.hammerspoon.Hammerspoon MJConfigFile "$HOME/.config/hammerspoon/init.lua"; then
+			echo "Error: Failed to set the default location for Hammerspoon."
+			exit 2
+	fi
+
+	# Success message
+	echo "Default location for Hammerspoon successfully changed."
+}
+
 case "$1" in
     backup)
         backup
@@ -268,6 +285,10 @@ case "$1" in
         ;;
     macos)
         setup_macos
+				setup_hammerspoon
+        ;;
+    hammerspoon)
+				setup_hammerspoon
         ;;
     all)
         setup_symlinks
@@ -276,9 +297,10 @@ case "$1" in
         setup_shell
         setup_git
         setup_macos
+				setup_hammerspoon
         ;;
     *)
-        echo -e $"\nUsage: $(basename "$0") {backup|link|git|homebrew|shell|terminfo|macos|all}\n"
+        echo -e $"\nUsage: $(basename "$0") {backup|link|git|homebrew|shell|terminfo|macos|hammerspoon|all}\n"
         exit 1
         ;;
 esac
