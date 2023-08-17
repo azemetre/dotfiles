@@ -329,10 +329,21 @@ return {
 	},
 
 	-- todo comments
+	-- PERF:
+	-- HACK:
+	-- TODO:
+	-- FIX:
+	-- NOTE:
+	-- WARNING:
 	{
 		"folke/todo-comments.nvim",
 		cmd = { "TodoTrouble", "TodoTelescope" },
 		event = "BufReadPost",
+		opts = {
+			keywords = {
+				NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+			},
+		},
 		config = true,
         -- stylua: ignore
         keys = {
