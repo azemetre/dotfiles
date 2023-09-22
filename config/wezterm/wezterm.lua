@@ -23,7 +23,7 @@ local config = {
 		left = 0,
 		right = 0,
 		top = 0,
-		bottom = 10,
+		bottom = 0,
 	},
 	send_composed_key_when_left_alt_is_pressed = true,
 	send_composed_key_when_right_alt_is_pressed = false,
