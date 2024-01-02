@@ -2,6 +2,9 @@ local icons = require("azemetre.theme").icons
 
 return {
 	-- file explorer
+	{ "echasnovski/mini.files", version = "*" },
+
+	-- file explorer
 	{
 		"nvim-tree/nvim-tree.lua",
 		cmd = "NvimTree",

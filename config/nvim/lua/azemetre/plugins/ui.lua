@@ -536,21 +536,32 @@ return {
 	-- indent guides for Neovim
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
 		event = "BufReadPre",
-		opts = {
-			-- char = "▏",
-			char = "│",
-			filetype_exclude = {
-				"help",
-				"alpha",
-				"dashboard",
-				"neo-tree",
-				"Trouble",
-				"lazy",
-			},
-			show_trailing_blankline_indent = false,
-			show_current_context = false,
-		},
+		config = function()
+			local ibl = require("ibl")
+			ibl.setup({
+				indent = {
+					char = "|",
+				},
+				exclude = {
+					filetypes = {
+						"help",
+						"alpha",
+						"dashboard",
+						"neo-tree",
+						"lazy",
+						"Trouble",
+					},
+				},
+				whitespace = {
+					remove_blankline_trail = false,
+				},
+				scope = {
+					enabled = false,
+				},
+			})
+		end,
 	},
 
 	-- active indent guide and indent text objects
