@@ -81,3 +81,7 @@ end
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+-- plugin specific settings
+-- nvim-ts-context-commentstring
+vim.g.skip_ts_context_commentstring_module = true
