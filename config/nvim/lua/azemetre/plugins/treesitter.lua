@@ -10,7 +10,6 @@ return {
 			indent = { enable = true },
 			context_commentstring = { enable = true, enable_autocmd = false },
 			ensure_installed = {
-				"astro",
 				"bash",
 				"c",
 				"cmake",
@@ -21,7 +20,7 @@ return {
 				"gomod",
 				"html",
 				"javascript",
-				"jsdoc",
+				-- "jsdoc",
 				"json",
 				"json5",
 				"kotlin",

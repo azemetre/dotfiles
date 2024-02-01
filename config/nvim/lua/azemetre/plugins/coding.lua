@@ -3,12 +3,6 @@ return {
 	-- snippets
 	{
 		"L3MON4D3/LuaSnip",
-		dependencies = {
-			"rafamadriz/friendly-snippets",
-			config = function()
-				require("luasnip.loaders.from_vscode").lazy_load()
-			end,
-		},
 		opts = {
 			history = true,
 			delete_check_events = "TextChanged",
@@ -134,16 +128,21 @@ return {
 	{
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		event = "VeryLazy",
+		opts = {
+			enable_autocmd = false,
+		},
+		config = function(_, opts)
+			require("ts_context_commentstring").setup(opts)
+		end,
 	},
 	{
 		"echasnovski/mini.comment",
 		event = "VeryLazy",
 		opts = {
-			hooks = {
-				pre = function()
-					require("ts_context_commentstring.internal").update_commentstring({})
-				end,
-			},
+			custom_commentstring = function()
+				return require("ts_context_commentstring").calculate_commentstring()
+					or vim.bo.commentstring
+			end,
 		},
 		config = function(_, opts)
 			require("mini.comment").setup(opts)
