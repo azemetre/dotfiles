@@ -187,7 +187,6 @@ return {
 			"php-cs-fixer",
 			"php-debug-adapter",
 			"prettier",
-			"prisma-language-server",
 			"proselint",
 			"puppet-editor-services",
 			"rust-analyzer",

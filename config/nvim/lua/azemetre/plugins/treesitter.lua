@@ -13,7 +13,7 @@ return {
 				"bash",
 				"c",
 				"cmake",
-				-- "css", -- possible trojan installed, refer to \
+				"css", -- possible trojan installed, refer to \
 				-- https://github.com/tree-sitter/tree-sitter-css/issues/35
 				"dockerfile",
 				"go",
@@ -27,7 +27,6 @@ return {
 				"lua",
 				"markdown",
 				"php",
-				"prisma",
 				"python",
 				"rust",
 				"scss",
