@@ -216,9 +216,53 @@ return {
 				},
 				lsp = {
 					name = {
-						provider = "lsp_client_names",
+						provider = function()
+							local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+							if next(clients) == nil then
+								return "No LSP"
+							end
+
+							local abbreviations = {
+								lua_ls = "lua",
+								rust_analyzer = "rust",
+								["tsserver"] = "ts",
+								emmet_language_server = "emmet",
+								["awk-language-server"] = "awk",
+								["ansible-language-server"] = "ansible",
+								["bash-language-server"] = "bash",
+								["bash-debug-adapter"] = "bash-dap",
+								["chrome-debug-adapter"] = "chrome-dap",
+								["css-lsp"] = "css",
+								["dockerfile-language-server"] = "docker",
+								["elixir-ls"] = "elixir",
+								["emmet-language-server"] = "emmet",
+								["eslint-lsp"] = "eslint",
+								["firefox-debug-adapter"] = "firefox-dap",
+								["go-debug-adapter"] = "go-dap",
+								["gopls"] = "go",
+								["html-lsp"] = "html",
+								["htmx-lsp"] = "htmx",
+								["json-lsp"] = "json",
+								["ltex-ls"] = "ltex",
+								["lua-language-server"] = "lua",
+								["nginx-language-server"] = "nginx",
+								["php-debug-adapter"] = "php-dap",
+								["stylelint-lsp"] = "stylelint",
+								["svelte-language-server"] = "svelte",
+								["terraform-ls"] = "terraform",
+								["vim-language-server"] = "vim",
+								["yaml-language-server"] = "yaml",
+							}
+
+							local names = {}
+							for _, client in ipairs(clients) do
+								local name = abbreviations[client.name] or client.name
+								table.insert(names, name)
+							end
+							return icons.lsp .. " " .. table.concat(names, " ")
+						end,
 						left_sep = " ",
-						icon = icons.lsp .. " ",
+						icon = "", -- We moved the icon to the provider function
 						right_sep = " ",
 						hl = {
 							fg = colors.grey,
