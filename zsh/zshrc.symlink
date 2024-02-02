@@ -7,8 +7,7 @@ fi
 
 export ZSH=$DOTFILES/zsh
 
-source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
-
+source /usr/local/opt/powerlevel10k/share/powerlevel10k/powerlevel10k.zsh-theme
 if [[ -d $DOTFILES/zsh/functions ]]; then
     for func in $DOTFILES/zsh/functions/*(:t); autoload -U $func
 fi
