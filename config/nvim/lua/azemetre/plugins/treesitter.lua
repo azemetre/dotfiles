@@ -57,7 +57,8 @@ return {
 			-- Throttles plugin updates (may improve performance)
 			throttle = true,
 			-- How many lines the window should span. Values <= 0 mean no limit
-			max_lines = 0,
+			max_lines = 4,
+			multiline_threshold = 10,
 			show_all_context = true,
 			-- Match patterns for TS nodes. These get wrapped to match at word
 			-- boundaries.
