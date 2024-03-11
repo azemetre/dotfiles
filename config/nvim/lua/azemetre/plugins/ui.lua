@@ -765,20 +765,17 @@ return {
 		end,
 	},
 
-	-- color picker and lsp
+	-- color highlighter
 	{
-		"NvChad/nvim-colorizer.lua",
+		"brenoprata10/nvim-highlight-colors",
 		event = "VeryLazy",
 		opts = {
-			css = false,
-			hsl_fn = true,
-			rgb_fn = true,
-			css_fn = true,
+			render = "background",
+			enable_named_colors = true,
+			enable_tailwind = true,
 		},
-		-- need to create a function that passes opts to the setup for nvim-colorizer
-		-- but all follow the lazy.nvim guidelines
 		config = function(_, opts)
-			require("colorizer").setup(opts)
+			require("nvim-highlight-colors").setup(opts)
 		end,
 	},
 
