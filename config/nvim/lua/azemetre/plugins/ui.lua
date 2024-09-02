@@ -225,7 +225,7 @@ return {
 							local abbreviations = {
 								lua_ls = "lua",
 								rust_analyzer = "rust",
-								["tsserver"] = "ts",
+								["vtsls"] = "ts",
 								emmet_language_server = "emmet",
 								["awk-language-server"] = "awk",
 								["ansible-language-server"] = "ansible",
@@ -236,7 +236,6 @@ return {
 								["dockerfile-language-server"] = "docker",
 								["elixir-ls"] = "elixir",
 								["emmet-language-server"] = "emmet",
-								["eslint-lsp"] = "eslint",
 								["firefox-debug-adapter"] = "firefox-dap",
 								["go-debug-adapter"] = "go-dap",
 								["gopls"] = "go",

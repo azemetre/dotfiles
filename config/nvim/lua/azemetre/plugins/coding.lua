@@ -9,7 +9,7 @@ return {
 		},
 	       -- stylua: ignore
 	       keys = {
-	           {
+				  {
 	               "<tab>",
 	               function()
 	                   return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
@@ -19,6 +19,23 @@ return {
 	           { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
 	           { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
 	       },
+	},
+
+	{
+	  "folke/lazydev.nvim",
+	  ft = "lua", -- only load on lua files
+	  opts = {
+		 library = {
+			-- Or relative, which means they will be resolved from the plugin dir.
+			"lazy.nvim",
+			-- Only load the lazyvim library when the `LazyVim` global is found
+			{ path = "Azemetre", words = { "Azemetre" } },
+		 },
+		 -- disable when a .luarc.json file is found
+		 enabled = function(root_dir)
+			return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
+		 end,
+	  },
 	},
 
 	-- auto completion
@@ -39,8 +56,13 @@ return {
 			},
 			"zbirenbaum/copilot.lua",
 		},
-		opts = function()
+		opts = function(_, opts)
 			local cmp = require("cmp")
+			opts.sources = opts.sources or {}
+			table.insert(opts.sources, {
+			  name = "lazydev",
+			  group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+			})
 			return {
 				completion = {
 					completeopt = "menu,menuone,noinsert",
