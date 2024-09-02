@@ -258,36 +258,6 @@ return {
         },
 	},
 
-	{
-		"rmagatti/goto-preview",
-		opts = {
-			-- Width of the floating window
-			width = 120,
-			-- Height of the floating window
-			height = 15,
-			-- Border characters of the floating window
-			border = { "↖", "─", "┐", "│", "┘", "─", "└", "│" },
-			-- Bind default mappings
-			default_mappings = false,
-			-- Print debug information
-			debug = false,
-			-- 0-100 opacity level of the floating window where 100 is fully transparent.
-			opacity = nil,
-			-- Binds arrow keys to resizing the floating window.
-			resizing_mappings = false,
-			-- A function taking two arguments, a buffer and a window to be ran as a hook.
-			post_open_hook = nil,
-			-- Focus the floating window when opening it.
-			focus_on_open = true,
-			-- Dismiss the floating window when moving the cursor.
-			dismiss_on_move = false,
-			-- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
-			force_close = true,
-			-- the bufhidden option to set on the floating window. See :h bufhidden
-			bufhidden = "wipe",
-		},
-	},
-
 	-- editorconfig
 	{
 		"editorconfig/editorconfig-vim",
@@ -320,13 +290,13 @@ return {
 		keys = {
 			{
 				"<leader>xx",
-				"<cmd>TroubleToggle document_diagnostics<cr>",
+				"<cmd>Trouble diagnostics toggle<cr>",
 				desc = "Document Diagnostics (Trouble)",
 			},
 			{
-				"<leader>xw",
-				"<cmd>TroubleToggle workspace_diagnostics<cr>",
-				desc = "Workspace Diagnostics (Trouble)",
+				"<leader>xq",
+				"<cmd>Trouble quickfix toggle<cr>",
+				desc = "Quickfix (Trouble)",
 			},
 		},
 	},

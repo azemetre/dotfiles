@@ -1,5 +1,4 @@
 return {
-
 	-- tokyonight
 	{
 		"folke/tokyonight.nvim",
@@ -26,32 +25,6 @@ return {
 		dir = "~/github/oink.nvim",
 		dev = true,
 		lazy = false,
-		priority = 1000,
-	},
-
-	-- noctis
-	{
-		"talha-akram/noctis.nvim",
-		priority = 1000,
-	},
-
-	-- poimandres
-	{
-		"olivercederborg/poimandres.nvim",
-		priority = 1000,
-	},
-
-	-- nightfox
-	-- duskfox is decent looking
-	{
-		"EdenEast/nightfox.nvim",
-		priority = 1000,
-	},
-
-	-- catppuccin
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
 		priority = 1000,
 	},
 }

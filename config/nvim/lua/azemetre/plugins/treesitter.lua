@@ -11,7 +11,6 @@ return {
 			context_commentstring = { enable = true, enable_autocmd = false },
 			ensure_installed = {
 				"bash",
-				"c",
 				"cmake",
 				"css", -- possible trojan installed, refer to \
 				-- https://github.com/tree-sitter/tree-sitter-css/issues/35
@@ -23,10 +22,8 @@ return {
 				-- "jsdoc",
 				"json",
 				"json5",
-				"kotlin",
 				"lua",
 				"markdown",
-				"php",
 				"python",
 				"rust",
 				"scss",
