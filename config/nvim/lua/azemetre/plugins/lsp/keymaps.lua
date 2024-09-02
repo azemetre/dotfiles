@@ -1,115 +1,100 @@
 local M = {}
 
-function M.on_attach(client, buffer)
-	local self = M.new(client, buffer)
+---@type LazyKeysLspSpec[]|nil
+M._keys = nil
 
-	self:map("ge", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-	self:map("<leader>cl", "LspInfo", { desc = "Lsp Info" })
-	self:map(
-		"<leader>xd",
-		"Telescope diagnostics",
-		{ desc = "Telescope Diagnostics" }
-	)
-	self:map("gd", "Telescope lsp_definitions", { desc = "Goto Definition" })
-	self:map("gr", "Telescope lsp_references", { desc = "References" })
-	self:map("gD", "Telescope lsp_declarations", { desc = "Goto Declaration" })
-	self:map(
-		"gI",
-		"Telescope lsp_implementations",
-		{ desc = "Goto Implementation" }
-	)
-	self:map(
-		"gt",
-		"Telescope lsp_type_definitions",
-		{ desc = "Goto Type Definition" }
-	)
-	self:map("K", vim.lsp.buf.hover, { desc = "Hover" })
-	self:map(
-		"gK",
-		vim.lsp.buf.signature_help,
-		{ desc = "Signature Help", has = "signatureHelp" }
-	)
-	self:map("gf", "LspDiagNext")
-	self:map("gb", "LspDiagPrev")
-	self:map("ga", "LspCodeAction")
-	self:map("<Leader>a", "LspDiagLine")
-	self:map("<C-s><C-s>", "LspRestart")
-	self:map("<C-s>", "LspStart")
-	self:map("[d", M.diagnostic_goto(true), { desc = "Next Diagnostic" })
-	self:map("]d", M.diagnostic_goto(false), { desc = "Prev Diagnostic" })
-	self:map("]e", M.diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-	self:map("[e", M.diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-	self:map("]w", M.diagnostic_goto(true, "WARNING"), { desc = "Next Warning" })
-	self:map(
-		"[w",
-		M.diagnostic_goto(false, "WARNING"),
-		{ desc = "Prev Warning" }
-	)
-	self:map(
-		"<leader>ca",
-		vim.lsp.buf.code_action,
-		{ desc = "Code Action", mode = { "n", "v" }, has = "codeAction" }
-	)
+---@alias LazyKeysLspSpec LazyKeysSpec|{has?:string|string[], cond?:fun():boolean}
+---@alias LazyKeysLsp LazyKeys|{has?:string|string[], cond?:fun():boolean}
 
-	local format = require("azemetre.plugins.lsp.format").format
-	self:map(
-		"<leader>cf",
-		format,
-		{ desc = "Format Document", has = "documentFormatting" }
-	)
-	self:map(
-		"<leader>cf",
-		format,
-		{ desc = "Format Range", mode = "v", has = "documentRangeFormatting" }
-	)
-	self:map(
-		"<leader>cr",
-		M.rename,
-		{ expr = true, desc = "Rename", has = "rename" }
-	)
+---@return LazyKeysLspSpec[]
+function M.get()
+  if M._keys then
+    return M._keys
+  end
+    -- stylua: ignore
+    M._keys =  {
+      { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
+      { "ge", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+      { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
+      { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
+      { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
+      { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
+      { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+      { "K", vim.lsp.buf.hover, desc = "Hover" },
+      { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+      { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+      { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+      { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
+      { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
+      { "<leader>cR", Azemetre.lsp.rename_file, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
+      { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
+      { "<leader>cA", Azemetre.lsp.action.source, desc = "Source Action", has = "codeAction" },
+      { "]]", function() Azemetre.lsp.words.jump(vim.v.count1) end, has = "documentHighlight",
+        desc = "Next Reference", cond = function() return Azemetre.lsp.words.enabled end },
+      { "[[", function() Azemetre.lsp.words.jump(-vim.v.count1) end, has = "documentHighlight",
+        desc = "Prev Reference", cond = function() return Azemetre.lsp.words.enabled end },
+      { "<a-n>", function() Azemetre.lsp.words.jump(vim.v.count1, true) end, has = "documentHighlight",
+        desc = "Next Reference", cond = function() return Azemetre.lsp.words.enabled end },
+      { "<a-p>", function() Azemetre.lsp.words.jump(-vim.v.count1, true) end, has = "documentHighlight",
+        desc = "Prev Reference", cond = function() return Azemetre.lsp.words.enabled end },
+    }
+
+  return M._keys
 end
 
-function M.new(client, buffer)
-	return setmetatable({ client = client, buffer = buffer }, { __index = M })
+---@param method string|string[]
+function M.has(buffer, method)
+  if type(method) == "table" then
+    for _, m in ipairs(method) do
+      if M.has(buffer, m) then
+        return true
+      end
+    end
+    return false
+  end
+  method = method:find("/") and method or "textDocument/" .. method
+  local clients = Azemetre.lsp.get_clients({ bufnr = buffer })
+  for _, client in ipairs(clients) do
+    if client.supports_method(method) then
+      return true
+    end
+  end
+  return false
 end
 
-function M:has(cap)
-	return self.client.server_capabilities[cap .. "Provider"]
+---@return LazyKeysLsp[]
+function M.resolve(buffer)
+  local Keys = require("lazy.core.handler.keys")
+  if not Keys.resolve then
+    return {}
+  end
+  local spec = M.get()
+  local opts = Azemetre.opts("nvim-lspconfig")
+  local clients = Azemetre.lsp.get_clients({ bufnr = buffer })
+  for _, client in ipairs(clients) do
+    local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
+    vim.list_extend(spec, maps)
+  end
+  return Keys.resolve(spec)
 end
 
-function M:map(lhs, rhs, opts)
-	opts = opts or {}
-	if opts.has and not self:has(opts.has) then
-		return
-	end
-	vim.keymap.set(
-		opts.mode or "n",
-		lhs,
-		type(rhs) == "string" and ("<cmd>%s<cr>"):format(rhs) or rhs,
-		---@diagnostic disable-next-line: no-unknown
-		{
-			silent = true,
-			buffer = self.buffer,
-			expr = opts.expr,
-			desc = opts.desc,
-		}
-	)
-end
+function M.on_attach(_, buffer)
+  local Keys = require("lazy.core.handler.keys")
+  local keymaps = M.resolve(buffer)
 
-function M.rename()
-	if pcall(require, "inc_rename") then
-		return ":IncRename " .. vim.fn.expand("<cword>")
-	else
-		vim.lsp.buf.rename()
-	end
-end
+  for _, keys in pairs(keymaps) do
+    local has = not keys.has or M.has(buffer, keys.has)
+    local cond = not (keys.cond == false or ((type(keys.cond) == "function") and not keys.cond()))
 
-function M.diagnostic_goto(next, severity)
-	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-	severity = severity and vim.diagnostic.severity[severity] or nil
-	return function()
-		go({ severity = severity })
-	end
+    if has and cond then
+      local opts = Keys.opts(keys)
+      opts.cond = nil
+      opts.has = nil
+      opts.silent = opts.silent ~= false
+      opts.buffer = buffer
+      vim.keymap.set(keys.mode or "n", keys.lhs, keys.rhs, opts)
+    end
+  end
 end
 
 return M
