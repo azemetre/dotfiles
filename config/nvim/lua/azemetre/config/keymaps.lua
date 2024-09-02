@@ -1,6 +1,4 @@
--- This file is automatically loaded by lazyvim.plugins.config
-
-local util = require("azemetre.util")
+-- This file is automatically loaded by azemetre.plugins.config
 
 -- FIXME: document all keymaps
 
@@ -89,10 +87,19 @@ vim.keymap.set(
 -- stylua: ignore start
 
 -- toggle options
-vim.keymap.set("n", "<leader>tf", require("azemetre.plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
-vim.keymap.set("n", "<leader>ts", function() util.toggle("spell") end, { desc = "Toggle Spelling" })
-vim.keymap.set("n", "<leader>tw", function() util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
-vim.keymap.set("n", "<leader>tn", function() util.toggle("relativenumber", true) util.toggle("number") end, { desc = "Toggle Line Numbers" })
+Azemetre.toggle.map("<leader>uf", Azemetre.toggle.format())
+Azemetre.toggle.map("<leader>uF", Azemetre.toggle.format(true))
+Azemetre.toggle.map("<leader>us", Azemetre.toggle("spell", { name = "Spelling" }))
+Azemetre.toggle.map("<leader>uw", Azemetre.toggle("wrap", { name = "Wrap" }))
+Azemetre.toggle.map("<leader>uL", Azemetre.toggle("relativenumber", { name = "Relative Number" }))
+Azemetre.toggle.map("<leader>ud", Azemetre.toggle.diagnostics)
+Azemetre.toggle.map("<leader>ul", Azemetre.toggle.number)
+Azemetre.toggle.map( "<leader>uc", Azemetre.toggle("conceallevel", { values = { 0, vim.o.conceallevel > 0 and vim.o.conceallevel or 2 } }))
+Azemetre.toggle.map("<leader>uT", Azemetre.toggle.treesitter)
+Azemetre.toggle.map("<leader>ub", Azemetre.toggle("background", { values = { "light", "dark" }, name = "Background" }))
+if vim.lsp.inlay_hint then
+  Azemetre.toggle.map("<leader>uh", Azemetre.toggle.inlay_hints)
+end
 
 -- quit
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
