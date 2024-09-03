@@ -22,7 +22,7 @@ M.picker = nil
 
 ---@param picker LazyPicker
 function M.register(picker)
-	-- this only happens when using :LazyExtras
+	-- this only happens when using :AzemetreExtras
 	-- so allow to get the full spec
 	if vim.v.vim_did_enter == 1 then
 		return true
