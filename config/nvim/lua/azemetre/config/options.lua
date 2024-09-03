@@ -74,15 +74,11 @@ vim.opt.foldnestmax = 10 -- deepest fold is 10 levels
 vim.opt.foldenable = false -- don't fold by default
 vim.opt.foldlevel = 1
 
-if vim.fn.has("nvim-0.10") == 1 then
-	vim.opt.smoothscroll = true
-	vim.opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
-	vim.opt.foldmethod = "expr"
-	vim.opt.foldtext = ""
-else
-	vim.opt.foldmethod = "indent"
-	vim.opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
-end
+-- requires neovim >=v0.10.0
+vim.opt.smoothscroll = true
+vim.opt.foldexpr = "v:lua.require'azemetre.util'.ui.foldexpr()"
+vim.opt.foldmethod = "expr"
+vim.opt.foldtext = ""
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
