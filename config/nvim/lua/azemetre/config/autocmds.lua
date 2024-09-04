@@ -80,3 +80,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		end
 	end,
 })
+
+-- calls formatter on write `:w`
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	callback = function(args)
+		require("azemetre.util.format").format({ buf = args.buf })
+	end,
+})
