@@ -22,20 +22,20 @@ return {
 	},
 
 	{
-	  "folke/lazydev.nvim",
-	  ft = "lua", -- only load on lua files
-	  opts = {
-		 library = {
-			-- Or relative, which means they will be resolved from the plugin dir.
-			"lazy.nvim",
-			-- Only load the lazyvim library when the `LazyVim` global is found
-			{ path = "Azemetre", words = { "Azemetre" } },
-		 },
-		 -- disable when a .luarc.json file is found
-		 enabled = function(root_dir)
-			return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
-		 end,
-	  },
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			library = {
+				-- Or relative, which means they will be resolved from the plugin dir.
+				"lazy.nvim",
+				-- Only load the lazyvim library when the `LazyVim` global is found
+				{ path = "Azemetre", words = { "Azemetre" } },
+			},
+			-- disable when a .luarc.json file is found
+			enabled = function(root_dir)
+				return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
+			end,
+		},
 	},
 
 	-- auto completion
@@ -60,8 +60,8 @@ return {
 			local cmp = require("cmp")
 			opts.sources = opts.sources or {}
 			table.insert(opts.sources, {
-			  name = "lazydev",
-			  group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+				name = "lazydev",
+				group_index = 0, -- set group index to 0 to skip loading LuaLS completions
 			})
 			return {
 				completion = {
@@ -96,7 +96,7 @@ return {
 				}),
 				formatting = {
 					format = function(_, item)
-						local icons = require("azemetre.config.settings").icons.kinds
+						local icons = Azemetre.config.icons.kinds
 						if icons[item.kind] then
 							item.kind = icons[item.kind] .. item.kind
 						end
