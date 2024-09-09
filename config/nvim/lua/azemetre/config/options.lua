@@ -8,7 +8,7 @@ vim.opt.autowrite = true -- enable auto write
 vim.opt.backspace = { "indent", "eol,start" } -- make backspace behave in a sane manner
 vim.opt.clipboard = { "unnamed", "unnamedplus" } -- sync with system clipboard
 vim.opt.mouse = "a" -- set mouse mode to all modes
-vim.opt.history = 1000 -- store the last 1000 commands entered
+vim.opt.history = 10000 -- store the last 10000 commands entered
 vim.opt.swapfile = false -- don't create swap files
 
 -- search
