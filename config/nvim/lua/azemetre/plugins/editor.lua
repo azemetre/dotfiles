@@ -332,10 +332,11 @@ return {
 	-- create, move, delete files as buffers
 	{
 		"stevearc/oil.nvim",
+		---@module 'oil'
+		---@type oil.SetupOpts
 		opts = {},
-		depedencies = {
-			"echasnovski/mini.icons",
-		},
+		-- Optional dependencies
+		dependencies = { { "echasnovski/mini.icons", opts = {} } },
 	},
 
 	-- sleuth

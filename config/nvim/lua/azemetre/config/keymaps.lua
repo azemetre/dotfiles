@@ -101,6 +101,9 @@ if vim.lsp.inlay_hint then
   Azemetre.toggle.map("<leader>uh", Azemetre.toggle.inlay_hints)
 end
 
+-- oil
+vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
 -- quit
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 
