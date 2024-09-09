@@ -89,10 +89,10 @@ return {
 	-- search/replace in multiple files
 	{
 		"windwp/nvim-spectre",
-        -- stylua: ignore
-        keys = {
-            { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
-        },
+		-- stylua: ignore
+		keys = {
+			{ "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+		},
 	},
 
 	-- fuzzy finder
@@ -111,6 +111,7 @@ return {
 			{ "<leader>fo", "<cmd>Telescope oldfiles<cr>" },
 			{ "<leader>fg", "<cmd>Telescope live_grep<cr>" },
 			{ "<leader>fb", "<cmd>Telescope buffers<cr>" },
+			{ "<leader>fx", "<cmd>Telescope lsp_document_symbols<cr>" },
 			{ "<leader>fh", "<cmd>Telescope help_tags<cr>" },
 		},
 		config = function()
@@ -251,11 +252,11 @@ return {
 		config = function(_, opts)
 			require("illuminate").configure(opts)
 		end,
-        -- stylua: ignore
-        keys = {
-            { "]]", function() require("illuminate").goto_next_reference(false) end, desc = "Next Reference", },
-            { "[[", function() require("illuminate").goto_prev_reference(false) end, desc = "Prev Reference" },
-        },
+		-- stylua: ignore
+		keys = {
+			{ "]]", function() require("illuminate").goto_next_reference(false) end, desc = "Next Reference", },
+			{ "[[", function() require("illuminate").goto_prev_reference(false) end, desc = "Prev Reference" },
+		},
 	},
 
 	-- editorconfig
@@ -267,11 +268,11 @@ return {
 	-- buffer remove
 	{
 		"echasnovski/mini.bufremove",
-        -- stylua: ignore
-        keys = {
-            { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
-            { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
-        },
+		-- stylua: ignore
+		keys = {
+			{ "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
+			{ "<leader>bD", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
+		},
 	},
 
 	-- move any selection, in any directiond
@@ -318,14 +319,23 @@ return {
 			},
 		},
 		config = true,
-        -- stylua: ignore
-        keys = {
-            { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-            { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-            { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo Trouble" },
-            { "<leader>xtt", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo Trouble" },
-            { "<leader>xT", "<cmd>TodoTelescope<cr>", desc = "Todo Telescope" },
-        },
+		-- stylua: ignore
+		keys = {
+			{ "]t",          function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+			{ "[t",          function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+			{ "<leader>xt",  "<cmd>TodoTrouble<cr>",                              desc = "Todo Trouble" },
+			{ "<leader>xtt", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",      desc = "Todo Trouble" },
+			{ "<leader>xT",  "<cmd>TodoTelescope<cr>",                            desc = "Todo Telescope" },
+		},
+	},
+
+	-- create, move, delete files as buffers
+	{
+		"stevearc/oil.nvim",
+		opts = {},
+		depedencies = {
+			"echasnovski/mini.icons",
+		},
 	},
 
 	-- sleuth
