@@ -41,7 +41,7 @@ return {
 	-- auto completion
 	{
 		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
+		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
@@ -55,6 +55,7 @@ return {
 				},
 			},
 			"zbirenbaum/copilot.lua",
+			"hrsh7th/cmp-cmdline",
 		},
 		opts = function(_, opts)
 			local cmp = require("cmp")
@@ -62,6 +63,9 @@ return {
 			table.insert(opts.sources, {
 				name = "lazydev",
 				group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+			})
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
 			})
 			return {
 				completion = {
@@ -75,7 +79,13 @@ return {
 				mapping = cmp.mapping.preset.insert({
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
+					["<C-n>"] = cmp.mapping.select_next_item({
+						behavior = cmp.SelectBehavior.Insert,
+					}),
 					["<C-j>"] = cmp.mapping.select_next_item({
+						behavior = cmp.SelectBehavior.Insert,
+					}),
+					["<C-p>"] = cmp.mapping.select_prev_item({
 						behavior = cmp.SelectBehavior.Insert,
 					}),
 					["<C-k>"] = cmp.mapping.select_prev_item({
@@ -93,6 +103,12 @@ return {
 					{ name = "luasnip", priority = 750 },
 					{ name = "path", priority = 500 },
 					{ name = "buffer", priority = 250 },
+					{ name = "cmd", priority = 250 },
+					{
+						name = "cmdline",
+						priority = 125,
+						option = { ignore_cmds = { "Man", "!" } },
+					},
 				}),
 				formatting = {
 					format = function(_, item)
