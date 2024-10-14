@@ -64,8 +64,24 @@ return {
 				name = "lazydev",
 				group_index = 0, -- set group index to 0 to skip loading LuaLS completions
 			})
+			cmp.setup.cmdline("/", {
+				mapping = cmp.mapping.preset.cmdline(),
+				-- define sources in `setup.cmdline` to avoid loading them in other modes
+				sources = {
+					{ name = "buffer" },
+				},
+			})
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
+				-- define sources in `setup.cmdline` to avoid loading them in other modes
+				sources = cmp.config.sources({ { name = "path" } }, {
+					{
+						name = "cmdline",
+						option = {
+							ignore_cmds = { "Man", "!", "w", "qa", "wa", "wall", "wq" },
+						},
+					},
+				}),
 			})
 			return {
 				completion = {
@@ -104,11 +120,6 @@ return {
 					{ name = "path", priority = 500 },
 					{ name = "buffer", priority = 250 },
 					{ name = "cmd", priority = 250 },
-					{
-						name = "cmdline",
-						priority = 125,
-						option = { ignore_cmds = { "Man", "!" } },
-					},
 				}),
 				formatting = {
 					format = function(_, item)
