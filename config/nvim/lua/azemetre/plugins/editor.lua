@@ -353,9 +353,45 @@ return {
 				-- height = nil,
 				border = "rounded",
 			},
+			cleanup_delay_ms = false,
 		},
 		-- Optional dependencies
 		dependencies = { { "echasnovski/mini.icons", opts = {} } },
+	},
+
+	-- folding
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = {
+			"kevinhwang91/promise-async",
+			"neovim/nvim-lspconfig",
+		},
+		event = "BufReadPost",
+		opts = {
+			provider_selector = function(bufnr, filetype, buftype)
+				return { "lsp", "indent" }
+			end,
+			-- You can add more UFO-specific options here
+			-- For example:
+			-- open_fold_hl_timeout = 150,
+			-- close_fold_kinds = { "imports", "comment" },
+			-- preview = {
+			--     win_config = {
+			--         border = { "", "─", "", "", "", "─", "", "" },
+			--         winhighlight = "Normal:Folded",
+			--         winblend = 0,
+			--     },
+			-- },
+		},
+		config = function(_, opts)
+			-- Fold options
+			vim.o.foldcolumn = "1"
+			vim.o.foldlevel = 99 -- Using ufo provider need a large value
+			vim.o.foldlevelstart = 99
+			vim.o.foldenable = true
+
+			require("ufo").setup(opts)
+		end,
 	},
 
 	-- sleuth
