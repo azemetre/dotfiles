@@ -11,7 +11,7 @@ vim.keymap.set(
 )
 vim.keymap.set(
 	{ "n" },
-	"<cr>",
+	"<leader><cr>",
 	"<cmd>noh<cr>",
 	{ desc = "Enter and clear hlsearch" }
 )
@@ -79,7 +79,7 @@ vim.keymap.set(
 )
 vim.keymap.set(
 	"n",
-	"<leader>xq",
+	"<leader>xf",
 	"<cmd>copen<cr>",
 	{ desc = "Open Quickfix List" }
 )
@@ -103,6 +103,20 @@ end
 
 -- oil
 vim.keymap.set("n", "<leader>-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
+
+-- ufo - folding
+vim.keymap.set("n", "zR", require("ufo").openAllFolds, { desc = "Open All Folds" })
+vim.keymap.set("n", "zM", require("ufo").closeAllFolds, { desc = "Close All Folds" })
+vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds, { desc = "Open Folds Except" })
+vim.keymap.set("n", "zm", require("ufo").closeFoldsWith, { desc = "Close Folds With" })
+
+-- Option to see the folded lines count
+vim.keymap.set("n", "K", function()
+    local winid = require("ufo").peekFoldedLinesUnderCursor()
+    if not winid then
+        vim.lsp.buf.hover()
+    end
+end)
 
 -- quit
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
