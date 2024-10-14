@@ -12,6 +12,8 @@ vim.opt.history = 10000 -- store the last 10000 commands entered
 vim.opt.swapfile = false -- don't create swap files
 
 -- search
+vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
+vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.ignorecase = true -- case insensitive searching
 vim.opt.smartcase = true -- case-sensitive if expresson contains a capital letter
 vim.opt.hlsearch = true -- highlight search results
