@@ -12,8 +12,7 @@ return {
 			ensure_installed = {
 				"bash",
 				"cmake",
-				"css", -- possible trojan installed, refer to \
-				-- https://github.com/tree-sitter/tree-sitter-css/issues/35
+				"css",
 				"dockerfile",
 				"go",
 				"gomod",
@@ -30,6 +29,7 @@ return {
 				"svelte",
 				"toml",
 				"typescript",
+				"tsx",
 				"vim",
 			},
 		},
