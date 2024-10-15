@@ -189,10 +189,14 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-alias l="ls -lah ${colorflag}"
-alias la="ls -AF ${colorflag}"
-alias ll="ls -lFh ${colorflag}"
-alias lld="ls -l | grep ^d"
+alias e="eza -la ${colorflag}"
+alias eT="eza -laT ${colorflag}"
+alias l="eza -la ${colorflag}"
+alias lt="eza -laT ${colorflag}"
+alias T="eza -T"
+alias l="eza -la --blocks size:human ${colorflag}"
+alias la="eza -a --classify ${colorflag}"
+alias ll="eza -l --classify --blocks size:human ${colorflag}"
 alias rmf="rm -rf"
 
 # Helpers
