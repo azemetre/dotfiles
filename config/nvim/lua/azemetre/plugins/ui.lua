@@ -217,14 +217,14 @@ return {
 				lsp = {
 					name = {
 						provider = function()
-							local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+							local clients = vim.lsp.get_clients({ bufnr = 0 })
 							if next(clients) == nil then
 								return "No LSP"
 							end
 
 							local abbreviations = {
 								lua_ls = "lua",
-								rust_analyzer = "rust",
+								-- rust_analyzer = "rust",
 								["vtsls"] = "ts",
 								emmet_language_server = "emmet",
 								["awk-language-server"] = "awk",

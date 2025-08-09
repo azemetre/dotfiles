@@ -45,63 +45,64 @@ return {
 		end,
 	},
 
-	{
-		"nvim-treesitter/nvim-treesitter-context",
-		event = "VeryLazy",
-		opts = {
-			-- Enable this plugin (Can be enabled/disabled later via commands)
-			enable = true,
-			-- Throttles plugin updates (may improve performance)
-			throttle = true,
-			-- How many lines the window should span. Values <= 0 mean no limit
-			max_lines = 4,
-			multiline_threshold = 10,
-			show_all_context = true,
-			-- Match patterns for TS nodes. These get wrapped to match at word
-			-- boundaries.
-			patterns = {
-				-- For all filetypes
-				-- Note that setting an entry here replaces all other patterns
-				-- for this entry. By setting the 'default' entry below, you
-				-- can control which nodes you want to appear in the context
-				-- window.
-				default = {
-					"class",
-					"function",
-					"method",
-					"for",
-					"while",
-					"if",
-					"switch",
-					"case",
-					"interface",
-					"struct",
-					"enum",
-				},
-				json = {
-					"pair",
-				},
-				markdown = {
-					"section",
-				},
-				rust = {
-					"loop_expression",
-					"impl_item",
-				},
-				terraform = {
-					"block",
-					"object_elem",
-					"attribute",
-				},
-				typescript = {
-					"class_declaration",
-					"abstract_class_declaration",
-					"else_clause",
-				},
-				yaml = {
-					"block_mapping_pair",
-				},
-			},
-		},
-	},
+	-- NOTE: disabling for now to test update errors
+	-- {
+	-- 	"nvim-treesitter/nvim-treesitter-context",
+	-- 	event = "VeryLazy",
+	-- 	opts = {
+	-- 		-- Enable this plugin (Can be enabled/disabled later via commands)
+	-- 		enable = true,
+	-- 		-- Throttles plugin updates (may improve performance)
+	-- 		throttle = true,
+	-- 		-- How many lines the window should span. Values <= 0 mean no limit
+	-- 		max_lines = 4,
+	-- 		multiline_threshold = 10,
+	-- 		show_all_context = true,
+	-- 		-- Match patterns for TS nodes. These get wrapped to match at word
+	-- 		-- boundaries.
+	-- 		patterns = {
+	-- 			-- For all filetypes
+	-- 			-- Note that setting an entry here replaces all other patterns
+	-- 			-- for this entry. By setting the 'default' entry below, you
+	-- 			-- can control which nodes you want to appear in the context
+	-- 			-- window.
+	-- 			default = {
+	-- 				"class",
+	-- 				"function",
+	-- 				"method",
+	-- 				"for",
+	-- 				"while",
+	-- 				"if",
+	-- 				"switch",
+	-- 				"case",
+	-- 				"interface",
+	-- 				"struct",
+	-- 				"enum",
+	-- 			},
+	-- 			json = {
+	-- 				"pair",
+	-- 			},
+	-- 			markdown = {
+	-- 				"section",
+	-- 			},
+	-- 			rust = {
+	-- 				"loop_expression",
+	-- 				"impl_item",
+	-- 			},
+	-- 			terraform = {
+	-- 				"block",
+	-- 				"object_elem",
+	-- 				"attribute",
+	-- 			},
+	-- 			typescript = {
+	-- 				"class_declaration",
+	-- 				"abstract_class_declaration",
+	-- 				"else_clause",
+	-- 			},
+	-- 			yaml = {
+	-- 				"block_mapping_pair",
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
 }

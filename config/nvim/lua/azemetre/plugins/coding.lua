@@ -38,6 +38,9 @@ return {
 		},
 	},
 
+	-- `vim.uv` typings
+	{ "Bilal2453/luvit-meta", lazy = true },
+
 	-- auto completion
 	{
 		"hrsh7th/nvim-cmp",
@@ -47,14 +50,14 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"saadparwaiz1/cmp_luasnip",
-			{
-				"zbirenbaum/copilot-cmp",
-				config = true,
-				dependencies = {
-					{ "zbirenbaum/copilot.lua", config = true },
-				},
-			},
-			"zbirenbaum/copilot.lua",
+			-- {
+			-- 	"zbirenbaum/copilot-cmp",
+			-- 	config = true,
+			-- 	dependencies = {
+			-- 		{ "zbirenbaum/copilot.lua", config = true },
+			-- 	},
+			-- },
+			-- "zbirenbaum/copilot.lua",
 			"hrsh7th/cmp-cmdline",
 		},
 		opts = function(_, opts)

@@ -2,7 +2,7 @@ local icons = require("azemetre.theme").icons
 
 return {
 	-- file explorer
-	{ "echasnovski/mini.files", version = "*" },
+	-- { "echasnovski/mini.files", version = "*" },
 
 	-- file explorer
 	{
@@ -321,11 +321,11 @@ return {
 		config = true,
 		-- stylua: ignore
 		keys = {
-			{ "]t",          function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-			{ "[t",          function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-			{ "<leader>xt",  "<cmd>TodoTrouble<cr>",                              desc = "Todo Trouble" },
-			{ "<leader>xtt", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",      desc = "Todo Trouble" },
-			{ "<leader>xT",  "<cmd>TodoTelescope<cr>",                            desc = "Todo Telescope" },
+			{ "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+			{ "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+			{ "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo Trouble" },
+			{ "<leader>xtt", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo Trouble" },
+			{ "<leader>xT", "<cmd>TodoTelescope<cr>", desc = "Todo Telescope" },
 		},
 	},
 
@@ -335,6 +335,8 @@ return {
 		---@module 'oil'
 		---@type oil.SetupOpts
 		opts = {
+			-- adds oil buffer to jumplist
+			cleanup_delay_ms = false,
 			columns = {
 				"icon",
 				-- "permissions",
@@ -353,7 +355,6 @@ return {
 				-- height = nil,
 				border = "rounded",
 			},
-			cleanup_delay_ms = false,
 		},
 		-- Optional dependencies
 		dependencies = { { "echasnovski/mini.icons", opts = {} } },
@@ -379,7 +380,7 @@ return {
 				truncate
 			)
 				local newVirtText = {}
-				local suffix = ("\t⤵ %d lines folded ⤵"):format(endLnum - lnum)
+				local suffix = ("\t↳ %d lines folded ↳"):format(endLnum - lnum)
 				local sufWidth = vim.fn.strdisplaywidth(suffix)
 				local targetWidth = width - sufWidth
 				local curWidth = 0
@@ -421,5 +422,22 @@ return {
 	-- adjusts tabs and shiftwidth
 	{
 		"tpope/vim-sleuth",
+	},
+
+	-- laundry - folding clothes
+	{
+		dir = "~/github/laundry.nvim",
+		dev = true,
+		priority = 1000,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+		event = { "BufReadPost", "BufNewFile" },
+		---@module 'laundry'
+		---@type LaundryConfig
+		opts = {
+			auto_fold = true,
+			min_fold_lines = 20,
+		},
 	},
 }

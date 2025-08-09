@@ -260,9 +260,7 @@ return {
 			local have_mason, mlsp = pcall(require, "mason-lspconfig")
 			local all_mslp_servers = {}
 			if have_mason then
-				all_mslp_servers = vim.tbl_keys(
-					require("mason-lspconfig.mappings.server").lspconfig_to_package
-				)
+				all_mslp_servers = mlsp.get_available_servers()
 			end
 
 			local ensure_installed = {} ---@type string[]
@@ -306,6 +304,7 @@ return {
 		opts_extend = { "ensure_installed" },
 		opts = {
 			ensure_installed = {
+				"astro-language-server",
 				"awk-language-server",
 				"bash-language-server",
 				"biome", -- JS linter, formatter
@@ -328,7 +327,7 @@ return {
 				"lua-language-server",
 				"marksman",
 				"nginx-language-server",
-				"rust-analyzer",
+				-- "rust-analyzer",
 				"shellcheck",
 				"shfmt",
 				"sql-formatter",
