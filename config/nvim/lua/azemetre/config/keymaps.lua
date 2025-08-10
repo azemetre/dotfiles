@@ -1,4 +1,4 @@
--- This file is automatically loaded by azemetre.plugins.config
+-- This file is automatically loaded by azemetre.plugins.config,
 
 -- FIXME: document all keymaps
 
@@ -61,15 +61,17 @@ vim.keymap.set(
 	{ "v", "o" },
 	"J",
 	":m '>+1<CR>gv=gv",
-	{ desc = "Move line down" }
+	{ desc = "Move visual selection down" }
 )
-vim.keymap.set({ "v", "o" }, "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
+vim.keymap.set(
+	{ "v", "o" },
+	"K",
+	":m '<-2<CR>gv=gv",
+	{ desc = "Move visual selection up" }
+)
 
 -- lazy
 vim.keymap.set("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
-
--- new file
-vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
 vim.keymap.set(
 	"n",
@@ -87,19 +89,20 @@ vim.keymap.set(
 -- stylua: ignore start
 
 -- toggle options
-Azemetre.toggle.map("<leader>uf", Azemetre.toggle.format())
-Azemetre.toggle.map("<leader>uF", Azemetre.toggle.format(true))
-Azemetre.toggle.map("<leader>us", Azemetre.toggle("spell", { name = "Spelling" }))
-Azemetre.toggle.map("<leader>uw", Azemetre.toggle("wrap", { name = "Wrap" }))
-Azemetre.toggle.map("<leader>uL", Azemetre.toggle("relativenumber", { name = "Relative Number" }))
-Azemetre.toggle.map("<leader>ud", Azemetre.toggle.diagnostics)
-Azemetre.toggle.map("<leader>ul", Azemetre.toggle.number)
-Azemetre.toggle.map( "<leader>uc", Azemetre.toggle("conceallevel", { values = { 0, vim.o.conceallevel > 0 and vim.o.conceallevel or 2 } }))
-Azemetre.toggle.map("<leader>uT", Azemetre.toggle.treesitter)
-Azemetre.toggle.map("<leader>ub", Azemetre.toggle("background", { values = { "light", "dark" }, name = "Background" }))
-if vim.lsp.inlay_hint then
-  Azemetre.toggle.map("<leader>uh", Azemetre.toggle.inlay_hints)
-end
+-- vim.keymap.set("n", "<leader>uf", function() Snacks.toggle.option("autoformat", { name = "Format on Save" }) end, { desc = "Toggle Format" })
+-- vim.keymap.set("n", "<leader>uF", function() Azemetre.format() end, { desc = "Toggle Format (buffer)" })
+-- vim.keymap.set("n", "<leader>us", function() Snacks.toggle.option("spell", { name = "Spelling" }) end, { desc = "Toggle Spelling" })
+-- vim.keymap.set("n", "<leader>uw", function() Snacks.toggle.option("wrap", { name = "Wrap" }) end, { desc = "Toggle Line Wrap" })
+-- vim.keymap.set("n", "<leader>uL", function() Snacks.toggle.option("relativenumber", { name = "Relative Number" }) end, { desc = "Toggle Relative Number" })
+-- vim.keymap.set("n", "<leader>ud", function() Snacks.toggle.diagnostics() end, { desc = "Toggle Diagnostics" })
+-- vim.keymap.set("n", "<leader>ul", function() Snacks.toggle.line_number() end, { desc = "Toggle Line Numbers" })
+-- vim.keymap.set("n", "<leader>uT", function() Snacks.toggle.treesitter() end, { desc = "Toggle Treesitter" })
+-- vim.keymap.set("n", "<leader>ub", function()
+--   Snacks.toggle.option("background", {
+--     values = { "light", "dark" },
+--     name = "Background"
+--   })
+-- end, { desc = "Toggle Background" })
 
 -- oil
 vim.keymap.set("n", "<leader>-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
@@ -122,9 +125,7 @@ end)
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 
 -- highlights under cursor
-if vim.fn.has("nvim-0.9.0") == 1 then
-    vim.keymap.set("n", "<leader>hl", vim.show_pos, { desc = "Highlight Groups at cursor" })
-end
+vim.keymap.set("n", "<leader>hl", vim.show_pos, { desc = "Highlight Groups at cursor" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b]", "<cmd>:BufferLineCycleNext<CR>", { desc = "Next Buffer" })

@@ -144,26 +144,6 @@ function M.format(opts)
 	end
 end
 
-function M.health()
-	local Config = require("lazy.core.config")
-	local has_plugin = Config.spec.plugins["none-ls.nvim"]
-	local has_extra = vim.tbl_contains(
-		Config.spec.modules,
-		"azemetre.plugins.extras.lsp.none-ls"
-	)
-	if has_plugin and not has_extra then
-		Azemetre.warn({
-			"`conform.nvim` and `nvim-lint` are now the default formatters and linters in Azemetre.",
-			"",
-			"You can use those plugins together with `none-ls.nvim`,",
-			"but you need to enable the `azemetre.plugins.extras.lsp.none-ls` extra,",
-			"for formatting to work correctly.",
-			"",
-			"In case you no longer want to use `none-ls.nvim`, just remove the spec from your config.",
-		})
-	end
-end
-
 function M.setup()
 	M.health()
 

@@ -37,7 +37,7 @@ function M.get()
         desc = "Next Reference", cond = function() return Azemetre.lsp.words.enabled end },
       { "<a-p>", function() Azemetre.lsp.words.jump(-vim.v.count1, true) end, has = "documentHighlight",
         desc = "Prev Reference", cond = function() return Azemetre.lsp.words.enabled end },
-    }
+	 }
 
 	return M._keys
 end

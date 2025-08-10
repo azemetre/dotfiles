@@ -3,6 +3,7 @@ return {
 	-- create, move, delete files as buffers
 	{
 		"stevearc/oil.nvim",
+		event = "VeryLazy",
 		---@module 'oil'
 		---@type oil.SetupOpts
 		opts = {
@@ -17,7 +18,7 @@ return {
 			-- Configuration for the floating window in oil.open_float
 			float = {
 				padding = 2,
-				max_width = 60,
+				max_width = 75,
 				min_width = 40,
 				max_height = 40,
 				-- min_height = {5, 0.1} means "the greater of 5 columns or 10% of total"

@@ -4,6 +4,7 @@ return {
 	-- file explorer
 	{
 		"nvim-tree/nvim-tree.lua",
+		event = "VeryLazy",
 		cmd = "NvimTree",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",

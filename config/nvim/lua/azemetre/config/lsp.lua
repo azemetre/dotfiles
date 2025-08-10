@@ -1,31 +1,8 @@
--- lsp
-
---------------------------------------------------------------------------------
-
 -- See https://gpanders.com/blog/whats-new-in-neovim-0-11/ for a nice overview
 -- of how the lsp setup works in neovim 0.11+.
 -- This actually just enables the lsp servers.
--- The configuration is found in the lsp folder inside the nvim config folder,
--- so in ~.config/lsp/lua_ls.lua for lua_ls, for example.
-
-vim.lsp.enable({
-	"ansiblels",
-	"astro",
-	"awk_ls",
-	"basedpython",
-	"bashls",
-	"biome", -- js/ts formatter, linter
-	"cssls",
-	"docker_compose_language_service",
-	"dockerls",
-	"gopls",
-	"html",
-	"lua_ls",
-	"postgres_lsp",
-	"stylelint_lsp",
-	"vtsls", -- typescript lsp
-	"zls", -- zig lsp
-})
+local custom_icons = require("azemetre.theme").icons
+local blink = require("blink.cmp")
 
 -- LSP Keymaps following the same format as your keymaps file
 local lsp_keymaps = {
@@ -82,6 +59,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- Setup capabilities with safe blink.cmp integration
+-- This is copied straight from blink
+-- https://cmp.saghen.dev/installation#merging-lsp-capabilities
 local capabilities = {
 	textDocument = {
 		foldingRange = {
@@ -91,29 +70,7 @@ local capabilities = {
 	},
 }
 
--- Safely try to load blink.cmp capabilities
-local ok, blink_cmp = pcall(require, "blink.cmp")
-if ok and blink_cmp.get_lsp_capabilities then
-	capabilities = blink_cmp.get_lsp_capabilities(capabilities)
-else
-	-- Try alternative API for full blink.nvim
-	local ok2, blink = pcall(require, "blink")
-	if ok2 and blink.cmp and blink.cmp.get_lsp_capabilities then
-		capabilities = blink.cmp.get_lsp_capabilities(capabilities)
-	else
-		-- Fallback: manually add completion capabilities if blink isn't available
-		capabilities.textDocument.completion = {
-			completionItem = {
-				snippetSupport = true,
-				resolveSupport = {
-					properties = { "documentation", "detail", "additionalTextEdits" },
-				},
-			},
-		}
-	end
-end
-
-local custom_icons = require("azemetre.theme").icons
+capabilities = blink.get_lsp_capabilities(capabilities)
 
 -- Diagnostics configuration
 vim.diagnostic.config({
@@ -135,4 +92,23 @@ vim.diagnostic.config({
 vim.lsp.config("*", {
 	capabilities = capabilities,
 	root_markers = { ".git" },
+})
+
+vim.lsp.enable({
+	"ansiblels",
+	"astro",
+	"awk_ls",
+	"basedpython",
+	"bashls",
+	"biome", -- js/ts formatter, linter
+	"cssls",
+	"docker_compose_language_service",
+	"dockerls",
+	"gopls",
+	"html",
+	"lua_ls",
+	"postgres_lsp",
+	"stylelint_lsp",
+	"vtsls", -- typescript lsp
+	"zls", -- zig lsp
 })
