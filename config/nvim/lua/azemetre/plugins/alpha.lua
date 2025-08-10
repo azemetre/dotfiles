@@ -68,15 +68,11 @@ return {
 			-- dashboard.section.header.val = trogdor.val
 			dashboard.section.header.val = neovim.val
 			dashboard.section.buttons.val = {
-				dashboard.button(
-					"f",
-					" " .. " Find file",
-					":Telescope find_files <CR>"
-				),
+				dashboard.button("f", " " .. " Find file", ":FzfLua files <CR>"),
 				dashboard.button(
 					"g",
 					" " .. " Find text",
-					":Telescope live_grep <CR>"
+					":FzfLua live_grep <CR>"
 				),
 				dashboard.button(
 					"s",
