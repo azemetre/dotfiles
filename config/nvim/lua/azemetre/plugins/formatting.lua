@@ -4,26 +4,17 @@ local M = {}
 function M.setup(_, opts)
 	for _, key in ipairs({ "format_on_save", "format_after_save" }) do
 		if opts[key] then
-			local msg =
-				"Don't set `opts.%s` for `conform.nvim`.\n**Azemetre** will use the conform formatter automatically"
-			Azemetre.warn(msg:format(key))
 			---@diagnostic disable-next-line: no-unknown
 			opts[key] = nil
 		end
-	end
-	---@diagnostic disable-next-line: undefined-field
-	if opts.format then
-		Azemetre.warn(
-			"**conform.nvim** `opts.format` is deprecated. Please use `opts.default_format_opts` instead."
-		)
 	end
 	require("conform").setup(opts)
 end
 
 return {
+	-- #core #lsp #linting
 	{
 		"stevearc/conform.nvim",
-		dependencies = { "mason.nvim" },
 		lazy = true,
 		cmd = "ConformInfo",
 		keys = {
@@ -40,34 +31,38 @@ return {
 			},
 		},
 		init = function()
-			-- Install the conform formatter on VeryLazy
-			Azemetre.on_very_lazy(function()
-				Azemetre.format.register({
-					name = "conform.nvim",
-					priority = 100,
-					primary = true,
-					format = function(buf)
-						require("conform").format({ bufnr = buf })
-					end,
-					sources = function(buf)
-						local ret = require("conform").list_formatters(buf)
-						---@param v conform.FormatterInfo
-						return vim.tbl_map(function(v)
-							return v.name
-						end, ret)
-					end,
-				})
-			end)
+			-- Set up autocommand for formatting on save
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "VeryLazy",
+				callback = function()
+					-- Set up format on save
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						group = vim.api.nvim_create_augroup(
+							"ConformFormat",
+							{ clear = true }
+						),
+						callback = function(args)
+							require("conform").format({
+								bufnr = args.buf,
+								timeout_ms = 3000,
+								quiet = false,
+								lsp_format = "fallback",
+							})
+						end,
+					})
+
+					-- Create manual format command
+					vim.api.nvim_create_user_command("Format", function()
+						require("conform").format({
+							timeout_ms = 3000,
+							quiet = false,
+							lsp_format = "fallback",
+						})
+					end, { desc = "Format current buffer with `conform.nvim`" })
+				end,
+			})
 		end,
 		opts = function()
-			local plugin = require("lazy.core.config").plugins["conform.nvim"]
-			if plugin.config ~= M.setup then
-				Azemetre.error({
-					"Don't set `plugin.config` for `conform.nvim`.\n",
-					"This will break **Azemetre** formatting.\n",
-					"Please refer to the docs at https://www.lazyvim.org/plugins/formatting",
-				}, { title = "Azemetre" })
-			end
 			---@type conform.setupOpts
 			local opts = {
 				default_format_opts = {

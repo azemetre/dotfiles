@@ -8,28 +8,39 @@ return {
 		},
 		cmd = "FzfLua",
 		keys = {
-			{ "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find Files" },
-			{ "<leader>fo", "<cmd>FzfLua oldfiles<cr>", desc = "Recent Files" },
-			{ "<leader>fg", "<cmd>FzfLua live_grep<cr>", desc = "Live Grep" },
-			{ "<leader>fb", "<cmd>FzfLua buffers<cr>", desc = "Buffers" },
+			{ "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Telescope Files" },
+			{ "<leader>fg", "<cmd>FzfLua live_grep<cr>", desc = "Telescope Grep" },
+			{
+				"<leader>fb",
+				"<cmd>FzfLua buffers<cr>",
+				desc = "Telescope Buffers",
+			},
 			{
 				"<leader>fk",
 				"<cmd>FzfLua keymaps<cr>",
-				desc = "Keymaps && Hotkeys",
+				desc = "Telescope keymaps",
 			},
 			{
 				"<leader>fx",
 				"<cmd>FzfLua lsp_document_symbols<cr>",
-				desc = "Document Symbols",
+				desc = "Telescope Document Symbols",
 			},
-			{ "<leader>fh", "<cmd>FzfLua help_tags<cr>", desc = "Help Tags" },
+			{
+				"<leader>fh",
+				"<cmd>FzfLua help_tags<cr>",
+				desc = "Telescope Help Tags",
+			},
 
 			-- Git integration shortcuts
-			{ "<leader>fgc", "<cmd>FzfLua git_commits<cr>", desc = "Git Commits" },
 			{
-				"<leader>fgb",
+				"<leader>fG",
+				"<cmd>FzfLua git_commits<cr>",
+				desc = "Telescope Git Commits",
+			},
+			{
+				"<leader>fB",
 				"<cmd>FzfLua git_branches<cr>",
-				desc = "Git Branches",
+				desc = "Telescope Git Branches",
 			},
 		},
 		config = function()
@@ -62,6 +73,7 @@ return {
 			fzf.setup({
 				-- Global configuration
 				winopts = {
+					backdrop = false,
 					height = 0.94,
 					width = 0.86,
 					row = 0.5,
@@ -78,19 +90,16 @@ return {
 					},
 					-- Preview window configuration
 					preview = {
-						-- Vertical layout with preview at bottom, input at top
 						layout = "vertical",
-						vertical = "down:60%", -- Changed from "up:60%" to "down:60%"
-						-- Use bat for syntax highlighting
+						vertical = "down:60%",
 						bat = {
 							cmd = "bat",
 							args = "--color=always --style=numbers,changes",
-							theme = "ansi", -- or your preferred bat theme
+							theme = "ansi",
 						},
 					},
 				},
 
-				-- Key mappings
 				keymap = {
 					builtin = {
 						["<Esc>"] = "hide",
@@ -107,14 +116,12 @@ return {
 					},
 				},
 
-				-- Use ripgrep for live_grep
 				grep = {
 					rg_opts = "--color=never --no-heading --with-filename --line-number --column --smart-case --trim",
 					-- Add file ignore patterns
 					-- Note: fzf-lua handles this through fd/rg directly
 				},
 
-				-- Files configuration
 				files = {
 					cmd = "fd --type f --strip-cwd-prefix --hidden",
 					-- File ignore patterns are handled by fd's .gitignore and .fdignore
@@ -123,14 +130,12 @@ return {
 					fd_opts = "--color=never --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor",
 				},
 
-				-- LSP configuration
 				lsp = {
 					symbols = {
-						symbol_style = 1, -- Show kind + name
+						symbol_style = 1,
 					},
 				},
 
-				-- Git configuration
 				git = {
 					commits = {
 						cmd = "git log --color=never --pretty=format:'%C(yellow)%h%C(reset) %C(cyan)%ad%C(reset) %C(green)%an%C(reset) %s' --date=short",
@@ -148,12 +153,6 @@ return {
 						cmd = "git status --porcelain=v1",
 						preview = "git diff --color=always {-1}",
 					},
-				},
-
-				-- Oldfiles configuration
-				oldfiles = {
-					-- Include current session files
-					include_current_session = true,
 				},
 
 				-- Buffers configuration
