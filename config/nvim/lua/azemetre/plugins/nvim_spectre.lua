@@ -1,10 +1,9 @@
+-- #ux #editor
+-- search/replace in multiple files
 return {
-	-- search/replace in multiple files
-	{
-		"windwp/nvim-spectre",
+	"windwp/nvim-spectre",
 		-- stylua: ignore
 		keys = {
 			{ "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
 		},
-	},
 }

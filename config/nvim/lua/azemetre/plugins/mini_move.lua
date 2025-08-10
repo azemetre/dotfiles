@@ -1,6 +1,5 @@
+-- #editor #vim-motion
+-- move any selection, in any directiond
 return {
-	-- move any selection, in any directiond
-	{
-		"echasnovski/mini.move",
-	},
+	"echasnovski/mini.move",
 }

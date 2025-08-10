@@ -1,3 +1,4 @@
+-- #ux #editor #rust #lsp #language
 return {
 	{
 		"mrcjkb/rustaceanvim",

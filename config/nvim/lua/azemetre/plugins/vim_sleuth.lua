@@ -1,8 +1,6 @@
+-- #vim #tpope #keyboard #editor
+-- sleuth
+-- adjusts tabs and shiftwidth
 return {
-	-- #vim #tpope #keyboard #editor
-	-- sleuth
-	-- adjusts tabs and shiftwidth
-	{
-		"tpope/vim-sleuth",
-	},
+	"tpope/vim-sleuth",
 }

@@ -1,3 +1,5 @@
+-- #colorscheme #theme #color
+-- for housing multiple color schemes
 return {
 	-- tokyonight
 	{

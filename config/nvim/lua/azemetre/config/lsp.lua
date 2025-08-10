@@ -30,6 +30,91 @@ local lsp_keymaps = {
 		mode = { "n", "x" },
 		desc = "Code Action",
 	},
+	{
+		"gr",
+		function()
+			local fzf_ok, fzf = pcall(require, "fzf-lua")
+			if fzf_ok then
+				fzf.lsp_references()
+			else
+				vim.lsp.buf.references()
+			end
+		end,
+		desc = "References",
+	},
+	{
+		"gi",
+		function()
+			local fzf_ok, fzf = pcall(require, "fzf-lua")
+			if fzf_ok then
+				fzf.lsp_implementations()
+			else
+				vim.lsp.buf.implementation()
+			end
+		end,
+		desc = "Goto Implementation",
+	},
+	{
+		"gy",
+		function()
+			local fzf_ok, fzf = pcall(require, "fzf-lua")
+			if fzf_ok then
+				fzf.lsp_typedefs()
+			else
+				vim.lsp.buf.type_definition()
+			end
+		end,
+		desc = "Goto Type Definition",
+	},
+	{ "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+
+	-- Actions
+	{
+		"<leader>fv",
+		function()
+			vim.lsp.buf.format({ async = true })
+		end,
+		mode = { "n", "x" },
+		desc = "Format",
+	},
+	{
+		"<leader>ca",
+		function()
+			local fzf_ok, fzf = pcall(require, "fzf-lua")
+			if fzf_ok then
+				fzf.lsp_code_actions()
+			else
+				vim.lsp.buf.code_action()
+			end
+		end,
+		mode = { "n", "x" },
+		desc = "Code Action",
+	},
+
+	{
+		"<leader>cd",
+		function()
+			local fzf_ok, fzf = pcall(require, "fzf-lua")
+			if fzf_ok then
+				fzf.diagnostics_document()
+			else
+				vim.diagnostic.setloclist()
+			end
+		end,
+		desc = "Document Diagnostics",
+	},
+	{
+		"<leader>cD",
+		function()
+			local fzf_ok, fzf = pcall(require, "fzf-lua")
+			if fzf_ok then
+				fzf.diagnostics_workspace()
+			else
+				vim.diagnostic.setqflist()
+			end
+		end,
+		desc = "Workspace Diagnostics",
+	},
 }
 
 -- Function to set up keymaps for a buffer

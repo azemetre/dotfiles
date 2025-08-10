@@ -1,7 +1,6 @@
+-- #editor #format #file-type
+-- editorconfig
 return {
-	-- editorconfig
-	{
-		"editorconfig/editorconfig-vim",
-		event = "BufReadPre",
-	},
+	"editorconfig/editorconfig-vim",
+	event = "BufReadPre",
 }

@@ -1,4 +1,5 @@
+-- #core #editor #ui
+-- ui components
 return {
-	-- ui components
 	"MunifTanjim/nui.nvim",
 }

@@ -1,4 +1,3 @@
-return {
-	-- `vim.uv` typings
-	{ "Bilal2453/luvit-meta", lazy = true },
-}
+-- #lua #types
+-- `vim.uv` typings
+return { "Bilal2453/luvit-meta", lazy = true }

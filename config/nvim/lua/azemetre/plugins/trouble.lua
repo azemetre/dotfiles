@@ -1,23 +1,22 @@
+-- #editor #search
+-- better diagnostics list and others
 return {
-	-- better diagnostics list and others
-	{
-		"folke/trouble.nvim",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
+	"folke/trouble.nvim",
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+	},
+	cmd = { "TroubleToggle", "Trouble" },
+	opts = { use_diagnostic_signs = true },
+	keys = {
+		{
+			"<leader>xx",
+			"<cmd>Trouble diagnostics toggle<cr>",
+			desc = "Document Diagnostics (Trouble)",
 		},
-		cmd = { "TroubleToggle", "Trouble" },
-		opts = { use_diagnostic_signs = true },
-		keys = {
-			{
-				"<leader>xx",
-				"<cmd>Trouble diagnostics toggle<cr>",
-				desc = "Document Diagnostics (Trouble)",
-			},
-			{
-				"<leader>xq",
-				"<cmd>Trouble quickfix toggle<cr>",
-				desc = "Quickfix (Trouble)",
-			},
+		{
+			"<leader>xq",
+			"<cmd>Trouble quickfix toggle<cr>",
+			desc = "Quickfix (Trouble)",
 		},
 	},
 }

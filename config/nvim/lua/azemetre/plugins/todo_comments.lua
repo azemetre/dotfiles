@@ -1,21 +1,20 @@
+-- #todo #comments #editor #ui
+-- PERF:
+-- HACK:
+-- TODO:
+-- FIX:
+-- NOTE:
+-- WARNING:
 return {
-	-- #tag: todo, comments, editor, ui
-	-- PERF:
-	-- HACK:
-	-- TODO:
-	-- FIX:
-	-- NOTE:
-	-- WARNING:
-	{
-		"folke/todo-comments.nvim",
-		cmd = { "TodoTrouble", "TodoTelescope" },
-		event = "BufReadPost",
-		opts = {
-			keywords = {
-				NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-			},
+	"folke/todo-comments.nvim",
+	cmd = { "TodoTrouble", "TodoTelescope" },
+	event = "BufReadPost",
+	opts = {
+		keywords = {
+			NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
 		},
-		config = true,
+	},
+	config = true,
 		-- stylua: ignore
 		keys = {
 			{ "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
@@ -26,5 +25,4 @@ return {
 			{ "<leader>xd", "<cmd>FzfLua diagnostics_document<cr>", desc = "Document Diagnostics" },
 			{ "<leader>xw", "<cmd>FzfLua diagnostics_workspace<cr>", desc = "Workspace Diagnostics" },
 		},
-	},
 }
