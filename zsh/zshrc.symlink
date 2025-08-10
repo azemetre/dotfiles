@@ -35,11 +35,11 @@ COLOR_YELLOW="\e[1;33m"
 COLOR_WHITE="\e[1;37m"
 COLOR_NONE="\e[0m"
 
-if [ -z "$TMUX" ]; then
-    export TERM=xterm-256color-italic
-else
-    export TERM=tmux-256color
-fi
+# if [ -z "$TMUX" ]; then
+#     export TERM=xterm-256color-italic
+# else
+#     export TERM=tmux-256color
+# fi
 
 
 # initialize autocomplete
@@ -189,14 +189,13 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-alias e="eza -la ${colorflag}"
-alias eT="eza -laT ${colorflag}"
-alias l="eza -la ${colorflag}"
-alias lt="eza -laT ${colorflag}"
-alias T="eza -T"
-alias l="eza -la --blocks size:human ${colorflag}"
-alias la="eza -a --classify ${colorflag}"
-alias ll="eza -l --classify --blocks size:human ${colorflag}"
+alias e="eza -la --group-directories-first --blocksize"
+alias eT="eza -laT --group-directories-first --blocksize"
+alias l="eza -la --group-directories-first --blocksize"
+alias lt="eza -laT --group-directories-first --blocksize"
+alias T="eza -T --blocksize"
+alias ll="eza -l --group-directories-first --git --time-style=long-iso --blocksize"
+alias la="eza -la --classify --blocksize"
 alias rmf="rm -rf"
 
 # Helpers
@@ -243,8 +242,12 @@ alias dot='cd ~/github/dotfiles'
 alias ideas='vim ~/azemetre-docs/projects-todo.md'
 alias idea='vim ~/azemetre-docs/projects-todo.md'
 alias docs='cd ~/azemetre-docs/'
+alias video='cd ~/video-assets/'
 
 source "$DOTFILES/zsh/utils.zsh"
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -257,3 +260,5 @@ export NVM_DIR="$HOME/.nvm"
 
 # Language PATHS
 export PATH=$PATH:$(go env GOPATH)/bin
+
+. "$HOME/.local/bin/env"
