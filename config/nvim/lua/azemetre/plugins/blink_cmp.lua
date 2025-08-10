@@ -27,8 +27,7 @@ return {
 			["<c-j>"] = { "select_next", "fallback" },
 
 			-- selection
-			["<c-cr>"] = { "accept", "fallback" },
-			["<c-c>"] = { "accept", "fallback" },
+			["<c-space>"] = { "accept", "fallback" },
 			["<c-y>"] = { "accept", "fallback" },
 			["<c-e>"] = { "cancel", "fallback" },
 			["<c-x>"] = { "cancel", "fallback" },
@@ -43,7 +42,8 @@ return {
 			["<C-u>"] = { "scroll_documentation_up", "fallback" },
 
 			-- show completion menu
-			["<c-space>"] = { "show", "fallback" },
+			["<c-o>"] = { "show", "fallback" },
+			["<c-h>"] = { "show", "fallback" },
 		},
 		cmdline = {
 			keymap = {
@@ -92,18 +92,6 @@ return {
 				auto_brackets = {
 					enabled = true,
 				},
-			},
-		},
-
-		-- Signature help window styling
-		signature = {
-			enabled = true,
-			window = {
-				border = "rounded",
-				winblend = 0,
-				winhighlight = "Normal:BlinkCmpSignatureHelp,FloatBorder:BlinkCmpSignatureHelpBorder",
-				max_width = 80,
-				max_height = 10,
 			},
 		},
 

@@ -155,9 +155,9 @@ return {
 					{
 						"diff",
 						symbols = {
-							added = icons.added or "+ ",
-							modified = icons.modified or "~ ",
-							removed = icons.removed or "- ",
+							added = icons.added .. " ",
+							modified = icons.modified .. " ",
+							removed = icons.deleted .. " ",
 						},
 						diff_color = {
 							added = { fg = colors.green },
@@ -166,7 +166,6 @@ return {
 						},
 					},
 				},
-				-- Right side
 				lualine_x = {
 					{
 						function()
@@ -215,7 +214,7 @@ return {
 					{
 						function()
 							return icons.bsd
-						end, -- Empty component for the right side indicator
+						end,
 						color = function()
 							local mode_colors = {
 								n = colors.violet,
