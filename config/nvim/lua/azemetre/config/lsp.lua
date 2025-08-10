@@ -40,7 +40,7 @@ local lsp_keymaps = {
 	{ "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help" },
 	{ "gc", vim.lsp.buf.rename, desc = "Rename" },
 	{
-		"<F3>",
+		"<leader>fv",
 		function()
 			vim.lsp.buf.format({ async = true })
 		end,
@@ -48,7 +48,7 @@ local lsp_keymaps = {
 		desc = "Format",
 	},
 	{
-		"<F4>",
+		"<leader>ca",
 		vim.lsp.buf.code_action,
 		mode = { "n", "x" },
 		desc = "Code Action",
