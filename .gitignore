@@ -13,3 +13,7 @@ vim/vim.symlink/spell/
 vim/vim.symlink/plugged/
 
 Brewfile.lock.json
+
+# ignore actual binaries
+bin/.local/bin/uv
+bin/.local/bin/uvx
