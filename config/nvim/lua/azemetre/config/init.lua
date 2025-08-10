@@ -164,7 +164,6 @@ M.json = {
 	path = vim.g.azemetre_json or vim.fn.stdpath("config") .. "/azemetre.json",
 	data = {
 		version = nil, ---@type string?
-		extras = {}, ---@type string[]
 	},
 }
 
@@ -216,10 +215,6 @@ function M.setup(opts)
 
 			Azemetre.format.setup()
 			Azemetre.root.setup()
-
-			vim.api.nvim_create_user_command("AzemetreExtras", function()
-				Azemetre.extras.show()
-			end, { desc = "Manage Azemetre extras" })
 
 			vim.api.nvim_create_user_command("LazyHealth", function()
 				vim.cmd([[Lazy! load all]])

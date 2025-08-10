@@ -4,3 +4,4 @@ _G.config_namespace = "azemetre"
 
 -- require(config_namespace .. ".util")
 require("azemetre.config.lazy")
+require("azemetre.config.lsp")

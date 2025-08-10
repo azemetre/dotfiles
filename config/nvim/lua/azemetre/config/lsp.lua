@@ -1,0 +1,138 @@
+-- lsp
+
+--------------------------------------------------------------------------------
+
+-- See https://gpanders.com/blog/whats-new-in-neovim-0-11/ for a nice overview
+-- of how the lsp setup works in neovim 0.11+.
+-- This actually just enables the lsp servers.
+-- The configuration is found in the lsp folder inside the nvim config folder,
+-- so in ~.config/lsp/lua_ls.lua for lua_ls, for example.
+
+vim.lsp.enable({
+	"ansiblels",
+	"astro",
+	"awk_ls",
+	"basedpython",
+	"bashls",
+	"biome", -- js/ts formatter, linter
+	"cssls",
+	"docker_compose_language_service",
+	"dockerls",
+	"gopls",
+	"html",
+	"lua_ls",
+	"postgres_lsp",
+	"stylelint_lsp",
+	"vtsls", -- typescript lsp
+	"zls", -- zig lsp
+})
+
+-- LSP Keymaps following the same format as your keymaps file
+local lsp_keymaps = {
+	{ "ge", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+	{ "gd", vim.lsp.buf.definition, desc = "Goto Definition" },
+	{ "gr", vim.lsp.buf.references, desc = "References" },
+	{ "gi", vim.lsp.buf.implementation, desc = "Goto Implementation" },
+	{ "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
+	{ "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+	{ "K", vim.lsp.buf.hover, desc = "Hover" },
+	{ "gK", vim.lsp.buf.signature_help, desc = "Signature Help" },
+	{ "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help" },
+	{ "gc", vim.lsp.buf.rename, desc = "Rename" },
+	{
+		"<F3>",
+		function()
+			vim.lsp.buf.format({ async = true })
+		end,
+		mode = { "n", "x" },
+		desc = "Format",
+	},
+	{
+		"<F4>",
+		vim.lsp.buf.code_action,
+		mode = { "n", "x" },
+		desc = "Code Action",
+	},
+}
+
+-- Function to set up keymaps for a buffer
+local function setup_lsp_keymaps(buffer)
+	for _, keymap in ipairs(lsp_keymaps) do
+		local opts = {
+			buffer = buffer,
+			desc = keymap.desc,
+			silent = true,
+		}
+
+		local mode = keymap.mode or "n"
+		local lhs = keymap[1]
+		local rhs = keymap[2]
+
+		vim.keymap.set(mode, lhs, rhs, opts)
+	end
+end
+
+-- This is where you enable features that only work
+-- if there is a language server active in the file
+vim.api.nvim_create_autocmd("LspAttach", {
+	desc = "LSP actions",
+	callback = function(event)
+		setup_lsp_keymaps(event.buf)
+	end,
+})
+
+-- Setup capabilities with safe blink.cmp integration
+local capabilities = {
+	textDocument = {
+		foldingRange = {
+			dynamicRegistration = false,
+			lineFoldingOnly = true,
+		},
+	},
+}
+
+-- Safely try to load blink.cmp capabilities
+local ok, blink_cmp = pcall(require, "blink.cmp")
+if ok and blink_cmp.get_lsp_capabilities then
+	capabilities = blink_cmp.get_lsp_capabilities(capabilities)
+else
+	-- Try alternative API for full blink.nvim
+	local ok2, blink = pcall(require, "blink")
+	if ok2 and blink.cmp and blink.cmp.get_lsp_capabilities then
+		capabilities = blink.cmp.get_lsp_capabilities(capabilities)
+	else
+		-- Fallback: manually add completion capabilities if blink isn't available
+		capabilities.textDocument.completion = {
+			completionItem = {
+				snippetSupport = true,
+				resolveSupport = {
+					properties = { "documentation", "detail", "additionalTextEdits" },
+				},
+			},
+		}
+	end
+end
+
+local custom_icons = require("azemetre.theme").icons
+
+-- Diagnostics configuration
+vim.diagnostic.config({
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = custom_icons.error,
+			[vim.diagnostic.severity.WARN] = custom_icons.warning,
+			[vim.diagnostic.severity.INFO] = custom_icons.info,
+			[vim.diagnostic.severity.HINT] = custom_icons.hint,
+		},
+	},
+	underline = true,
+	severity_sort = true,
+	update_in_insert = false,
+	virtual_lines = false,
+})
+
+-- Setup language servers.
+vim.lsp.config("*", {
+	capabilities = capabilities,
+	root_markers = { ".git" },
+})

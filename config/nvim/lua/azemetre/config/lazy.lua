@@ -33,9 +33,6 @@ require("lazy").setup({
 	spec = {
 		-- import your plugins
 		{ import = "azemetre.plugins" },
-		{ import = "azemetre.plugins.extras.dap.core" },
-		{ import = "azemetre.plugins.extras.test.core" },
-		{ import = "azemetre.plugins.extras.lang" },
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- automatically check for plugin updates

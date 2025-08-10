@@ -9,7 +9,6 @@ local AzemetreUtil = require("lazy.core.util")
 ---@field toggle azemetre.util.toggle
 ---@field format azemetre.util.format
 ---@field plugin azemetre.util.plugin
----@field extras azemetre.util.extras
 ---@field inject azemetre.util.inject
 ---@field news azemetre.util.news
 ---@field json azemetre.util.json
@@ -72,14 +71,6 @@ end
 ---@param plugin string
 function M.has(plugin)
 	return M.get_plugin(plugin) ~= nil
-end
-
----@param extra string
-function M.has_extra(extra)
-	local Config = require("azemetre.config")
-	local modname = "azemetre.plugins.extras." .. extra
-	return vim.tbl_contains(require("lazy.core.config").spec.modules, modname)
-		or vim.tbl_contains(Config.json.data.extras, modname)
 end
 
 ---@param fn fun()
