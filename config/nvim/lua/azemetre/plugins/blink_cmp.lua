@@ -76,7 +76,7 @@ return {
 				winblend = 0, -- Transparency (0-100)
 				winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
 				-- Window size
-				max_height = 10,
+				max_height = 20,
 				min_width = 15,
 				-- Scrollbar
 				scrollbar = true,

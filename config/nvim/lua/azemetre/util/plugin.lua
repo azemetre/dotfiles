@@ -24,21 +24,9 @@ function M.save_core()
 end
 
 function M.setup()
-	M.fix_imports()
 	M.fix_renames()
 	M.lazy_file()
-	table.insert(package.loaders, function(module)
-		if M.deprecated_modules[module] then
-			Azemetre.warn(
-				("`%s` is no longer included by default in **Azemetre**.\nPlease install the `%s` extra if you still want to use it."):format(
-					module,
-					M.deprecated_modules[module]
-				),
-				{ title = "Azemetre" }
-			)
-			return function() end
-		end
-	end)
+	table.insert(package.loaders)
 end
 
 function M.extra_idx(name)

@@ -1,4 +1,5 @@
 _G.Azemetre = require("azemetre.util")
+local snacks = require("azemetre.plugins.snacks")
 
 ---@class AzemetreConfig: AzemetreOptions
 local M = {}
@@ -167,25 +168,6 @@ M.json = {
 	},
 }
 
-function M.json.load()
-	local f = io.open(M.json.path, "r")
-	if f then
-		local data = f:read("*a")
-		f:close()
-		local ok, json = pcall(
-			vim.json.decode,
-			data,
-			{ luanil = { object = true, array = true } }
-		)
-		if ok then
-			M.json.data = vim.tbl_deep_extend("force", M.json.data, json or {})
-			if M.json.data.version ~= M.json.version then
-				Azemetre.json.migrate()
-			end
-		end
-	end
-end
-
 ---@type AzemetreOptions
 local options
 local lazy_clipboard
@@ -212,60 +194,8 @@ function M.setup(opts)
 			if lazy_clipboard ~= nil then
 				vim.opt.clipboard = lazy_clipboard
 			end
-
-			Azemetre.format.setup()
-			Azemetre.root.setup()
-
-			vim.api.nvim_create_user_command("LazyHealth", function()
-				vim.cmd([[Lazy! load all]])
-				vim.cmd([[checkhealth]])
-			end, { desc = "Load all plugins and run :checkhealth" })
-
-			local health = require("lazy.health")
-			vim.list_extend(health.valid, {
-				"recommended",
-				"desc",
-				"vscode",
-			})
 		end,
 	})
-
-	Azemetre.track("colorscheme")
-	Azemetre.try(function()
-		if type(M.colorscheme) == "function" then
-			M.colorscheme()
-		else
-			vim.cmd.colorscheme(M.colorscheme)
-		end
-	end, {
-		msg = "Could not load your colorscheme",
-		on_error = function(msg)
-			Azemetre.error(msg)
-			vim.cmd.colorscheme("habamax")
-		end,
-	})
-	Azemetre.track()
-end
-
----@param buf? number
----@return string[]?
-function M.get_kind_filter(buf)
-	buf = (buf == nil or buf == 0) and vim.api.nvim_get_current_buf() or buf
-	local ft = vim.bo[buf].filetype
-	if M.kind_filter == false then
-		return
-	end
-	if M.kind_filter[ft] == false then
-		return
-	end
-	if type(M.kind_filter[ft]) == "table" then
-		return M.kind_filter[ft]
-	end
-	---@diagnostic disable-next-line: return-type-mismatch
-	return type(M.kind_filter) == "table"
-			and type(M.kind_filter.default) == "table"
-			and M.kind_filter.default
-		or nil
 end
 
 ---@param name "autocmds" | "options" | "keymaps"
@@ -305,25 +235,10 @@ function M.init()
 		vim.opt.rtp:append(plugin.dir)
 	end
 
-	package.preload["azemetre.plugins.lsp.format"] = function()
-		Azemetre.deprecate(
-			[[require("azemetre.plugins.lsp.format")]],
-			[[Azemetre.format]]
-		)
-		return Azemetre.format
-	end
-
 	-- load options here, before lazy init while sourcing plugin modules
 	-- this is needed to make sure options will be correctly applied
 	-- after installing missing plugins
 	M.load("options")
-
-	if vim.g.deprecation_warnings == false then
-		vim.deprecate = function() end
-	end
-
-	Azemetre.plugin.setup()
-	M.json.load()
 end
 
 setmetatable(M, {

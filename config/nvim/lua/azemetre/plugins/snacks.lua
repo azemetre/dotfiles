@@ -6,17 +6,20 @@ return {
 	---@type snacks.Config
 	opts = {
 		bigfile = { enabled = true },
-		dashboard = { enabled = false },
-		explorer = { enabled = false },
-		indent = { enabled = false },
 		input = { enabled = true },
 		quickfile = { enabled = true },
 		scope = { enabled = true },
 		words = { enabled = true },
-		notifier = { enabled = false },
+		notifier = { enabled = true },
+		image = { enabled = false },
+		dashboard = { enabled = false },
+		terminal = { enabled = false },
+		explorer = { enabled = false },
+		indent = { enabled = false },
 		picker = { enabled = false },
 		statuscolumn = { enabled = false },
 		scroll = { enabled = false },
+		lazygit = { enabled = false },
 		styles = {
 			notification = {
 				-- wo = { wrap = true } -- Wrap notifications

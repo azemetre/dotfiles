@@ -1,3 +1,5 @@
+local snacks = require("azemetre.plugins.snacks")
+
 -- #editor #core #lint #lsp
 return {
 	"mfussenegger/nvim-lint",
@@ -82,7 +84,7 @@ return {
 			names = vim.tbl_filter(function(name)
 				local linter = lint.linters[name]
 				if not linter then
-					Azemetre.warn(
+					snacks.notify.warn(
 						"Linter not found: " .. name,
 						{ title = "nvim-lint" }
 					)

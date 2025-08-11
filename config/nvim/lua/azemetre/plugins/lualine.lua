@@ -9,7 +9,6 @@ return {
 		local colors = theme.colors
 		local icons = theme.icons
 
-		-- Custom theme matching your feline colors
 		local custom_theme = {
 			normal = {
 				a = { fg = colors.violet, bg = colors.bg, gui = "bold" },
@@ -30,7 +29,6 @@ return {
 			},
 		}
 
-		-- Custom components
 		local function mode_with_icon()
 			return icons.ghost .. " " .. require("lualine.utils.mode").get_mode()
 		end
