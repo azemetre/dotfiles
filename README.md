@@ -52,9 +52,9 @@ question.
   - [x] Move from `packer.nvim` to `lazy.nvim`
   - [ ] List current installed plugins with their purpose
   - [ ] Setup DAP for various languages
-  - [ ] Fix `null-ls` issues for:
+  - [x] Fix `null-ls` issues for:
     - [x] prettier
-    - [ ] lua
+    - [x] lua
     - [x] gopls
   - [ ] Fit Trogdor the Burninator into `alpha-nvim`
 - [ ] `Brewfile` cleanup and add comments
@@ -136,7 +136,33 @@ ZSH is configured in the `zshrc.symlink` file, which will be symlinked to the ho
 - Setup zplug plugin manager for zsh plugins and installed them.
 - source a `~/.localrc` if it exists so that additional configurations can be made that won't be kept track of in this dotfiles repo. This is good for things like API keys, etc.
 - Add the `~/bin` and `$DOTFILES/bin` directories to the path
-- And more...
+
+## Neovim Setup
+
+This instance of dotfiles does not use mason to manage LSPs. Various package
+managers handle this. Will need to create a script to act as a "manager" to
+LSPs.
+
+Here are the following LSPs that are needed to use these dot files correctly:
+
+```text
+# npm management
+npm i -g vscode-langservers-extracted
+npm i -g @postgrestools/postgrestools
+npm install -g @biomejs/biome
+npm install -g @astrojs/language-server
+npm i -g bash-language-server
+npm install -g @microsoft/compose-language-service
+npm install -g @vtsls/language-server
+
+# go management
+go install github.com/docker/docker-language-server/cmd/docker-language-server@latest
+
+# brew management
+brew install lua-language-server
+brew install zig
+brew install zls
+```
 
 ### Prompt
 
@@ -174,10 +200,10 @@ If a `package.json` file or a `node_modules` directory exists in the current wor
 
 [Neovim](https://neovim.io/) is a fork and drop-in replacement for vim. in most cases, you would not notice a difference between the two, other than Neovim allows plugins to run asynchronously so that they do not freeze the editor, which is the main reason I have switched over to it. Vim and Neovim both use Vimscript and most plugins will work in both (all of the plugins I use do work in both Vim and Neovim). For this reason, they share the same configuration files in this setup. Neovim uses the [XDG base directory specification](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html) which means it won't look for a `.vimrc` in your home directory. Instead, its configuration looks like the following:
 
-|                         | Vim        | Neovim                    |
-| ----------------------- | ---------- | ------------------------- |
-| Main Configuration File | `~/.vimrc` | `~/.config/nvim/init.vim` |
-| Configuration directory | `~/.vim`   | `~/.config/nvim`          |
+|                         | Neovim                    |
+| ----------------------- | ------------------------- |
+| Configuration directory | `~/.config/nvim`          |
+| Main Configuration File | `~/.config/nvim/init.vim` |
 
 ### Installation
 

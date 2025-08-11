@@ -26,6 +26,22 @@ return {
 			-- height = nil,
 			border = "rounded",
 		},
+		-- Show hidden files but hide specific ones
+		view_options = {
+			show_hidden = true,
+			is_hidden_file = function(name, bufnr)
+				-- Hide .DS_Store files
+				if name == ".DS_Store" then
+					return true
+				end
+				-- You can add more files to hide here
+				-- if name == "Thumbs.db" then return true end
+				-- if name:match("%.tmp$") then return true end
+
+				-- Don't hide other dotfiles (they'll be shown because show_hidden = true)
+				return false
+			end,
+		},
 	},
 	-- Optional dependencies
 	dependencies = { { "nvim-tree/nvim-web-devicons", opts = {} } },
