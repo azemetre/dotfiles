@@ -149,6 +149,30 @@ return {
 				lualine_c = {
 					{
 						"branch",
+						fmt = function(str)
+							if vim.api.nvim_strwidth(str) > 15 then
+								local last_slash = str:match(".*/()")
+								-- slighly dumb truncate
+								if last_slash then
+									local suffix = str:sub(last_slash)
+									local truncated = "../" .. suffix
+									if vim.api.nvim_strwidth(truncated) > 15 then
+										-- chars for "../"
+										local available_chars = 15 - 3
+										return "../"
+											.. suffix:sub(1, available_chars)
+											.. "…"
+									end
+									return truncated
+								else
+									-- dumb truncate
+									-- return last 15 chars if branch has no slash
+									return "…" .. str:sub(-14)
+								end
+							end
+
+							return str
+						end,
 						icon = icons.git,
 						color = { fg = colors.violet, gui = "bold" },
 					},
