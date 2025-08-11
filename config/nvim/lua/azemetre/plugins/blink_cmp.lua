@@ -27,11 +27,11 @@ return {
 			["<c-j>"] = { "select_next", "fallback" },
 
 			-- selection
-			["<c-space>"] = { "accept", "fallback" },
+			["<cr>"] = { "accept", "fallback" },
 			["<c-y>"] = { "accept", "fallback" },
+			["<esc>"] = { "cancel", "fallback" },
 			["<c-e>"] = { "cancel", "fallback" },
 			["<c-x>"] = { "cancel", "fallback" },
-			["<cr>"] = { "cancel", "fallback" },
 
 			-- snippet navigation
 			["<tab>"] = { "snippet_forward", "select_next", "fallback" },
@@ -42,13 +42,25 @@ return {
 			["<C-u>"] = { "scroll_documentation_up", "fallback" },
 
 			-- show completion menu
+			["<c-space>"] = { "show", "fallback" },
 			["<c-o>"] = { "show", "fallback" },
 			["<c-h>"] = { "show", "fallback" },
 		},
 		cmdline = {
 			keymap = {
-				preset = "none", -- disable cmdline keymaps to avoid conflicts
+				preset = "none",
+				-- navigation
+				["<c-p>"] = { "select_prev", "fallback" },
+				["<c-n>"] = { "select_next", "fallback" },
+				["<c-k>"] = { "select_prev", "fallback" },
+				["<c-j>"] = { "select_next", "fallback" },
+				-- selection
+				["<c-y>"] = { "accept", "fallback" },
+				["<esc>"] = { "cancel", "fallback" },
+				["<c-e>"] = { "cancel", "fallback" },
+				["<c-x>"] = { "cancel", "fallback" },
 			},
+			completion = { menu = { auto_show = true } },
 		},
 		completion = {
 			menu = {

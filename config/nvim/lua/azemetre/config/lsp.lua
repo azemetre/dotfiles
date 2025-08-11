@@ -1,6 +1,7 @@
 -- See https://gpanders.com/blog/whats-new-in-neovim-0-11/ for a nice overview
 -- of how the lsp setup works in neovim 0.11+.
 -- This actually just enables the lsp servers.
+
 local custom_icons = require("azemetre.theme").icons
 local blink = require("blink.cmp")
 
@@ -12,8 +13,28 @@ local lsp_keymaps = {
 	{ "gi", vim.lsp.buf.implementation, desc = "Goto Implementation" },
 	{ "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
 	{ "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-	{ "K", vim.lsp.buf.hover, desc = "Hover" },
-	{ "gK", vim.lsp.buf.signature_help, desc = "Signature Help" },
+	{
+		"K",
+		function()
+			vim.lsp.buf.hover({
+				border = "double",
+				max_width = 85,
+				max_height = 25,
+			})
+		end,
+		desc = "Hover",
+	},
+	{
+		"gK",
+		function()
+			vim.lsp.buf.signature_help({
+				border = "double",
+				max_width = 85,
+				max_height = 25,
+			})
+		end,
+		desc = "Signature Help",
+	},
 	{ "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help" },
 	{ "gc", vim.lsp.buf.rename, desc = "Rename" },
 	{
