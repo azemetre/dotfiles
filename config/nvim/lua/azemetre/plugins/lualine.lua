@@ -157,7 +157,7 @@ return {
 									if vim.api.nvim_strwidth(truncated) > 15 then
 										-- chars for "../"
 										local available_chars = 15 - 3
-										return "../"
+										return "…/"
 											.. suffix:sub(1, available_chars)
 											.. "…"
 									end
