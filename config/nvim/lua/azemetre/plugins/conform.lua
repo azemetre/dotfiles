@@ -47,11 +47,27 @@ return {
 			}
 		end,
 		formatters_by_ft = {
-			lua = { "stylua" },
-			javascript = { { "biome" } },
-			typescript = { { "biome" } },
-			typescriptreact = { { "biome" } },
-			javascriptreact = { { "biome" } },
+			lua = { "stylua", stop_after_first = true },
+			javascript = {
+				"biome",
+				"biome-organize-imports",
+				stop_after_first = true,
+			},
+			typescript = {
+				"biome",
+				"biome-organize-imports",
+				stop_after_first = true,
+			},
+			typescriptreact = {
+				"biome",
+				"biome-organize-imports",
+				stop_after_first = true,
+			},
+			javascriptreact = {
+				"biome",
+				"biome-organize-imports",
+				stop_after_first = true,
+			},
 		},
 	},
 	config = function(_, opts)
