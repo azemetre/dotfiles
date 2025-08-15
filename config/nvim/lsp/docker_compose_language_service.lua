@@ -19,5 +19,9 @@ return {
 		"docker-compose.yml",
 		"compose.yaml",
 		"compose.yml",
+		".git", -- git
+		".hg", -- mercurial
+		".svn", -- subversion
+		".bzr", -- bazaar
 	},
 }

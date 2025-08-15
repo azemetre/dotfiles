@@ -9,6 +9,10 @@ return {
 		root_markers = {
 			"go.mod",
 			"go.sum",
+			".git", -- git
+			".hg", -- mercurial
+			".svn", -- subversion
+			".bzr", -- bazaar
 		},
 		single_file_support = true,
 	},

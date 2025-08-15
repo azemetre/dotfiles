@@ -1,4 +1,4 @@
-require("azemetre.config").init()
+require("enchiridion.config").init()
 
 return {
 	{ "folke/lazy.nvim", version = "*" },

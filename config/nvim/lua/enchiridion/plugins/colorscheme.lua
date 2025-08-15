@@ -16,10 +16,17 @@ return {
 
 	-- hipster
 	{
-		"azemetre/hipster.nvim",
+		-- "enchiridion/hipster.nvim",
+		-- dependencies = { "rktjmp/lush.nvim" },
+		dir = "~/github/hipster.nvim",
+		dev = true,
 		lazy = false,
 		priority = 1000,
-		dependencies = { "rktjmp/lush.nvim" },
+		-- config = function(_, opts)
+		-- 	local hipster = require("hipster")
+		-- 	hipster.setup(opts)
+		-- 	hipster.load()
+		-- end,
 	},
 
 	-- oink's pink palace

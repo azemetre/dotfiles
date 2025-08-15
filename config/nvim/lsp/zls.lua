@@ -1,3 +1,14 @@
+---@brief
+---
+--- https://github.com/zigtools/zls
+---
+--- #osx #mac #homebrew
+--- ```sh
+--- brew install zls
+--- brew install zig
+--- ```
+--- #TODO: include instructions to install snippets
+--- ```
 return {
 	default_config = {
 		cmd = { "zls" },
@@ -10,7 +21,14 @@ return {
 			end
 		end,
 		filetypes = { "zig", "zir" },
-		root_markers = { "zls.json", "build.zig", ".git" },
+		root_markers = {
+			"zls.json",
+			"build.zig",
+			".git", -- git
+			".hg", -- mercurial
+			".svn", -- subversion
+			".bzr", -- bazaar
+		},
 		single_file_support = true,
 	},
 	docs = {

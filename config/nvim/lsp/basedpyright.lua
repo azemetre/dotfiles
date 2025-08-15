@@ -1,3 +1,5 @@
+--- brew install basedpyright
+
 ---@type vim.lsp.Config
 return {
 	cmd = { "basedpyright-langserver", "--stdio" },
@@ -9,7 +11,10 @@ return {
 		"requirements.txt",
 		"Pipfile",
 		"pyrightconfig.json",
-		".git",
+		".git", -- git
+		".hg", -- mercurial
+		".svn", -- subversion
+		".bzr", -- bazaar
 	},
 	settings = {
 		basedpyright = {

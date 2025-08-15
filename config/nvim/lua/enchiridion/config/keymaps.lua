@@ -1,4 +1,4 @@
--- This file is automatically loaded by azemetre.plugins.config,
+-- This file is automatically loaded by enchiridion.plugins.config,
 
 -- FIXME: document all keymaps
 

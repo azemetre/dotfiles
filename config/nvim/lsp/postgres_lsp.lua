@@ -4,7 +4,13 @@ return {
 		filetypes = {
 			"sql",
 		},
-		root_markers = vim.fs.root(0, { "postgrestools.jsonc" }),
+		root_markers = {
+			"postgrestools.jsonc",
+			".git", -- git
+			".hg", -- mercurial
+			".svn", -- subversion
+			".bzr", -- bazaar
+		},
 		single_file_support = true,
 	},
 	docs = {

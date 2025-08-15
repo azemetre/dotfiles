@@ -32,7 +32,7 @@ vim.g.maplocalleader = ","
 require("lazy").setup({
 	spec = {
 		-- import your plugins
-		{ import = "azemetre.plugins" },
+		{ import = "enchiridion.plugins" },
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- automatically check for plugin updates

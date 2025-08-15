@@ -42,6 +42,10 @@ return {
 		"stylelint.config.mjs",
 		"stylelint.config.cjs",
 		"stylelint.config.js",
+		".git", -- git
+		".hg", -- mercurial
+		".svn", -- subversion
+		".bzr", -- bazaar
 	},
 	settings = {},
 }

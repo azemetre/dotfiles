@@ -1,13 +1,13 @@
-_G.Azemetre = require("azemetre.util")
-local snacks = require("azemetre.plugins.snacks")
+_G.Enchiridion = require("enchiridion.util")
+local snacks = require("enchiridion.plugins.snacks")
 
----@class AzemetreConfig: AzemetreOptions
+---@class EnchiridionConfig: EnchiridionOptions
 local M = {}
 
 M.version = "1.0.0" -- x-release-please-version
-Azemetre.config = M
+Enchiridion.config = M
 
----@class AzemetreOptions
+---@class EnchiridionOptions
 local defaults = {
 	-- colorscheme can be a string like `catppuccin` or a function that will load the colorscheme
 	---@type string|fun()
@@ -16,10 +16,10 @@ local defaults = {
 	end,
 	-- load the default settings
 	defaults = {
-		autocmds = true, -- azemetre.config.autocmds
-		keymaps = true, -- azemetre.config.keymaps
-		-- azemetre.config.options can't be configured here since that's loaded before azemetre setup
-		-- if you want to disable loading options, add `package.loaded["azemetre.config.options"] = true` to the top of your init.lua
+		autocmds = true, -- enchiridion.config.autocmds
+		keymaps = true, -- enchiridion.config.keymaps
+		-- enchiridion.config.options can't be configured here since that's loaded before enchiridion setup
+		-- if you want to disable loading options, add `package.loaded["enchiridion.config.options"] = true` to the top of your init.lua
 	},
 	-- icons used by other plugins
 	-- stylua: ignore
@@ -162,17 +162,18 @@ local defaults = {
 
 M.json = {
 	version = 6,
-	path = vim.g.azemetre_json or vim.fn.stdpath("config") .. "/azemetre.json",
+	path = vim.g.enchiridion_json
+		or vim.fn.stdpath("config") .. "/enchiridion.json",
 	data = {
 		version = nil, ---@type string?
 	},
 }
 
----@type AzemetreOptions
+---@type EnchiridionOptions
 local options
 local lazy_clipboard
 
----@param opts? AzemetreOptions
+---@param opts? EnchiridionOptions
 function M.setup(opts)
 	options = vim.tbl_deep_extend("force", defaults, opts or {}) or {}
 
@@ -182,7 +183,7 @@ function M.setup(opts)
 		M.load("autocmds")
 	end
 
-	local group = vim.api.nvim_create_augroup("Azemetre", { clear = true })
+	local group = vim.api.nvim_create_augroup("Enchiridion", { clear = true })
 	vim.api.nvim_create_autocmd("User", {
 		group = group,
 		pattern = "VeryLazy",
@@ -202,15 +203,15 @@ end
 function M.load(name)
 	local function _load(mod)
 		if require("lazy.core.cache").find(mod)[1] then
-			Azemetre.try(function()
+			Enchiridion.try(function()
 				require(mod)
 			end, { msg = "Failed loading " .. mod })
 		end
 	end
-	local pattern = "Azemetre" .. name:sub(1, 1):upper() .. name:sub(2)
-	-- always load azemetre, then user file
+	local pattern = "Enchiridion" .. name:sub(1, 1):upper() .. name:sub(2)
+	-- always load enchiridion, then user file
 	if M.defaults[name] or name == "options" then
-		_load("azemetre.config." .. name)
+		_load("enchiridion.config." .. name)
 		vim.api.nvim_exec_autocmds(
 			"User",
 			{ pattern = pattern .. "Defaults", modeline = false }
@@ -218,7 +219,7 @@ function M.load(name)
 	end
 	_load("config." .. name)
 	if vim.bo.filetype == "lazy" then
-		-- HACK: Azemetre may have overwritten options of the Lazy ui, so reset this here
+		-- HACK: Enchiridion may have overwritten options of the Lazy ui, so reset this here
 		vim.cmd([[do VimResized]])
 	end
 	vim.api.nvim_exec_autocmds("User", { pattern = pattern, modeline = false })
@@ -230,7 +231,7 @@ function M.init()
 		return
 	end
 	M.did_init = true
-	local plugin = require("lazy.core.config").spec.plugins.Azemetre
+	local plugin = require("lazy.core.config").spec.plugins.Enchiridion
 	if plugin then
 		vim.opt.rtp:append(plugin.dir)
 	end
@@ -246,7 +247,7 @@ setmetatable(M, {
 		if options == nil then
 			return vim.deepcopy(defaults)[key]
 		end
-		---@cast options AzemetreConfig
+		---@cast options EnchiridionConfig
 		return options[key]
 	end,
 })

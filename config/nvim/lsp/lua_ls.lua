@@ -10,7 +10,10 @@ return {
 			"stylua.toml",
 			"selene.toml",
 			"selene.yml",
-			".git",
+			".git", -- git
+			".hg", -- mercurial
+			".svn", -- subversion
+			".bzr", -- bazaar
 		},
 		single_file_support = true,
 		log_level = vim.lsp.protocol.MessageType.Warning,

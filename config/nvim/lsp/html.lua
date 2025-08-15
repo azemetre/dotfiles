@@ -24,7 +24,13 @@
 return {
 	cmd = { "vscode-html-language-server", "--stdio" },
 	filetypes = { "html", "templ" },
-	root_markers = { "package.json", ".git" },
+	root_markers = {
+		"package.json",
+		".git", -- git
+		".hg", -- mercurial
+		".svn", -- subversion
+		".bzr", -- bazaar
+	},
 	settings = {},
 	init_options = {
 		provideFormatter = true,

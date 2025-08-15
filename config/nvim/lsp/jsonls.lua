@@ -5,7 +5,12 @@ return {
 		init_options = {
 			provideFormatter = true,
 		},
-		root_markers = {},
+		root_markers = {
+			".git", -- git
+			".hg", -- mercurial
+			".svn", -- subversion
+			".bzr", -- bazaar
+		},
 		single_file_support = true,
 	},
 	docs = {

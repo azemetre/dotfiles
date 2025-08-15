@@ -26,5 +26,9 @@ return {
 		"docker-bake.hcl",
 		"docker-bake.override.json",
 		"docker-bake.override.hcl",
+		".git", -- git
+		".hg", -- mercurial
+		".svn", -- subversion
+		".bzr", -- bazaar
 	},
 }

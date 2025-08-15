@@ -35,5 +35,12 @@ return {
 		"vue",
 	},
 	workspace_required = true,
-	root_markers = { "biome.json", "biome.jsonc" },
+	root_markers = {
+		"biome.json",
+		"biome.jsonc",
+		".git", -- git
+		".hg", -- mercurial
+		".svn", -- subversion
+		".bzr", -- bazaar
+	},
 }

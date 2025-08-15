@@ -1,4 +1,4 @@
----@class azemetre.util.inject
+---@class enchiridion.util.inject
 local M = {}
 
 ---@generic A: any

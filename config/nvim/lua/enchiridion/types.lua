@@ -1,10 +1,10 @@
 ---@meta
 
----@class AzemetreGlobals
+---@class EnchiridionGlobals
 vim.g = {}
 
-_G.azemetre_docs = true
-_G.Azemetre = require("azemetre.util")
+_G.enchiridion_docs = true
+_G.Enchiridion = require("Enchiridion.util")
 
 ---@class vim.api.create_autocmd.callback.args
 ---@field id number

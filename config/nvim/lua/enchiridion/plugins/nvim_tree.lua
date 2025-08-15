@@ -1,4 +1,4 @@
-local icons = require("azemetre.theme").icons
+local icons = require("enchiridion.theme").icons
 
 -- #ui #ux #editor
 -- file explorer

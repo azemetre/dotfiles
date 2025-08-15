@@ -2,7 +2,7 @@
 -- of how the lsp setup works in neovim 0.11+.
 -- This actually just enables the lsp servers.
 
-local custom_icons = require("azemetre.theme").icons
+local custom_icons = require("enchiridion.theme").icons
 local blink = require("blink.cmp")
 
 -- LSP Keymaps following the same format as your keymaps file

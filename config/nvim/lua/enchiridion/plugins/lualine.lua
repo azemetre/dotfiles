@@ -5,7 +5,7 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	event = "VeryLazy",
 	config = function()
-		local theme = require("azemetre.theme")
+		local theme = require("enchiridion.theme")
 		local colors = theme.colors
 		local icons = theme.icons
 
@@ -60,6 +60,8 @@ return {
 				["dockerfile-language-server"] = "docker",
 				["go-debug-adapter"] = "go-dap",
 				["gopls"] = "go",
+				["jsonls"] = "json",
+				["yaml-language-server"] = "yml",
 				["html-lsp"] = "html",
 				["lua-language-server"] = "lua",
 				["stylelint-lsp"] = "stylelint",

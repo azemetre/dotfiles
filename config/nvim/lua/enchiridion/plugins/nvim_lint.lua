@@ -1,4 +1,4 @@
-local snacks = require("azemetre.plugins.snacks")
+local snacks = require("enchiridion.plugins.snacks")
 
 -- #editor #core #lint #lsp
 return {
@@ -17,13 +17,13 @@ return {
 			-- ['_'] = { 'fallback linter' },
 			-- ["*"] = { "typos" },
 		},
-		-- Azemetre extension to easily override linter options
+		-- Enchiridion extension to easily override linter options
 		-- or add custom linters.
 		---@type table<string,table>
 		linters = {
 			-- -- Example of using selene only when a selene.toml file is present
 			-- selene = {
-			--   -- `condition` is another Azemetre extension that allows you to
+			--   -- `condition` is another Enchiridion extension that allows you to
 			--   -- dynamically enable/disable linters based on the context.
 			--   condition = function(ctx)
 			--     return vim.fs.find({ "selene.toml" }, { path = ctx.filename, upward = true })[1]

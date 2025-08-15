@@ -36,7 +36,7 @@ return {
 	---@param opts TSConfig
 	config = function(plugin, opts)
 		if plugin.ensure_installed then
-			require("azemetre.util").deprecate(
+			require("enchiridion.util").deprecate(
 				"treesitter.ensure_installed",
 				"treesitter.opts.ensure_installed"
 			)

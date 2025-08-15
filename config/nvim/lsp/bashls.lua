@@ -23,5 +23,10 @@ return {
 		},
 	},
 	filetypes = { "bash", "sh" },
-	root_markers = { ".git" },
+	root_markers = {
+		".git", -- git
+		".hg", -- mercurial
+		".svn", -- subversion
+		".bzr", -- bazaar
+	},
 }

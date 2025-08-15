@@ -21,7 +21,10 @@ return {
 			"package.json",
 			"tsconfig.json",
 			"jsconfig.json",
-			".git",
+			".git", -- git
+			".hg", -- mercurial
+			".svn", -- subversion
+			".bzr", -- bazaar
 		},
 		init_options = {
 			typescript = {},

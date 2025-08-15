@@ -1,7 +1,7 @@
 -- We namespace the config so that when we reload our modules more easily
 -- Ref: https://www.reddit.com/r/neovim/comments/puuskh/comment/he5vnqc
-_G.config_namespace = "azemetre"
+_G.config_namespace = "enchiridion"
 
 -- require(config_namespace .. ".util")
-require("azemetre.config.lazy")
-require("azemetre.config.lsp")
+require("enchiridion.config.lazy")
+require("enchiridion.config.lsp")
