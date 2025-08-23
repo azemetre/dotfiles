@@ -1,14 +1,72 @@
--- #ui #vim-motion #key-board #core
+-- #ui #editor #vim-motion #key-board #core
 -- jump between 4 files
 return {
 	"ThePrimeagen/harpoon",
-	dependencies = "nvim-lua/plenary.nvim",
+	branch = "harpoon2",
+	dependencies = { "nvim-lua/plenary.nvim" },
+	config = function()
+		local harpoon = require("harpoon")
+		local harpoon_extensions = require("harpoon.extensions")
+		harpoon:setup()
+		harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
+	end,
 	keys = {
-		{ "<C-e>", ":lua require('harpoon.mark').add_file()<CR>" },
-		{ "<C-t>", ":lua require('harpoon.ui').toggle_quick_menu()<CR>" },
-		{ "<C-h>", ":lua require('harpoon.ui').nav_file(1)<CR>" },
-		{ "<C-j>", ":lua require('harpoon.ui').nav_file(2)<CR>" },
-		{ "<C-k>", ":lua require('harpoon.ui').nav_file(3)<CR>" },
-		{ "<C-l>", ":lua require('harpoon.ui').nav_file(4)<CR>" },
+		{
+			"<C-e>",
+			function()
+				require("harpoon"):list():add()
+			end,
+			desc = "Add file to harpoon",
+		},
+		{
+			"<C-t>",
+			function()
+				local harpoon = require("harpoon")
+				harpoon.ui:toggle_quick_menu(harpoon:list())
+			end,
+			desc = "Toggle harpoon menu",
+		},
+		{
+			"<C-h>",
+			function()
+				require("harpoon"):list():select(1)
+			end,
+			desc = "Navigate to harpoon file 1",
+		},
+		{
+			"<C-j>",
+			function()
+				require("harpoon"):list():select(2)
+			end,
+			desc = "Navigate to harpoon file 2",
+		},
+		{
+			"<C-k>",
+			function()
+				require("harpoon"):list():select(3)
+			end,
+			desc = "Navigate to harpoon file 3",
+		},
+		{
+			"<C-l>",
+			function()
+				require("harpoon"):list():select(4)
+			end,
+			desc = "Navigate to harpoon file 4",
+		},
+		{
+			"<C-S-P>",
+			function()
+				require("harpoon"):list():prev()
+			end,
+			desc = "Previous harpoon file",
+		},
+		{
+			"<C-S-N>",
+			function()
+				require("harpoon"):list():next()
+			end,
+			desc = "Next harpoon file",
+		},
 	},
 }

@@ -10,6 +10,11 @@ return {
 		{ "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Telescope Files" },
 		{ "<leader>fg", "<cmd>FzfLua live_grep<cr>", desc = "Telescope Grep" },
 		{
+			"<leader>fc",
+			"<cmd>FzfLua highlights<cr>",
+			desc = "Telescope highlights",
+		},
+		{
 			"<leader>fb",
 			"<cmd>FzfLua buffers<cr>",
 			desc = "Telescope Buffers",
@@ -117,6 +122,7 @@ return {
 
 			grep = {
 				rg_opts = "--color=never --no-heading --with-filename --line-number --column --smart-case --trim",
+				rg_glob = true,
 				-- Add file ignore patterns
 				-- Note: fzf-lua handles this through fd/rg directly
 			},

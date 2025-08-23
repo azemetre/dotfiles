@@ -54,18 +54,21 @@ return {
 
 			local abbreviations = {
 				lua_ls = "lua",
-				["vtsls"] = "ts",
 				["ansible-language-server"] = "ansible",
+				["awk-language-server"] = "awk",
+				["astro-ls"] = "astro",
+				["bashls"] = "bash",
 				["css-lsp"] = "css",
-				["dockerfile-language-server"] = "docker",
+				["docker-langserver"] = "docker",
 				["go-debug-adapter"] = "go-dap",
 				["gopls"] = "go",
 				["jsonls"] = "json",
-				["yaml-language-server"] = "yml",
-				["html-lsp"] = "html",
 				["lua-language-server"] = "lua",
-				["stylelint-lsp"] = "stylelint",
+				["html-lsp"] = "html",
+				["taplo"] = "toml",
 				["vim-language-server"] = "vim",
+				["vtsls"] = "ts",
+				["yaml-language-server"] = "yml",
 			}
 
 			local names = {}
