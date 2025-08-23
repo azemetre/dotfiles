@@ -16,7 +16,7 @@ return {
 
 	-- eekah - collection of color schemes
 	{
-		dir = "shimman-dev/eekah.nvim",
+		dir = "~/github/shimman-eekah.nvim",
 		dev = true,
 		lazy = false,
 		priority = 1000,

@@ -1,7 +1,7 @@
 -- #ux #text #lsp #treesitter
 -- laundry - folding clothes
 return {
-	dir = "shimman-dev/laundry.nvim",
+	"shimman-dev/laundry.nvim",
 	priority = 1000,
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
