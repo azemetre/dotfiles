@@ -154,6 +154,7 @@ npm install -g @astrojs/language-server
 npm i -g bash-language-server
 npm install -g @microsoft/compose-language-service
 npm install -g @vtsls/language-server
+npm i -g yaml-language-server
 
 # go management
 go install github.com/docker/docker-language-server/cmd/docker-language-server@latest
@@ -162,6 +163,9 @@ go install github.com/docker/docker-language-server/cmd/docker-language-server@l
 brew install lua-language-server
 brew install zig
 brew install zls
+
+# cargo management
+cargo install --features lsp --locked taplo-cli
 ```
 
 ### Prompt
