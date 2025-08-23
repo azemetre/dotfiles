@@ -14,24 +14,9 @@ return {
 		end,
 	},
 
-	-- hipster
+	-- eekah - collection of color schemes
 	{
-		-- "enchiridion/hipster.nvim",
-		-- dependencies = { "rktjmp/lush.nvim" },
-		dir = "~/github/hipster.nvim",
-		dev = true,
-		lazy = false,
-		priority = 1000,
-		-- config = function(_, opts)
-		-- 	local hipster = require("hipster")
-		-- 	hipster.setup(opts)
-		-- 	hipster.load()
-		-- end,
-	},
-
-	-- oink's pink palace
-	{
-		dir = "~/github/oink.nvim",
+		dir = "shimman-dev/eekah.nvim",
 		dev = true,
 		lazy = false,
 		priority = 1000,
