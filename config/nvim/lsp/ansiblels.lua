@@ -1,23 +1,22 @@
+---@type vim.lsp.Config
 return {
-	default_config = {
-		cmd = { "ansible-language-server", "--stdio" },
-		settings = {
+	cmd = { "ansible-language-server", "--stdio" },
+	settings = {
+		ansible = {
+			python = {
+				interpreterPath = "python",
+			},
 			ansible = {
-				python = {
-					interpreterPath = "python",
-				},
-				ansible = {
-					path = "ansible",
-				},
-				executionEnvironment = {
-					enabled = false,
-				},
-				validation = {
+				path = "ansible",
+			},
+			executionEnvironment = {
+				enabled = false,
+			},
+			validation = {
+				enabled = true,
+				lint = {
 					enabled = true,
-					lint = {
-						enabled = true,
-						path = "ansible-lint",
-					},
+					path = "ansible-lint",
 				},
 			},
 		},

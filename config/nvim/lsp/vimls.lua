@@ -8,6 +8,7 @@
 --- ```
 --- #TODO: include instructions to install snippets
 --- ```
+---@type vim.lsp.Config
 return {
 	cmd = { "vim-language-server", "--stdio" },
 	filetypes = { "vim" },

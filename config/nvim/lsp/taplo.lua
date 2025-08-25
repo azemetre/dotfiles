@@ -8,18 +8,17 @@
 --- ```
 --- #TODO: include instructions to install snippets
 --- ```
+---@type vim.lsp.Config
 return {
-	default_config = {
-		cmd = { "taplo", "lsp", "stdio" },
-		filetypes = { "toml" },
-		root_markers = {
-			".git", -- git
-			".hg", -- mercurial
-			".svn", -- subversion
-			".bzr", -- bazaar
-		},
-		single_file_support = true,
+	cmd = { "taplo", "lsp", "stdio" },
+	filetypes = { "toml" },
+	root_markers = {
+		".git", -- git
+		".hg", -- mercurial
+		".svn", -- subversion
+		".bzr", -- bazaar
 	},
+	single_file_support = true,
 	docs = {
 		description = [[
 https://taplo.tamasfe.dev/cli/usage/language-server.html

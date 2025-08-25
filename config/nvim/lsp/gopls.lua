@@ -1,21 +1,16 @@
-local util = require("lspconfig.util")
-local async = require("lspconfig.async")
-local mod_cache = nil
-
+---@type vim.lsp.Config
 return {
-	default_config = {
-		cmd = { "gopls" },
-		filetypes = { "go", "gomod", "gowork", "gotmpl" },
-		root_markers = {
-			"go.mod",
-			"go.sum",
-			".git", -- git
-			".hg", -- mercurial
-			".svn", -- subversion
-			".bzr", -- bazaar
-		},
-		single_file_support = true,
+	cmd = { "gopls" },
+	filetypes = { "go", "gomod", "gowork", "gotmpl" },
+	root_markers = {
+		"go.mod",
+		"go.sum",
+		".git", -- git
+		".hg", -- mercurial
+		".svn", -- subversion
+		".bzr", -- bazaar
 	},
+	single_file_support = true,
 	docs = {
 		description = [[
 https://github.com/golang/tools/tree/master/gopls

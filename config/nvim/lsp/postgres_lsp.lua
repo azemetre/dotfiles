@@ -1,3 +1,4 @@
+---@type vim.lsp.Config
 return {
 	default_config = {
 		cmd = { "postgrestools", "lsp-proxy" },

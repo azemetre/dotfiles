@@ -204,7 +204,7 @@ vim.lsp.enable({
 	"ansiblels",
 	"astro",
 	"awk_ls",
-	"basedpython",
+	"basedpyright",
 	"bashls",
 	"biome", -- js/ts formatter, linter
 	"cssls",
@@ -212,9 +212,13 @@ vim.lsp.enable({
 	"dockerls",
 	"gopls",
 	"html",
+	"jsonls",
 	"lua_ls",
+	"marksman", -- markdown
 	"postgres_lsp",
-	"stylelint_lsp",
+	"taplo", -- toml
+	"vimls",
 	"vtsls", -- typescript lsp
+	"yamlls",
 	"zls", -- zig lsp
 })

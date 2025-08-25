@@ -6,9 +6,7 @@
 --- ```sh
 --- npm install [-g] @biomejs/biome
 --- ```
-
-local util = require("lspconfig.util")
-
+---@type vim.lsp.Config
 return {
 	cmd = function(dispatchers, config)
 		local cmd = "biome"

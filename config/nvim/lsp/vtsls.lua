@@ -57,7 +57,7 @@
 --- ```
 ---
 --- See `vue_ls` section and https://github.com/vuejs/language-tools/wiki/Neovim for more information.
-
+---@type vim.lsp.Config
 return {
 	cmd = { "vtsls", "--stdio" },
 	filetypes = {

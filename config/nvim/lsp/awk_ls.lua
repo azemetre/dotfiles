@@ -1,9 +1,8 @@
+---@type vim.lsp.Config
 return {
-	default_config = {
-		cmd = { "awk-language-server" },
-		filetypes = { "awk" },
-		single_file_support = true,
-	},
+	cmd = { "awk-language-server" },
+	filetypes = { "awk" },
+	single_file_support = true,
 	docs = {
 		description = [[
 https://github.com/Beaglefoot/awk-language-server/

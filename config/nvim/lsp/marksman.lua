@@ -1,16 +1,15 @@
+---@type vim.lsp.Config
 return {
-	default_config = {
-		cmd = { "marksman", "server" },
-		filetypes = { "markdown", "markdown.mdx", ".md" },
-		root_markers = {
-			".marksman.toml",
-			".git", -- git
-			".hg", -- mercurial
-			".svn", -- subversion
-			".bzr", -- bazaar
-		},
-		single_file_support = true,
+	cmd = { "marksman", "server" },
+	filetypes = { "markdown", "markdown.mdx" },
+	root_markers = {
+		".marksman.toml",
+		".git", -- git
+		".hg", -- mercurial
+		".svn", -- subversion
+		".bzr", -- bazaar
 	},
+	single_file_support = true,
 	docs = {
 		description = [[
 https://github.com/artempyanykh/marksman

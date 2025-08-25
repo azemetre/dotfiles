@@ -59,7 +59,7 @@ return {
 				["astro-ls"] = "astro",
 				["bashls"] = "bash",
 				["css-lsp"] = "css",
-				["docker-langserver"] = "docker",
+				["docker-language-server"] = "docker",
 				["go-debug-adapter"] = "go-dap",
 				["gopls"] = "go",
 				["jsonls"] = "json",
