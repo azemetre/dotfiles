@@ -1,4 +1,4 @@
--- #ui #editor #vim-motion #key-board #core
+-- #ui #editor #vim-motion #keyboard #core
 -- jump between 4 files
 return {
 	"ThePrimeagen/harpoon",
@@ -16,7 +16,7 @@ return {
 			function()
 				require("harpoon"):list():add()
 			end,
-			desc = "Add file to harpoon",
+			desc = "add file to harpoon",
 		},
 		{
 			"<C-t>",
@@ -24,14 +24,14 @@ return {
 				local harpoon = require("harpoon")
 				harpoon.ui:toggle_quick_menu(harpoon:list())
 			end,
-			desc = "Toggle harpoon menu",
+			desc = "toggle harpoon menu",
 		},
 		{
 			"<C-h>",
 			function()
 				require("harpoon"):list():select(1)
 			end,
-			desc = "Navigate to harpoon file 1",
+			desc = "navigate to harpoon file 1",
 		},
 		{
 			"<C-j>",
@@ -45,28 +45,28 @@ return {
 			function()
 				require("harpoon"):list():select(3)
 			end,
-			desc = "Navigate to harpoon file 3",
+			desc = "navigate to harpoon file 3",
 		},
 		{
 			"<C-l>",
 			function()
 				require("harpoon"):list():select(4)
 			end,
-			desc = "Navigate to harpoon file 4",
+			desc = "navigate to harpoon file 4",
 		},
 		{
 			"<C-S-P>",
 			function()
 				require("harpoon"):list():prev()
 			end,
-			desc = "Previous harpoon file",
+			desc = "previous harpoon file",
 		},
 		{
 			"<C-S-N>",
 			function()
 				require("harpoon"):list():next()
 			end,
-			desc = "Next harpoon file",
+			desc = "next harpoon file",
 		},
 	},
 }

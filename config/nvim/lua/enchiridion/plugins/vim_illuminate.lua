@@ -7,9 +7,20 @@ return {
 	config = function(_, opts)
 		require("illuminate").configure(opts)
 	end,
-		-- stylua: ignore
-		keys = {
-			{ "]]", function() require("illuminate").goto_next_reference(false) end, desc = "Next Reference", },
-			{ "[[", function() require("illuminate").goto_prev_reference(false) end, desc = "Prev Reference" },
+	keys = {
+		{
+			"]]",
+			function()
+				require("illuminate").goto_next_reference(false)
+			end,
+			desc = "next reference",
 		},
+		{
+			"[[",
+			function()
+				require("illuminate").goto_prev_reference(false)
+			end,
+			desc = "prev reference",
+		},
+	},
 }
