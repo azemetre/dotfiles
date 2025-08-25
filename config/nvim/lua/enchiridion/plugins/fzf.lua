@@ -86,7 +86,7 @@ return {
 		end
 
 		--- utilizing `always_ignore_these`
-		local fd_opts = "--color=never --type f --hiden --follow "
+		local fd_opts = "--color=never --type f --hidden --follow "
 			.. table.concat(fd_excludes, " ")
 		--- utilizing `always_ignore_these`
 		local rg_opts = "--color=never --files --hidden --follow "
