@@ -74,6 +74,27 @@ return {
 			"*.db",
 		}
 
+		local fd_excludes = {}
+		local rg_excludes = {}
+
+		for _, pattern in ipairs(always_ignore_these) do
+			table.insert(fd_excludes, "--exclude")
+			table.insert(fd_excludes, pattern)
+
+			table.insert(fd_excludes, "-g")
+			table.insert(rg_excludes, "!" .. pattern)
+		end
+
+		--- utilizing `always_ignore_these`
+		local fd_opts = "--color=never --type f --hiden --follow "
+			.. table.concat(fd_excludes, " ")
+		--- utilizing `always_ignore_these`
+		local rg_opts = "--color=never --files --hidden --follow "
+			.. table.concat(rg_excludes, " ")
+		--- utilizing `always_ignore_these`
+		local rg_grep_opts = "--color=never --no-heading --with-filename --line-number --column --smart-case --trim "
+			.. table.concat(rg_excludes, " ")
+
 		fzf.setup({
 			-- Global configuration
 			winopts = {
@@ -101,6 +122,16 @@ return {
 						args = "--color=always --style=numbers,changes",
 						theme = "ansi",
 					},
+					-- WARN: image previews require arcance magic, use at your own
+					-- risk.
+					-- disable preview for binary and image files
+					cmd = [[
+						if file --mine-type {} | grep -qE 'image/|video/|audio/|application/octet-stream' ; then
+							echo "Binary file - no preview available"
+						else
+							bat --color=always --style=numbers,changes --theme=ansi {}
+						fi
+					]],
 				},
 			},
 
@@ -121,18 +152,13 @@ return {
 			},
 
 			grep = {
-				rg_opts = "--color=never --no-heading --with-filename --line-number --column --smart-case --trim",
+				rg_opts = rg_grep_opts,
 				rg_glob = true,
-				-- Add file ignore patterns
-				-- Note: fzf-lua handles this through fd/rg directly
 			},
 
 			files = {
-				cmd = "fd --type f --strip-cwd-prefix --hidden",
-				-- File ignore patterns are handled by fd's .gitignore and .fdignore
-				find_opts = [[-type f -not -path '*/\.git/*' -not -path '*/node_modules/*' -not -path '*/vendor/*']],
-				rg_opts = "--color=never --files --hidden --follow -g '!.git' -g '!node_modules' -g '!vendor'",
-				fd_opts = "--color=never --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor",
+				fd_opts = fd_opts .. " --strip-cwd-prefix",
+				rg_opts = rg_opts,
 			},
 
 			lsp = {
