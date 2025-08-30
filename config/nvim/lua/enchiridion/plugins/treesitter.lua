@@ -22,6 +22,7 @@ return {
 			"json",
 			"json5",
 			"lua",
+			"luadoc",
 			"markdown",
 			"markdown_inline",
 			"python",
@@ -36,12 +37,14 @@ return {
 	},
 	---@param opts TSConfig
 	config = function(plugin, opts)
-		if plugin.ensure_installed then
-			require("enchiridion.util").deprecate(
-				"treesitter.ensure_installed",
-				"treesitter.opts.ensure_installed"
-			)
-		end
+		-- INFO: 2025-08-30
+		-- NOTE: verify if this is necessary, remove after sometime if no issues
+		-- if plugin.ensure_installed then
+		-- 	require("enchiridion.util").deprecate(
+		-- 		"treesitter.ensure_installed",
+		-- 		"treesitter.opts.ensure_installed"
+		-- 	)
+		-- end
 		require("nvim-treesitter.configs").setup(opts)
 	end,
 }
