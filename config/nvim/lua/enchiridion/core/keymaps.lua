@@ -2,6 +2,9 @@
 
 -- FIXME: document all keymaps
 
+---@type vim.keymap.set.Opts
+local options = { silent = true }
+
 -- Clear search with <esc> or <cr>
 vim.keymap.set(
 	{ "i", "n" },
@@ -70,9 +73,6 @@ vim.keymap.set(
 	{ desc = "Move visual selection up" }
 )
 
--- lazy
-vim.keymap.set("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
-
 vim.keymap.set(
 	"n",
 	"<leader>xl",
@@ -95,30 +95,33 @@ vim.keymap.set(
 )
 
 -- ufo - folding
-vim.keymap.set(
-	"n",
-	"zR",
-	require("ufo").openAllFolds,
-	{ desc = "Open All Folds" }
-)
-vim.keymap.set(
-	"n",
-	"zM",
-	require("ufo").closeAllFolds,
-	{ desc = "Close All Folds" }
-)
-vim.keymap.set(
-	"n",
-	"zr",
-	require("ufo").openFoldsExceptKinds,
-	{ desc = "Open Folds Except" }
-)
-vim.keymap.set(
-	"n",
-	"zm",
-	require("ufo").closeFoldsWith,
-	{ desc = "Close Folds With" }
-)
+-- NOTE: 2025-08-30
+-- INFO: don't know if I need UFO, currently disabling. plan to remove if not
+-- impacting workflow
+-- vim.keymap.set(
+-- 	"n",
+-- 	"zR",
+-- 	require("ufo").openAllFolds,
+-- 	{ desc = "Open All Folds" }
+-- )
+-- vim.keymap.set(
+-- 	"n",
+-- 	"zM",
+-- 	require("ufo").closeAllFolds,
+-- 	{ desc = "Close All Folds" }
+-- )
+-- vim.keymap.set(
+-- 	"n",
+-- 	"zr",
+-- 	require("ufo").openFoldsExceptKinds,
+-- 	{ desc = "Open Folds Except" }
+-- )
+-- vim.keymap.set(
+-- 	"n",
+-- 	"zm",
+-- 	require("ufo").closeFoldsWith,
+-- 	{ desc = "Close Folds With" }
+-- )
 
 -- Option to see the folded lines count
 vim.keymap.set("n", "K", function()

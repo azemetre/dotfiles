@@ -1,25 +1,16 @@
 -- #editor #ui #vim-motion
 -- better text-objects
+---@type Utils.Pack.Spec
 return {
-	"nvim-mini/mini.ai",
-	keys = {
-		{ "a", mode = { "x", "o" } },
-		{ "i", mode = { "x", "o" } },
-	},
+	src = "https://github.com/nvim-mini/mini.ai",
 	dependencies = {
 		{
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			init = function()
-				-- no need to load the plugin, since we only need its queries
-				require("lazy.core.loader").disable_rtp_plugin(
-					"nvim-treesitter-textobjects"
-				)
-			end,
+			src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
 		},
 	},
-	opts = function()
+	config = function()
 		local ai = require("mini.ai")
-		return {
+		ai.setup({
 			n_lines = 500,
 			custom_textobjects = {
 				o = ai.gen_spec.treesitter({
@@ -35,10 +26,6 @@ return {
 					{}
 				),
 			},
-		}
-	end,
-	config = function(_, opts)
-		local ai = require("mini.ai")
-		ai.setup(opts)
+		})
 	end,
 }

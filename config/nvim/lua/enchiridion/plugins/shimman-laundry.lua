@@ -1,16 +1,17 @@
 -- #ux #text #lsp #treesitter
 -- laundry - folding clothes
+---@type Utils.Pack.Spec
 return {
-	"shimman-dev/laundry.nvim",
-	priority = 1000,
+	src = "https://github.com/shimman-dev/laundry.nvim",
 	dependencies = {
-		"nvim-treesitter/nvim-treesitter",
+		{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	},
-	event = { "BufReadPost", "BufNewFile" },
 	---@module 'laundry'
 	---@type LaundryConfig
-	opts = {
-		auto_fold = true,
-		min_fold_lines = 20,
-	},
+	config = function()
+		require("laundry").setup({
+			auto_fold = true,
+			min_fold_lines = 20,
+		})
+	end,
 }

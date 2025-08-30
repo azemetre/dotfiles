@@ -1,6 +1,6 @@
 -- #editor #format #file-type
 -- editorconfig
+---@type Utils.Pack.Spec
 return {
-	"editorconfig/editorconfig-vim",
-	event = "BufReadPre",
+	src = "https://github.com/editorconfig/editorconfig-vim",
 }

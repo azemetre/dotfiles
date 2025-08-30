@@ -1,9 +1,11 @@
 -- #dashboard #startup #ui
+---@type Utils.Pack.Spec
 return {
-	"goolord/alpha-nvim",
-	event = "VimEnter",
-	opts = function()
+	src = "https://github.com/goolord/alpha-nvim",
+	config = function()
+		local alpha = require("alpha")
 		local dashboard = require("alpha.themes.dashboard")
+
 		local neovim = {
 			type = "text",
 			val = {
@@ -75,49 +77,31 @@ return {
 			),
 			dashboard.button(
 				"s",
-				"勒" .. " Restore Session",
+				"勒 " .. " Restore Session",
 				[[:lua require("persistence").load() <cr>]]
 			),
-			dashboard.button("l", "鈴" .. " Lazy", ":Lazy<CR>"),
+			dashboard.button(
+				"p",
+				" " .. " Plugins",
+				":lua vim.pack.update()<CR>"
+			),
 			dashboard.button("q", " " .. " Quit", ":qa<CR>"),
 		}
+
 		for _, button in ipairs(dashboard.section.buttons.val) do
 			button.opts.hl = "AlphaButtons"
 			button.opts.hl_shortcut = "AlphaShortcut"
 		end
+
 		dashboard.section.footer.opts.hl = "Type"
 		dashboard.section.buttons.opts.hl = "AlphaButtons"
 		dashboard.opts.layout[1].val = 8
-		return dashboard
+
+		-- Setup alpha with the dashboard config
+		alpha.setup(dashboard.opts)
 	end,
-	config = function(_, dashboard)
-		vim.b.miniindentscope_disable = true
-
-		-- close Lazy and re-open when the dashboard is ready
-		if vim.o.filetype == "lazy" then
-			vim.cmd.close()
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "AlphaReady",
-				callback = function()
-					require("lazy").show()
-				end,
-			})
-		end
-
-		require("alpha").setup(dashboard.opts)
-
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "LazyVimStarted",
-			callback = function()
-				local stats = require("lazy").stats()
-				local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-				dashboard.section.footer.val = "⚡ Neovim loaded "
-					.. stats.count
-					.. " plugins in "
-					.. ms
-					.. "ms"
-				pcall(vim.cmd.AlphaRedraw)
-			end,
-		})
-	end,
+	data = { build = "cargo build --release" },
+	dependencies = {
+		{ src = "https://github.com/folke/persistence.nvim" },
+	},
 }

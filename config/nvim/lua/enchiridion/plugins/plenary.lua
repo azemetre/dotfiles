@@ -1,5 +1,6 @@
 -- #core #plugins #tooling
 -- library used by other plugins
+---@type Utils.Pack.Spec
 return {
-	"nvim-lua/plenary.nvim",
+	src = "https://github.com/nvim-lua/plenary.nvim",
 }

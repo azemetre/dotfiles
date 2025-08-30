@@ -1,6 +1,8 @@
 -- #ui #editor #lsp
+---@type Utils.Pack.Spec
 return {
-	"j-hui/fidget.nvim",
-	even = "Lazy",
-	opts = {},
+	src = "https://github.com/j-hui/fidget.nvim",
+	config = function()
+		require("fidget").setup({})
+	end,
 }

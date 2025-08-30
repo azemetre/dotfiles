@@ -1,9 +1,12 @@
 -- #ui #docs #markdown #notes #documentation
--- markdown preview
+-- cross platform markdown server, also supports: KaTeX, PlantUML, Mermaid,
+-- Chart.js, js-sequence-diagrams, Flowchart, viz-js
+---@type Utils.Pack.Spec
 return {
-	"iamcco/markdown-preview.nvim",
-	even = "VeryLazy",
-	build = function()
-		vim.fn["mkdp#util#install"]()
+	src = "https://github.com/iamcco/markdown-preview.nvim",
+	config = function()
+		if vim.fn.executable("markdown-preview-nvim") == 0 then
+			vim.fn["mkdp#util#install"]()
+		end
 	end,
 }

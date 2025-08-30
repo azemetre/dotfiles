@@ -1,22 +1,27 @@
 -- #editor #search
 -- better diagnostics list and others
+---@type Utils.Pack.Spec
 return {
-	"folke/trouble.nvim",
+	src = "https://github.com/folke/trouble.nvim",
 	dependencies = {
-		"nvim-tree/nvim-web-devicons",
+		{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	},
-	cmd = { "TroubleToggle", "Trouble" },
-	opts = { use_diagnostic_signs = true },
-	keys = {
-		{
+	config = function()
+		require("trouble").setup({
+			use_diagnostic_signs = true,
+		})
+
+		vim.keymap.set(
+			"n",
 			"<leader>xx",
 			"<cmd>Trouble diagnostics toggle<cr>",
-			desc = "Document Diagnostics (Trouble)",
-		},
-		{
+			{ desc = "Document Diagnostics (Trouble)" }
+		)
+		vim.keymap.set(
+			"n",
 			"<leader>xq",
 			"<cmd>Trouble quickfix toggle<cr>",
-			desc = "Quickfix (Trouble)",
-		},
-	},
+			{ desc = "Quickfix (Trouble)" }
+		)
+	end,
 }

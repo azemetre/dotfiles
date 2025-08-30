@@ -1,15 +1,9 @@
 -- #ui #code #text
 -- active indent guide and indent text objects
+---@type Utils.Pack.Spec
 return {
-	"nvim-mini/mini.indentscope",
-	version = false, -- wait till new 0.7.0 release to put it back on semver
-	event = "BufReadPre",
-	opts = {
-		-- symbol = "▏",
-		symbol = "│",
-		options = { try_as_border = true },
-	},
-	config = function(_, opts)
+	src = "https://github.com/nvim-mini/mini.indentscope",
+	config = function()
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = {
 				"help",
@@ -24,6 +18,10 @@ return {
 				vim.b.miniindentscope_disable = true
 			end,
 		})
-		require("mini.indentscope").setup(opts)
+
+		require("mini.indentscope").setup({
+			symbol = "│",
+			options = { try_as_border = true },
+		})
 	end,
 }

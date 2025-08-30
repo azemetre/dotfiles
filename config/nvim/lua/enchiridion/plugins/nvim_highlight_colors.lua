@@ -1,14 +1,13 @@
 -- #color #css #ui
 -- color highlighter
+---@type Utils.Pack.Spec
 return {
-	"brenoprata10/nvim-highlight-colors",
-	event = "VeryLazy",
-	opts = {
-		render = "background",
-		enable_named_colors = true,
-		enable_tailwind = true,
-	},
-	config = function(_, opts)
-		require("nvim-highlight-colors").setup(opts)
+	src = "https://github.com/brenoprata10/nvim-highlight-colors",
+	config = function()
+		require("nvim-highlight-colors").setup({
+			render = "background",
+			enable_named_colors = true,
+			enable_tailwind = true,
+		})
 	end,
 }

@@ -3,5 +3,5 @@
 _G.config_namespace = "enchiridion"
 
 -- require(config_namespace .. ".util")
-require("enchiridion.config.lazy")
-require("enchiridion.config.lsp")
+require("enchiridion.core.lazy")
+require("enchiridion.core.lsp")
