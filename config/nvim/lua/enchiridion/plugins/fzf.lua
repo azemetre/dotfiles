@@ -74,26 +74,13 @@ return {
 			"*.db",
 		}
 
-		local fd_excludes = {}
-		local rg_excludes = {}
+		local fd_excludes = ""
+		local rg_globs = ""
 
 		for _, pattern in ipairs(always_ignore_these) do
-			table.insert(fd_excludes, "--exclude")
-			table.insert(fd_excludes, pattern)
-
-			table.insert(fd_excludes, "-g")
-			table.insert(rg_excludes, "!" .. pattern)
+			fd_excludes = fd_excludes .. " --exclude '" .. pattern .. "'"
+			rg_globs = rg_globs .. " -g '!" .. pattern .. "'"
 		end
-
-		--- utilizing `always_ignore_these`
-		local fd_opts = "--color=never --type f --hidden --follow "
-			.. table.concat(fd_excludes, " ")
-		--- utilizing `always_ignore_these`
-		local rg_opts = "--color=never --files --hidden --follow "
-			.. table.concat(rg_excludes, " ")
-		--- utilizing `always_ignore_these`
-		local rg_grep_opts = "--color=never --no-heading --with-filename --line-number --column --smart-case --trim "
-			.. table.concat(rg_excludes, " ")
 
 		fzf.setup({
 			-- Global configuration
@@ -122,16 +109,6 @@ return {
 						args = "--color=always --style=numbers,changes",
 						theme = "ansi",
 					},
-					-- WARN: image previews require arcance magic, use at your own
-					-- risk.
-					-- disable preview for binary and image files
-					cmd = [[
-						if file --mine-type {} | grep -qE 'image/|video/|audio/|application/octet-stream' ; then
-							echo "Binary file - no preview available"
-						else
-							bat --color=always --style=numbers,changes --theme=ansi {}
-						fi
-					]],
 				},
 			},
 
@@ -152,13 +129,14 @@ return {
 			},
 
 			grep = {
-				rg_opts = rg_grep_opts,
+				rg_opts = "--color=never --no-heading --with-filename --line-number --column --smart-case --trim"
+					.. rg_globs,
 				rg_glob = true,
 			},
 
 			files = {
-				fd_opts = fd_opts .. " --strip-cwd-prefix",
-				rg_opts = rg_opts,
+				cmd = "fd --type f --strip-cwd-prefix --hidden --follow"
+					.. fd_excludes,
 			},
 
 			lsp = {
