@@ -1,51 +1,10 @@
 -- #telescope #picker #ui #vim-motion #keyboard #core
 -- fzf-lua fuzzy finder
+---@type Utils.Pack.Spec
 return {
-	"ibhagwan/fzf-lua",
+	src = "https://github.com/ibhagwan/fzf-lua",
 	dependencies = {
-		"nvim-tree/nvim-web-devicons",
-	},
-	cmd = "FzfLua",
-	keys = {
-		{ "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Telescope Files" },
-		{ "<leader>fg", "<cmd>FzfLua live_grep<cr>", desc = "Telescope Grep" },
-		{
-			"<leader>fc",
-			"<cmd>FzfLua highlights<cr>",
-			desc = "Telescope highlights",
-		},
-		{
-			"<leader>fb",
-			"<cmd>FzfLua buffers<cr>",
-			desc = "Telescope Buffers",
-		},
-		{
-			"<leader>fk",
-			"<cmd>FzfLua keymaps<cr>",
-			desc = "Telescope keymaps",
-		},
-		{
-			"<leader>fx",
-			"<cmd>FzfLua lsp_document_symbols<cr>",
-			desc = "Telescope Document Symbols",
-		},
-		{
-			"<leader>fh",
-			"<cmd>FzfLua help_tags<cr>",
-			desc = "Telescope Help Tags",
-		},
-
-		-- Git integration shortcuts
-		{
-			"<leader>fG",
-			"<cmd>FzfLua git_commits<cr>",
-			desc = "Telescope Git Commits",
-		},
-		{
-			"<leader>fB",
-			"<cmd>FzfLua git_branches<cr>",
-			desc = "Telescope Git Branches",
-		},
+		{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	},
 	config = function()
 		local fzf = require("fzf-lua")
@@ -186,5 +145,60 @@ return {
 		})
 
 		fzf.register_ui_select()
+
+		vim.keymap.set(
+			"n",
+			"<leader>ff",
+			"<cmd>FzfLua files<cr>",
+			{ desc = "Telescope Files" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>fg",
+			"<cmd>FzfLua live_grep<cr>",
+			{ desc = "Telescope Grep" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>fc",
+			"<cmd>FzfLua highlights<cr>",
+			{ desc = "Telescope highlights" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>fb",
+			"<cmd>FzfLua buffers<cr>",
+			{ desc = "Telescope Buffers" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>fk",
+			"<cmd>FzfLua keymaps<cr>",
+			{ desc = "Telescope keymaps" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>fx",
+			"<cmd>FzfLua lsp_document_symbols<cr>",
+			{ desc = "Telescope Document Symbols" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>fh",
+			"<cmd>FzfLua help_tags<cr>",
+			{ desc = "Telescope Help Tags" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>fG",
+			"<cmd>FzfLua git_commits<cr>",
+			{ desc = "Telescope Git Commits" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>fB",
+			"<cmd>FzfLua git_branches<cr>",
+			{ desc = "Telescope Git Branches" }
+		)
 	end,
 }

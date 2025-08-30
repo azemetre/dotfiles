@@ -1,9 +1,9 @@
 -- #editor #ux
 -- auto pairs,
+---@type Utils.Pack.Spec
 return {
-	"nvim-mini/mini.pairs",
-	event = "VeryLazy",
-	config = function(_, opts)
-		require("mini.pairs").setup(opts)
+	src = "https://github.com/echasnovski/mini.pairs",
+	config = function()
+		require("mini.pairs").setup()
 	end,
 }

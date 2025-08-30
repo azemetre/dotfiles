@@ -1,26 +1,18 @@
 -- #editor #text #search
 -- references
+---@type Utils.Pack.Spec
 return {
-	"RRethy/vim-illuminate",
-	event = "BufReadPost",
-	opts = { delay = 200 },
-	config = function(_, opts)
-		require("illuminate").configure(opts)
+	src = "https://github.com/RRethy/vim-illuminate",
+	config = function()
+		require("illuminate").configure({
+			delay = 200,
+		})
+
+		vim.keymap.set("n", "]]", function()
+			require("illuminate").goto_next_reference(false)
+		end, { desc = "next reference" })
+		vim.keymap.set("n", "[[", function()
+			require("illuminate").goto_prev_reference(false)
+		end, { desc = "prev reference" })
 	end,
-	keys = {
-		{
-			"]]",
-			function()
-				require("illuminate").goto_next_reference(false)
-			end,
-			desc = "next reference",
-		},
-		{
-			"[[",
-			function()
-				require("illuminate").goto_prev_reference(false)
-			end,
-			desc = "prev reference",
-		},
-	},
 }

@@ -1,5 +1,6 @@
 -- #core #editor #ui
 -- ui components
+---@type Utils.Pack.Spec
 return {
-	"MunifTanjim/nui.nvim",
+	src = "MunifTanjim/nui.nvim",
 }

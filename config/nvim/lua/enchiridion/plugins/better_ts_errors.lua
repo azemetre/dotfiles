@@ -1,11 +1,13 @@
 -- #ui #editor #typescript #ts #frontend
+----@type Utils.Pack.Spec
 return {
-	"OlegGulevskyy/better-ts-errors.nvim",
-	dependencies = { "MunifTanjim/nui.nvim" },
-	config = {
-		keymaps = {
-			toggle = "<leader>dd",
-			go_to_definition = "<leader>dx",
-		},
-	},
+	src = "https://github.com/OlegGulevskyy/better-ts-errors.nvim",
+	config = function()
+		require("better-ts-errors").setup({
+			keymaps = {
+				toggle = "<leader>dd",
+				go_to_definition = "<leader>dx",
+			},
+		})
+	end,
 }

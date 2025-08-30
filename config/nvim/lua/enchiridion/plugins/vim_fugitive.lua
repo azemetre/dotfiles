@@ -1,10 +1,16 @@
 -- #vim #tpope #vim-motions #ui #git #keyboard
 -- fugitive - git workflow
+---@type Utils.Pack.Spec
 return {
-	"tpope/vim-fugitive",
-	keys = {
-		{ "<leader>G", ":Git<CR>", desc = "Git Status" },
-		{ "<leader>Gb", ":Git blame<CR>", desc = "Git Blame" },
-		{ "<leader>Gp", ":Git push<CR>", desc = "Git Push" },
-	},
+	src = "https://github.com/tpope/vim-fugitive",
+	config = function()
+		vim.keymap.set("n", "<leader>G", ":Git<CR>", { desc = "Git Status" })
+		vim.keymap.set(
+			"n",
+			"<leader>Gb",
+			":Git blame<CR>",
+			{ desc = "Git Blame" }
+		)
+		vim.keymap.set("n", "<leader>Gp", ":Git push<CR>", { desc = "Git Push" })
+	end,
 }

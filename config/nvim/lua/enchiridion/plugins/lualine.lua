@@ -1,9 +1,11 @@
 -- #status-line #status-bar #ui
 -- lualine statusline matching feline style
+---@type Utils.Pack.Spec
 return {
-	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
-	event = "VeryLazy",
+	src = "https://github.com/nvim-lualine/lualine.nvim",
+	dependencies = {
+		{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
+	},
 	config = function()
 		local theme = require("enchiridion.theme")
 		local colors = theme.colors
@@ -34,16 +36,21 @@ return {
 		end
 
 		local function file_osinfo()
-			local os = vim.bo.fileformat:upper()
 			local icon
-			if os == "UNIX" then
-				icon = icons.linux
-			elseif os == "MAC" then
+			local os_name
+
+			if vim.fn.has("mac") == 1 or vim.fn.has("macunix") == 1 then
 				icon = icons.macos
-			else
+				os_name = "MAC"
+			elseif vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
 				icon = icons.windows
+				os_name = "WIN"
+			else
+				icon = icons.linux
+				os_name = "LINUX"
 			end
-			return icon .. os
+
+			return icon .. " " .. os_name
 		end
 
 		local function lsp_clients()
@@ -111,23 +118,22 @@ return {
 				},
 			},
 			sections = {
-				-- Left side
 				lualine_a = {
 					{
 						mode_with_icon,
 						color = function()
 							local mode_colors = {
-								n = colors.violet, -- Normal
-								i = colors.aqua, -- Insert
-								v = colors.magenta, -- Visual
-								V = colors.magenta, -- V-Line
-								["^V"] = colors.blue, -- V-Block
-								R = colors.orange, -- Replace
-								c = colors.green, -- Command
-								s = colors.orange, -- Select
-								S = colors.orange, -- S-Line
-								["^S"] = colors.orange, -- S-Block
-								t = colors.green, -- Terminal
+								n = colors.violet,
+								i = colors.aqua,
+								v = colors.magenta,
+								V = colors.magenta,
+								["^V"] = colors.blue,
+								R = colors.orange,
+								c = colors.green,
+								s = colors.orange,
+								S = colors.orange,
+								["^S"] = colors.orange,
+								t = colors.green,
 							}
 							local current_mode = vim.api.nvim_get_mode().mode
 							return {
@@ -155,12 +161,10 @@ return {
 						fmt = function(str)
 							if vim.api.nvim_strwidth(str) > 15 then
 								local last_slash = str:match(".*/()")
-								-- slighly dumb truncate
 								if last_slash then
 									local suffix = str:sub(last_slash)
 									local truncated = "../" .. suffix
 									if vim.api.nvim_strwidth(truncated) > 15 then
-										-- chars for "../"
 										local available_chars = 15 - 3
 										return "…/"
 											.. suffix:sub(1, available_chars)
@@ -168,8 +172,6 @@ return {
 									end
 									return truncated
 								else
-									-- dumb truncate
-									-- return last 15 chars if branch has no slash
 									return "…" .. str:sub(-14)
 								end
 							end

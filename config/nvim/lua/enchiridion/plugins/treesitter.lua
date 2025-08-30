@@ -1,15 +1,10 @@
 -- #language #core #lsp #syntax-highlight
+---@type Utils.Pack.Spec
 return {
-	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
-	event = "BufReadPost",
+	src = "https://github.com/nvim-treesitter/nvim-treesitter",
 	---@type TSConfig
-	opts = {
-		sync_install = false,
-		highlight = { enable = true },
-		indent = { enable = true },
-		context_commentstring = { enable = true, enable_autocmd = false },
-		ensure_installed = {
+	config = function()
+		local ensure_installed = {
 			"bash",
 			"cmake",
 			"css",
@@ -33,18 +28,27 @@ return {
 			"tsx",
 			"vim",
 			"zig",
-		},
-	},
-	---@param opts TSConfig
-	config = function(plugin, opts)
-		-- INFO: 2025-08-30
-		-- NOTE: verify if this is necessary, remove after sometime if no issues
-		-- if plugin.ensure_installed then
-		-- 	require("enchiridion.util").deprecate(
-		-- 		"treesitter.ensure_installed",
-		-- 		"treesitter.opts.ensure_installed"
-		-- 	)
-		-- end
-		require("nvim-treesitter.configs").setup(opts)
+		}
+
+		require("nvim-treesitter.configs").setup({
+			sync_install = false,
+			highlight = { enable = true },
+			indent = { enable = true },
+			context_commentstring = { enable = true, enable_autocmd = false },
+			ensure_installed = ensure_installed,
+		})
+
+		-- INFO: Install any missing parsers
+		-- WARN: Will not update, run `:TSUpdate`
+		local parsers = require("nvim-treesitter.parsers")
+		local missing_parsers = {}
+		for _, lang in ipairs(ensure_installed) do
+			if not parsers.has_parser(lang) then
+				table.insert(missing_parsers, lang)
+			end
+		end
+		if #missing_parsers > 0 then
+			vim.cmd("TSUpdate " .. table.concat(missing_parsers, " "))
+		end
 	end,
 }
