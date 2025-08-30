@@ -201,7 +201,6 @@ vim.lsp.config("*", {
 })
 
 vim.lsp.enable({
-	"ansiblels",
 	"astro",
 	"awk_ls",
 	"basedpyright",
@@ -218,7 +217,7 @@ vim.lsp.enable({
 	"postgres_lsp",
 	"taplo", -- toml
 	"vimls",
-	"vtsls", -- typescript lsp
+	"vtsls", -- typescript
 	"yamlls",
-	"zls", -- zig lsp
+	"zls", -- zig
 })
