@@ -1,5 +1,5 @@
 -- #editor #vim-motion
 -- move any selection, in any directiond
 return {
-	"echasnovski/mini.move",
+	"nvim-mini/mini.move",
 }

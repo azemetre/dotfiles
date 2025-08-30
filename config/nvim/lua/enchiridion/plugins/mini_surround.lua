@@ -1,7 +1,7 @@
 -- #editor #keyboard
 -- surround
 return {
-	"echasnovski/mini.surround",
+	"nvim-mini/mini.surround",
 	keys = { "gz" },
 	opts = {
 		mappings = {

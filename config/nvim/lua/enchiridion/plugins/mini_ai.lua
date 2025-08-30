@@ -1,7 +1,7 @@
 -- #editor #ui #vim-motion
 -- better text-objects
 return {
-	"echasnovski/mini.ai",
+	"nvim-mini/mini.ai",
 	keys = {
 		{ "a", mode = { "x", "o" } },
 		{ "i", mode = { "x", "o" } },
