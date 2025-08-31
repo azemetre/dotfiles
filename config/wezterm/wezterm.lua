@@ -6,7 +6,7 @@ local config = {
 	enable_tab_bar = false,
 	window_decorations = "RESIZE",
 	font = wezterm.font_with_fallback({
-		"Hack",
+		"Hack Nerd Font Mono",
 		{ family = "MesloLGS NF" },
 	}),
 	font_size = 24,
