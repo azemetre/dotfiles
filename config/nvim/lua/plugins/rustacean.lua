@@ -2,5 +2,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/mrcjkb/rustaceanvim",
-	version = "v6.9.1", -- Recommended
+	defer = true,
+	-- WARN: need to manually chase after new releases
+	version = "v6.9.1",
 }

@@ -3,4 +3,5 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/nvim-mini/mini.move",
+	defer = true,
 }

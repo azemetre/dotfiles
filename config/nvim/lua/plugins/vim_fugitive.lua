@@ -3,6 +3,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/tpope/vim-fugitive",
+	defer = true,
 	config = function()
 		vim.keymap.set("n", "<leader>G", ":Git<CR>", { desc = "Git Status" })
 		vim.keymap.set(

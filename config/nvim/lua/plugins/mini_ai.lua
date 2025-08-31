@@ -3,6 +3,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/nvim-mini/mini.ai",
+	defer = true,
 	dependencies = {
 		{
 			src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",

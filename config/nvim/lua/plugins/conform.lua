@@ -2,6 +2,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/stevearc/conform.nvim",
+	defer = true,
 	config = function()
 		local conform = require("conform")
 

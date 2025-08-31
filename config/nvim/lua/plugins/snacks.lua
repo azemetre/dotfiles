@@ -2,6 +2,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/folke/snacks.nvim",
+	defer = true,
 	---@type snacks.Config
 	config = function()
 		require("snacks").setup({

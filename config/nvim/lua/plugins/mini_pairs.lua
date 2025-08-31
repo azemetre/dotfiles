@@ -3,6 +3,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/echasnovski/mini.pairs",
+	defer = true,
 	config = function()
 		require("mini.pairs").setup()
 	end,

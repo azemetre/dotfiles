@@ -3,6 +3,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/ibhagwan/fzf-lua",
+	defer = true,
 	dependencies = {
 		{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	},

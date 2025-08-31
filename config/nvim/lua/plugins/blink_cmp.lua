@@ -1,17 +1,16 @@
 -- #cmp #lsp #core #keyboard
----@type Utils.Pack.Spec
+---@type utils.pack.spec
 return {
 	src = "https://github.com/saghen/blink.cmp",
-	version = "1.*",
+	version = vim.version.range("*"),
 	-- optional: provides snippets for the snippet source
 	dependencies = {
-		{ src = "https://github.com/L3MON4D3/LuaSnip", version = "v2.4.0" },
+		{ src = "https://github.com/l3mon4d3/luasnip", version = "v2.4.0" },
 	},
 	data = { build = "cargo build --release" },
-	defer = true,
 	config = function()
 		---@module 'blink.cmp'
-		---@type blink.cmp.Config
+		---@type blink.cmp.config
 		local blink = require("blink.cmp")
 
 		blink.setup({
@@ -42,7 +41,7 @@ return {
 
 				-- documentation
 				["<c-d>"] = { "scroll_documentation_down", "fallback" },
-				["<C-u>"] = { "scroll_documentation_up", "fallback" },
+				["<c-u>"] = { "scroll_documentation_up", "fallback" },
 
 				-- show completion menu
 				["<c-space>"] = { "show", "fallback" },
@@ -71,31 +70,31 @@ return {
 						treesitter = { "lsp" },
 						columns = {
 							{ "label", "label_description", gap = 1 },
-							{ "kind_icon", "kind" },
+							{ "kind_icon", "kind", gap = 1 },
 						},
 					},
-					-- Completion window styling
-					border = "rounded", -- Options: "none", "single", "double", "rounded", "solid", "shadow"
-					winblend = 0, -- Transparency (0-100)
-					winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
-					-- Window size
+					-- completion window styling
+					border = "rounded", -- options: "none", "single", "double", "rounded", "solid", "shadow"
+					winblend = 0, -- transparency (0-100)
+					winhighlight = "normal:blinkcmpmenu,floatborder:blinkcmpmenuborder,cursorline:blinkcmpmenuselection,search:none",
+					-- window size
 					max_height = 20,
 					min_width = 15,
-					-- Scrollbar
+					-- scrollbar
 					scrollbar = true,
 				},
 
 				documentation = {
 					auto_show = true,
 					auto_show_delay_ms = 500,
-					-- Documentation window styling
+					-- documentation window styling
 					window = {
-						border = "rounded", -- Same border options as menu
+						border = "rounded", -- same border options as menu
 						winblend = 0,
-						winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder",
+						winhighlight = "normal:blinkcmpdoc,floatborder:blinkcmpdocborder",
 						max_width = 80,
 						max_height = 20,
-						-- Position relative to completion menu
+						-- position relative to completion menu
 						direction_priority = {
 							menu_north = { "e", "w", "n", "s" },
 							menu_south = { "e", "w", "s", "n" },
@@ -133,7 +132,7 @@ return {
 				default = { "lsp", "path", "snippets", "buffer" },
 				providers = {
 					buffer = {
-						-- Reduce buffer completions
+						-- reduce buffer completions
 						max_items = 5, -- limit number of buffer suggestions
 						min_keyword_length = 3, -- only show after 3 characters
 						score_offset = -10, -- lower priority than other sources
@@ -147,7 +146,7 @@ return {
 				window = {
 					border = "rounded",
 					winblend = 0,
-					winhighlight = "Normal:BlinkCmpSignatureHelp,FloatBorder:BlinkCmpSignatureHelpBorder",
+					winhighlight = "normal:blinkcmpsignaturehelp,floatborder:blinkcmpsignaturehelpborder",
 					max_width = 80,
 					max_height = 10,
 				},

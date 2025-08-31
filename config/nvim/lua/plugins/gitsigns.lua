@@ -2,6 +2,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/lewis6991/gitsigns.nvim",
+	defer = true,
 	config = function()
 		local gitsigns = require("gitsigns")
 		local Snacks = require("snacks")

@@ -3,6 +3,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/RRethy/vim-illuminate",
+	defer = true,
 	config = function()
 		require("illuminate").configure({
 			delay = 200,

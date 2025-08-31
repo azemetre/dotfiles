@@ -9,6 +9,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/folke/todo-comments.nvim",
+	defer = true,
 	config = function()
 		require("todo-comments").setup({
 			keywords = {

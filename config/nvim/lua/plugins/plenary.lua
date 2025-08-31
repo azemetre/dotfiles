@@ -3,4 +3,5 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/nvim-lua/plenary.nvim",
+	defer = true,
 }

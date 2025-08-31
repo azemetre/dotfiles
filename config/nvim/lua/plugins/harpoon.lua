@@ -3,6 +3,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/ThePrimeagen/harpoon",
+	defer = true,
 	version = "harpoon2",
 	dependencies = {
 		{ src = "https://github.com/nvim-lua/plenary.nvim" },
