@@ -1,7 +1,6 @@
 -- #dashboard #startup #ui
 ---@type Utils.Pack.Spec
 return {
-	src = "https://github.com/goolord/alpha-nvim",
 	config = function()
 		local alpha = require("alpha")
 		local dashboard = require("alpha.themes.dashboard")
@@ -77,7 +76,7 @@ return {
 			),
 			dashboard.button(
 				"s",
-				"勒 " .. " Restore Session",
+				"勒" .. " Restore Session",
 				[[:lua require("persistence").load() <cr>]]
 			),
 			dashboard.button(
@@ -100,7 +99,7 @@ return {
 		-- Setup alpha with the dashboard config
 		alpha.setup(dashboard.opts)
 	end,
-	data = { build = "cargo build --release" },
+	src = "https://github.com/goolord/alpha-nvim",
 	dependencies = {
 		{ src = "https://github.com/folke/persistence.nvim" },
 	},

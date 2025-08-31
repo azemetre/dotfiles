@@ -4,6 +4,7 @@ return {
 	src = "https://github.com/lewis6991/gitsigns.nvim",
 	config = function()
 		local gitsigns = require("gitsigns")
+		local Snacks = require("snacks")
 
 		gitsigns.setup({
 			signs = {

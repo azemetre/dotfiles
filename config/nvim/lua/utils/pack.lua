@@ -1,5 +1,6 @@
 ---@class Utils.Pack.Spec : vim.pack.Spec
 ---@field config function?
+---@field defer boolean?
 ---@field dependencies Utils.Pack.Spec[]?
 
 local pack = {
@@ -19,8 +20,7 @@ local function get_specs_and_names()
 	end
 
 	---@type string[]
-	local plugin_files =
-		vim.fn.glob(utils_shared.config_path .. "/lua/plugins/*.lua", true, true)
+	local plugin_files = vim.fn.glob(utils_shared.config_path .. "/lua/plugins/*.lua", true, true)
 	---@type Utils.Pack.Spec[], string[]
 	local specs, names = {}, {}
 
@@ -45,28 +45,24 @@ end
 
 ---@param spec Utils.Pack.Spec
 local function handle_build(spec)
-	if not spec.data or utils_shared.is_null_or_whitespace(spec.data.build) then
+	if not spec.data or spec.data.build:is_null_or_whitespace() then
 		return
 	end
 
 	local plugin_name = vim.fn.fnamemodify(spec.src, ":t")
 	---@type string
-	local plugin_path = utils_shared.data_path
-		.. utils_shared.pack_path
-		.. plugin_name
+	local plugin_path = utils_shared.data_path .. utils_shared.pack_path .. plugin_name
 
 	vim.notify("Building " .. plugin_name .. "...", vim.log.levels.WARN)
-	local response =
-		vim.system(vim.split(spec.data.build, " "), { cwd = plugin_path }):wait()
+	local response = vim.system(vim.split(spec.data.build, " "), { cwd = plugin_path }):wait()
 	vim.notify(
-		utils_shared.trim(
+		(
 			(
-				not utils_shared.is_null_or_whitespace(response.stderr)
-					and response.stderr
-				or not utils_shared.is_null_or_whitespace(response.stdout) and response.stdout
+				not response.stderr:is_null_or_whitespace() and response.stderr
+				or not response.stdout:is_null_or_whitespace() and response.stdout
 				or "exit code: " .. string(response.code)
 			)
-		),
+		):trim(),
 		response.code ~= 0 and vim.log.levels.ERROR or vim.log.levels.INFO
 	)
 end
@@ -89,7 +85,11 @@ local M = {
 		vim.pack.add(specs, pack.add_options)
 		for _, spec in ipairs(specs) do
 			if spec.config then
-				spec.config()
+				if spec.defer then
+					vim.schedule(spec.config)
+				else
+					spec.config()
+				end
 			end
 		end
 	end,

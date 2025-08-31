@@ -2,5 +2,5 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/mrcjkb/rustaceanvim",
-	version = "^6", -- Recommended
+	version = "v6.9.1", -- Recommended
 }
