@@ -10,11 +10,15 @@
 return {
 	cmd = function(dispatchers, config)
 		local cmd = "biome"
-		local local_cmd = (config or {}).root_markers
-			and config.root_markers .. "/node_modules/.bin/biome"
-		if local_cmd and vim.fn.executable(local_cmd) == 1 then
-			cmd = local_cmd
+
+		local root_dir = config and config.root_dir
+		if root_dir then
+			local local_cmd = root_dir .. "/node_modules/.bin/biome"
+			if vim.fn.executable(local_cmd) == 1 then
+				cmd = local_cmd
+			end
 		end
+
 		return vim.lsp.rpc.start({ cmd, "lsp-proxy" }, dispatchers)
 	end,
 	filetypes = {
