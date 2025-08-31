@@ -1,18 +1,17 @@
 -- See https://gpanders.com/blog/whats-new-in-neovim-0-11/ for a nice overview
 -- of how the lsp setup works in neovim 0.11+.
 -- This actually just enables the lsp servers.
-
 local custom_icons = require("utils.theme").icons
 local blink = require("blink.cmp")
 
 -- LSP Keymaps following the same format as your keymaps file
 local lsp_keymaps = {
 	{ "ge", vim.diagnostic.open_float, desc = "Line Diagnostics" },
-	{ "gd", vim.lsp.buf.definition, desc = "Goto Definition" },
+	{ "gd", vim.lsp.buf.definition, desc = "goto Definition" },
 	{ "gr", vim.lsp.buf.references, desc = "References" },
-	{ "gi", vim.lsp.buf.implementation, desc = "Goto Implementation" },
-	{ "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
-	{ "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+	{ "gi", vim.lsp.buf.implementation, desc = "goto Implementation" },
+	{ "gy", vim.lsp.buf.type_definition, desc = "goto T[y]pe Definition" },
+	{ "gD", vim.lsp.buf.declaration, desc = "goto Declaration" },
 	{
 		"K",
 		function()
@@ -22,7 +21,7 @@ local lsp_keymaps = {
 				max_height = 25,
 			})
 		end,
-		desc = "Hover",
+		desc = "Hover Definition",
 	},
 	{
 		"gK",
@@ -45,12 +44,13 @@ local lsp_keymaps = {
 		mode = { "n", "x" },
 		desc = "Format",
 	},
-	{
-		"<leader>ca",
-		vim.lsp.buf.code_action,
-		mode = { "n", "x" },
-		desc = "Code Action",
-	},
+	-- WARN: decide if needed or not, disabling to test 2025-08-31
+	-- {
+	-- 	"<leader>ca",
+	-- 	vim.lsp.buf.code_action,
+	-- 	mode = { "n", "x" },
+	-- 	desc = "code actions",
+	-- },
 	{
 		"gr",
 		function()
@@ -73,7 +73,7 @@ local lsp_keymaps = {
 				vim.lsp.buf.implementation()
 			end
 		end,
-		desc = "Goto Implementation",
+		desc = "goto Implementation",
 	},
 	{
 		"gy",
@@ -89,14 +89,13 @@ local lsp_keymaps = {
 	},
 	{ "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
 
-	-- Actions
 	{
 		"<leader>fv",
 		function()
 			vim.lsp.buf.format({ async = true })
 		end,
 		mode = { "n", "x" },
-		desc = "Format",
+		desc = "format visual selection",
 	},
 	{
 		"<leader>ca",
@@ -194,12 +193,16 @@ vim.diagnostic.config({
 	virtual_lines = false,
 })
 
--- Setup language servers.
 vim.lsp.config("*", {
 	capabilities = capabilities,
 	root_markers = { ".git" },
 })
 
+-- NOTE: #lsp-step-1
+-- INFO: To add a new LSP to your enchiridion, be sure to add the name of the
+-- lsp here in `lua/core/lsp.lua`, this name will also become a new LSP lua
+-- file in `lsp/`, and if you'd like you can include an abbreviate in
+-- `lua/plugins/lualine.lua`
 vim.lsp.enable({
 	"astro",
 	"awk_ls",
@@ -214,9 +217,7 @@ vim.lsp.enable({
 	"jsonls",
 	"lua_ls",
 	"marksman", -- markdown
-	"postgres_lsp",
 	"taplo", -- toml
-	"vimls",
 	"vtsls", -- typescript
 	"yamlls",
 	"zls", -- zig
