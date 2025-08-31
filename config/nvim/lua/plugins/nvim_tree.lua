@@ -7,7 +7,7 @@ return {
 		{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	},
 	config = function()
-		local icons = require("enchiridion.theme").icons
+		local icons = require("utils.theme").icons
 
 		require("nvim-tree").setup({
 			disable_netrw = false,

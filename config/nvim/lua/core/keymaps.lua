@@ -1,5 +1,3 @@
--- This file is automatically loaded by enchiridion.plugins.config,
-
 -- FIXME: document all keymaps
 
 ---@type vim.keymap.set.Opts

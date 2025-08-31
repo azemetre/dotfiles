@@ -5,11 +5,11 @@ return {
 	src = "https://github.com/folke/tokyonight.nvim",
 	name = "tokyonight",
 	config = function()
-		local tokyonight = require("tokyonight")
-		tokyonight.setup({ style = "storm" })
-		tokyonight.load()
+		-- local tokyonight = require("tokyonight")
+		-- tokyonight.setup({ style = "storm" })
+		-- tokyonight.load()
+		vim.cmd([[colorscheme tokyonight-storm]])
 	end,
-
 	-- # Create symlink in start/ - plugin loads automatically
 	-- ln -s ~/github/shimman-eekah.nvim ~/.local/share/nvim/site/pack/develop/start/shimman-eekah
 	--

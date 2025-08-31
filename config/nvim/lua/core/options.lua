@@ -78,7 +78,6 @@ vim.opt.foldlevel = 1
 
 -- requires neovim >=v0.10.0
 vim.opt.smoothscroll = true
-vim.opt.foldexpr = "v:lua.require'enchiridion.util'.ui.foldexpr()"
 vim.opt.foldmethod = "expr"
 vim.opt.foldtext = ""
 
