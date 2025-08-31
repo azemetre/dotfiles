@@ -21,6 +21,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/nvim-pack/nvim-spectre",
+	defer = true,
 	config = function()
 		local spectre = require("spectre")
 		spectre.setup({

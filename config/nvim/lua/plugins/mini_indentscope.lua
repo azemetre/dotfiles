@@ -3,6 +3,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/nvim-mini/mini.indentscope",
+	defer = true,
 	config = function()
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = {

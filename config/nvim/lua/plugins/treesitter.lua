@@ -2,6 +2,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/nvim-treesitter/nvim-treesitter",
+	defer = true,
 	---@type TSConfig
 	config = function()
 		local ensure_installed = {

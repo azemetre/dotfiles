@@ -3,6 +3,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/folke/persistence.nvim",
+	defer = true,
 	config = function()
 		require("persistence").setup({
 			options = { "buffers", "curdir", "tabpages", "winsize", "help" },

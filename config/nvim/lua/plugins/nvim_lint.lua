@@ -2,6 +2,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/mfussenegger/nvim-lint",
+	defer = true,
 	config = function()
 		local lint = require("lint")
 		local Snacks = require("snacks")
