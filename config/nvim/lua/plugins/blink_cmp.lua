@@ -2,6 +2,7 @@
 ---@type utils.pack.spec
 return {
 	src = "https://github.com/saghen/blink.cmp",
+	defer = true,
 	version = vim.version.range("*"),
 	-- optional: provides snippets for the snippet source
 	dependencies = {
@@ -9,10 +10,21 @@ return {
 	},
 	data = { build = "cargo build --release" },
 	config = function()
-		---@module 'blink.cmp'
-		---@type blink.cmp.config
+		-- Check if the binary needs building/rebuilding
+		local plugin_path = vim.fn.stdpath("data")
+			.. "/site/pack/core/opt/blink.cmp"
+		local lib_path = plugin_path .. "/target/release/libblink_cmp_fuzzy.dylib"
+
+		-- Build if missing or wrong architecture
+		if vim.fn.filereadable(lib_path) == 0 then
+			vim.notify("Building blink.cmp fuzzy module...")
+			vim.fn.system("cd " .. plugin_path .. " && cargo build --release")
+		end
+
 		local blink = require("blink.cmp")
 
+		---@module 'blink.cmp'
+		---@type blink.cmp.config
 		blink.setup({
 			-- 'default' for mappings similar to built-in completion
 			-- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -44,6 +56,7 @@ return {
 				["<c-u>"] = { "scroll_documentation_up", "fallback" },
 
 				-- show completion menu
+				["<c-q>"] = { "show", "fallback" },
 				["<c-space>"] = { "show", "fallback" },
 				["<c-o>"] = { "show", "fallback" },
 				["<c-h>"] = { "show", "fallback" },
