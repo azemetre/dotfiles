@@ -60,6 +60,9 @@ return {
 				return "No LSP"
 			end
 
+			-- NOTE: #lsp-step-3
+			-- INFO: If you need to change LSP name to fit lualine, you can cast a
+			-- reflection spell here.
 			local abbreviations = {
 				lua_ls = "lua",
 				["ansible-language-server"] = "ansible",
