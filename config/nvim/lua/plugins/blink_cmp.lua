@@ -4,15 +4,15 @@ return {
 	src = "https://github.com/saghen/blink.cmp",
 	-- optional: provides snippets for the snippet source
 	dependencies = {
-		{ src = "https://github.com/L3MON4D3/LuaSnip", version = "v2.*" },
+		{ src = "https://github.com/L3MON4D3/LuaSnip", version = "v2.4.0" },
 	},
 	data = { build = "cargo build --release" },
-	---
+	defer = true,
 	config = function()
 		---@module 'blink.cmp'
+		---@type blink.cmp.Config
 		local blink = require("blink.cmp")
 
-		---@type blink.cmp.Config
 		blink.setup({
 			-- 'default' for mappings similar to built-in completion
 			-- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)

@@ -7,7 +7,7 @@ return {
 		{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	},
 	config = function()
-		local theme = require("enchiridion.theme")
+		local theme = require("utils.theme")
 		local colors = theme.colors
 		local icons = theme.icons
 
