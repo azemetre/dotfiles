@@ -15,32 +15,55 @@ local utils_shared = require("utils.shared")
 
 ---@return Utils.Pack.Spec[], string[]
 local function get_specs_and_names()
-	if cached_specs and cached_names then
-		return cached_specs, cached_names
-	end
+    if cached_specs and cached_names then
+        return cached_specs, cached_names
+    end
 
-	---@type string[]
-	local plugin_files = vim.fn.glob(utils_shared.config_path .. "/lua/plugins/*.lua", true, true)
-	---@type Utils.Pack.Spec[], string[]
-	local specs, names = {}, {}
+    local plugin_files = vim.fn.glob(utils_shared.config_path .. "/lua/plugins/*.lua", true, true)
+    ---@type Utils.Pack.Spec[], string[]
+    local specs, names = {}, {}
 
-	for _, file in ipairs(plugin_files) do
-		local plugin_name = vim.fn.fnamemodify(file, ":t:r")
-		---@type Utils.Pack.Spec
-		local spec = require("plugins." .. plugin_name)
+    for _, file in ipairs(plugin_files) do
+        local plugin_name = vim.fn.fnamemodify(file, ":t:r")
+        local ok, spec_or_err = pcall(require, "plugins." .. plugin_name)
 
-		if spec.dependencies then
-			for _, dep in ipairs(spec.dependencies) do
-				specs[#specs + 1] = dep
-				names[#names + 1] = vim.fn.fnamemodify(dep.src, ":t")
-			end
-		end
-		specs[#specs + 1] = spec
-		names[#names + 1] = vim.fn.fnamemodify(spec.src, ":t")
-	end
-	cached_specs, cached_names = specs, names
+        if not ok then
+            vim.notify("ERROR requiring plugin module '" .. plugin_name .. "': " .. spec_or_err, vim.log.levels.ERROR)
+            goto continue
+        end
 
-	return specs, names
+        -- Check if the main spec is valid
+        if type(spec_or_err) ~= "table" or not spec_or_err.src then
+            vim.notify("ERROR: Plugin '" .. plugin_name .. "' must return a table with an 'src' field.", vim.log.levels.ERROR)
+            goto continue
+        end
+
+        -- Handle dependencies FIRST
+        if spec_or_err.dependencies then
+            for i, dep in ipairs(spec_or_err.dependencies) do
+                -- Validate the dependency spec
+                if type(dep) ~= "table" or not dep.src then
+                    vim.notify("ERROR: Dependency #" .. i .. " in plugin '" .. plugin_name .. "' is invalid. It must be a table with an 'src' field.", vim.log.levels.ERROR)
+                    goto continue_outer -- This is a severe error in the main plugin spec
+                end
+                specs[#specs + 1] = dep
+                names[#names + 1] = vim.fn.fnamemodify(dep.src, ":t")
+            end
+        end
+
+        -- Then add the main plugin spec
+        specs[#specs + 1] = spec_or_err
+        names[#names + 1] = vim.fn.fnamemodify(spec_or_err.src, ":t")
+
+        ::continue_outer::
+        ::continue::
+    end
+
+    -- DEBUG: Print all specs to verify before returning
+    -- print(vim.inspect(specs))
+    cached_specs, cached_names = specs, names
+
+    return specs, names
 end
 
 ---@param spec Utils.Pack.Spec

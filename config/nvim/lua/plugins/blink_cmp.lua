@@ -2,6 +2,7 @@
 ---@type Utils.Pack.Spec
 return {
 	src = "https://github.com/saghen/blink.cmp",
+	version = "1.*",
 	-- optional: provides snippets for the snippet source
 	dependencies = {
 		{ src = "https://github.com/L3MON4D3/LuaSnip", version = "v2.4.0" },

@@ -38,17 +38,17 @@ return {
 			ensure_installed = ensure_installed,
 		})
 
-		-- INFO: Install any missing parsers
-		-- WARN: Will not update, run `:TSUpdate`
-		local parsers = require("nvim-treesitter.parsers")
-		local missing_parsers = {}
-		for _, lang in ipairs(ensure_installed) do
-			if not parsers.has_parser(lang) then
-				table.insert(missing_parsers, lang)
-			end
-		end
-		if #missing_parsers > 0 then
-			vim.cmd("TSUpdate " .. table.concat(missing_parsers, " "))
-		end
+		-- -- INFO: Install any missing parsers
+		-- -- WARN: Will not update, run `:TSUpdate`
+		-- local parsers = require("nvim-treesitter.parsers")
+		-- local missing_parsers = {}
+		-- for _, lang in ipairs(ensure_installed) do
+		-- 	if not parsers.has_parser(lang) then
+		-- 		table.insert(missing_parsers, lang)
+		-- 	end
+		-- end
+		-- if #missing_parsers > 0 then
+		-- 	vim.cmd("TSUpdate " .. table.concat(missing_parsers, " "))
+		-- end
 	end,
 }
