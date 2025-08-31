@@ -1,7 +1,8 @@
--- We namespace the config so that when we reload our modules more easily
--- Ref: https://www.reddit.com/r/neovim/comments/puuskh/comment/he5vnqc
-_G.config_namespace = "enchiridion"
+vim.loader.enable()
 
--- require(config_namespace .. ".util")
-require("enchiridion.core.lazy")
-require("enchiridion.core.lsp")
+require("core.autocmds")
+require("core.extensions")
+require("core.keymaps")
+require("core.options")
+require("core.pack")
+require("core.lsp")
