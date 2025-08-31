@@ -46,6 +46,12 @@ return {
 					return false
 				end,
 			},
+			vim.keymap.set(
+				"n",
+				"<leader>-",
+				"<CMD>Oil --float<CR>",
+				{ desc = "Open parent directory" }
+			),
 		})
 	end,
 }
