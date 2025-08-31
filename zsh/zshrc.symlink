@@ -7,7 +7,9 @@ fi
 
 export ZSH=$DOTFILES/zsh
 
-source /usr/local/opt/powerlevel10k/share/powerlevel10k/powerlevel10k.zsh-theme
+. "$HOME/.local/bin/env"
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+
 if [[ -d $DOTFILES/zsh/functions ]]; then
     for func in $DOTFILES/zsh/functions/*(:t); autoload -U $func
 fi
@@ -102,7 +104,6 @@ export ZPLUGDIR="$CACHEDIR/zsh/plugins"
 
 plugins=(
   fzf
-  ansible
 )
 
 if [[ -x "$(command -v fnm)" ]]; then
@@ -256,9 +257,5 @@ export NVM_DIR="$HOME/.nvm"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-. /usr/local/opt/asdf/libexec/asdf.sh
-
 # Language PATHS
 export PATH=$PATH:$(go env GOPATH)/bin
-
-. "$HOME/.local/bin/env"
