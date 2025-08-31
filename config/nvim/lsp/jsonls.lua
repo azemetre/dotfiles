@@ -1,19 +1,17 @@
 ---@type vim.lsp.Config
 return {
-	default_config = {
-		cmd = { "vscode-json-language-server", "--stdio" },
-		filetypes = { "json", "jsonc" },
-		init_options = {
-			provideFormatter = true,
-		},
-		root_markers = {
-			".git", -- git
-			".hg", -- mercurial
-			".svn", -- subversion
-			".bzr", -- bazaar
-		},
-		single_file_support = true,
+	cmd = { "vscode-json-language-server", "--stdio" },
+	filetypes = { "json", "jsonc" },
+	init_options = {
+		provideFormatter = true,
 	},
+	root_markers = {
+		".git", -- git
+		".hg", -- mercurial
+		".svn", -- subversion
+		".bzr", -- bazaar
+	},
+	single_file_support = true,
 	docs = {
 		-- this language server config is in VSCode built-in package.json
 		description = [[
