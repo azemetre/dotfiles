@@ -1,19 +1,22 @@
 -- #dashboard #startup #ui
 ---@type Utils.Pack.Spec
 return {
+	src = "https://github.com/goolord/alpha-nvim",
 	config = function()
 		local alpha = require("alpha")
 		local dashboard = require("alpha.themes.dashboard")
+		local Snacks = require("snacks")
 
 		local neovim = {
 			type = "text",
 			val = {
-				[[                                        ]],
-				[[ ██████████████████████████████████████ ]],
-				[[ █▄ ▀█▄ ▄█▄ ▄▄ █ ▄▄ █▄ █ ▄█▄ ▄█▄ ▀█▀ ▄█ ]],
-				[[ ██ █▄▀ ███ ▄█▀█ ██ ██▄▀▄███ ███ █▄█ ██ ]],
-				[[ ▀▄▄▄▀▀▄▄▀▄▄▄▄▄▀▄▄▄▄▀▀▀▄▀▀▀▄▄▄▀▄▄▄▀▄▄▄▀ ]],
-				[[                                        ]],
+				[[                                                                ]],
+				[[ ██████████████████████████████████████████████████████████████ ]],
+				[[ █▄─▄▄─█▄─▀█▄─▄█─▄▄▄─█─█─█▄─▄█▄─▄▄▀█▄─▄█▄─▄▄▀█▄─▄█─▄▄─█▄─▀█▄─▄█ ]],
+				[[ ██─▄█▀██─█▄▀─██─███▀█─▄─██─███─▄─▄██─███─██─██─██─██─██─█▄▀─██ ]],
+				[[ ▀▄▄▄▄▄▀▄▄▄▀▀▄▄▀▄▄▄▄▄▀▄▀▄▀▄▄▄▀▄▄▀▄▄▀▄▄▄▀▄▄▄▄▀▀▄▄▄▀▄▄▄▄▀▄▄▄▀▀▄▄▀ ]],
+				[[                                                                ]],
+				[[                                                                ]],
 			},
 			opts = {
 				position = "center",
@@ -21,49 +24,6 @@ return {
 				hl = "String",
 			},
 		}
-		local trogdor = {
-			type = "text",
-			val = {
-				[[                                                                 ]],
-				[[                                                 :::             ]],
-				[[                                             :: :::.             ]],
-				[[                       \/,                    .:::::             ]],
-				[[           \),          \`-._                 :::888             ]],
-				[[           /\            \   `-.             ::88888             ]],
-				[[          /  \            | .(                ::88               ]],
-				[[         /,.  \           ; ( `              .:8888              ]],
-				[[            ), \         / ;``               :::888              ]],
-				[[           /_   \     __/_(_                  :88                ]],
-				[[             `. ,`..-'      `-._    \  /      :8                 ]],
-				[[               )__ `.           `._ .\/.                         ]],
-				[[              /   `. `             `-._______m         _,        ]],
-				[[  ,-=====-.-;'                 ,  ___________/ _,-_,'"`/__,-.    ]],
-				[[ C   =--   ;                   `.`._    V V V       -=-'"#==-._  ]],
-				[[:,  \     ,|      UuUu _,......__   `-.__A_A_ -. ._ ,--._ ",`` `-]],
-				[[||  |`---' :    uUuUu,'          `'--...____/   `" `".   `       ]],
-				[[|`  :       \   UuUu:                                            ]],
-				[[:  /         \   UuUu`-._                                        ]],
-				[[ \(_          `._  uUuUu `-.                                     ]],
-				[[ (_3             `._  uUu   `._                                  ]],
-				[[                    ``-._      `.                                ]],
-				[[                         `-._    `.                              ]],
-				[[                             `.    \                             ]],
-				[[                               )   ;                             ]],
-				[[                              /   /                              ]],
-				[[               `.        |\ ,'   /                               ]],
-				[[                 ",_A_/\-| `   ,'                                ]],
-				[[                   `--..,_|_,-'\                                 ]],
-				[[                          |     \                                ]],
-				[[                          |      \__                             ]],
-				[[                          |__                                    ]],
-			},
-			opts = {
-				position = "center",
-				type = "ascii",
-				hl = "String",
-			},
-		}
-
 		-- figure out a way to change font size for ascii art
 		-- dashboard.section.header.val = trogdor.val
 		dashboard.section.header.val = neovim.val
@@ -81,8 +41,13 @@ return {
 			),
 			dashboard.button(
 				"p",
-				" " .. " Plugins",
+				" " .. " Update Plugins",
 				":lua vim.pack.update()<CR>"
+			),
+			dashboard.button(
+				"n",
+				"󱀁 " .. " Neovim News",
+				":lua Snacks.win({file = vim.api.nvim_get_runtime_file('doc/news.txt', false)[1], width = 0.8, height = 0.9, wo = {spell = false, wrap = false, signcolumn = 'yes', statuscolumn = ' ', conceallevel = 3}})<cr>"
 			),
 			dashboard.button("q", " " .. " Quit", ":qa<CR>"),
 		}
@@ -96,10 +61,16 @@ return {
 		dashboard.section.buttons.opts.hl = "AlphaButtons"
 		dashboard.opts.layout[1].val = 8
 
-		-- Setup alpha with the dashboard config
+		-- NOTE: disables the indent line that appears
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "AlphaReady",
+			callback = function()
+				vim.b.miniindentscope_disable = true
+			end,
+		})
+
 		alpha.setup(dashboard.opts)
 	end,
-	src = "https://github.com/goolord/alpha-nvim",
 	dependencies = {
 		{ src = "https://github.com/folke/persistence.nvim" },
 	},
