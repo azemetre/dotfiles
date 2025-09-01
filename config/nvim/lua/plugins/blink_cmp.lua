@@ -6,7 +6,11 @@ return {
 	version = vim.version.range("*"),
 	-- optional: provides snippets for the snippet source
 	dependencies = {
-		{ src = "https://github.com/l3mon4d3/luasnip", version = "v2.4.0" },
+		{
+			defer = true,
+			src = "https://github.com/l3mon4d3/luasnip",
+			version = "v2.4.0",
+		},
 	},
 	data = { build = "cargo build --release" },
 	config = function()

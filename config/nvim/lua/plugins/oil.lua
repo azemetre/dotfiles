@@ -5,7 +5,10 @@ return {
 	src = "https://github.com/stevearc/oil.nvim",
 	defer = true,
 	dependencies = {
-		{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
+		{
+			defer = true,
+			src = "https://github.com/nvim-tree/nvim-web-devicons",
+		},
 	},
 	---@module 'oil'
 	---@type oil.SetupOpts

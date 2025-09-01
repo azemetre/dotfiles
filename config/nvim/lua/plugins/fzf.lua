@@ -5,7 +5,10 @@ return {
 	src = "https://github.com/ibhagwan/fzf-lua",
 	defer = true,
 	dependencies = {
-		{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
+		{
+			defer = true,
+			src = "https://github.com/nvim-tree/nvim-web-devicons",
+		},
 	},
 	config = function()
 		local fzf = require("fzf-lua")
