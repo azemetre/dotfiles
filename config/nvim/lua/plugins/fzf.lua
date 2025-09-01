@@ -47,6 +47,7 @@ return {
 
 		fzf.setup({
 			-- Global configuration
+			fzf_opts = { ["--cycle"] = "" },
 			winopts = {
 				backdrop = false,
 				height = 0.94,
