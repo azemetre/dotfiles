@@ -4,14 +4,6 @@ return {
 	src = "https://github.com/saghen/blink.cmp",
 	defer = true,
 	version = vim.version.range("*"),
-	-- optional: provides snippets for the snippet source
-	dependencies = {
-		{
-			defer = true,
-			src = "https://github.com/l3mon4d3/luasnip",
-			version = "v2.4.0",
-		},
-	},
 	data = { build = "cargo build --release" },
 	config = function()
 		-- Check if the binary needs building/rebuilding
@@ -27,8 +19,6 @@ return {
 
 		local blink = require("blink.cmp")
 
-		---@module 'blink.cmp'
-		---@type blink.cmp.config
 		blink.setup({
 			-- 'default' for mappings similar to built-in completion
 			-- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -82,6 +72,12 @@ return {
 				completion = { menu = { auto_show = true } },
 			},
 			completion = {
+				list = {
+					cycle = {
+						from_bottom = true,
+						from_top = true,
+					},
+				},
 				menu = {
 					draw = {
 						treesitter = { "lsp" },
@@ -91,13 +87,13 @@ return {
 						},
 					},
 					-- completion window styling
-					border = "rounded", -- options: "none", "single", "double", "rounded", "solid", "shadow"
+					-- options: "none", "single", "double", "rounded", "solid", "shadow"
+					border = "rounded",
 					winblend = 0, -- transparency (0-100)
 					winhighlight = "normal:blinkcmpmenu,floatborder:blinkcmpmenuborder,cursorline:blinkcmpmenuselection,search:none",
 					-- window size
 					max_height = 20,
 					min_width = 15,
-					-- scrollbar
 					scrollbar = true,
 				},
 
@@ -145,12 +141,13 @@ return {
 					require("luasnip").jump(direction)
 				end,
 			},
+
 			sources = {
 				default = { "lsp", "path", "snippets", "buffer" },
 				providers = {
 					buffer = {
 						-- reduce buffer completions
-						max_items = 5, -- limit number of buffer suggestions
+						max_items = 20, -- limit number of buffer suggestions
 						min_keyword_length = 3, -- only show after 3 characters
 						score_offset = -10, -- lower priority than other sources
 					},
