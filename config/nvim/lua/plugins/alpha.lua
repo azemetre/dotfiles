@@ -72,6 +72,6 @@ return {
 		alpha.setup(dashboard.opts)
 	end,
 	dependencies = {
-		{ src = "https://github.com/folke/persistence.nvim" },
+		{ defer = true, src = "https://github.com/folke/persistence.nvim" },
 	},
 }

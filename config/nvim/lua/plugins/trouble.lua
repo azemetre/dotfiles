@@ -5,7 +5,10 @@ return {
 	src = "https://github.com/folke/trouble.nvim",
 	defer = true,
 	dependencies = {
-		{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
+		{
+			defer = true,
+			src = "https://github.com/nvim-tree/nvim-web-devicons",
+		},
 	},
 	config = function()
 		require("trouble").setup({

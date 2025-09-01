@@ -1,50 +1,57 @@
-local group = "Init"
 local utils_pack = require("utils.pack")
 
-vim.api.nvim_create_augroup(group, { clear = true })
+local autocmds = {
+	---@type vim.api.keyset.create_augroup
+	augroup_options = { clear = true },
+	group = "Init",
+}
+
+vim.api.nvim_create_augroup(autocmds.group, autocmds.augroup_options)
 
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function(args)
 		pcall(vim.treesitter.start, args.buf)
 	end,
-	group = group,
+	group = autocmds.group,
+	desc = "treesitter initialization",
 })
+
 vim.api.nvim_create_autocmd("PackChanged", {
 	callback = function(args)
 		---@type string
 		local kind = args.data.kind
-		---@type Utils.Pack.Spec
-		local spec = args.data.spec
 
 		if kind == "install" or kind == "update" then
+			---@type Utils.Pack.Spec
+			local spec = args.data.spec
 			utils_pack.build({ spec })
 		end
 	end,
-	group = group,
+	group = autocmds.group,
+	desc = "if `lua/plugins` dir is modified, build plugins",
 })
+
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
 		vim.cmd("clearjumps")
 	end,
-	group = group,
+	group = autocmds.group,
+	desc = "clear Jumps",
 })
--- This file is automatically loaded by plugins.config
 
--- Check if we need to reload the file when it changed
-vim.api.nvim_create_autocmd(
-	{ "FocusGained", "TermClose", "TermLeave" },
-	{ command = "checktime" }
-)
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+	command = "checktime",
+	desc = "check if we need to reload the file when it changed",
+})
 
--- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank({ timeout = 125 })
 	end,
-	group = group,
+	group = autocmds.group,
+	desc = "highlight on Yank",
 })
 
--- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
 	callback = function()
 		local mark = vim.api.nvim_buf_get_mark(0, '"')
@@ -53,9 +60,9 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 			pcall(vim.api.nvim_win_set_cursor, 0, mark)
 		end
 	end,
+	desc = "go to last loc when opening a Buffer",
 })
 
--- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = {
 		"qf",
@@ -77,6 +84,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			{ buffer = event.buf, silent = true }
 		)
 	end,
+	desc = "close some filetypes with <q>",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -85,29 +93,5 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.wrap = true
 		vim.opt_local.spell = true
 	end,
+	desc = "enable spelling in gitcommit, markdown",
 })
-
--- add/removes go imports
--- vim.api.nvim_create_autocmd("BufWritePre", {
--- 	pattern = { "*.go" },
--- 	callback = function()
--- 		local ONE_SECOND = 1000
--- 		local params = vim.lsp.util.make_range_params()
--- 		params.context = { only = { "source.organizeImports" } }
--- 		local result = vim.lsp.buf_request_sync(
--- 			0,
--- 			"textDocument/codeAction",
--- 			params,
--- 			ONE_SECOND
--- 		)
--- 		for _, res in pairs(result or {}) do
--- 			for _, r in pairs(res.result or {}) do
--- 				if r.edit then
--- 					vim.lsp.util.apply_workspace_edit(r.edit, "UTF-8")
--- 				else
--- 					vim.lsp.buf.execute_command(r.command)
--- 				end
--- 			end
--- 		end
--- 	end,
--- })

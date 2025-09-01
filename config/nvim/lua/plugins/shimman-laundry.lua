@@ -5,14 +5,18 @@ return {
 	src = "https://github.com/shimman-dev/laundry.nvim",
 	defer = true,
 	dependencies = {
-		{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+		{
+			defer = true,
+			src = "https://github.com/nvim-treesitter/nvim-treesitter",
+		},
 	},
-	---@module 'laundry'
-	---@type LaundryConfig
 	config = function()
-		require("laundry").setup({
+		local laundry = require("laundry")
+		---@type LaundryConfig
+		local opts = {
 			auto_fold = true,
 			min_fold_lines = 20,
-		})
+		}
+		laundry.setup(opts)
 	end,
 }

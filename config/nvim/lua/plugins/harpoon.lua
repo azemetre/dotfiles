@@ -6,7 +6,7 @@ return {
 	defer = true,
 	version = "harpoon2",
 	dependencies = {
-		{ src = "https://github.com/nvim-lua/plenary.nvim" },
+		{ defer = true, src = "https://github.com/nvim-lua/plenary.nvim" },
 	},
 	config = function()
 		local harpoon = require("harpoon")
