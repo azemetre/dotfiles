@@ -1,0 +1,67 @@
+#!/bin/zsh
+
+if [[ -z "$TMUX" ]]; then
+		echo "Need to be in a tmux session" >&2
+    exit 1
+fi
+
+cleanup() {
+    trap - EXIT
+}
+trap cleanup EXIT
+
+OLD_WINDOWS=($(tmux list-windows -F '#{window_index}:#{window_name}'))
+
+WINDOW_NAMES=("code" "runner" "shell" "dot")
+COMMANDS=("vim" "" "" "dot")
+
+for i in {1..4}; do
+    if ! tmux new-window 2>/dev/null; then
+        echo "Failed to create window" >&2
+        exit 1
+    fi
+done
+
+WINDOWS=($(tmux list-windows -F '#{window_index}' | sort -n))
+
+if (( ${#WINDOWS[@]} < 4 )); then
+    echo "Not enough windows created" >&2
+    exit 1
+fi
+
+NEW_WINDOWS=(${WINDOWS[-4]} ${WINDOWS[-3]} ${WINDOWS[-2]} ${WINDOWS[-1]})
+
+for target in 0 1 2 3; do
+    if tmux list-windows -F '#{window_index}' | grep -q "^${target}$" && [[ "${NEW_WINDOWS[$((target+1))]}" != "$target" ]]; then
+        tmux move-window -s "$target" -t 999 2>/dev/null
+    fi
+done
+
+for ((i=1; i<=4; i++)); do
+    target=$((i-1))
+    if [[ "${NEW_WINDOWS[$i]}" != "$target" ]]; then
+        tmux move-window -s "${NEW_WINDOWS[$i]}" -t "$target"
+    fi
+done
+
+FINAL_WINDOWS=($(tmux list-windows -F '#{window_index}' | sort -n))
+
+for ((i=1; i<=4; i++)); do
+    tmux rename-window -t "${FINAL_WINDOWS[$i]}" "${WINDOW_NAMES[$((i-1))]}"
+    if [[ -n "${COMMANDS[$((i-1))]}" ]]; then
+        tmux send-keys -t "${FINAL_WINDOWS[$i]}" "${COMMANDS[$((i-1))]}" Enter
+    fi
+done
+
+if (( ${#OLD_WINDOWS[@]} > 0 )); then
+    for ((i=1; i<=${#OLD_WINDOWS[@]}; i++)); do
+        WINDOW_INFO="${OLD_WINDOWS[$i]}"
+        WINDOW_NAME="${WINDOW_INFO##*:}"
+        NEW_POSITION=$((i + 4))
+        if (( NEW_POSITION <= ${#FINAL_WINDOWS[@]} )) && [[ -n "${FINAL_WINDOWS[$NEW_POSITION]}" ]]; then
+            tmux rename-window -t "${FINAL_WINDOWS[$NEW_POSITION]}" "$WINDOW_NAME"
+        fi
+    done
+fi
+
+tmux select-window -t "${FINAL_WINDOWS[1]}"
